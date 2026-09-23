@@ -1,0 +1,736 @@
+[
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Puesta en Producción Segura",
+    "section": "",
+    "text": "Puesta en Producción Segura · CIBER\n\n\nAprender.Construir.\n\n\nUn espacio para investigar, diseñar, desarrollar y presentar soluciones reales trabajando como un equipo profesional.\n\n\n\n\nInvestigación · Diseño · Desarrollo · IA · Comunicación\n\n\n¿Cómo conseguimos que una aplicación pase de código a producción de forma segura utilizando automatización e IA?.\n\n\n\nTu espacio de trabajo\n\n\n\n\n📚\n\n\n\nMódulo\n\n\nCarga lectiva\n\n\n120 horas anuales.\n\n\n4 horas a la semana.\n\n\n\n\n\n🧪\n\n\n\nRRAAA\n\n\nResultados de aprendizaje\n\n\nObjetivos que debemos alcanzar para superar el módulo.\n\nVer RRAA →\n\n\n\n\nRecursos\n\n\n\n\n🤖\n\n\n\nTRANSVERSAL\n\n\nIA\n\n\nLa inteligencia artificial como herramienta para aprender, investigar y desarrollar.\n\nExplorar IA →\n\n\n\n\n📦\n\n\n\nAPOYO\n\n\nRecursos\n\n\nPlantillas, herramientas y recursos de apoyo para el proyecto.\n\nVer recursos →",
+    "crumbs": [
+      "🏠 Inicio"
+    ]
+  },
+  {
+    "objectID": "index.html#el-proyecto",
+    "href": "index.html#el-proyecto",
+    "title": "Proyecto Intermodular",
+    "section": "",
+    "text": "Conoce el reto, la metodología y cómo vamos a trabajar.",
+    "crumbs": [
+      "🏠 Inicio"
+    ]
+  },
+  {
+    "objectID": "index.html#aprendizajes",
+    "href": "index.html#aprendizajes",
+    "title": "Proyecto Intermodular",
+    "section": "",
+    "text": "Los conocimientos y herramientas que necesitaremos.",
+    "crumbs": [
+      "🏠 Inicio"
+    ]
+  },
+  {
+    "objectID": "index.html#desafíos",
+    "href": "index.html#desafíos",
+    "title": "Proyecto Intermodular",
+    "section": "",
+    "text": "Dos retos para aprender a resolver problemas reales.",
+    "crumbs": [
+      "🏠 Inicio"
+    ]
+  },
+  {
+    "objectID": "index.html#laboratorios",
+    "href": "index.html#laboratorios",
+    "title": "Proyecto Intermodular",
+    "section": "",
+    "text": "Pequeñas experiencias prácticas para adquirir las habilidades necesarias.",
+    "crumbs": [
+      "🏠 Inicio"
+    ]
+  },
+  {
+    "objectID": "index.html#ia",
+    "href": "index.html#ia",
+    "title": "Proyecto Intermodular",
+    "section": "",
+    "text": "Utiliza la inteligencia artificial como herramienta de aprendizaje y desarrollo.",
+    "crumbs": [
+      "🏠 Inicio"
+    ]
+  },
+  {
+    "objectID": "index.html#proyecto-final",
+    "href": "index.html#proyecto-final",
+    "title": "Proyecto Intermodular",
+    "section": "",
+    "text": "Integra todo lo aprendido en un proyecto intermodular.",
+    "crumbs": [
+      "🏠 Inicio"
+    ]
+  },
+  {
+    "objectID": "unidades/index.html",
+    "href": "unidades/index.html",
+    "title": "Unidades",
+    "section": "",
+    "text": "PROYECTO INTERMODULAR II · DAW\n\n\nEl recorrido.\n\n\nUna secuencia de unidades para investigar, diseñar, desarrollar y presentar una solución real.\n\n\n\n\n\n01\n\n\n\nPUNTO DE PARTIDA\n\n\nGestión de proyectos y metodologías ágiles\n\nVer unidad →\n\n\n\n\n02\n\n\n\nINVESTIGACIÓN\n\n\nInvestigación aplicada e innovación tecnológica\n\n\n\n\n\n\n03\n\n\n\nEMPRENDIMIENTO\n\n\nEmprendimiento, ideación y propiedad intelectual\n\n\n\n\n\n\n04\n\n\n\nDESARROLLO\n\n\nArquitectura y despliegue de la solución (coworking)\n\n\n\n\n\n\n05\n\n\n\nCOMUNICACIÓN\n\n\nDocumentación, comunicación y defensa oral",
+    "crumbs": [
+      "📚 Unidades"
+    ]
+  },
+  {
+    "objectID": "desafios/index.html",
+    "href": "desafios/index.html",
+    "title": "Desafíos",
+    "section": "",
+    "text": "🚀 Desafíos\nDesafíos que nos ayudarán a poner en práctica lo aprendido.",
+    "crumbs": [
+      "🚀 Desafíos",
+      "Desafíos"
+    ]
+  },
+  {
+    "objectID": "desafios/desafio-01/index.html",
+    "href": "desafios/desafio-01/index.html",
+    "title": "Desafío 1 · LifeOS - Tu vida digital",
+    "section": "",
+    "text": "🚀 Desafío 1 · LifeOS - Tu vida digital\nEl alumnado debe desarrollar una aplicación web llamada provisionalmente LifeOS, pero realmente cada alumno elegirá su nombre.\nSerá una especie de dashboard personal para organizar planes, actividades, pequeños gastos, hábitos y objetivos.\n\n\n🧩 Reto\n\n💡 Deberás diseñar y desarrollar una aplicación web que ayude a una persona a organizar su vida diaria desde un único lugar.\n\nLa aplicación debería permitir, como mínimo:\n\n📅 organizar planes y eventos\n✅ gestionar tareas\n💰 controlar pequeños gastos\n📝 registrar información personal\n📊 visualizar un resumen de su situación\n💾 conservar los datos aunque cierre el navegador\n\nQueremos realizar una SPA sencilla, desarrollada inicialmente con JavaScript + Vanilla + Vite, donde diferentes funcionalidades comparten datos y estado.\nEjemplos que te pueden dar ideas:\n\n\n\nEjemplo\n\n\n\n\n\nEjemplo\n\n\n\n\n\nEjemplo\n\n\n\n\n\nEjemplo",
+    "crumbs": [
+      "🚀 Desafíos",
+      "D1 · LifeOS"
+    ]
+  },
+  {
+    "objectID": "desafios/desafio-02/index.html",
+    "href": "desafios/desafio-02/index.html",
+    "title": "Desafío 2",
+    "section": "",
+    "text": "🚀 Desafío 2\nNuestro segundo desafío.",
+    "crumbs": [
+      "🚀 Desafíos",
+      "Desafío 2"
+    ]
+  },
+  {
+    "objectID": "proyecto-final/index.html",
+    "href": "proyecto-final/index.html",
+    "title": "Proyecto Intermodular Final",
+    "section": "",
+    "text": "🏆 Proyecto Intermodular Final\nAquí construiremos el proyecto final.",
+    "crumbs": [
+      "🏆 Proyecto Intermodular Final"
+    ]
+  },
+  {
+    "objectID": "laboratorios/index.html",
+    "href": "laboratorios/index.html",
+    "title": "Laboratorios",
+    "section": "",
+    "text": "🧪 Laboratorios\nExperiencias prácticas para desarrollar las habilidades necesarias.",
+    "crumbs": [
+      "🧪 Laboratorios"
+    ]
+  },
+  {
+    "objectID": "ia/index.html",
+    "href": "ia/index.html",
+    "title": "IA",
+    "section": "",
+    "text": "🤖 IA\nLa inteligencia artificial como herramienta de aprendizaje y desarrollo.",
+    "crumbs": [
+      "🤖 IA"
+    ]
+  },
+  {
+    "objectID": "recursos/index.html",
+    "href": "recursos/index.html",
+    "title": "Recursos",
+    "section": "",
+    "text": "📦 Recursos\nHerramientas, plantillas y recursos de apoyo.",
+    "crumbs": [
+      "📦 Recursos"
+    ]
+  },
+  {
+    "objectID": "index.html#title-proyecto-intermodular",
+    "href": "index.html#title-proyecto-intermodular",
+    "title": "Proyecto Intermodular",
+    "section": "title: “Proyecto Intermodular”",
+    "text": "title: “Proyecto Intermodular”\n\n\nPROYECTO INTERMODULAR · DAW\n\n\nAprender. Construir.\n\n\nUn espacio para investigar, diseñar, desarrollar y presentar soluciones reales trabajando como un equipo profesional.\n\n\n\n\nNo vienes a aprender un proyecto.&lt;br&gt;\n&lt;strong&gt;Vienes a aprender a construirlo.&lt;/strong&gt;\n\n\nInvestigación · Diseño · Desarrollo · IA · Comunicación\n\n\n\nTu espacio de trabajo\n\n\n\n&lt;div class=\"home-card-icon\"&gt;📚&lt;/div&gt;\n\n&lt;div class=\"home-card-content\"&gt;\n\n  &lt;div class=\"home-card-label\"&gt;\n    APRENDIZAJE\n  &lt;/div&gt;\n\n  &lt;div class=\"home-card-title\"&gt;\n    Unidades\n  &lt;/div&gt;\n\n  &lt;div class=\"home-card-description\"&gt;\n    Los conocimientos y habilidades que iremos adquiriendo\n    durante el proyecto.\n  &lt;/div&gt;\n\n  &lt;a href=\"unidades/index.html\" class=\"home-card-link\"&gt;\n    Ver unidades →\n  &lt;/a&gt;\n\n&lt;/div&gt;\n\n\n&lt;div class=\"home-card-icon\"&gt;🧪&lt;/div&gt;\n\n&lt;div class=\"home-card-content\"&gt;\n\n  &lt;div class=\"home-card-label\"&gt;\n    EXPERIMENTA\n  &lt;/div&gt;\n\n  &lt;div class=\"home-card-title\"&gt;\n    Laboratorios\n  &lt;/div&gt;\n\n  &lt;div class=\"home-card-description\"&gt;\n    Experiencias prácticas para desarrollar las habilidades\n    necesarias.\n  &lt;/div&gt;\n\n  &lt;a href=\"laboratorios/index.html\" class=\"home-card-link\"&gt;\n    Ver laboratorios →\n  &lt;/a&gt;\n\n&lt;/div&gt;\n\n\n\nDesafíos\n\n\nAprender haciendo. Cada desafío plantea un problema que tendrás que investigar, resolver y convertir en una solución.\n\n\n\n&lt;div class=\"home-project-icon\"&gt;🚀&lt;/div&gt;\n\n&lt;div class=\"home-project-label\"&gt;\n  DESAFÍO 01\n&lt;/div&gt;\n\n&lt;div class=\"home-project-title\"&gt;\n  LifeOS\n&lt;/div&gt;\n\n&lt;div class=\"home-project-description\"&gt;\n  Tu sistema personal de productividad.\n  Construye una aplicación web para organizar tu vida\n  y experimentar con el desarrollo de una solución real.\n&lt;/div&gt;\n\n&lt;div class=\"home-project-meta\"&gt;\n  &lt;span&gt;4 semanas&lt;/span&gt;\n  &lt;span&gt;Trabajo en equipo&lt;/span&gt;\n&lt;/div&gt;\n\n&lt;a href=\"desafios/desafio-01/index.html\" class=\"home-project-link\"&gt;\n  Comenzar desafío →\n&lt;/a&gt;\n\n\n&lt;div class=\"home-project-icon\"&gt;✦&lt;/div&gt;\n\n&lt;div class=\"home-project-label\"&gt;\n  DESAFÍO 02\n&lt;/div&gt;\n\n&lt;div class=\"home-project-title\"&gt;\n  Próximamente\n&lt;/div&gt;\n\n&lt;div class=\"home-project-description\"&gt;\n  El segundo desafío del curso pondrá en práctica nuevas\n  habilidades y nos acercará un paso más al proyecto final.\n&lt;/div&gt;\n\n&lt;div class=\"home-project-meta\"&gt;\n  &lt;span&gt;Próximamente&lt;/span&gt;\n&lt;/div&gt;\n\n&lt;a href=\"desafios/desafio-02/index.html\" class=\"home-project-link\"&gt;\n  Ver desafío →\n&lt;/a&gt;\n\n\n\nProyecto final\n\n\n\n🏆\n\n\n&lt;div class=\"home-card-label\"&gt;\n  EL GRAN RETO\n&lt;/div&gt;\n\n&lt;div class=\"home-final-project-title\"&gt;\n  Proyecto Intermodular Final\n&lt;/div&gt;\n\n&lt;div class=\"home-final-project-description\"&gt;\n  Integra todo lo aprendido para investigar, diseñar,\n  desarrollar y presentar una solución completa a un\n  problema real.\n&lt;/div&gt;\n\n&lt;div class=\"home-project-tags\"&gt;\n  &lt;span&gt;Investigación&lt;/span&gt;\n  &lt;span&gt;Diseño&lt;/span&gt;\n  &lt;span&gt;Desarrollo&lt;/span&gt;\n  &lt;span&gt;IA&lt;/span&gt;\n  &lt;span&gt;Presentación&lt;/span&gt;\n&lt;/div&gt;\n\n&lt;a href=\"proyecto-final/index.html\" class=\"home-project-button\"&gt;\n  Comenzar proyecto →\n&lt;/a&gt;\n\n\n\nRecursos\n\n\n\n&lt;div class=\"home-card-icon\"&gt;🤖&lt;/div&gt;\n\n&lt;div class=\"home-card-content\"&gt;\n\n  &lt;div class=\"home-card-label\"&gt;\n    TRANSVERSAL\n  &lt;/div&gt;\n\n  &lt;div class=\"home-card-title\"&gt;\n    IA\n  &lt;/div&gt;\n\n  &lt;div class=\"home-card-description\"&gt;\n    La inteligencia artificial como herramienta para\n    aprender, investigar y desarrollar.\n  &lt;/div&gt;\n\n  &lt;a href=\"ia/index.html\" class=\"home-card-link\"&gt;\n    Explorar IA →\n  &lt;/a&gt;\n\n&lt;/div&gt;\n\n\n&lt;div class=\"home-card-icon\"&gt;📦&lt;/div&gt;\n\n&lt;div class=\"home-card-content\"&gt;\n\n  &lt;div class=\"home-card-label\"&gt;\n    APOYO\n  &lt;/div&gt;\n\n  &lt;div class=\"home-card-title\"&gt;\n    Recursos\n  &lt;/div&gt;\n\n  &lt;div class=\"home-card-description\"&gt;\n    Plantillas, herramientas y recursos de apoyo\n    para el proyecto.\n  &lt;/div&gt;\n\n  &lt;a href=\"recursos/index.html\" class=\"home-card-link\"&gt;\n    Ver recursos →\n  &lt;/a&gt;\n\n&lt;/div&gt;\n\n\n\n\n&lt;img src=\"images/inmaculada.jpg\" alt=\"Inmaculada Gijón\"&gt;\n\n\n&lt;div class=\"home-teacher-label\"&gt;\n  ESTE ESPACIO HA SIDO DISEÑADO POR\n&lt;/div&gt;\n\n&lt;div class=\"home-teacher-name\"&gt;\n  Inmaculada Gijón\n&lt;/div&gt;\n\n&lt;div class=\"home-teacher-role\"&gt;\n  Profesora de Informática · DAW\n&lt;/div&gt;",
+    "crumbs": [
+      "🏠 Inicio"
+    ]
+  },
+  {
+    "objectID": "unidades/ud1.html",
+    "href": "unidades/ud1.html",
+    "title": "UD1. Gestión de proyectos y metodologías ágiles",
+    "section": "",
+    "text": "En el ámbito del software, la diferencia entre ambos radica en la mentalidad, la duración y la forma en que se mide el éxito. Mientras que un proyecto es un esfuerzo temporal con un principio y un fin claros, un producto es una entidad viva que evoluciona continuamente para generar valor a largo plazo mientras siga siendo útil para sus usuarios.\nUn proyecto sirve para construir o actualizar un producto.\n\n\n\nTabla proyecto vs Producto\n\n\n\n\n\nSon los resultados medibles que se esperan conseguir con la creación de la web. Responden a ¿para qué? del proyecto.\nEjemplo: Lograr 1.000 ventas mensuales en la nueva tienda online durante el primer trimestre o reducir un 30% las llamadas de soporte mediante una sección de ayuda autogestionable.\n\n\n\nEs el límite del proyecto; define detalladamente todo el trabajo que se va a realizar y, de igual importancia, lo que queda fuera.\nEjemplo: El alcance incluye el diseño de 5 páginas, pasarela de pago con tarjeta y un blog. No incluye el desarrollo de una app móvil ni la redacción de los textos legales.\n\n\n\nSon los productos tangibles o verificables que se van generando y presentando a lo largo del proyecto.\nEjemplo: El documento de arquitectura de información, los wireframes (bocetos de diseño), el código fuente en GitHub, y finalmente, la web publicada y funcional.\n\n\n\nSon las limitaciones o factores restrictivos que condicionan la ejecución del proyecto. Tradicionalmente forman el “triángulo de hierro” aunque ahora ante la IA hay quien piensa que ya no se cumple del mismo modo.\n\n\n\nTriángulo de hierro\n\n\nEjemplo: El presupuesto máximo es de 15.000 €, la fecha de lanzamiento límite es el 15 de diciembre, o la obligación de usar obligatoriamente la tecnología Angular / React."
+  },
+  {
+    "objectID": "unidades/ud1.html#proyecto-vs-producto",
+    "href": "unidades/ud1.html#proyecto-vs-producto",
+    "title": "UD1. Gestión de proyectos y metodologías ágiles",
+    "section": "",
+    "text": "En el ámbito del software, la diferencia entre ambos radica en la mentalidad, la duración y la forma en que se mide el éxito. Mientras que un proyecto es un esfuerzo temporal con un principio y un fin claros, un producto es una entidad viva que evoluciona continuamente para generar valor a largo plazo mientras siga siendo útil para sus usuarios.\nUn proyecto sirve para construir o actualizar un producto.\n\n\n\nTabla proyecto vs Producto"
+  },
+  {
+    "objectID": "unidades/ud1.html#objetivos-de-un-proyecto-web",
+    "href": "unidades/ud1.html#objetivos-de-un-proyecto-web",
+    "title": "UD1. Gestión de proyectos y metodologías ágiles",
+    "section": "",
+    "text": "Son los resultados medibles que se esperan conseguir con la creación de la web. Responden a ¿para qué? del proyecto.\nEjemplo: Lograr 1.000 ventas mensuales en la nueva tienda online durante el primer trimestre o reducir un 30% las llamadas de soporte mediante una sección de ayuda autogestionable."
+  },
+  {
+    "objectID": "unidades/ud1.html#alcance",
+    "href": "unidades/ud1.html#alcance",
+    "title": "UD1. Gestión de proyectos y metodologías ágiles",
+    "section": "",
+    "text": "Es el límite del proyecto; define detalladamente todo el trabajo que se va a realizar y, de igual importancia, lo que queda fuera.\nEjemplo: El alcance incluye el diseño de 5 páginas, pasarela de pago con tarjeta y un blog. No incluye el desarrollo de una app móvil ni la redacción de los textos legales."
+  },
+  {
+    "objectID": "unidades/ud1.html#entregables",
+    "href": "unidades/ud1.html#entregables",
+    "title": "UD1. Gestión de proyectos y metodologías ágiles",
+    "section": "",
+    "text": "Son los productos tangibles o verificables que se van generando y presentando a lo largo del proyecto.\nEjemplo: El documento de arquitectura de información, los wireframes (bocetos de diseño), el código fuente en GitHub, y finalmente, la web publicada y funcional."
+  },
+  {
+    "objectID": "unidades/ud1.html#restricciones",
+    "href": "unidades/ud1.html#restricciones",
+    "title": "UD1. Gestión de proyectos y metodologías ágiles",
+    "section": "",
+    "text": "Son las limitaciones o factores restrictivos que condicionan la ejecución del proyecto. Tradicionalmente forman el “triángulo de hierro” aunque ahora ante la IA hay quien piensa que ya no se cumple del mismo modo.\n\n\n\nTriángulo de hierro\n\n\nEjemplo: El presupuesto máximo es de 15.000 €, la fecha de lanzamiento límite es el 15 de diciembre, o la obligación de usar obligatoriamente la tecnología Angular / React."
+  },
+  {
+    "objectID": "unidades/ud1/ud1.html",
+    "href": "unidades/ud1/ud1.html",
+    "title": "UD1. Gestión de proyectos y metodologías ágiles",
+    "section": "",
+    "text": "En el ámbito del software, la diferencia entre ambos radica en la mentalidad, la duración y la forma en que se mide el éxito. Mientras que un proyecto es un esfuerzo temporal con un principio y un fin claros, un producto es una entidad viva que evoluciona continuamente para generar valor a largo plazo mientras siga siendo útil para sus usuarios.\nUn proyecto sirve para construir o actualizar un producto.\n\n\n\nTabla proyecto vs Producto\n\n\n\n\n\nSon los resultados medibles que se esperan conseguir con la creación de la web. Responden a ¿para qué? del proyecto.\nEjemplo: Lograr 1.000 ventas mensuales en la nueva tienda online durante el primer trimestre o reducir un 30% las llamadas de soporte mediante una sección de ayuda autogestionable.\n\n\n\nEs el límite del proyecto; define detalladamente todo el trabajo que se va a realizar y, de igual importancia, lo que queda fuera.\nEjemplo: El alcance incluye el diseño de 5 páginas, pasarela de pago con tarjeta y un blog. No incluye el desarrollo de una app móvil ni la redacción de los textos legales.\n\n\n\nSon los productos tangibles o verificables que se van generando y presentando a lo largo del proyecto.\nEjemplo: El documento de arquitectura de información, los wireframes (bocetos de diseño), el código fuente en GitHub, y finalmente, la web publicada y funcional.\n\n\n\nSon las limitaciones o factores restrictivos que condicionan la ejecución del proyecto. Tradicionalmente forman el “triángulo de hierro” aunque ahora ante la IA hay quien piensa que ya no se cumple del mismo modo.\n\n\n\nTriángulo de hierro\n\n\nEjemplo: El presupuesto máximo es de 15.000 €, la fecha de lanzamiento límite es el 15 de diciembre, o la obligación de usar obligatoriamente la tecnología Angular / React."
+  },
+  {
+    "objectID": "unidades/ud1/ud1.html#proyecto-vs-producto",
+    "href": "unidades/ud1/ud1.html#proyecto-vs-producto",
+    "title": "UD1. Gestión de proyectos y metodologías ágiles",
+    "section": "",
+    "text": "En el ámbito del software, la diferencia entre ambos radica en la mentalidad, la duración y la forma en que se mide el éxito. Mientras que un proyecto es un esfuerzo temporal con un principio y un fin claros, un producto es una entidad viva que evoluciona continuamente para generar valor a largo plazo mientras siga siendo útil para sus usuarios.\nUn proyecto sirve para construir o actualizar un producto.\n\n\n\nTabla proyecto vs Producto"
+  },
+  {
+    "objectID": "unidades/ud1/ud1.html#objetivos-de-un-proyecto-web",
+    "href": "unidades/ud1/ud1.html#objetivos-de-un-proyecto-web",
+    "title": "UD1. Gestión de proyectos y metodologías ágiles",
+    "section": "",
+    "text": "Son los resultados medibles que se esperan conseguir con la creación de la web. Responden a ¿para qué? del proyecto.\nEjemplo: Lograr 1.000 ventas mensuales en la nueva tienda online durante el primer trimestre o reducir un 30% las llamadas de soporte mediante una sección de ayuda autogestionable."
+  },
+  {
+    "objectID": "unidades/ud1/ud1.html#alcance",
+    "href": "unidades/ud1/ud1.html#alcance",
+    "title": "UD1. Gestión de proyectos y metodologías ágiles",
+    "section": "",
+    "text": "Es el límite del proyecto; define detalladamente todo el trabajo que se va a realizar y, de igual importancia, lo que queda fuera.\nEjemplo: El alcance incluye el diseño de 5 páginas, pasarela de pago con tarjeta y un blog. No incluye el desarrollo de una app móvil ni la redacción de los textos legales."
+  },
+  {
+    "objectID": "unidades/ud1/ud1.html#entregables",
+    "href": "unidades/ud1/ud1.html#entregables",
+    "title": "UD1. Gestión de proyectos y metodologías ágiles",
+    "section": "",
+    "text": "Son los productos tangibles o verificables que se van generando y presentando a lo largo del proyecto.\nEjemplo: El documento de arquitectura de información, los wireframes (bocetos de diseño), el código fuente en GitHub, y finalmente, la web publicada y funcional."
+  },
+  {
+    "objectID": "unidades/ud1/ud1.html#restricciones",
+    "href": "unidades/ud1/ud1.html#restricciones",
+    "title": "UD1. Gestión de proyectos y metodologías ágiles",
+    "section": "",
+    "text": "Son las limitaciones o factores restrictivos que condicionan la ejecución del proyecto. Tradicionalmente forman el “triángulo de hierro” aunque ahora ante la IA hay quien piensa que ya no se cumple del mismo modo.\n\n\n\nTriángulo de hierro\n\n\nEjemplo: El presupuesto máximo es de 15.000 €, la fecha de lanzamiento límite es el 15 de diciembre, o la obligación de usar obligatoriamente la tecnología Angular / React."
+  },
+  {
+    "objectID": "unidades/ud1/index.html",
+    "href": "unidades/ud1/index.html",
+    "title": "UD1. Del código a producción. ¿Qué significa que una aplicación sea segura?",
+    "section": "",
+    "text": "¿Qué ocurre desde que escribimos código hasta que un usuario utiliza una aplicación?",
+    "crumbs": [
+      "📚 Unidades",
+      "1-Del código a producción. ¿Qué significa que una aplicación sea segura?"
+    ]
+  },
+  {
+    "objectID": "unidades/ud1/index.html#proyecto-vs-producto",
+    "href": "unidades/ud1/index.html#proyecto-vs-producto",
+    "title": "UD1. Del código a producción. ¿Qué significa que una aplicación sea segura?",
+    "section": "Proyecto vs Producto",
+    "text": "Proyecto vs Producto\nEn el ámbito del software, la diferencia entre ambos radica en la mentalidad, la duración y la forma en que se mide el éxito. Mientras que un proyecto es un esfuerzo temporal con un principio y un fin claros, un producto es una entidad viva que evoluciona continuamente para generar valor a largo plazo mientras siga siendo útil para sus usuarios.\nUn proyecto sirve para construir o actualizar un producto.\n\n\n\nTabla proyecto vs Producto",
+    "crumbs": [
+      "📚 Unidades",
+      "1-Gestión de proyectos y metodologías ágiles"
+    ]
+  },
+  {
+    "objectID": "unidades/ud1/index.html#objetivos-de-un-proyecto-web",
+    "href": "unidades/ud1/index.html#objetivos-de-un-proyecto-web",
+    "title": "UD1. Del código a producción. ¿Qué significa que una aplicación sea segura?",
+    "section": "Objetivos de un proyecto web",
+    "text": "Objetivos de un proyecto web\nSon los resultados medibles que se esperan conseguir con la creación de la web. Responden a ¿para qué? del proyecto.\nEjemplo: Lograr 1.000 ventas mensuales en la nueva tienda online durante el primer trimestre o reducir un 30% las llamadas de soporte mediante una sección de ayuda autogestionable.",
+    "crumbs": [
+      "📚 Unidades",
+      "1-Gestión de proyectos y metodologías ágiles"
+    ]
+  },
+  {
+    "objectID": "unidades/ud1/index.html#alcance",
+    "href": "unidades/ud1/index.html#alcance",
+    "title": "UD1. Del código a producción. ¿Qué significa que una aplicación sea segura?",
+    "section": "Alcance",
+    "text": "Alcance\nEs el límite del proyecto; define detalladamente todo el trabajo que se va a realizar y, de igual importancia, lo que queda fuera.\nEjemplo: El alcance incluye el diseño de 5 páginas, pasarela de pago con tarjeta y un blog. No incluye el desarrollo de una app móvil ni la redacción de los textos legales.",
+    "crumbs": [
+      "📚 Unidades",
+      "1-Gestión de proyectos y metodologías ágiles"
+    ]
+  },
+  {
+    "objectID": "unidades/ud1/index.html#entregables",
+    "href": "unidades/ud1/index.html#entregables",
+    "title": "UD1. Del código a producción. ¿Qué significa que una aplicación sea segura?",
+    "section": "Entregables",
+    "text": "Entregables\nSon los productos tangibles o verificables que se van generando y presentando a lo largo del proyecto.\nEjemplo: El documento de arquitectura de información, los wireframes (bocetos de diseño), el código fuente en GitHub, y finalmente, la web publicada y funcional.",
+    "crumbs": [
+      "📚 Unidades",
+      "1-Gestión de proyectos y metodologías ágiles"
+    ]
+  },
+  {
+    "objectID": "unidades/ud1/index.html#restricciones",
+    "href": "unidades/ud1/index.html#restricciones",
+    "title": "UD1. Del código a producción. ¿Qué significa que una aplicación sea segura?",
+    "section": "Restricciones",
+    "text": "Restricciones\nSon las limitaciones o factores restrictivos que condicionan la ejecución del proyecto. Tradicionalmente forman el “triángulo de hierro” aunque ahora ante la IA hay quien piensa que ya no se cumple del mismo modo.\n\n\n\nTriángulo de hierro\n\n\nEjemplo: El presupuesto máximo es de 15.000 €, la fecha de lanzamiento límite es el 15 de diciembre, o la obligación de usar obligatoriamente la tecnología Angular / React.",
+    "crumbs": [
+      "📚 Unidades",
+      "1-Gestión de proyectos y metodologías ágiles"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud1/lab1.html",
+    "href": "laboratorios/ud1/lab1.html",
+    "title": "UD1 · Lab 1 · Del reto al briefing y la viabilidad",
+    "section": "",
+    "text": "Debemos identificar:\n\nQué sabemos\nQué no sabemos\nQué necesitamos preguntar\nQué estamos suponiendo\n\nVamos a realizar una matriz de incertidumbres:\n\n\n\nMatriz de incertidumbres\n\n\n\n\n\nConstruimos:\ncontexto→problema→actores→objetivos→alcance→entregables→restricciones→recursos→plazo→éxito\n\n\n\nRealizar tabla:\nTécnica / temporal / económica / operativa / legal\n\n\n\nPasarás tu briefing a la IA pidiéndole algo como esto:\n“Actúa como consultor de proyectos software. Revisa nuestro briefing. Identifica información ambigua, objetivos mal definidos, restricciones no contempladas, riesgos y preguntas que deberíamos realizar antes de iniciar el desarrollo. No propongas soluciones todavía.”\nDebes analizar la respuesta y guardar el prompt que le pides en un md en la carpeta docs\n\n\n\nproyecto-coworking/\n│\n├── README.md\n│\n└── docs/\n    ├── briefing.md\n    ├── viabilidad.md\n    ├── incertidumbres.md\n    └── ia-prompt.md",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD1 · Lab 1 · Del reto al briefing y la viabilidad"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud1/lab1.html#paso-2.-descubrir-información",
+    "href": "laboratorios/ud1/lab1.html#paso-2.-descubrir-información",
+    "title": "UD1 · Lab 1 · Del reto al briefing y la viabilidad",
+    "section": "",
+    "text": "Debemos identificar:\n\nQué sabemos\nQué no sabemos\nQué necesitamos preguntar\nQué estamos suponiendo\n\nVamos a realizar una matriz de incertidumbres:\n\n\n\nMatriz de incertidumbres",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD1 · Lab 1 · Del reto al briefing y la viabilidad"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud1/lab1.html#paso-3.-elaborar-briefing",
+    "href": "laboratorios/ud1/lab1.html#paso-3.-elaborar-briefing",
+    "title": "UD1 · Lab 1 · Del reto al briefing y la viabilidad",
+    "section": "",
+    "text": "Construimos:\ncontexto→problema→actores→objetivos→alcance→entregables→restricciones→recursos→plazo→éxito",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD1 · Lab 1 · Del reto al briefing y la viabilidad"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud1/lab1.html#paso-4.-analizar-viabilidad",
+    "href": "laboratorios/ud1/lab1.html#paso-4.-analizar-viabilidad",
+    "title": "UD1 · Lab 1 · Del reto al briefing y la viabilidad",
+    "section": "",
+    "text": "Realizar tabla:\nTécnica / temporal / económica / operativa / legal",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD1 · Lab 1 · Del reto al briefing y la viabilidad"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud1/lab1.html#paso-5---ia-como-auditor",
+    "href": "laboratorios/ud1/lab1.html#paso-5---ia-como-auditor",
+    "title": "UD1 · Lab 1 · Del reto al briefing y la viabilidad",
+    "section": "",
+    "text": "Pasarás tu briefing a la IA pidiéndole algo como esto:\n“Actúa como consultor de proyectos software. Revisa nuestro briefing. Identifica información ambigua, objetivos mal definidos, restricciones no contempladas, riesgos y preguntas que deberíamos realizar antes de iniciar el desarrollo. No propongas soluciones todavía.”\nDebes analizar la respuesta y guardar el prompt que le pides en un md en la carpeta docs",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD1 · Lab 1 · Del reto al briefing y la viabilidad"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud1/lab1.html#paso-6.-resultado-de-la-sesión",
+    "href": "laboratorios/ud1/lab1.html#paso-6.-resultado-de-la-sesión",
+    "title": "UD1 · Lab 1 · Del reto al briefing y la viabilidad",
+    "section": "",
+    "text": "proyecto-coworking/\n│\n├── README.md\n│\n└── docs/\n    ├── briefing.md\n    ├── viabilidad.md\n    ├── incertidumbres.md\n    └── ia-prompt.md",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD1 · Lab 1 · Del reto al briefing y la viabilidad"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud1/lab1.html#plantilla-de-un-briefing",
+    "href": "laboratorios/ud1/lab1.html#plantilla-de-un-briefing",
+    "title": "UD1 · Lab 1 · Del reto al briefing y la viabilidad",
+    "section": "Plantilla de un Briefing",
+    "text": "Plantilla de un Briefing\n\n\n\nBriefing",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD1 · Lab 1 · Del reto al briefing y la viabilidad"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud1/lab1.html#identificación-de-actores",
+    "href": "laboratorios/ud1/lab1.html#identificación-de-actores",
+    "title": "UD1 · Lab 1 · Del reto al briefing y la viabilidad",
+    "section": "Identificación de actores",
+    "text": "Identificación de actores\nDebemos introducir stakeholders de forma muy visual.\n\n\n\nStakeholders\n\n\nPor ejemplo:\n\n\n\nStakeholders\n\n\n\nObjetivos\nPor ejemplo:\n“Desarrollar una plataforma web para gestionar reservas de espacios de coworking”\nSería un objetivo/alcance, mientras que:\n“Aplicación web desplegada + documentación + manual de usuario”\nson entregables.\nDebemos redactarlos de forma detallada y que no sean objetivos generales ni ambiguos.\nUn objetivo como:\n\n“Hacer una aplicación moderna.”\n\nes demasiado ambiguo.\nMejor:\n\n“Desarrollar una aplicación web que permita a los usuarios consultar la disponibilidad de los espacios y realizar reservas.”\n\nY podemos introducir el concepto de SMART sin convertirlo en teoría empresarial:\n\nSpecific\nMeasurable\nAchievable\nRelevant\nTime-bound\n\nNo hace falta que todos los objetivos sean perfectamente SMART, pero sí que aprendamos a preguntarnos:\n\n¿Cómo sabremos que hemos conseguido el objetivo?",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD1 · Lab 1 · Del reto al briefing y la viabilidad"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud1/lab1.html#restricciones",
+    "href": "laboratorios/ud1/lab1.html#restricciones",
+    "title": "UD1 · Lab 1 · Del reto al briefing y la viabilidad",
+    "section": "Restricciones",
+    "text": "Restricciones\n\n💡 ¿Qué podría impedir que nuestro proyecto se realizase como inicialmente lo imaginamos?\n\nTenemos que buscar restricciones de diferentes tipos:\n\n\n\nRestricciones",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD1 · Lab 1 · Del reto al briefing y la viabilidad"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud1/lab1.html#viabilidad-del-proyecto",
+    "href": "laboratorios/ud1/lab1.html#viabilidad-del-proyecto",
+    "title": "UD1 · Lab 1 · Del reto al briefing y la viabilidad",
+    "section": "Viabilidad del proyecto",
+    "text": "Viabilidad del proyecto\n\n💡 La viabilidad no es si/no. También sirve para detectar qué tenemos que cambiar antes de empezar.\n\nEn esta fase buscamos una viabilidad inicial.\nUtilizamos cinco dimensiones:\n\n\n\nViabilidad\n\n\n\n\n\nViabilidad\n\n\nMVP: Producto mínimo viable\nRGPD: Reglamento General de Protección de Datos\n\nHerramientas que vamos a utilizar\n🧠 Para pensar y documentar\nMarkdown + Github\n/docs/briefing.md\n/docs/viabilidad.md\n\n💡 La documentación va a formar parte del repositorio del proyecto y queda versionada\n\n📋 Para organizar\nGithub Proyects\nTodavía no vamos a tener un Product Backlog completo. Pero en esta sesión podemos:\nIdeas → Análisis → Viable/No Viable\n🤖 Para IA\nIntroduciría la IA con un papel concreto: IA como consultor, no responsable de la decisión.\nIA propone → equipo comprueba → equipo acepta/rechaza → equipo documenta",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD1 · Lab 1 · Del reto al briefing y la viabilidad"
+    ]
+  },
+  {
+    "objectID": "unidades/ud1/index.html#stakeholders",
+    "href": "unidades/ud1/index.html#stakeholders",
+    "title": "UD1. Del código a producción. ¿Qué significa que una aplicación sea segura?",
+    "section": "Stakeholders",
+    "text": "Stakeholders\nSon todas las personas, equipos u organizaciones que se ven afectadas por el proyecto o que tienen interés en su resultado.\nEjemplo: El cliente (dueño del negocio), el diseñador UI/UX, el equipo de programadores, el especialista en SEO, e incluso los usuarios finales que navegarán por la web.",
+    "crumbs": [
+      "📚 Unidades",
+      "1-Gestión de proyectos y metodologías ágiles"
+    ]
+  },
+  {
+    "objectID": "unidades/ud1/index.html#ciclo-de-vida-de-un-proyecto-web",
+    "href": "unidades/ud1/index.html#ciclo-de-vida-de-un-proyecto-web",
+    "title": "UD1. Del código a producción. ¿Qué significa que una aplicación sea segura?",
+    "section": "Ciclo de vida de un proyecto web",
+    "text": "Ciclo de vida de un proyecto web\nEl ciclo de vida abarca desde que la web es solo una idea hasta que se lanza a internet. Se compone de 6 fases secuenciales (aunque en entornos ágiles se puede iterar continuamente entre ellas):\n\nInicio → 2. Planificación → 3. Diseño → 4. Desarrollo → 5. Pruebas → 6. Lanzamiento\n\n\n1. Inicio (briefing y viabilidad)\nSe define la idea general, se identifican los principales stakeholders y se alinean las expectativas. Se aprueba la viabilidad del proyecto mediante un acta de constitución (Project Charter).\n\n\n2. Planificación (definición y estructura)\nSe detalla el alcance, el calendario (cronograma) y el presupuesto. Aquí se crea el mapa del sitio web (sitemap) y la arquitectura de la información para saber qué páginas tendrá el sitio y cómo se conectarán.\n\n\n3. Diseño (UI/UX)\nSe define el aspecto visual de la web. Se crean los wireframes (esquemas en blanco y negro) y posteriormente los prototipos interactivos en alta fidelidad (en herramientas como Figma). Se valida la experiencia de usuario (UX) y la interfaz visual (UI).\n\n\n4. Desarrollo (Programación)\nLos desarrolladores traducen los diseños aprobados en código real.\n\nFront-end: La parte visual con la que interactúa el usuario (HTML, CSS, JavaScript).\nBack-end: La lógica interna, bases de datos, integraciones con pasarelas de pago y el panel de administración (CMS).\n\n\n\n5. Pruebas (QA/Quality Assurance)\nSe testea a fondo la web antes de hacerla pública. Se comprueba que funcione bien en móviles y ordenadores (responsivo), que no haya enlaces rotos, que la velocidad de carga sea óptima y que los formularios envíen la información correctamente.\n\n\n6. Lanzamiento y cierre\nLa web se traslada al servidor definitivo, se vincula el dominio (ej. tuweb.com) y se indexa en Google. Se entrega la documentación al cliente, se realiza la formación si la requiere y se cierra formalmente el proyecto. (A partir de aquí, la web entra en su fase de mantenimiento y evoluciona como producto).",
+    "crumbs": [
+      "📚 Unidades",
+      "1-Gestión de proyectos y metodologías ágiles"
+    ]
+  },
+  {
+    "objectID": "unidades/ud1/index.html#necesidad",
+    "href": "unidades/ud1/index.html#necesidad",
+    "title": "UD1. Gestión de proyectos y metodologías ágiles",
+    "section": "Necesidad",
+    "text": "Necesidad\nLa carencia u oportunidad real del usuario o del negocio (por ejemplo: “los clientes necesitan comprar productos sin llamar por teléfono”).",
+    "crumbs": [
+      "📚 Unidades",
+      "1-Gestión de proyectos y metodologías ágiles"
+    ]
+  },
+  {
+    "objectID": "unidades/ud1/index.html#requisito",
+    "href": "unidades/ud1/index.html#requisito",
+    "title": "UD1. Gestión de proyectos y metodologías ágiles",
+    "section": "Requisito",
+    "text": "Requisito",
+    "crumbs": [
+      "📚 Unidades",
+      "1-Gestión de proyectos y metodologías ágiles"
+    ]
+  },
+  {
+    "objectID": "unidades/ud1/index.html#requisito-funcional-no-funcional",
+    "href": "unidades/ud1/index.html#requisito-funcional-no-funcional",
+    "title": "UD1. Gestión de proyectos y metodologías ágiles",
+    "section": "Requisito funcional / no funcional",
+    "text": "Requisito funcional / no funcional\nRequisito funcional: Lo que la aplicación hace (por ejemplo: “el sistema debe permitir pagar con tarjeta de crédito”).\nRequisito no funcional: Cómo se comporta la aplicación en términos de calidad (por ejemplo: “la página debe cargar en menos de 2 segundos” o “los datos deben estar cifrados”).",
+    "crumbs": [
+      "📚 Unidades",
+      "1-Gestión de proyectos y metodologías ágiles"
+    ]
+  },
+  {
+    "objectID": "unidades/ud1/index.html#alcance-1",
+    "href": "unidades/ud1/index.html#alcance-1",
+    "title": "UD1. Gestión de proyectos y metodologías ágiles",
+    "section": "Alcance",
+    "text": "Alcance\nLos límites del proyecto; define exactamente qué se incluye y qué se deja fuera para evitar retrasos.",
+    "crumbs": [
+      "📚 Unidades",
+      "1-Gestión de proyectos y metodologías ágiles"
+    ]
+  },
+  {
+    "objectID": "unidades/ud1/index.html#épicas",
+    "href": "unidades/ud1/index.html#épicas",
+    "title": "UD1. Gestión de proyectos y metodologías ágiles",
+    "section": "Épicas",
+    "text": "Épicas\nGrandes bloques de trabajo o funcionalidades generales que se dividen en partes más pequeñas (por ejemplo: “Módulo de autenticación de usuarios”)",
+    "crumbs": [
+      "📚 Unidades",
+      "1-Gestión de proyectos y metodologías ágiles"
+    ]
+  },
+  {
+    "objectID": "unidades/ud1/index.html#historias-de-usuario",
+    "href": "unidades/ud1/index.html#historias-de-usuario",
+    "title": "UD1. Gestión de proyectos y metodologías ágiles",
+    "section": "Historias de usuario",
+    "text": "Historias de usuario\nPequeñas piezas de valor contadas desde la perspectiva del usuario, usando el formato:\n“Como [rol], quiero [acción] para [beneficio]”.",
+    "crumbs": [
+      "📚 Unidades",
+      "1-Gestión de proyectos y metodologías ágiles"
+    ]
+  },
+  {
+    "objectID": "unidades/ud1/index.html#criterios-de-aceptación",
+    "href": "unidades/ud1/index.html#criterios-de-aceptación",
+    "title": "UD1. Gestión de proyectos y metodologías ágiles",
+    "section": "Criterios de aceptación",
+    "text": "Criterios de aceptación\nLas condiciones específicas que debe cumplir una historia de usuario para darse por buena y terminada (por ejemplo: “el botón de registro se desactiva si el correo es inválido”)",
+    "crumbs": [
+      "📚 Unidades",
+      "1-Gestión de proyectos y metodologías ágiles"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud1/lab2.html",
+    "href": "laboratorios/ud1/lab2.html",
+    "title": "UD1 · Lab 2 · Del problema al backlog",
+    "section": "",
+    "text": "El briefing de LifeOS está terminado. Ahora sois el equipo de análisis. Tenéis que convertir necesidades detectadas en el primer Product Backlog del producto\n\n\n\nVamos a revisar el brefing y obtener las necesidades.\n\nTodos los ejemplos que aquí aparecen son sólo eso, ejemplos. No son los que debéis usar en vuestro proyecto. Tenéis que extraerlos vosotros mismos del briefing.\n\nPor ejemplo:\nN1 → Organizar tareas\nN2 → Priorizar tareas\nN3 → Trabajar con objetivos\nN4 → Saber qué tareas están pendientes\nN5 → Consultar progreso\nN6 → No perder la información\n\n\n\nN1\n├── Crear tarea\n├── Editar tarea\n├── Eliminar tarea\n└── Completar tarea\n\nN2\n├── Asignar prioridad\n└── Ordenar por prioridad\n\nN3\n├── Crear objetivo\n├── Editar objetivo\n├── Asociar tareas\n└── Consultar progreso\n\n\n\nVamos a utilizar un prompt muy contextualizado. Modifícalo como consideres oportuno.\nActúa como analista de requisitos de una aplicación web llamada LifeOS.\n\nLifeOS es una aplicación de planificación personal que permite a una persona gestionar sus tareas y objetivos, organizar sus prioridades y consultar su progreso.\n\nEste es el briefing del proyecto:\n\n[PEGAR AQUÍ EL BRIEFING REALIZADO POR EL EQUIPO]\n\nEstas son las necesidades que hemos identificado:\n\n[PEGAR NECESIDADES]\n\nAyúdanos a analizarlas.\n\nPara cada necesidad:\n\n1. Identifica qué problema del usuario intenta resolver.\n2. Propón las funcionalidades que debería ofrecer la aplicación.\n3. Identifica posibles usuarios implicados.\n4. Detecta ambigüedades o información que falta.\n5. Indica posibles requisitos funcionales.\n6. Indica posibles requisitos no funcionales cuando sean relevantes.\n\nNo inventes información que no aparezca en el briefing.\nNo decidas por nosotros.\nSi una cuestión requiere información del cliente o del usuario, indícala como pregunta abierta.\n\nTodavía NO redactes historias de usuario.\n\n\n\nRevisa nuestro análisis de requisitos para LifeOS.\n\nNecesidades:\n[...]\n\nFuncionalidades:\n[...]\n\nActúa como un analista que debe encontrar problemas.\n\nIdentifica:\n\n* necesidades que no tienen ninguna funcionalidad asociada;\n* funcionalidades que no parecen responder a ninguna necesidad;\n* funcionalidades demasiado grandes;\n* funcionalidades duplicadas;\n* funcionalidades ambiguas;\n* información que deberíamos aclarar;\n* posibles requisitos que hayamos olvidado.\n\nNo añadas funcionalidades simplemente porque parezcan interesantes.\nDiferencia claramente entre lo que se deduce de la información proporcionada y lo que sería una sugerencia.\n\nLa IA no sólo sirve para generar; también sirve para revisar nuestro razonamiento\n\n\n\n\nA partir exclusivamente de las funcionalidades validadas de nuestro proyecto LifeOS:\n\n[PEGAR FUNCIONALIDADES]\n\nCrea historias de usuario siguiendo esta estructura:\n\nComo [tipo de usuario],\nquiero [acción],\npara [valor que obtengo].\n\nPara cada historia:\n\n* utiliza lenguaje comprensible para el usuario;\n* evita describir tecnología o implementación;\n* asegúrate de que aporta valor;\n* indica si consideras que es demasiado grande y podría dividirse;\n* propone entre 3 y 5 criterios de aceptación verificables.\n\nNo inventes funcionalidades nuevas.\n\n\n\nEjemplo (sólo un ejemplo)\n\n\n\nHistorias de usuario\n\n\n\n\n\nVamos a organizar épicas e historias de usuario utilizando Github Project\nPara ello, vamos a crear un proyecto asociado al repositorio de LifeOS.\n\n\n\nGithub Project\n\n\nVamos a organizar las épicas como Milestones de Github. Para ello vamos a nuestro repositorio -&gt; buscador de issues -&gt; Milestones (crearemos los que necesitemos).\nUn milestone debe tener una descripción y puede tener o no una fecha límite asociada. También se establecerá una barra de progreso que se irá completando cuando se completen las issues asociadas al milestone.\n\n\n\nMilestones\n\n\n\n\n\nHistorias de usuario",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD1 · Lab 2 · Del problema al backlog"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud1/lab2.html#paso-1.-extraemos-necesidades",
+    "href": "laboratorios/ud1/lab2.html#paso-1.-extraemos-necesidades",
+    "title": "UD1 · Lab 2 · Del problema al backlog",
+    "section": "",
+    "text": "Vamos a revisar el brefing y obtener las necesidades.\n\nTodos los ejemplos que aquí aparecen son sólo eso, ejemplos. No son los que debéis usar en vuestro proyecto. Tenéis que extraerlos vosotros mismos del briefing.\n\nPor ejemplo:\nN1 → Organizar tareas\nN2 → Priorizar tareas\nN3 → Trabajar con objetivos\nN4 → Saber qué tareas están pendientes\nN5 → Consultar progreso\nN6 → No perder la información",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD1 · Lab 2 · Del problema al backlog"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud1/lab2.html#paso-2.-identificar-funcionalidaes",
+    "href": "laboratorios/ud1/lab2.html#paso-2.-identificar-funcionalidaes",
+    "title": "UD1 · Lab 2 · Del problema al backlog",
+    "section": "",
+    "text": "N1\n├── Crear tarea\n├── Editar tarea\n├── Eliminar tarea\n└── Completar tarea\n\nN2\n├── Asignar prioridad\n└── Ordenar por prioridad\n\nN3\n├── Crear objetivo\n├── Editar objetivo\n├── Asociar tareas\n└── Consultar progreso",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD1 · Lab 2 · Del problema al backlog"
+    ]
+  },
+  {
+    "objectID": "unidades/ud1/index.html#conceptos-clave",
+    "href": "unidades/ud1/index.html#conceptos-clave",
+    "title": "UD1. Del código a producción. ¿Qué significa que una aplicación sea segura?",
+    "section": "Conceptos clave",
+    "text": "Conceptos clave\n\nNecesidad\nLa carencia u oportunidad real del usuario o del negocio (por ejemplo: “los clientes necesitan comprar productos sin llamar por teléfono”).\n\n\nRequisito funcional / no funcional\nRequisito funcional: Lo que la aplicación hace (por ejemplo: “el sistema debe permitir pagar con tarjeta de crédito”).\nRequisito no funcional: Cómo se comporta la aplicación en términos de calidad (por ejemplo: “la página debe cargar en menos de 2 segundos” o “los datos deben estar cifrados”).\n\n\nAlcance\nLos límites del proyecto; define exactamente qué se incluye y qué se deja fuera para evitar retrasos.\n\n\nÉpicas\nGrandes bloques de trabajo o funcionalidades generales que se dividen en partes más pequeñas (por ejemplo: “Módulo de autenticación de usuarios”)\n\n\nHistorias de usuario\nPequeñas piezas de valor contadas desde la perspectiva del usuario, usando el formato:\n“Como [rol], quiero [acción] para [beneficio]”.\n\n\nCriterios de aceptación\nLas condiciones específicas que debe cumplir una historia de usuario para darse por buena y terminada (por ejemplo: “el botón de registro se desactiva si el correo es inválido”)",
+    "crumbs": [
+      "📚 Unidades",
+      "1-Gestión de proyectos y metodologías ágiles"
+    ]
+  },
+  {
+    "objectID": "unidades/ud1/index.html#del-problema-a-las-necesidades",
+    "href": "unidades/ud1/index.html#del-problema-a-las-necesidades",
+    "title": "UD1. Del código a producción. ¿Qué significa que una aplicación sea segura?",
+    "section": "Del problema a las necesidades",
+    "text": "Del problema a las necesidades\nImaginemos que tengo: “Quiero saber qué tengo pendiente”\nTodavía no sabemos qué debe hacer la aplicación exactamebnte, pero sí sabemos que hay una necesidad de organizar tareas y consultar progreso.",
+    "crumbs": [
+      "📚 Unidades",
+      "1-Gestión de proyectos y metodologías ágiles"
+    ]
+  },
+  {
+    "objectID": "unidades/ud1/index.html#necesidad---f",
+    "href": "unidades/ud1/index.html#necesidad---f",
+    "title": "UD1. Gestión de proyectos y metodologías ágiles",
+    "section": "Necesidad -> f",
+    "text": "Necesidad -&gt; f",
+    "crumbs": [
+      "📚 Unidades",
+      "1-Gestión de proyectos y metodologías ágiles"
+    ]
+  },
+  {
+    "objectID": "unidades/ud1/index.html#necesidad---funcionalidad",
+    "href": "unidades/ud1/index.html#necesidad---funcionalidad",
+    "title": "UD1. Del código a producción. ¿Qué significa que una aplicación sea segura?",
+    "section": "Necesidad -> Funcionalidad",
+    "text": "Necesidad -&gt; Funcionalidad\nEjemplo:\n\n\n\nNecesidad-funcionalidad\n\n\n\nUna necesidad puede dar lugar a varias funcionalidades, y una funcionalidad puede cubrir varias necesidades.\n\nPor ejemplo:\nNecesidad: “Quiero organizar mis tareas”\nPuede convertirse en:\n\ncrear tarea\neditar tarea\neliminar tarea\ncompletar tarea\nasignar prioridad\nasignar categoría\nestablecer fecha límite",
+    "crumbs": [
+      "📚 Unidades",
+      "1-Gestión de proyectos y metodologías ágiles"
+    ]
+  },
+  {
+    "objectID": "unidades/ud1/index.html#funcionalidades---épicas",
+    "href": "unidades/ud1/index.html#funcionalidades---épicas",
+    "title": "UD1. Del código a producción. ¿Qué significa que una aplicación sea segura?",
+    "section": "Funcionalidades -> épicas",
+    "text": "Funcionalidades -&gt; épicas\nAhora podemos agruparlas.\nPodríamos tener algo así (recuerda que son sólo ejemplos):\n📝 Épica 1 — Gestión de tareas\nTodo lo relacionado con crear y gestionar tareas.\n\nCrear tarea\nEditar tarea\nEliminar tarea\nCompletar tarea\nEstablecer fecha\nEstablecer prioridad",
+    "crumbs": [
+      "📚 Unidades",
+      "1-Gestión de proyectos y metodologías ágiles"
+    ]
+  },
+  {
+    "objectID": "unidades/ud1/index.html#historias-de-usuario-1",
+    "href": "unidades/ud1/index.html#historias-de-usuario-1",
+    "title": "UD1. Del código a producción. ¿Qué significa que una aplicación sea segura?",
+    "section": "Historias de usuario",
+    "text": "Historias de usuario\nVamos a pasar de:\n“Crear tarea”\na algo que tenga sentido desde la perspectiva del usuario.\nHistoria =&gt; Como usuario, quiero establecer crear una tarea para registrar algo que necesito realizar\nOtro ejemplo:\nHistoria =&gt; Como usuario, quiero asignar una prioridad a una tarea para identificar cuáles requieren mayor atención\n…",
+    "crumbs": [
+      "📚 Unidades",
+      "1-Gestión de proyectos y metodologías ágiles"
+    ]
+  },
+  {
+    "objectID": "unidades/ud1/index.html#ejemplo-completo",
+    "href": "unidades/ud1/index.html#ejemplo-completo",
+    "title": "UD1. Del código a producción. ¿Qué significa que una aplicación sea segura?",
+    "section": "Ejemplo completo",
+    "text": "Ejemplo completo\nProblema\n\nTengo muchas cosas que hacer y me cuesta organizarme.\n\n↓\nNecesidad\n\nNecesito registrar y organizar mis tareas.\n\n↓\nFuncionalidades\n\nCrear tareas.\nEditar tareas.\nEliminar tareas.\nCompletar tareas.\nEstablecer prioridad.\nEstablecer fecha límite.\n\n↓\nÉpica\n\nGestión de tareas\n\n↓\nHistoria\n\nComo usuario, quiero crear una tarea para registrar una actividad que necesito realizar.\n\n↓\nCriterios de aceptación\n\nLa tarea debe tener un título.\nEl usuario puede crear la tarea desde la interfaz.\nUna vez creada aparece en la lista de tareas.\nLa nueva tarea comienza como pendiente.\nEl sistema no permite crear una tarea sin título.\n\n↓\nTareas técnicas\nAquí sí pueden aparecer cosas como:\n\nCrear formulario.\nValidar campos.\nCrear objeto task.\nAñadir tarea al array.\nRenderizar tarea.\n…\n\n\nLa historia describe QUÉ necesita el usuario. Las tareas describen CÓMO lo vamos a implementar",
+    "crumbs": [
+      "📚 Unidades",
+      "1-Gestión de proyectos y metodologías ágiles"
+    ]
+  },
+  {
+    "objectID": "unidades/ud1/index.html#requisitos-no-funcionales",
+    "href": "unidades/ud1/index.html#requisitos-no-funcionales",
+    "title": "UD1. Del código a producción. ¿Qué significa que una aplicación sea segura?",
+    "section": "Requisitos no funcionales",
+    "text": "Requisitos no funcionales\nRequisitos funcionales\n\nEl usuario podrá crear tareas\n\n\nEl usuario podrá asociar una tarea a un objetivo\n\nRequisitos no funcionales\n\nLa aplicación deberá funcionar correctamente en los navegadores modernos definidos para el proyecto\n\n\nLos datos deberán mantenerse al recargar la página\n\n\nLa interfaz deberá ser usable desde dispositivos móviles\n\n\nLa aplicación deberá cumplir los criterios de accesibilidad establecidos para el proyecto\n\n“Hacer una aplicación” no significa solamente implementar funcionalidades",
+    "crumbs": [
+      "📚 Unidades",
+      "1-Gestión de proyectos y metodologías ágiles"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud1/lab2.html#paso-3.-ia-como-analista-de-lifeos",
+    "href": "laboratorios/ud1/lab2.html#paso-3.-ia-como-analista-de-lifeos",
+    "title": "UD1 · Lab 2 · Del problema al backlog",
+    "section": "",
+    "text": "Vamos a utilizar un prompt muy contextualizado. Modifícalo como consideres oportuno.\nActúa como analista de requisitos de una aplicación web llamada LifeOS.\n\nLifeOS es una aplicación de planificación personal que permite a una persona gestionar sus tareas y objetivos, organizar sus prioridades y consultar su progreso.\n\nEste es el briefing del proyecto:\n\n[PEGAR AQUÍ EL BRIEFING REALIZADO POR EL EQUIPO]\n\nEstas son las necesidades que hemos identificado:\n\n[PEGAR NECESIDADES]\n\nAyúdanos a analizarlas.\n\nPara cada necesidad:\n\n1. Identifica qué problema del usuario intenta resolver.\n2. Propón las funcionalidades que debería ofrecer la aplicación.\n3. Identifica posibles usuarios implicados.\n4. Detecta ambigüedades o información que falta.\n5. Indica posibles requisitos funcionales.\n6. Indica posibles requisitos no funcionales cuando sean relevantes.\n\nNo inventes información que no aparezca en el briefing.\nNo decidas por nosotros.\nSi una cuestión requiere información del cliente o del usuario, indícala como pregunta abierta.\n\nTodavía NO redactes historias de usuario.",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD1 · Lab 2 · Del problema al backlog"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud1/lab2.html#paso-4.-ia-para-encontrar-incoherencias-auditoría-del-análisis",
+    "href": "laboratorios/ud1/lab2.html#paso-4.-ia-para-encontrar-incoherencias-auditoría-del-análisis",
+    "title": "UD1 · Lab 2 · Del problema al backlog",
+    "section": "",
+    "text": "Revisa nuestro análisis de requisitos para LifeOS.\n\nNecesidades:\n[...]\n\nFuncionalidades:\n[...]\n\nActúa como un analista que debe encontrar problemas.\n\nIdentifica:\n\n* necesidades que no tienen ninguna funcionalidad asociada;\n* funcionalidades que no parecen responder a ninguna necesidad;\n* funcionalidades demasiado grandes;\n* funcionalidades duplicadas;\n* funcionalidades ambiguas;\n* información que deberíamos aclarar;\n* posibles requisitos que hayamos olvidado.\n\nNo añadas funcionalidades simplemente porque parezcan interesantes.\nDiferencia claramente entre lo que se deduce de la información proporcionada y lo que sería una sugerencia.\n\nLa IA no sólo sirve para generar; también sirve para revisar nuestro razonamiento",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD1 · Lab 2 · Del problema al backlog"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud1/lab2.html#paso-5.-creamos-las-primeras-historias-utilizando-ia",
+    "href": "laboratorios/ud1/lab2.html#paso-5.-creamos-las-primeras-historias-utilizando-ia",
+    "title": "UD1 · Lab 2 · Del problema al backlog",
+    "section": "",
+    "text": "A partir exclusivamente de las funcionalidades validadas de nuestro proyecto LifeOS:\n\n[PEGAR FUNCIONALIDADES]\n\nCrea historias de usuario siguiendo esta estructura:\n\nComo [tipo de usuario],\nquiero [acción],\npara [valor que obtengo].\n\nPara cada historia:\n\n* utiliza lenguaje comprensible para el usuario;\n* evita describir tecnología o implementación;\n* asegúrate de que aporta valor;\n* indica si consideras que es demasiado grande y podría dividirse;\n* propone entre 3 y 5 criterios de aceptación verificables.\n\nNo inventes funcionalidades nuevas.",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD1 · Lab 2 · Del problema al backlog"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud1/lab2.html#resultado-final",
+    "href": "laboratorios/ud1/lab2.html#resultado-final",
+    "title": "UD1 · Lab 2 · Del problema al backlog",
+    "section": "",
+    "text": "Ejemplo (sólo un ejemplo)\n\n\n\nHistorias de usuario",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD1 · Lab 2 · Del problema al backlog"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud1/lab2.html#paso-6.-crea-tu-backlog-en-github",
+    "href": "laboratorios/ud1/lab2.html#paso-6.-crea-tu-backlog-en-github",
+    "title": "UD1 · Lab 2 · Del problema al backlog",
+    "section": "",
+    "text": "Vamos a organizar épicas e historias de usuario utilizando Github Project\nPara ello, vamos a crear un proyecto asociado al repositorio de LifeOS.\n\n\n\nGithub Project\n\n\nVamos a organizar las épicas como Milestones de Github. Para ello vamos a nuestro repositorio -&gt; buscador de issues -&gt; Milestones (crearemos los que necesitemos).\nUn milestone debe tener una descripción y puede tener o no una fecha límite asociada. También se establecerá una barra de progreso que se irá completando cuando se completen las issues asociadas al milestone.\n\n\n\nMilestones\n\n\n\n\n\nHistorias de usuario",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD1 · Lab 2 · Del problema al backlog"
+    ]
+  },
+  {
+    "objectID": "rraa/index.html",
+    "href": "rraa/index.html",
+    "title": "Resultados de aprendizaje",
+    "section": "",
+    "text": "🎯 Resultados de aprendizaje\n\n\n\n\n\n\n\nRA\nResultado de aprendizaje\n\n\n\n\nRA1\nPrueba aplicaciones web y aplicaciones para dispositivos móviles analizando la estructura del código y su modelo de ejecución.\n\n\nRA2\nDetermina el nivel de seguridad requerido por aplicaciones identificando los vectores de ataque habituales y sus riesgos asociados.\n\n\nRA3\nDetecta y corrige vulnerabilidades de aplicaciones web analizando su código fuente y configurando servidores web.\n\n\nRA4\nDetecta problemas de seguridad en las aplicaciones para dispositivos móviles, monitorizando su ejecución y analizando ficheros y datos.\n\n\nRA5\nImplanta sistemas seguros de desplegado de software, utilizando herramientas para la automatización de la construcción de sus elementos."
+  },
+  {
+    "objectID": "unidades/ud1/index.html#lenguajes-compilados",
+    "href": "unidades/ud1/index.html#lenguajes-compilados",
+    "title": "UD1. Del código a producción. ¿Qué significa que una aplicación sea segura?",
+    "section": "Lenguajes Compilados",
+    "text": "Lenguajes Compilados\n\nCódigo fuente → Compilador → Programa ejecutable → Ejecución\n\nEjemplos: C, C++, Rust, Java (con matices), Kotlin (con matices)",
+    "crumbs": [
+      "📚 Unidades",
+      "1-Del código a producción. ¿Qué significa que una aplicación sea segura?"
+    ]
+  },
+  {
+    "objectID": "unidades/ud1/index.html#lenguajes-interpretados",
+    "href": "unidades/ud1/index.html#lenguajes-interpretados",
+    "title": "UD1. Del código a producción. ¿Qué significa que una aplicación sea segura?",
+    "section": "Lenguajes Interpretados",
+    "text": "Lenguajes Interpretados\n\nCódigo fuente → Runtime → Ejecución\n\nJavaScript → Node.js (lado del servidor), navegador web (lado del cliente)\nPython → Python runtime\nPor ejemplo si JavaScript se puede ejecutar en el lado del servidor o en el navegador web y esto es fundamental tenerlo en cuenta para posteriormente ver cosas como:\n\nVulnerabilidades\nDependencias\nConfiguración\nContenedores\nServidores…",
+    "crumbs": [
+      "📚 Unidades",
+      "1-Del código a producción. ¿Qué significa que una aplicación sea segura?"
+    ]
+  }
+]

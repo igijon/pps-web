@@ -1,0 +1,15 @@
+---
+title: "Resultados de aprendizaje"
+---
+
+# 🎯 Resultados de aprendizaje
+
+
+| RA      | Resultado de aprendizaje                                                                                                                                   |
+| ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| RA1 | Prueba aplicaciones web y aplicaciones para dispositivos móviles analizando la estructura del código y su modelo de ejecución.                                 |
+| RA2 | Determina el nivel de seguridad requerido por aplicaciones identificando los vectores de ataque habituales y sus riesgos asociados.                            |
+| RA3 | Detecta y corrige vulnerabilidades de aplicaciones web analizando su código fuente y configurando servidores web.                      |
+| RA4 | Detecta problemas de seguridad en las aplicaciones para dispositivos móviles, monitorizando su ejecución y analizando ficheros y datos. |
+| RA5 | Implanta sistemas seguros de desplegado de software, utilizando herramientas para la automatización de la construcción de sus elementos. |
+

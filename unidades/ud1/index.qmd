@@ -1,0 +1,85 @@
+---
+title: "UD1. Del código a producción. ¿Qué significa que una aplicación sea segura?"
+---
+
+> **¿Qué ocurre desde que escribimos código hasta que un usuario utiliza una aplicación?**
+
+# 📚 Aplicaciones modernas
+
+Una aplicación o app es un programa informático diseñado para ayudar al usuario a realizar una tarea específica.
+
+Una aplicación moderna combina muchas piezas para ofrecer una experiencia rápida y conectada en cualquier dispositivo:
+
+- **Frontend:** Es la interfaz visual con la que interactúa el usuario en su pantalla. Se diseña para navegadores web o teléfonos móviles.
+- **Backend:** Es el servidor que procesa las reglas del negocio, la seguridad y las peticiones del usuario de forma oculta.
+- **Base de datos:** Es el sistema seguro donde se guarda toda la información, como perfiles de usuarios, textos o imágenes.
+- **APIs:** Funcionan como un puente de comunicación para que el frontend, el backend y otros servicios externos compartan datos al instante.
+
+Los productos finales los podemos encontrar como aplicaciones web o móviles, por ejemplo.
+
+![Aplicaciones modernas](images/ud1_1.png)
+
+> **¿Qué parte tenemos que proteger?**
+
+
+# 💻 Del código fuente a la ejecución
+
+El código fuente es lo que escribe el desarrollador, por ejemplo:
+
+```js
+function login(user, password) {
+    // ...
+}
+```
+
+Pero una aplicación no termina aquí.
+Tenemos:
+
+> **Código fuente -> Transformación (dependiendo del lenguaje) -> Ejecución -> Aplicación **
+
+# 🎰 Lenguajes compilados e interpretados
+
+## Lenguajes Compilados
+
+> Código fuente → Compilador → Programa ejecutable → Ejecución
+
+Ejemplos: C, C++, Rust, Java (con matices), Kotlin (con matices)
+
+## Lenguajes Interpretados
+
+> Código fuente → Runtime → Ejecución
+
+JavaScript → Node.js (lado del servidor), navegador web (lado del cliente)
+
+Python → Python runtime
+
+Por ejemplo si JavaScript se puede ejecutar en el lado del servidor o en el navegador web y esto es fundamental tenerlo en cuenta para posteriormente ver cosas como:
+
+- Vulnerabilidades
+- Dependencias
+- Configuración
+- Contenedores
+- Servidores…
+
+# 🍢 Seguridad de lenguajes y runtimes
+
+>**No todos los lenguajes tienen las mismas características de seguridad**
+
+Por ejemplo, en la **gestión de memoria**, algunos lenguajes permiten trabajar directamente con memoria y otros la gestionan automáticamente.
+
+**C/C++**:  + control ⇒ + responsabilidad.
+
+**JS/Python/Java:** Gestión automática de la memoria.
+
+>Esto no quiere decir que “JavaScript sea seguro”.
+>**Un lenguaje puede reducir determinados tipos de errores, pero ninguna tecnologían convierte automáticamente una aplicación en segura.
+**
+
+Por ejemplo, una aplicación JavaScript puede tener:
+
+- XSS
+- Problemas de autenticación
+- Inyecciones
+- Exposición de secretos
+- Dependencias vulnerables
+

@@ -1,0 +1,66 @@
+---
+title: "Puesta en Producción Segura"
+---
+
+<div class="home-hero">
+<div class="home-eyebrow">Puesta en Producción Segura · CIBER</div>
+<h1>Aprender.<br><span>Construir.</span></h1>
+<p>Un espacio para investigar, diseñar, desarrollar y presentar soluciones reales trabajando como un equipo profesional.</p>
+</div>
+
+<div class="home-manifesto">
+<div class="home-manifesto-meta">Investigación · Diseño · Desarrollo · IA · Comunicación</div>
+<div class="home-manifesto-main">¿Cómo conseguimos que una aplicación pase de código a producción de forma segura utilizando automatización e IA?.</strong></div>
+</div>
+
+<div class="home-section-title">Tu espacio de trabajo</div>
+
+<div class="home-cards-small">
+
+<div class="home-card">
+<div class="home-card-icon">📚</div>
+<div class="home-card-content">
+<div class="home-card-label">Módulo</div>
+<div class="home-card-title">Carga lectiva</div>
+<div class="home-card-description">120 horas anuales.</div>
+<div class="home-card-description">4 horas a la semana.</div>
+</div>
+</div>
+
+<div class="home-card">
+<div class="home-card-icon">🧪</div>
+<div class="home-card-content">
+<div class="home-card-label">RRAAA</div>
+<div class="home-card-title">Resultados de aprendizaje</div>
+<div class="home-card-description">Objetivos que debemos alcanzar para superar el módulo.</div>
+<a href="rraa/index.html" class="home-card-link">Ver RRAA →</a>
+</div>
+</div>
+
+</div>
+
+<div class="home-section-title">Recursos</div>
+
+<div class="home-cards-small">
+
+<div class="home-card">
+<div class="home-card-icon">🤖</div>
+<div class="home-card-content">
+<div class="home-card-label">TRANSVERSAL</div>
+<div class="home-card-title">IA</div>
+<div class="home-card-description">La inteligencia artificial como herramienta para aprender, investigar y desarrollar.</div>
+<a href="ia/index.html" class="home-card-link">Explorar IA →</a>
+</div>
+</div>
+
+<div class="home-card">
+<div class="home-card-icon">📦</div>
+<div class="home-card-content">
+<div class="home-card-label">APOYO</div>
+<div class="home-card-title">Recursos</div>
+<div class="home-card-description">Plantillas, herramientas y recursos de apoyo para el proyecto.</div>
+<a href="recursos/index.html" class="home-card-link">Ver recursos →</a>
+</div>
+</div>
+
+</div>

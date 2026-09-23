@@ -1,0 +1,824 @@
+:root {
+  --home-text: #37352f;
+  --home-text-secondary: #787774;
+  --home-text-light: #9b9a97;
+  --home-border: #e9e9e7;
+  --home-border-hover: #d9d9d6;
+  --home-background: #ffffff;
+  --home-soft: #fafafa;
+  --home-icon: #f3f3f1;
+}
+
+
+/* =========================================================
+   SIDEBAR
+   ========================================================= */
+
+#quarto-sidebar {
+  background: #fafafa;
+  border-right: 1px solid #e9e9e7;
+}
+
+/* =========================================================
+   CABECERA DE LA SIDEBAR
+   ========================================================= */
+
+#quarto-sidebar .sidebar-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+
+  width: 100%;
+  box-sizing: border-box;
+
+  padding: 18px 12px 24px !important;
+
+  text-align: center;
+}
+
+
+/* =========================================================
+   TÍTULO — PROYECTO INTERMODULAR
+   ========================================================= */
+
+#quarto-sidebar .sidebar-title {
+  display: block;
+
+  width: 100% !important;
+  max-width: 100% !important;
+
+  margin: 0 0 18px 0 !important;
+  padding: 0 !important;
+
+  box-sizing: border-box;
+
+  text-align: center !important;
+
+  white-space: normal !important;
+
+  font-size: 1.05rem;
+  line-height: 1.3;
+  font-weight: 600;
+
+  color: var(--home-text);
+}
+
+
+/* =========================================================
+   FOTO
+   ========================================================= */
+
+#quarto-sidebar .sidebar-header::before {
+  content: "";
+
+  display: block;
+
+  position: static;
+
+  width: 120px;
+  height: 120px;
+
+  flex: 0 0 120px;
+
+  margin: 0 auto 14px auto;
+
+  border-radius: 50%;
+
+  background-image: url("images/inmagijon.jpg");
+  background-size: cover;
+  background-position: center;
+
+  border: 3px solid #ffffff;
+
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.12);
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   NOMBRE + CARGO
+   ========================================================= */
+
+#quarto-sidebar .sidebar-header::after {
+  content: "Inma Gijón\A Profesora de Informática · DAW";
+
+  display: block;
+
+  position: static;
+
+  width: 100%;
+
+  margin: 0;
+
+  padding: 0 5px;
+
+  box-sizing: border-box;
+
+  text-align: center;
+
+  white-space: pre;
+
+  font-size: 0.72rem;
+  line-height: 1.65;
+  font-weight: 500;
+
+  color: var(--home-text-secondary);
+}
+
+/* =========================================================
+   BUSCADOR
+   ========================================================= */
+
+#quarto-sidebar .sidebar-search {
+  margin-top: 8px;
+}
+
+
+/* =========================================================
+   NAVEGACIÓN
+   ========================================================= */
+
+#quarto-sidebar .sidebar-link {
+  border-radius: 6px;
+
+  margin: 2px 6px;
+  padding: 7px 10px;
+
+  color: var(--home-text-secondary);
+
+  font-size: 0.92rem;
+
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+
+#quarto-sidebar .sidebar-link:hover {
+  background: #f1f1ef;
+  color: var(--home-text);
+}
+
+
+#quarto-sidebar .sidebar-link.active {
+  background: #efefed;
+  color: var(--home-text);
+  font-weight: 600;
+}
+
+
+/* =========================================================
+   CONTENIDO PRINCIPAL
+   ========================================================= */
+
+.home-hero,
+.home-manifesto,
+.home-section-title,
+.home-section-intro,
+.home-cards-small,
+.home-project-grid,
+.home-final-project {
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.home-hero {
+  padding-top: 55px;
+  padding-bottom: 42px;
+}
+
+
+.home-eyebrow {
+  font-size: 0.72rem;
+  font-weight: 700;
+
+  letter-spacing: 0.12em;
+
+  color: var(--home-text-light);
+
+  margin-bottom: 22px;
+}
+
+
+.home-hero h1 {
+  margin: 0;
+
+  font-size: clamp(3.4rem, 7vw, 5.8rem);
+
+  line-height: 0.94;
+
+  letter-spacing: -0.055em;
+
+  font-weight: 700;
+
+  color: var(--home-text);
+}
+
+
+.home-hero h1 span {
+  color: #9b9a97;
+}
+
+
+.home-hero p {
+  max-width: 620px;
+
+  margin-top: 30px;
+  margin-bottom: 0;
+
+  font-size: 1.08rem;
+  line-height: 1.7;
+
+  color: var(--home-text-secondary);
+}
+
+
+/* =========================================================
+   MANIFESTO
+   ========================================================= */
+
+.home-manifesto {
+  border-top: 1px solid var(--home-border);
+  border-bottom: 1px solid var(--home-border);
+
+  padding: 27px 0;
+
+  margin-bottom: 62px;
+}
+
+
+.home-manifesto-main {
+  font-size: 1.25rem;
+  line-height: 1.55;
+
+  color: var(--home-text);
+}
+
+
+.home-manifesto-main strong {
+  font-weight: 650;
+}
+
+
+.home-manifesto-meta {
+  margin-top: 14px;
+
+  font-size: 0.7rem;
+
+  letter-spacing: 0.08em;
+
+  text-transform: uppercase;
+
+  color: var(--home-text-light);
+}
+
+
+/* =========================================================
+   TÍTULOS DE SECCIÓN
+   ========================================================= */
+
+.home-section-title {
+  margin-top: 58px;
+  margin-bottom: 20px;
+
+  font-size: 0.72rem;
+
+  font-weight: 700;
+
+  letter-spacing: 0.11em;
+
+  text-transform: uppercase;
+
+  color: var(--home-text-light);
+}
+
+
+.home-section-projects {
+  margin-top: 68px;
+}
+
+
+.home-section-final {
+  margin-top: 68px;
+}
+
+
+/* =========================================================
+   INTRO
+   ========================================================= */
+
+.home-section-intro {
+  margin-bottom: 25px;
+
+  color: var(--home-text-secondary);
+
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
+
+
+.home-section-intro strong {
+  color: var(--home-text);
+  font-weight: 600;
+}
+
+
+/* =========================================================
+   CARDS
+   ========================================================= */
+
+.home-cards-small {
+  display: grid;
+
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  gap: 15px;
+}
+
+
+.home-card {
+  display: flex;
+
+  gap: 17px;
+
+  padding: 21px;
+
+  border: 1px solid var(--home-border);
+
+  border-radius: 10px;
+
+  background: var(--home-background);
+
+  transition:
+    border-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+
+.home-card:hover {
+  border-color: var(--home-border-hover);
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 7px 20px rgba(0,0,0,0.04);
+}
+
+
+.home-card-icon {
+  flex: 0 0 40px;
+
+  width: 40px;
+  height: 40px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 9px;
+
+  background: var(--home-icon);
+
+  font-size: 1.15rem;
+}
+
+
+.home-card-content {
+  min-width: 0;
+}
+
+
+.home-card-label {
+  margin-bottom: 5px;
+
+  font-size: 0.64rem;
+
+  font-weight: 700;
+
+  letter-spacing: 0.09em;
+
+  color: var(--home-text-light);
+}
+
+
+.home-card-title {
+  font-size: 1.05rem;
+
+  font-weight: 650;
+
+  color: var(--home-text);
+}
+
+
+.home-card-description {
+  margin-top: 7px;
+
+  font-size: 0.83rem;
+
+  line-height: 1.55;
+
+  color: var(--home-text-secondary);
+}
+
+
+.home-card-link {
+  display: inline-block;
+
+  margin-top: 13px;
+
+  font-size: 0.78rem;
+
+  font-weight: 600;
+
+  color: var(--home-text);
+
+  text-decoration: none;
+}
+
+
+.home-card-link:hover {
+  text-decoration: underline;
+}
+
+
+/* =========================================================
+   DESAFÍOS
+   ========================================================= */
+
+.home-project-grid {
+  display: grid;
+
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  gap: 17px;
+}
+
+
+.home-project-card {
+  padding: 26px;
+
+  border: 1px solid var(--home-border);
+
+  border-radius: 12px;
+
+  background: #ffffff;
+
+  transition:
+    border-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+
+.home-project-card:hover {
+  border-color: var(--home-border-hover);
+
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 9px 24px rgba(0,0,0,0.05);
+}
+
+
+.home-project-card-muted {
+  background: #fbfbfa;
+}
+
+
+.home-project-icon {
+  margin-bottom: 22px;
+
+  font-size: 1.5rem;
+}
+
+
+.home-project-label {
+  margin-bottom: 7px;
+
+  font-size: 0.65rem;
+
+  font-weight: 700;
+
+  letter-spacing: 0.1em;
+
+  color: var(--home-text-light);
+}
+
+
+.home-project-title {
+  font-size: 1.5rem;
+
+  font-weight: 650;
+
+  letter-spacing: -0.02em;
+
+  color: var(--home-text);
+}
+
+
+.home-project-description {
+  margin-top: 11px;
+
+  font-size: 0.87rem;
+
+  line-height: 1.65;
+
+  color: var(--home-text-secondary);
+}
+
+
+.home-project-meta {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 7px;
+
+  margin-top: 20px;
+}
+
+
+.home-project-meta span {
+  padding: 5px 9px;
+
+  border-radius: 5px;
+
+  background: #f4f4f2;
+
+  font-size: 0.67rem;
+
+  color: var(--home-text-secondary);
+}
+
+
+.home-project-link {
+  display: inline-block;
+
+  margin-top: 22px;
+
+  font-size: 0.78rem;
+
+  font-weight: 600;
+
+  color: var(--home-text);
+
+  text-decoration: none;
+}
+
+
+.home-project-link:hover {
+  text-decoration: underline;
+}
+
+
+/* =========================================================
+   PROYECTO FINAL
+   ========================================================= */
+
+.home-final-project {
+  display: flex;
+
+  gap: 24px;
+
+  padding: 28px;
+
+  border: 1px solid var(--home-border);
+
+  border-radius: 12px;
+
+  background: var(--home-soft);
+}
+
+
+.home-final-project-icon {
+  flex: 0 0 48px;
+
+  width: 48px;
+  height: 48px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 10px;
+
+  background: #efefed;
+
+  font-size: 1.3rem;
+}
+
+
+.home-final-project-content {
+  min-width: 0;
+}
+
+
+.home-final-project-title {
+  font-size: 1.45rem;
+
+  font-weight: 650;
+
+  letter-spacing: -0.02em;
+
+  color: var(--home-text);
+}
+
+
+.home-final-project-description {
+  max-width: 650px;
+
+  margin-top: 10px;
+
+  font-size: 0.87rem;
+
+  line-height: 1.65;
+
+  color: var(--home-text-secondary);
+}
+
+
+.home-project-tags {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 7px;
+
+  margin-top: 18px;
+}
+
+
+.home-project-tags span {
+  padding: 5px 9px;
+
+  border: 1px solid var(--home-border);
+
+  border-radius: 5px;
+
+  background: #ffffff;
+
+  font-size: 0.66rem;
+
+  color: var(--home-text-secondary);
+}
+
+
+.home-project-button {
+  display: inline-block;
+
+  margin-top: 21px;
+
+  padding: 9px 14px;
+
+  border-radius: 6px;
+
+  background: var(--home-text);
+
+  color: #ffffff !important;
+
+  font-size: 0.75rem;
+
+  font-weight: 600;
+
+  text-decoration: none !important;
+
+  transition: opacity 0.2s ease;
+}
+
+
+.home-project-button:hover {
+  opacity: 0.82;
+}
+
+
+/* =========================================================
+   CONTENIDO QUARTO
+   ========================================================= */
+
+#quarto-content {
+  color: var(--home-text);
+}
+
+
+#quarto-document-content {
+  padding-bottom: 70px;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+  .home-hero,
+  .home-manifesto,
+  .home-section-title,
+  .home-section-intro,
+  .home-cards-small,
+  .home-project-grid,
+  .home-final-project {
+    max-width: 100%;
+  }
+
+  .home-hero {
+    padding-top: 35px;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+  .home-hero {
+    padding-top: 28px;
+    padding-bottom: 32px;
+  }
+
+  .home-hero h1 {
+    font-size: 3.2rem;
+  }
+
+  .home-hero p {
+    font-size: 0.98rem;
+  }
+
+  .home-manifesto {
+    margin-bottom: 45px;
+  }
+
+  .home-manifesto-main {
+    font-size: 1.08rem;
+  }
+
+  .home-cards-small,
+  .home-project-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .home-final-project {
+    flex-direction: column;
+    gap: 17px;
+  }
+
+  .home-section-projects,
+  .home-section-final {
+    margin-top: 52px;
+  }
+
+}
+
+
+/* =========================================================
+   SIDEBAR EN MÓVIL
+   ========================================================= */
+
+@media (max-width: 991.98px) {
+
+  #quarto-sidebar .sidebar-header {
+    padding-top: 8px !important;
+    padding-bottom: 10px !important;
+  }
+
+  #quarto-sidebar .sidebar-header::before,
+  #quarto-sidebar .sidebar-header::after {
+    display: none;
+  }
+
+}
+
+
+/* =========================================
+   ENLACES · ROSA
+   ========================================= */
+
+#quarto-content .content a {
+  color: #d63384;
+  font-weight: 700;
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+#quarto-content .content a:hover {
+  color: #b02a6f;
+  border-bottom-color: #b02a6f;
+}

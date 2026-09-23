@@ -1,0 +1,47 @@
+project:
+  type: website
+
+website:
+  title: "Proyecto Intermodular"
+
+  sidebar:
+    style: "docked"
+    search: true
+    contents:
+      - href: index.qmd
+        text: "🏠 Inicio"
+
+      - section: "📚 Unidades"
+        contents:
+          - text: "1-Del código a producción. ¿Qué significa que una aplicación sea segura?"
+            href: unidades/ud1/index.qmd
+
+      - section: "🧪 Laboratorios"
+        contents: 
+          # - href: laboratorios/ud1/lab1.qmd
+          #   text: "UD1 · Lab 1 · Del reto al briefing y la viabilidad"
+          
+    
+      - section: "🚀 Desafíos"
+        contents:
+          # - href: desafios/desafio-01/index.qmd
+          #   text: "D1 · LifeOS"
+
+
+      - href: proyecto-final/index.qmd
+        text: "🏆 Proyecto Final"
+
+
+      - href: ia/index.qmd
+        text: "🤖 IA"
+
+      - href: recursos/index.qmd
+        text: "📦 Recursos"
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
+
+
