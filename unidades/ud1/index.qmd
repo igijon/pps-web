@@ -20,6 +20,8 @@ Los productos finales los podemos encontrar como aplicaciones web o móviles, po
 ![Aplicaciones modernas](images/ud1_1.png)
 
 > **¿Qué parte tenemos que proteger?**
+>
+> **Todas**
 
 
 # 💻 Del código fuente a la ejecución
@@ -37,15 +39,15 @@ Tenemos:
 
 > **Código fuente -> Transformación (dependiendo del lenguaje) -> Ejecución -> Aplicación **
 
-# 🎰 Lenguajes compilados e interpretados
+## Lenguajes compilados e interpretados
 
-## Lenguajes Compilados
+### Lenguajes Compilados
 
 > Código fuente → Compilador → Programa ejecutable → Ejecución
 
 Ejemplos: C, C++, Rust, Java (con matices), Kotlin (con matices)
 
-## Lenguajes Interpretados
+### Lenguajes Interpretados
 
 > Código fuente → Runtime → Ejecución
 

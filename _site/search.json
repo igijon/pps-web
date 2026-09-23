@@ -732,5 +732,16 @@
       "📚 Unidades",
       "1-Del código a producción. ¿Qué significa que una aplicación sea segura?"
     ]
+  },
+  {
+    "objectID": "unidades/ud1/index.html#lenguajes-compilados-e-interpretados",
+    "href": "unidades/ud1/index.html#lenguajes-compilados-e-interpretados",
+    "title": "UD1. Del código a producción. ¿Qué significa que una aplicación sea segura?",
+    "section": "Lenguajes compilados e interpretados",
+    "text": "Lenguajes compilados e interpretados\n\nLenguajes Compilados\n\nCódigo fuente → Compilador → Programa ejecutable → Ejecución\n\nEjemplos: C, C++, Rust, Java (con matices), Kotlin (con matices)\n\n\nLenguajes Interpretados\n\nCódigo fuente → Runtime → Ejecución\n\nJavaScript → Node.js (lado del servidor), navegador web (lado del cliente)\nPython → Python runtime\nPor ejemplo si JavaScript se puede ejecutar en el lado del servidor o en el navegador web y esto es fundamental tenerlo en cuenta para posteriormente ver cosas como:\n\nVulnerabilidades\nDependencias\nConfiguración\nContenedores\nServidores…",
+    "crumbs": [
+      "📚 Unidades",
+      "1-Del código a producción. ¿Qué significa que una aplicación sea segura?"
+    ]
   }
 ]

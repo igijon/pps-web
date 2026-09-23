@@ -207,11 +207,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#aplicaciones-modernas" id="toc-aplicaciones-modernas" class="nav-link active" data-scroll-target="#aplicaciones-modernas">📚 Aplicaciones modernas</a></li>
-  <li><a href="#del-código-fuente-a-la-ejecución" id="toc-del-código-fuente-a-la-ejecución" class="nav-link" data-scroll-target="#del-código-fuente-a-la-ejecución">💻 Del código fuente a la ejecución</a></li>
-  <li><a href="#lenguajes-compilados-e-interpretados" id="toc-lenguajes-compilados-e-interpretados" class="nav-link" data-scroll-target="#lenguajes-compilados-e-interpretados">🎰 Lenguajes compilados e interpretados</a>
+  <li><a href="#del-código-fuente-a-la-ejecución" id="toc-del-código-fuente-a-la-ejecución" class="nav-link" data-scroll-target="#del-código-fuente-a-la-ejecución">💻 Del código fuente a la ejecución</a>
+  <ul class="collapse">
+  <li><a href="#lenguajes-compilados-e-interpretados" id="toc-lenguajes-compilados-e-interpretados" class="nav-link" data-scroll-target="#lenguajes-compilados-e-interpretados">Lenguajes compilados e interpretados</a>
   <ul class="collapse">
   <li><a href="#lenguajes-compilados" id="toc-lenguajes-compilados" class="nav-link" data-scroll-target="#lenguajes-compilados">Lenguajes Compilados</a></li>
   <li><a href="#lenguajes-interpretados" id="toc-lenguajes-interpretados" class="nav-link" data-scroll-target="#lenguajes-interpretados">Lenguajes Interpretados</a></li>
+  </ul></li>
   </ul></li>
   <li><a href="#seguridad-de-lenguajes-y-runtimes" id="toc-seguridad-de-lenguajes-y-runtimes" class="nav-link" data-scroll-target="#seguridad-de-lenguajes-y-runtimes">🍢 Seguridad de lenguajes y runtimes</a></li>
   </ul>
@@ -261,6 +263,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <blockquote class="blockquote">
 <p><strong>¿Qué parte tenemos que proteger?</strong></p>
+<p><strong>Todas</strong></p>
 </blockquote>
 </section>
 <section id="del-código-fuente-a-la-ejecución" class="level1">
@@ -273,18 +276,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <blockquote class="blockquote">
 <p><strong>Código fuente -&gt; Transformación (dependiendo del lenguaje) -&gt; Ejecución -&gt; Aplicación </strong></p>
 </blockquote>
-</section>
-<section id="lenguajes-compilados-e-interpretados" class="level1">
-<h1>🎰 Lenguajes compilados e interpretados</h1>
-<section id="lenguajes-compilados" class="level2">
-<h2 class="anchored" data-anchor-id="lenguajes-compilados">Lenguajes Compilados</h2>
+<section id="lenguajes-compilados-e-interpretados" class="level2">
+<h2 class="anchored" data-anchor-id="lenguajes-compilados-e-interpretados">Lenguajes compilados e interpretados</h2>
+<section id="lenguajes-compilados" class="level3">
+<h3 class="anchored" data-anchor-id="lenguajes-compilados">Lenguajes Compilados</h3>
 <blockquote class="blockquote">
 <p>Código fuente → Compilador → Programa ejecutable → Ejecución</p>
 </blockquote>
 <p>Ejemplos: C, C++, Rust, Java (con matices), Kotlin (con matices)</p>
 </section>
-<section id="lenguajes-interpretados" class="level2">
-<h2 class="anchored" data-anchor-id="lenguajes-interpretados">Lenguajes Interpretados</h2>
+<section id="lenguajes-interpretados" class="level3">
+<h3 class="anchored" data-anchor-id="lenguajes-interpretados">Lenguajes Interpretados</h3>
 <blockquote class="blockquote">
 <p>Código fuente → Runtime → Ejecución</p>
 </blockquote>
@@ -298,6 +300,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Contenedores</li>
 <li>Servidores…</li>
 </ul>
+</section>
 </section>
 </section>
 <section id="seguridad-de-lenguajes-y-runtimes" class="level1">
