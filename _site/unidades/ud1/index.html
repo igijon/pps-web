@@ -171,8 +171,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">
- <span class="menu-text">🧪 Laboratorios</span></span>
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">🧪 Laboratorios</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../laboratorios/ud1/lab1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">UD1 · Lab 1 · ¿Dónde se ejecuta?</span></a>
+  </div>
+</li>
+      </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <span class="sidebar-item-text sidebar-link text-start">
@@ -206,8 +219,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#aplicaciones-modernas" id="toc-aplicaciones-modernas" class="nav-link active" data-scroll-target="#aplicaciones-modernas">📚 Aplicaciones modernas</a></li>
-  <li><a href="#del-código-fuente-a-la-ejecución" id="toc-del-código-fuente-a-la-ejecución" class="nav-link" data-scroll-target="#del-código-fuente-a-la-ejecución">💻 Del código fuente a la ejecución</a>
+  <li><a href="#aplicaciones-modernas" id="toc-aplicaciones-modernas" class="nav-link active" data-scroll-target="#aplicaciones-modernas">📚 1. Aplicaciones modernas</a></li>
+  <li><a href="#del-código-fuente-a-la-ejecución" id="toc-del-código-fuente-a-la-ejecución" class="nav-link" data-scroll-target="#del-código-fuente-a-la-ejecución">💻 2. Del código fuente a la ejecución</a>
   <ul class="collapse">
   <li><a href="#lenguajes-compilados-e-interpretados" id="toc-lenguajes-compilados-e-interpretados" class="nav-link" data-scroll-target="#lenguajes-compilados-e-interpretados">Lenguajes compilados e interpretados</a>
   <ul class="collapse">
@@ -216,6 +229,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   </ul></li>
   <li><a href="#seguridad-de-lenguajes-y-runtimes" id="toc-seguridad-de-lenguajes-y-runtimes" class="nav-link" data-scroll-target="#seguridad-de-lenguajes-y-runtimes">🍢 Seguridad de lenguajes y runtimes</a></li>
+  <li><a href="#arquitectura-y-comunicación" id="toc-arquitectura-y-comunicación" class="nav-link" data-scroll-target="#arquitectura-y-comunicación">📟 3. Arquitectura y comunicación</a>
+  <ul class="collapse">
+  <li><a href="#arquitectura-cliente-servidor" id="toc-arquitectura-cliente-servidor" class="nav-link" data-scroll-target="#arquitectura-cliente-servidor">Arquitectura cliente-servidor</a></li>
+  <li><a href="#http-y-https" id="toc-http-y-https" class="nav-link" data-scroll-target="#http-y-https">HTTP y HTTPS</a></li>
+  <li><a href="#apis-rest" id="toc-apis-rest" class="nav-link" data-scroll-target="#apis-rest">APIs REST</a>
+  <ul class="collapse">
+  <li><a href="#cómo-funciona" id="toc-cómo-funciona" class="nav-link" data-scroll-target="#cómo-funciona">¿Cómo funciona?</a></li>
+  <li><a href="#métodos-y-códigos-básicos" id="toc-métodos-y-códigos-básicos" class="nav-link" data-scroll-target="#métodos-y-códigos-básicos">Métodos y códigos básicos</a></li>
+  </ul></li>
+  <li><a href="#json" id="toc-json" class="nav-link" data-scroll-target="#json">JSON</a>
+  <ul class="collapse">
+  <li><a href="#estructura-técnica" id="toc-estructura-técnica" class="nav-link" data-scroll-target="#estructura-técnica">Estructura técnica</a></li>
+  <li><a href="#ejemplo" id="toc-ejemplo" class="nav-link" data-scroll-target="#ejemplo">Ejemplo</a></li>
+  </ul></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -241,11 +269,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<ol type="1">
+<li>Arquitectura y comunicación Cliente-servidor. Servidores y entornos de ejecución. HTTP y HTTPS. APIs REST. JSON. Arquitectura por capas.</li>
+<li>El ecosistema de una aplicación Componentes. Dependencias. Entornos de desarrollo, pruebas y producción.</li>
+<li>Primera aproximación a la seguridad Entradas externas. Superficie de ataque. Seguridad desde el diseño.</li>
+<li>Nuevas aplicaciones Aplicaciones integradas con LLM. Nuevos componentes y superficie de ataque.</li>
+</ol>
 <blockquote class="blockquote">
 <p><strong>¿Qué ocurre desde que escribimos código hasta que un usuario utiliza una aplicación?</strong></p>
 </blockquote>
 <section id="aplicaciones-modernas" class="level1">
-<h1>📚 Aplicaciones modernas</h1>
+<h1>📚 1. Aplicaciones modernas</h1>
 <p>Una aplicación o app es un programa informático diseñado para ayudar al usuario a realizar una tarea específica.</p>
 <p>Una aplicación moderna combina muchas piezas para ofrecer una experiencia rápida y conectada en cualquier dispositivo:</p>
 <ul>
@@ -267,7 +301,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </blockquote>
 </section>
 <section id="del-código-fuente-a-la-ejecución" class="level1">
-<h1>💻 Del código fuente a la ejecución</h1>
+<h1>💻 2. Del código fuente a la ejecución</h1>
 <p>El código fuente es lo que escribe el desarrollador, por ejemplo:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">login</span>(user<span class="op">,</span> password) {</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ...</span></span>
@@ -316,14 +350,116 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </blockquote>
 <p>Por ejemplo, una aplicación JavaScript puede tener:</p>
 <ul>
-<li>XSS</li>
+<li><strong>XSS</strong> (<em>Cross-Site Scripting</em>) es una vulnerabilidad de seguridad informática que permite a un atacante inyectar código malicioso (generalmente JS) en una página web legítima para que se ejecute en el navegador de otros usuarios.</li>
 <li>Problemas de autenticación</li>
-<li>Inyecciones</li>
 <li>Exposición de secretos</li>
 <li>Dependencias vulnerables</li>
 </ul>
+</section>
+<section id="arquitectura-y-comunicación" class="level1">
+<h1>📟 3. Arquitectura y comunicación</h1>
+<section id="arquitectura-cliente-servidor" class="level2">
+<h2 class="anchored" data-anchor-id="arquitectura-cliente-servidor">Arquitectura cliente-servidor</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./images/u1_4.png" class="img-fluid figure-img"></p>
+<figcaption>Arquitectura cliente-servidor</figcaption>
+</figure>
+</div>
+<p><strong>El Cliente:</strong> Es la aplicación o dispositivo del usuario (como un navegador web o una app en el móvil) que inicia la comunicación haciendo peticiones.</p>
+<p><strong>El Servidor:</strong> Es el equipo o programa remoto con mayores recursos encargado de procesar las solicitudes, gestionar bases de datos y devolver los datos requeridos.</p>
+<p><strong>Cómo Funciona</strong></p>
+<ol type="1">
+<li>El usuario interactúa con el <strong>cliente</strong> y realiza una acción o petición (por ejemplo, entrar a una página web).</li>
+<li>El cliente envía un mensaje a través de la red usando protocolos como <strong>HTTP o HTTPS</strong>.</li>
+<li>El <strong>servidor</strong> recibe la petición, hace el trabajo pesado (busca en la base de datos, procesa los datos) y genera una respuesta.</li>
+<li>El servidor envía la información de vuelta al cliente, que se encarga de mostrarla de forma visual en la pantalla.</li>
+</ol>
+</section>
+<section id="http-y-https" class="level2">
+<h2 class="anchored" data-anchor-id="http-y-https">HTTP y HTTPS</h2>
+<p>La diferencia principal entre <strong>HTTP</strong> y <strong>HTTPS</strong> es que <strong>el segundo cuenta con una capa de seguridad y cifrado para proteger los datos, mientras que el primero los transmite de forma abierta</strong>.</p>
+<p><strong>¿Qué es HTTP?</strong></p>
+<p>Significa <em>Hypertext Transfer Protocol</em> (Protocolo de Transferencia de Hipertexto).</p>
+<p>Envía la información en texto plano entre el navegador y el servidor.</p>
+<p>No ofrece cifrado, por lo que terceros pueden leer o robar los datos fácilmente si los interceptan.</p>
+<p><strong>¿Qué es HTTPS?</strong></p>
+<p>Significa <em>Hypertext Transfer Protocol Secure</em> (Protocolo de Transferencia de Hipertexto Seguro).</p>
+<p>Añade los protocolos de seguridad <strong>SSL o TLS</strong> para cifrar los datos intercambiados.</p>
+<p>Protege la información confidencial, como contraseñas o números de tarjetas de crédito.</p>
+<p>Valida la identidad del servidor web para evitar suplantaciones.</p>
+<blockquote class="blockquote">
+<p><strong>HTTPS</strong> protege la comunicación pero <strong>NO GARANTIZA</strong> que la aplicación sea segura.</p>
+</blockquote>
+</section>
+<section id="apis-rest" class="level2">
+<h2 class="anchored" data-anchor-id="apis-rest">APIs REST</h2>
+<p>Un <strong>API REST</strong> es un conjunto de reglas que permite que diferentes aplicaciones se comuniquen entre sí mediante HTTP/HTTPS.</p>
+<p>El acrónimo significa <em>Application Programming Interface</em> (Interfaz de programación de aplicaciones) y <em>REpresentational State Transfer</em> (Transferencia de estado representacional).</p>
+<blockquote class="blockquote">
+<p>Funciona como un puente o traductor para que un sistema pida datos o funciones a otro y obtenga una respuesta clara.</p>
+</blockquote>
+<section id="cómo-funciona" class="level3">
+<h3 class="anchored" data-anchor-id="cómo-funciona">¿Cómo funciona?</h3>
+<p>Una API REST funciona mediante un modelo de cliente y servidor:</p>
+<ul>
+<li><strong>El cliente</strong>: Es quien hace la petición, como una aplicación móvil, una página web o tu navegador.</li>
+<li><strong>El servidor</strong>: Es el sistema que recibe la petición, procesa la información en el <em>backend</em> (como buscar en una base de datos) y devuelve un resultado.</li>
+</ul>
+<p>Los datos se suelen enviar y recibir en formato , que es un formato de texto ligero.</p>
+<p>### Request/response</p>
+<p><strong>Request (Solicitud / Petición):</strong> Es el mensaje que envía el cliente (por ejemplo, tu navegador web) pidiendo un recurso, datos o una acción al servidor. Incluye métodos como <code>GET</code> o <code>POST</code>, cabeceras y datos.</p>
+<p><strong>Response:</strong> Es el mensaje que el servidor devuelve al cliente tras procesar la solicitud. Incluye un código de estado (como 200 para éxito o 404 para no encontrado) y la información solicitada.</p>
+</section>
+<section id="métodos-y-códigos-básicos" class="level3">
+<h3 class="anchored" data-anchor-id="métodos-y-códigos-básicos">Métodos y códigos básicos</h3>
+<p><strong>Métodos HTTP básicos (Acciones)</strong></p>
+<p>Los métodos indican al servidor <strong>qué acción</strong> se desea realizar sobre un recurso.</p>
+<p>• <strong>GET:</strong> Solicita datos o información de un servidor. <strong>No modifica nada</strong> en el servidor, solo lee (por ejemplo, cargar una página web o ver un perfil). • <strong>POST:</strong> Envía datos al servidor para <strong>crear un nuevo recurso</strong> (por ejemplo, registrar un nuevo usuario o publicar un comentario). • <strong>PUT:</strong> Envía datos para <strong>actualizar por completo</strong> un recurso existente. Si no existe, a veces lo crea. • <strong>DELETE:</strong> Solicita la <strong>eliminación</strong> de un recurso específico en el servidor. • <strong>PATCH:</strong> Aplica <strong>modificaciones parciales</strong> a un recurso (a diferencia de PUT, no lo reemplaza entero).</p>
+<p><strong>Códigos de estado HTTP básicos (Respuestas)</strong></p>
+<p>Los códigos son números de tres dígitos que el servidor devuelve para indicar el <strong>resultado de la petición</strong>.</p>
+<p>Se dividen en grupos según su primer dígito:</p>
+<p><strong>🟢 2xx: Éxito (Todo salió bien)</strong> • <strong>200 OK:</strong> La petición fue exitosa y el servidor devuelve los datos solicitados. • <strong>201 Created:</strong> La petición fue exitosa y se ha <strong>creado un nuevo recurso</strong> (común tras un POST).</p>
+<p><strong>🟡 3xx: Redirección (Hay que ir a otro lado)</strong> • <strong>301 Moved Permanently:</strong> El recurso solicitado se ha mudado de forma permanente a una nueva dirección (URL). • <strong>302 Found:</strong> El recurso está temporalmente en otra dirección.</p>
+<p><strong>🔴 4xx: Errores del Cliente (El error está en tu petición)</strong> • <strong>400 Bad Request:</strong> El servidor no entiende la petición porque está mal redactada o corrupta. • <strong>401 Unauthorized:</strong> No tienes permiso para ver el recurso; necesitas <strong>iniciar sesión</strong>. • <strong>403 Forbidden:</strong> El servidor entiende quién eres, pero <strong>tienes prohibido</strong> el acceso a ese recurso. • <strong>404 Not Found:</strong> El recurso solicitado <strong>no existe</strong> o no se pudo encontrar en el servidor.</p>
+<p><strong>🟣 5xx: Errores del Servidor (El error es de la web/sistema)</strong> • <strong>500 Internal Server Error:</strong> El servidor encontró una condición inesperada que le impide cumplir con la petición (un fallo genérico en el código del servidor). • <strong>503 Service Unavailable:</strong> El servidor <strong>no está disponible</strong> temporalmente, generalmente por mantenimiento o sobrecarga.</p>
+</section>
+</section>
+<section id="json" class="level2">
+<h2 class="anchored" data-anchor-id="json">JSON</h2>
+<p><strong>JSON</strong> (JavaScript Object Notation) es técnicamente un formato ligero de intercambio de datos basado en texto plano, diseñado para ser fácil de leer y escribir por humanos, y fácil de interpretar y generar por computadoras.</p>
+<p>A pesar de que su nombre incluye “JavaScript” y nació como una simplificación de la sintaxis de objetos de ese lenguaje, hoy en día <strong>es un estándar completamente independiente del lenguaje</strong> y es compatible con prácticamente cualquier tecnología (Python, Java, PHP, C++, etc.).</p>
+<section id="estructura-técnica" class="level3">
+<h3 class="anchored" data-anchor-id="estructura-técnica">Estructura técnica</h3>
+<p>Un archivo o cadena JSON está compuesto exclusivamente por dos estructuras de datos universales:</p>
+<ul>
+<li><strong>Colecciones de pares clave/valor</strong>: En la mayoría de los lenguajes, esto se traduce como un objeto, diccionario, hash table o registro.</li>
+<li><strong>Listas ordenadas de valores</strong>: En los lenguajes de programación, esto se traduce como un arreglo (array), lista o vector.</li>
+</ul>
+</section>
+<section id="ejemplo" class="level3">
+<h3 class="anchored" data-anchor-id="ejemplo">Ejemplo</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"usuario_id"</span><span class="op">:</span> <span class="dv">10543</span><span class="op">,</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"nombre"</span><span class="op">:</span> <span class="st">"Elena"</span><span class="op">,</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"es_administrador"</span><span class="op">:</span> <span class="kw">false</span><span class="op">,</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"telefonos"</span><span class="op">:</span> [</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"+34 600 000 000"</span><span class="op">,</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"+34 910 000 000"</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  ]<span class="op">,</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">"configuracion"</span><span class="op">:</span> {</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"tema"</span><span class="op">:</span> <span class="st">"oscuro"</span><span class="op">,</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"notificaciones"</span><span class="op">:</span> <span class="kw">true</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  }<span class="op">,</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="st">"ultimo_acceso"</span><span class="op">:</span> <span class="kw">null</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<blockquote class="blockquote">
+<p><strong>Los datos que llegan desde fuera no son confiables</strong></p>
+</blockquote>
 
 
+</section>
+</section>
 </section>
 
 </main> <!-- /main -->

@@ -258,7 +258,7 @@
     "href": "unidades/ud1/index.html",
     "title": "UD1. Del código a producción. ¿Qué significa que una aplicación sea segura?",
     "section": "",
-    "text": "¿Qué ocurre desde que escribimos código hasta que un usuario utiliza una aplicación?",
+    "text": "Arquitectura y comunicación Cliente-servidor. Servidores y entornos de ejecución. HTTP y HTTPS. APIs REST. JSON. Arquitectura por capas.\nEl ecosistema de una aplicación Componentes. Dependencias. Entornos de desarrollo, pruebas y producción.\nPrimera aproximación a la seguridad Entradas externas. Superficie de ataque. Seguridad desde el diseño.\nNuevas aplicaciones Aplicaciones integradas con LLM. Nuevos componentes y superficie de ataque.",
     "crumbs": [
       "📚 Unidades",
       "1-Del código a producción. ¿Qué significa que una aplicación sea segura?"
@@ -322,112 +322,76 @@
   {
     "objectID": "laboratorios/ud1/lab1.html",
     "href": "laboratorios/ud1/lab1.html",
-    "title": "UD1 · Lab 1 · Del reto al briefing y la viabilidad",
+    "title": "UD1 · Lab 1 · ¿Dónde se ejecuta?",
     "section": "",
-    "text": "Debemos identificar:\n\nQué sabemos\nQué no sabemos\nQué necesitamos preguntar\nQué estamos suponiendo\n\nVamos a realizar una matriz de incertidumbres:\n\n\n\nMatriz de incertidumbres\n\n\n\n\n\nConstruimos:\ncontexto→problema→actores→objetivos→alcance→entregables→restricciones→recursos→plazo→éxito\n\n\n\nRealizar tabla:\nTécnica / temporal / económica / operativa / legal\n\n\n\nPasarás tu briefing a la IA pidiéndole algo como esto:\n“Actúa como consultor de proyectos software. Revisa nuestro briefing. Identifica información ambigua, objetivos mal definidos, restricciones no contempladas, riesgos y preguntas que deberíamos realizar antes de iniciar el desarrollo. No propongas soluciones todavía.”\nDebes analizar la respuesta y guardar el prompt que le pides en un md en la carpeta docs\n\n\n\nproyecto-coworking/\n│\n├── README.md\n│\n└── docs/\n    ├── briefing.md\n    ├── viabilidad.md\n    ├── incertidumbres.md\n    └── ia-prompt.md",
+    "text": "🧪 ¿Dónde se ejecuta?\nImagina que tenemos distintas piezas de software utilizando distintas tecnologías:\n\nReact\nJavaScript en navegador.\nNode.js\nPython\nAplicación Android\nBase de datos\n\nDebes responder, para cada una:\n\n¿Dónde se ejecuta?\n¿Qué necesita para ejecutarse?\n\n\nEsta actividad es conceptual",
     "crumbs": [
       "🧪 Laboratorios",
-      "UD1 · Lab 1 · Del reto al briefing y la viabilidad"
+      "UD1 · Lab 1 · ¿Dónde se ejecuta?"
     ]
   },
   {
     "objectID": "laboratorios/ud1/lab1.html#paso-2.-descubrir-información",
     "href": "laboratorios/ud1/lab1.html#paso-2.-descubrir-información",
-    "title": "UD1 · Lab 1 · Del reto al briefing y la viabilidad",
+    "title": "UD1 · Lab 1 · ¿Dónde se ejecuta?",
     "section": "",
-    "text": "Debemos identificar:\n\nQué sabemos\nQué no sabemos\nQué necesitamos preguntar\nQué estamos suponiendo\n\nVamos a realizar una matriz de incertidumbres:\n\n\n\nMatriz de incertidumbres",
-    "crumbs": [
-      "🧪 Laboratorios",
-      "UD1 · Lab 1 · Del reto al briefing y la viabilidad"
-    ]
+    "text": "Debemos identificar:\n\nQué sabemos\nQué no sabemos\nQué necesitamos preguntar\nQué estamos suponiendo\n\nVamos a realizar una matriz de incertidumbres:\n\n\n\nMatriz de incertidumbres"
   },
   {
     "objectID": "laboratorios/ud1/lab1.html#paso-3.-elaborar-briefing",
     "href": "laboratorios/ud1/lab1.html#paso-3.-elaborar-briefing",
-    "title": "UD1 · Lab 1 · Del reto al briefing y la viabilidad",
+    "title": "UD1 · Lab 1 · ¿Dónde se ejecuta?",
     "section": "",
-    "text": "Construimos:\ncontexto→problema→actores→objetivos→alcance→entregables→restricciones→recursos→plazo→éxito",
-    "crumbs": [
-      "🧪 Laboratorios",
-      "UD1 · Lab 1 · Del reto al briefing y la viabilidad"
-    ]
+    "text": "Construimos:\ncontexto→problema→actores→objetivos→alcance→entregables→restricciones→recursos→plazo→éxito"
   },
   {
     "objectID": "laboratorios/ud1/lab1.html#paso-4.-analizar-viabilidad",
     "href": "laboratorios/ud1/lab1.html#paso-4.-analizar-viabilidad",
-    "title": "UD1 · Lab 1 · Del reto al briefing y la viabilidad",
+    "title": "UD1 · Lab 1 · ¿Dónde se ejecuta?",
     "section": "",
-    "text": "Realizar tabla:\nTécnica / temporal / económica / operativa / legal",
-    "crumbs": [
-      "🧪 Laboratorios",
-      "UD1 · Lab 1 · Del reto al briefing y la viabilidad"
-    ]
+    "text": "Realizar tabla:\nTécnica / temporal / económica / operativa / legal"
   },
   {
     "objectID": "laboratorios/ud1/lab1.html#paso-5---ia-como-auditor",
     "href": "laboratorios/ud1/lab1.html#paso-5---ia-como-auditor",
-    "title": "UD1 · Lab 1 · Del reto al briefing y la viabilidad",
+    "title": "UD1 · Lab 1 · ¿Dónde se ejecuta?",
     "section": "",
-    "text": "Pasarás tu briefing a la IA pidiéndole algo como esto:\n“Actúa como consultor de proyectos software. Revisa nuestro briefing. Identifica información ambigua, objetivos mal definidos, restricciones no contempladas, riesgos y preguntas que deberíamos realizar antes de iniciar el desarrollo. No propongas soluciones todavía.”\nDebes analizar la respuesta y guardar el prompt que le pides en un md en la carpeta docs",
-    "crumbs": [
-      "🧪 Laboratorios",
-      "UD1 · Lab 1 · Del reto al briefing y la viabilidad"
-    ]
+    "text": "Pasarás tu briefing a la IA pidiéndole algo como esto:\n“Actúa como consultor de proyectos software. Revisa nuestro briefing. Identifica información ambigua, objetivos mal definidos, restricciones no contempladas, riesgos y preguntas que deberíamos realizar antes de iniciar el desarrollo. No propongas soluciones todavía.”\nDebes analizar la respuesta y guardar el prompt que le pides en un md en la carpeta docs"
   },
   {
     "objectID": "laboratorios/ud1/lab1.html#paso-6.-resultado-de-la-sesión",
     "href": "laboratorios/ud1/lab1.html#paso-6.-resultado-de-la-sesión",
-    "title": "UD1 · Lab 1 · Del reto al briefing y la viabilidad",
+    "title": "UD1 · Lab 1 · ¿Dónde se ejecuta?",
     "section": "",
-    "text": "proyecto-coworking/\n│\n├── README.md\n│\n└── docs/\n    ├── briefing.md\n    ├── viabilidad.md\n    ├── incertidumbres.md\n    └── ia-prompt.md",
-    "crumbs": [
-      "🧪 Laboratorios",
-      "UD1 · Lab 1 · Del reto al briefing y la viabilidad"
-    ]
+    "text": "proyecto-coworking/\n│\n├── README.md\n│\n└── docs/\n    ├── briefing.md\n    ├── viabilidad.md\n    ├── incertidumbres.md\n    └── ia-prompt.md"
   },
   {
     "objectID": "laboratorios/ud1/lab1.html#plantilla-de-un-briefing",
     "href": "laboratorios/ud1/lab1.html#plantilla-de-un-briefing",
-    "title": "UD1 · Lab 1 · Del reto al briefing y la viabilidad",
+    "title": "UD1 · Lab 1 · ¿Dónde se ejecuta?",
     "section": "Plantilla de un Briefing",
-    "text": "Plantilla de un Briefing\n\n\n\nBriefing",
-    "crumbs": [
-      "🧪 Laboratorios",
-      "UD1 · Lab 1 · Del reto al briefing y la viabilidad"
-    ]
+    "text": "Plantilla de un Briefing\n\n\n\nBriefing"
   },
   {
     "objectID": "laboratorios/ud1/lab1.html#identificación-de-actores",
     "href": "laboratorios/ud1/lab1.html#identificación-de-actores",
-    "title": "UD1 · Lab 1 · Del reto al briefing y la viabilidad",
+    "title": "UD1 · Lab 1 · ¿Dónde se ejecuta?",
     "section": "Identificación de actores",
-    "text": "Identificación de actores\nDebemos introducir stakeholders de forma muy visual.\n\n\n\nStakeholders\n\n\nPor ejemplo:\n\n\n\nStakeholders\n\n\n\nObjetivos\nPor ejemplo:\n“Desarrollar una plataforma web para gestionar reservas de espacios de coworking”\nSería un objetivo/alcance, mientras que:\n“Aplicación web desplegada + documentación + manual de usuario”\nson entregables.\nDebemos redactarlos de forma detallada y que no sean objetivos generales ni ambiguos.\nUn objetivo como:\n\n“Hacer una aplicación moderna.”\n\nes demasiado ambiguo.\nMejor:\n\n“Desarrollar una aplicación web que permita a los usuarios consultar la disponibilidad de los espacios y realizar reservas.”\n\nY podemos introducir el concepto de SMART sin convertirlo en teoría empresarial:\n\nSpecific\nMeasurable\nAchievable\nRelevant\nTime-bound\n\nNo hace falta que todos los objetivos sean perfectamente SMART, pero sí que aprendamos a preguntarnos:\n\n¿Cómo sabremos que hemos conseguido el objetivo?",
-    "crumbs": [
-      "🧪 Laboratorios",
-      "UD1 · Lab 1 · Del reto al briefing y la viabilidad"
-    ]
+    "text": "Identificación de actores\nDebemos introducir stakeholders de forma muy visual.\n\n\n\nStakeholders\n\n\nPor ejemplo:\n\n\n\nStakeholders\n\n\n\nObjetivos\nPor ejemplo:\n“Desarrollar una plataforma web para gestionar reservas de espacios de coworking”\nSería un objetivo/alcance, mientras que:\n“Aplicación web desplegada + documentación + manual de usuario”\nson entregables.\nDebemos redactarlos de forma detallada y que no sean objetivos generales ni ambiguos.\nUn objetivo como:\n\n“Hacer una aplicación moderna.”\n\nes demasiado ambiguo.\nMejor:\n\n“Desarrollar una aplicación web que permita a los usuarios consultar la disponibilidad de los espacios y realizar reservas.”\n\nY podemos introducir el concepto de SMART sin convertirlo en teoría empresarial:\n\nSpecific\nMeasurable\nAchievable\nRelevant\nTime-bound\n\nNo hace falta que todos los objetivos sean perfectamente SMART, pero sí que aprendamos a preguntarnos:\n\n¿Cómo sabremos que hemos conseguido el objetivo?"
   },
   {
     "objectID": "laboratorios/ud1/lab1.html#restricciones",
     "href": "laboratorios/ud1/lab1.html#restricciones",
-    "title": "UD1 · Lab 1 · Del reto al briefing y la viabilidad",
+    "title": "UD1 · Lab 1 · ¿Dónde se ejecuta?",
     "section": "Restricciones",
-    "text": "Restricciones\n\n💡 ¿Qué podría impedir que nuestro proyecto se realizase como inicialmente lo imaginamos?\n\nTenemos que buscar restricciones de diferentes tipos:\n\n\n\nRestricciones",
-    "crumbs": [
-      "🧪 Laboratorios",
-      "UD1 · Lab 1 · Del reto al briefing y la viabilidad"
-    ]
+    "text": "Restricciones\n\n💡 ¿Qué podría impedir que nuestro proyecto se realizase como inicialmente lo imaginamos?\n\nTenemos que buscar restricciones de diferentes tipos:\n\n\n\nRestricciones"
   },
   {
     "objectID": "laboratorios/ud1/lab1.html#viabilidad-del-proyecto",
     "href": "laboratorios/ud1/lab1.html#viabilidad-del-proyecto",
-    "title": "UD1 · Lab 1 · Del reto al briefing y la viabilidad",
+    "title": "UD1 · Lab 1 · ¿Dónde se ejecuta?",
     "section": "Viabilidad del proyecto",
-    "text": "Viabilidad del proyecto\n\n💡 La viabilidad no es si/no. También sirve para detectar qué tenemos que cambiar antes de empezar.\n\nEn esta fase buscamos una viabilidad inicial.\nUtilizamos cinco dimensiones:\n\n\n\nViabilidad\n\n\n\n\n\nViabilidad\n\n\nMVP: Producto mínimo viable\nRGPD: Reglamento General de Protección de Datos\n\nHerramientas que vamos a utilizar\n🧠 Para pensar y documentar\nMarkdown + Github\n/docs/briefing.md\n/docs/viabilidad.md\n\n💡 La documentación va a formar parte del repositorio del proyecto y queda versionada\n\n📋 Para organizar\nGithub Proyects\nTodavía no vamos a tener un Product Backlog completo. Pero en esta sesión podemos:\nIdeas → Análisis → Viable/No Viable\n🤖 Para IA\nIntroduciría la IA con un papel concreto: IA como consultor, no responsable de la decisión.\nIA propone → equipo comprueba → equipo acepta/rechaza → equipo documenta",
-    "crumbs": [
-      "🧪 Laboratorios",
-      "UD1 · Lab 1 · Del reto al briefing y la viabilidad"
-    ]
+    "text": "Viabilidad del proyecto\n\n💡 La viabilidad no es si/no. También sirve para detectar qué tenemos que cambiar antes de empezar.\n\nEn esta fase buscamos una viabilidad inicial.\nUtilizamos cinco dimensiones:\n\n\n\nViabilidad\n\n\n\n\n\nViabilidad\n\n\nMVP: Producto mínimo viable\nRGPD: Reglamento General de Protección de Datos\n\nHerramientas que vamos a utilizar\n🧠 Para pensar y documentar\nMarkdown + Github\n/docs/briefing.md\n/docs/viabilidad.md\n\n💡 La documentación va a formar parte del repositorio del proyecto y queda versionada\n\n📋 Para organizar\nGithub Proyects\nTodavía no vamos a tener un Product Backlog completo. Pero en esta sesión podemos:\nIdeas → Análisis → Viable/No Viable\n🤖 Para IA\nIntroduciría la IA con un papel concreto: IA como consultor, no responsable de la decisión.\nIA propone → equipo comprueba → equipo acepta/rechaza → equipo documenta"
   },
   {
     "objectID": "unidades/ud1/index.html#stakeholders",
@@ -739,6 +703,72 @@
     "title": "UD1. Del código a producción. ¿Qué significa que una aplicación sea segura?",
     "section": "Lenguajes compilados e interpretados",
     "text": "Lenguajes compilados e interpretados\n\nLenguajes Compilados\n\nCódigo fuente → Compilador → Programa ejecutable → Ejecución\n\nEjemplos: C, C++, Rust, Java (con matices), Kotlin (con matices)\n\n\nLenguajes Interpretados\n\nCódigo fuente → Runtime → Ejecución\n\nJavaScript → Node.js (lado del servidor), navegador web (lado del cliente)\nPython → Python runtime\nPor ejemplo si JavaScript se puede ejecutar en el lado del servidor o en el navegador web y esto es fundamental tenerlo en cuenta para posteriormente ver cosas como:\n\nVulnerabilidades\nDependencias\nConfiguración\nContenedores\nServidores…",
+    "crumbs": [
+      "📚 Unidades",
+      "1-Del código a producción. ¿Qué significa que una aplicación sea segura?"
+    ]
+  },
+  {
+    "objectID": "unidades/ud1/index.html#arquitectura-cliente-servidor",
+    "href": "unidades/ud1/index.html#arquitectura-cliente-servidor",
+    "title": "UD1. Del código a producción. ¿Qué significa que una aplicación sea segura?",
+    "section": "Arquitectura cliente-servidor",
+    "text": "Arquitectura cliente-servidor\n\n\n\nArquitectura cliente-servidor\n\n\nEl Cliente: Es la aplicación o dispositivo del usuario (como un navegador web o una app en el móvil) que inicia la comunicación haciendo peticiones.\nEl Servidor: Es el equipo o programa remoto con mayores recursos encargado de procesar las solicitudes, gestionar bases de datos y devolver los datos requeridos.\nCómo Funciona\n\nEl usuario interactúa con el cliente y realiza una acción o petición (por ejemplo, entrar a una página web).\nEl cliente envía un mensaje a través de la red usando protocolos como HTTP o HTTPS.\nEl servidor recibe la petición, hace el trabajo pesado (busca en la base de datos, procesa los datos) y genera una respuesta.\nEl servidor envía la información de vuelta al cliente, que se encarga de mostrarla de forma visual en la pantalla.",
+    "crumbs": [
+      "📚 Unidades",
+      "1-Del código a producción. ¿Qué significa que una aplicación sea segura?"
+    ]
+  },
+  {
+    "objectID": "unidades/ud1/index.html#http-y-https",
+    "href": "unidades/ud1/index.html#http-y-https",
+    "title": "UD1. Del código a producción. ¿Qué significa que una aplicación sea segura?",
+    "section": "HTTP y HTTPS",
+    "text": "HTTP y HTTPS\nLa diferencia principal entre HTTP y HTTPS es que el segundo cuenta con una capa de seguridad y cifrado para proteger los datos, mientras que el primero los transmite de forma abierta.\n¿Qué es HTTP?\nSignifica Hypertext Transfer Protocol (Protocolo de Transferencia de Hipertexto).\nEnvía la información en texto plano entre el navegador y el servidor.\nNo ofrece cifrado, por lo que terceros pueden leer o robar los datos fácilmente si los interceptan.\n¿Qué es HTTPS?\nSignifica Hypertext Transfer Protocol Secure (Protocolo de Transferencia de Hipertexto Seguro).\nAñade los protocolos de seguridad SSL o TLS para cifrar los datos intercambiados.\nProtege la información confidencial, como contraseñas o números de tarjetas de crédito.\nValida la identidad del servidor web para evitar suplantaciones.\n\nHTTPS protege la comunicación pero NO GARANTIZA que la aplicación sea segura.",
+    "crumbs": [
+      "📚 Unidades",
+      "1-Del código a producción. ¿Qué significa que una aplicación sea segura?"
+    ]
+  },
+  {
+    "objectID": "unidades/ud1/index.html#api",
+    "href": "unidades/ud1/index.html#api",
+    "title": "UD1. Del código a producción. ¿Qué significa que una aplicación sea segura?",
+    "section": "API",
+    "text": "API",
+    "crumbs": [
+      "📚 Unidades",
+      "1-Del código a producción. ¿Qué significa que una aplicación sea segura?"
+    ]
+  },
+  {
+    "objectID": "unidades/ud1/index.html#apis-rest",
+    "href": "unidades/ud1/index.html#apis-rest",
+    "title": "UD1. Del código a producción. ¿Qué significa que una aplicación sea segura?",
+    "section": "APIs REST",
+    "text": "APIs REST\nUn API REST es un conjunto de reglas que permite que diferentes aplicaciones se comuniquen entre sí mediante HTTP/HTTPS.\nEl acrónimo significa Application Programming Interface (Interfaz de programación de aplicaciones) y REpresentational State Transfer (Transferencia de estado representacional).\n\nFunciona como un puente o traductor para que un sistema pida datos o funciones a otro y obtenga una respuesta clara.\n\n\n¿Cómo funciona?\nUna API REST funciona mediante un modelo de cliente y servidor:\n\nEl cliente: Es quien hace la petición, como una aplicación móvil, una página web o tu navegador.\nEl servidor: Es el sistema que recibe la petición, procesa la información en el backend (como buscar en una base de datos) y devuelve un resultado.\n\nLos datos se suelen enviar y recibir en formato , que es un formato de texto ligero.\n### Request/response\nRequest (Solicitud / Petición): Es el mensaje que envía el cliente (por ejemplo, tu navegador web) pidiendo un recurso, datos o una acción al servidor. Incluye métodos como GET o POST, cabeceras y datos.\nResponse: Es el mensaje que el servidor devuelve al cliente tras procesar la solicitud. Incluye un código de estado (como 200 para éxito o 404 para no encontrado) y la información solicitada.\n\n\nMétodos y códigos básicos\nMétodos HTTP básicos (Acciones)\nLos métodos indican al servidor qué acción se desea realizar sobre un recurso.\n• GET: Solicita datos o información de un servidor. No modifica nada en el servidor, solo lee (por ejemplo, cargar una página web o ver un perfil). • POST: Envía datos al servidor para crear un nuevo recurso (por ejemplo, registrar un nuevo usuario o publicar un comentario). • PUT: Envía datos para actualizar por completo un recurso existente. Si no existe, a veces lo crea. • DELETE: Solicita la eliminación de un recurso específico en el servidor. • PATCH: Aplica modificaciones parciales a un recurso (a diferencia de PUT, no lo reemplaza entero).\nCódigos de estado HTTP básicos (Respuestas)\nLos códigos son números de tres dígitos que el servidor devuelve para indicar el resultado de la petición.\nSe dividen en grupos según su primer dígito:\n🟢 2xx: Éxito (Todo salió bien) • 200 OK: La petición fue exitosa y el servidor devuelve los datos solicitados. • 201 Created: La petición fue exitosa y se ha creado un nuevo recurso (común tras un POST).\n🟡 3xx: Redirección (Hay que ir a otro lado) • 301 Moved Permanently: El recurso solicitado se ha mudado de forma permanente a una nueva dirección (URL). • 302 Found: El recurso está temporalmente en otra dirección.\n🔴 4xx: Errores del Cliente (El error está en tu petición) • 400 Bad Request: El servidor no entiende la petición porque está mal redactada o corrupta. • 401 Unauthorized: No tienes permiso para ver el recurso; necesitas iniciar sesión. • 403 Forbidden: El servidor entiende quién eres, pero tienes prohibido el acceso a ese recurso. • 404 Not Found: El recurso solicitado no existe o no se pudo encontrar en el servidor.\n🟣 5xx: Errores del Servidor (El error es de la web/sistema) • 500 Internal Server Error: El servidor encontró una condición inesperada que le impide cumplir con la petición (un fallo genérico en el código del servidor). • 503 Service Unavailable: El servidor no está disponible temporalmente, generalmente por mantenimiento o sobrecarga.",
+    "crumbs": [
+      "📚 Unidades",
+      "1-Del código a producción. ¿Qué significa que una aplicación sea segura?"
+    ]
+  },
+  {
+    "objectID": "unidades/ud1/index.html#los-datos-se-suelen-enviar-y-recibir-en-formato-json.",
+    "href": "unidades/ud1/index.html#los-datos-se-suelen-enviar-y-recibir-en-formato-json.",
+    "title": "UD1. Del código a producción. ¿Qué significa que una aplicación sea segura?",
+    "section": "Los datos se suelen enviar y recibir en formato JSON.",
+    "text": "Los datos se suelen enviar y recibir en formato JSON.",
+    "crumbs": [
+      "📚 Unidades",
+      "1-Del código a producción. ¿Qué significa que una aplicación sea segura?"
+    ]
+  },
+  {
+    "objectID": "unidades/ud1/index.html#json",
+    "href": "unidades/ud1/index.html#json",
+    "title": "UD1. Del código a producción. ¿Qué significa que una aplicación sea segura?",
+    "section": "JSON",
+    "text": "JSON\nJSON (JavaScript Object Notation) es técnicamente un formato ligero de intercambio de datos basado en texto plano, diseñado para ser fácil de leer y escribir por humanos, y fácil de interpretar y generar por computadoras.\nA pesar de que su nombre incluye “JavaScript” y nació como una simplificación de la sintaxis de objetos de ese lenguaje, hoy en día es un estándar completamente independiente del lenguaje y es compatible con prácticamente cualquier tecnología (Python, Java, PHP, C++, etc.).\n\nEstructura técnica\nUn archivo o cadena JSON está compuesto exclusivamente por dos estructuras de datos universales:\n\nColecciones de pares clave/valor: En la mayoría de los lenguajes, esto se traduce como un objeto, diccionario, hash table o registro.\nListas ordenadas de valores: En los lenguajes de programación, esto se traduce como un arreglo (array), lista o vector.\n\n\n\nEjemplo\n{\n  \"usuario_id\": 10543,\n  \"nombre\": \"Elena\",\n  \"es_administrador\": false,\n  \"telefonos\": [\n    \"+34 600 000 000\",\n    \"+34 910 000 000\"\n  ],\n  \"configuracion\": {\n    \"tema\": \"oscuro\",\n    \"notificaciones\": true\n  },\n  \"ultimo_acceso\": null\n}\n\nLos datos que llegan desde fuera no son confiables",
     "crumbs": [
       "📚 Unidades",
       "1-Del código a producción. ¿Qué significa que una aplicación sea segura?"

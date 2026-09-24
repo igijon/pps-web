@@ -18,8 +18,8 @@ website:
 
       - section: "🧪 Laboratorios"
         contents: 
-          # - href: laboratorios/ud1/lab1.qmd
-          #   text: "UD1 · Lab 1 · Del reto al briefing y la viabilidad"
+          - href: laboratorios/ud1/lab1.qmd
+            text: "UD1 · Lab 1 · ¿Dónde se ejecuta?"
           
     
       - section: "🚀 Desafíos"
