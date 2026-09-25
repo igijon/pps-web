@@ -495,12 +495,12 @@
   {
     "objectID": "laboratorios/ud1/lab2.html",
     "href": "laboratorios/ud1/lab2.html",
-    "title": "UD1 · Lab 2 · Del problema al backlog",
+    "title": "UD1 · Lab 2 · ¿Qué estamos ejecutando realmente?",
     "section": "",
-    "text": "El briefing de LifeOS está terminado. Ahora sois el equipo de análisis. Tenéis que convertir necesidades detectadas en el primer Product Backlog del producto\n\n\n\nVamos a revisar el brefing y obtener las necesidades.\n\nTodos los ejemplos que aquí aparecen son sólo eso, ejemplos. No son los que debéis usar en vuestro proyecto. Tenéis que extraerlos vosotros mismos del briefing.\n\nPor ejemplo:\nN1 → Organizar tareas\nN2 → Priorizar tareas\nN3 → Trabajar con objetivos\nN4 → Saber qué tareas están pendientes\nN5 → Consultar progreso\nN6 → No perder la información\n\n\n\nN1\n├── Crear tarea\n├── Editar tarea\n├── Eliminar tarea\n└── Completar tarea\n\nN2\n├── Asignar prioridad\n└── Ordenar por prioridad\n\nN3\n├── Crear objetivo\n├── Editar objetivo\n├── Asociar tareas\n└── Consultar progreso\n\n\n\nVamos a utilizar un prompt muy contextualizado. Modifícalo como consideres oportuno.\nActúa como analista de requisitos de una aplicación web llamada LifeOS.\n\nLifeOS es una aplicación de planificación personal que permite a una persona gestionar sus tareas y objetivos, organizar sus prioridades y consultar su progreso.\n\nEste es el briefing del proyecto:\n\n[PEGAR AQUÍ EL BRIEFING REALIZADO POR EL EQUIPO]\n\nEstas son las necesidades que hemos identificado:\n\n[PEGAR NECESIDADES]\n\nAyúdanos a analizarlas.\n\nPara cada necesidad:\n\n1. Identifica qué problema del usuario intenta resolver.\n2. Propón las funcionalidades que debería ofrecer la aplicación.\n3. Identifica posibles usuarios implicados.\n4. Detecta ambigüedades o información que falta.\n5. Indica posibles requisitos funcionales.\n6. Indica posibles requisitos no funcionales cuando sean relevantes.\n\nNo inventes información que no aparezca en el briefing.\nNo decidas por nosotros.\nSi una cuestión requiere información del cliente o del usuario, indícala como pregunta abierta.\n\nTodavía NO redactes historias de usuario.\n\n\n\nRevisa nuestro análisis de requisitos para LifeOS.\n\nNecesidades:\n[...]\n\nFuncionalidades:\n[...]\n\nActúa como un analista que debe encontrar problemas.\n\nIdentifica:\n\n* necesidades que no tienen ninguna funcionalidad asociada;\n* funcionalidades que no parecen responder a ninguna necesidad;\n* funcionalidades demasiado grandes;\n* funcionalidades duplicadas;\n* funcionalidades ambiguas;\n* información que deberíamos aclarar;\n* posibles requisitos que hayamos olvidado.\n\nNo añadas funcionalidades simplemente porque parezcan interesantes.\nDiferencia claramente entre lo que se deduce de la información proporcionada y lo que sería una sugerencia.\n\nLa IA no sólo sirve para generar; también sirve para revisar nuestro razonamiento\n\n\n\n\nA partir exclusivamente de las funcionalidades validadas de nuestro proyecto LifeOS:\n\n[PEGAR FUNCIONALIDADES]\n\nCrea historias de usuario siguiendo esta estructura:\n\nComo [tipo de usuario],\nquiero [acción],\npara [valor que obtengo].\n\nPara cada historia:\n\n* utiliza lenguaje comprensible para el usuario;\n* evita describir tecnología o implementación;\n* asegúrate de que aporta valor;\n* indica si consideras que es demasiado grande y podría dividirse;\n* propone entre 3 y 5 criterios de aceptación verificables.\n\nNo inventes funcionalidades nuevas.\n\n\n\nEjemplo (sólo un ejemplo)\n\n\n\nHistorias de usuario\n\n\n\n\n\nVamos a organizar épicas e historias de usuario utilizando Github Project\nPara ello, vamos a crear un proyecto asociado al repositorio de LifeOS.\n\n\n\nGithub Project\n\n\nVamos a organizar las épicas como Milestones de Github. Para ello vamos a nuestro repositorio -&gt; buscador de issues -&gt; Milestones (crearemos los que necesitemos).\nUn milestone debe tener una descripción y puede tener o no una fecha límite asociada. También se establecerá una barra de progreso que se irá completando cuando se completen las issues asociadas al milestone.\n\n\n\nMilestones\n\n\n\n\n\nHistorias de usuario",
+    "text": "🧪 ¿Qué estamos ejecutando realmente?",
     "crumbs": [
       "🧪 Laboratorios",
-      "UD1 · Lab 2 · Del problema al backlog"
+      "UD1 · Lab 2 · ¿Qué estamos ejecutando realmente?"
     ]
   },
   {
@@ -915,6 +915,50 @@
     "crumbs": [
       "🧪 Laboratorios",
       "UD1 · Lab 1 · ¿Dónde se ejecuta?"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud1/lab2.html#herramientas",
+    "href": "laboratorios/ud1/lab2.html#herramientas",
+    "title": "UD1 · Lab 2 · ¿Qué estamos ejecutando realmente?",
+    "section": "Herramientas",
+    "text": "Herramientas\n\nNavegador.\nDevTools.\nUna aplicación web sencilla que tú elijas.",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD1 · Lab 2 · ¿Qué estamos ejecutando realmente?"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud1/lab2.html#qué-debemos-hacer",
+    "href": "laboratorios/ud1/lab2.html#qué-debemos-hacer",
+    "title": "UD1 · Lab 2 · ¿Qué estamos ejecutando realmente?",
+    "section": "¿Qué debemos hacer?",
+    "text": "¿Qué debemos hacer?\n\nAbrir la aplicación.\nAbrir DevTools.\nIr a Network.\nIdentificar peticiones.",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD1 · Lab 2 · ¿Qué estamos ejecutando realmente?"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud1/lab2.html#observamos",
+    "href": "laboratorios/ud1/lab2.html#observamos",
+    "title": "UD1 · Lab 2 · ¿Qué estamos ejecutando realmente?",
+    "section": "Observamos:",
+    "text": "Observamos:\n\nURL.\nMétodo.\nRequest.\nResponse.\nJSON.\nHeaders.\n\nPor ejemplo:\nGET /api/products\nRespuesta:\n[\n  {\n    \"id\": 1,\n    \"name\": \"Producto\"\n  }\n]\n\nTenemos que ver que una aplicación está formada por componentes que se comunican",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD1 · Lab 2 · ¿Qué estamos ejecutando realmente?"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud1/lab2.html#responde",
+    "href": "laboratorios/ud1/lab2.html#responde",
+    "title": "UD1 · Lab 2 · ¿Qué estamos ejecutando realmente?",
+    "section": "Responde",
+    "text": "Responde\n\n¿Qué información estamos enviando?\n¿Qué información estamos recibiendo?\n¿Qué ocurre si alguien la modifica?",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD1 · Lab 2 · ¿Qué estamos ejecutando realmente?"
     ]
   }
 ]

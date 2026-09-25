@@ -20,6 +20,8 @@ website:
         contents: 
           - href: laboratorios/ud1/lab1.qmd
             text: "UD1 · Lab 1 · ¿Dónde se ejecuta?"
+          - href: laboratorios/ud1/lab2.qmd
+            text: "UD1 · Lab 2 · ¿Qué estamos ejecutando realmente?"
           
     
       - section: "🚀 Desafíos"
