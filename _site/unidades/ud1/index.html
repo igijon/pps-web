@@ -243,6 +243,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#estructura-técnica" id="toc-estructura-técnica" class="nav-link" data-scroll-target="#estructura-técnica">Estructura técnica</a></li>
   <li><a href="#ejemplo" id="toc-ejemplo" class="nav-link" data-scroll-target="#ejemplo">Ejemplo</a></li>
   </ul></li>
+  <li><a href="#arquitectura-por-capas" id="toc-arquitectura-por-capas" class="nav-link" data-scroll-target="#arquitectura-por-capas">Arquitectura por capas</a>
+  <ul class="collapse">
+  <li><a href="#estructura-tradicional-arquitectura-de-3-capas" id="toc-estructura-tradicional-arquitectura-de-3-capas" class="nav-link" data-scroll-target="#estructura-tradicional-arquitectura-de-3-capas">Estructura tradicional (arquitectura de 3 capas)</a></li>
+  <li><a href="#regla-de-acoplamiento-cerrado" id="toc-regla-de-acoplamiento-cerrado" class="nav-link" data-scroll-target="#regla-de-acoplamiento-cerrado">Regla de acoplamiento cerrado</a></li>
+  </ul></li>
+  <li><a href="#servidores-y-entornos-de-ejecución" id="toc-servidores-y-entornos-de-ejecución" class="nav-link" data-scroll-target="#servidores-y-entornos-de-ejecución">Servidores y entornos de ejecución</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -270,7 +276,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <ol type="1">
-<li>Arquitectura y comunicación Cliente-servidor. Servidores y entornos de ejecución. HTTP y HTTPS. APIs REST. JSON. Arquitectura por capas.</li>
 <li>El ecosistema de una aplicación Componentes. Dependencias. Entornos de desarrollo, pruebas y producción.</li>
 <li>Primera aproximación a la seguridad Entradas externas. Superficie de ataque. Seguridad desde el diseño.</li>
 <li>Nuevas aplicaciones Aplicaciones integradas con LLM. Nuevos componentes y superficie de ataque.</li>
@@ -456,9 +461,42 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <blockquote class="blockquote">
 <p><strong>Los datos que llegan desde fuera no son confiables</strong></p>
 </blockquote>
-
-
 </section>
+</section>
+<section id="arquitectura-por-capas" class="level2">
+<h2 class="anchored" data-anchor-id="arquitectura-por-capas">Arquitectura por capas</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./images/u1_5.png" class="img-fluid figure-img"></p>
+<figcaption>Arquitectura 3 capas</figcaption>
+</figure>
+</div>
+<p>La <strong>arquitectura por capas</strong> (o Layered Architecture) es un patrón de diseño de software que consiste en dividir una aplicación en secciones horizontales, donde cada capa tiene un rol y una responsabilidad única. Se fundamenta en el principio de <strong>separación de responsabilidades</strong> (Separation of Concerns), lo que significa que cada nivel procesa una tarea específica y se comunica únicamente con sus capas adyacentes de manera jerárquica.</p>
+<section id="estructura-tradicional-arquitectura-de-3-capas" class="level3">
+<h3 class="anchored" data-anchor-id="estructura-tradicional-arquitectura-de-3-capas">Estructura tradicional (arquitectura de 3 capas)</h3>
+<p>Aunque un sistema puede configurarse con múltiples niveles (N-capas), el modelo estándar de la industria organiza el software en tres capas lógicas esenciales:</p>
+<ul>
+<li><strong>Capa de Presentación</strong> (Interfaz de Usuario / UI): Es el punto de contacto directo con el usuario final. Se encarga de capturar las acciones del cliente, enviar los datos a la capa inferior y renderizar de forma visual la información de retorno (páginas web, apps móviles, HTML, etc.).</li>
+<li><strong>Capa de Lógica de Negocio</strong> (Capa de Aplicación / BLL): Actúa como el motor del sistema. Modela, calcula y procesa todas las reglas operativas, validaciones y transformaciones de datos requeridas por la empresa. Nunca accede directamente al almacenamiento.</li>
+<li><strong>Capa de Acceso a Datos</strong> (Persistencia / DAL): Su único objetivo es gestionar la comunicación con los almacenes de información (bases de datos SQL/NoSQL, archivos físicos o APIs de terceros). Recibe solicitudes de la capa de negocio para extraer, actualizar o eliminar registros.</li>
+</ul>
+</section>
+<section id="regla-de-acoplamiento-cerrado" class="level3">
+<h3 class="anchored" data-anchor-id="regla-de-acoplamiento-cerrado">Regla de acoplamiento cerrado</h3>
+<p>En una arquitectura limpia por capas, estas operan de forma <strong>cerrada</strong>. El flujo de datos viaja de forma estrictamente descendente: la capa de presentación solo puede llamar a la de negocio, y la de negocio solo a la de datos. Se prohíbe terminantemente “saltarse” niveles (por ejemplo, que la interfaz de usuario ejecute consultas SQL directas a la base de datos).</p>
+</section>
+</section>
+<section id="servidores-y-entornos-de-ejecución" class="level2">
+<h2 class="anchored" data-anchor-id="servidores-y-entornos-de-ejecución">Servidores y entornos de ejecución</h2>
+<blockquote class="blockquote">
+<p>Mi aplicación funciona en local, ¿qué necesita para funcionar en producción?</p>
+<p><strong>Qué funcione en mi ordenador no significa que esté preparada para producción</strong></p>
+</blockquote>
+<p>Ejemplo:</p>
+<p><strong>Mi equipo MACOS -&gt; Node.js -&gt; Aplicación</strong></p>
+<p><strong>Servidor -&gt; Node.js -&gt; Aplicación</strong></p>
+
+
 </section>
 </section>
 

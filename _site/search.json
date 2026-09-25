@@ -258,7 +258,7 @@
     "href": "unidades/ud1/index.html",
     "title": "UD1. Del código a producción. ¿Qué significa que una aplicación sea segura?",
     "section": "",
-    "text": "Arquitectura y comunicación Cliente-servidor. Servidores y entornos de ejecución. HTTP y HTTPS. APIs REST. JSON. Arquitectura por capas.\nEl ecosistema de una aplicación Componentes. Dependencias. Entornos de desarrollo, pruebas y producción.\nPrimera aproximación a la seguridad Entradas externas. Superficie de ataque. Seguridad desde el diseño.\nNuevas aplicaciones Aplicaciones integradas con LLM. Nuevos componentes y superficie de ataque.",
+    "text": "El ecosistema de una aplicación Componentes. Dependencias. Entornos de desarrollo, pruebas y producción.\nPrimera aproximación a la seguridad Entradas externas. Superficie de ataque. Seguridad desde el diseño.\nNuevas aplicaciones Aplicaciones integradas con LLM. Nuevos componentes y superficie de ataque.",
     "crumbs": [
       "📚 Unidades",
       "1-Del código a producción. ¿Qué significa que una aplicación sea segura?"
@@ -769,6 +769,39 @@
     "title": "UD1. Del código a producción. ¿Qué significa que una aplicación sea segura?",
     "section": "JSON",
     "text": "JSON\nJSON (JavaScript Object Notation) es técnicamente un formato ligero de intercambio de datos basado en texto plano, diseñado para ser fácil de leer y escribir por humanos, y fácil de interpretar y generar por computadoras.\nA pesar de que su nombre incluye “JavaScript” y nació como una simplificación de la sintaxis de objetos de ese lenguaje, hoy en día es un estándar completamente independiente del lenguaje y es compatible con prácticamente cualquier tecnología (Python, Java, PHP, C++, etc.).\n\nEstructura técnica\nUn archivo o cadena JSON está compuesto exclusivamente por dos estructuras de datos universales:\n\nColecciones de pares clave/valor: En la mayoría de los lenguajes, esto se traduce como un objeto, diccionario, hash table o registro.\nListas ordenadas de valores: En los lenguajes de programación, esto se traduce como un arreglo (array), lista o vector.\n\n\n\nEjemplo\n{\n  \"usuario_id\": 10543,\n  \"nombre\": \"Elena\",\n  \"es_administrador\": false,\n  \"telefonos\": [\n    \"+34 600 000 000\",\n    \"+34 910 000 000\"\n  ],\n  \"configuracion\": {\n    \"tema\": \"oscuro\",\n    \"notificaciones\": true\n  },\n  \"ultimo_acceso\": null\n}\n\nLos datos que llegan desde fuera no son confiables",
+    "crumbs": [
+      "📚 Unidades",
+      "1-Del código a producción. ¿Qué significa que una aplicación sea segura?"
+    ]
+  },
+  {
+    "objectID": "unidades/ud1/index.html#arquitectura",
+    "href": "unidades/ud1/index.html#arquitectura",
+    "title": "UD1. Del código a producción. ¿Qué significa que una aplicación sea segura?",
+    "section": "Arquitectura",
+    "text": "Arquitectura",
+    "crumbs": [
+      "📚 Unidades",
+      "1-Del código a producción. ¿Qué significa que una aplicación sea segura?"
+    ]
+  },
+  {
+    "objectID": "unidades/ud1/index.html#arquitectura-por-capas",
+    "href": "unidades/ud1/index.html#arquitectura-por-capas",
+    "title": "UD1. Del código a producción. ¿Qué significa que una aplicación sea segura?",
+    "section": "Arquitectura por capas",
+    "text": "Arquitectura por capas\n\n\n\nArquitectura 3 capas\n\n\nLa arquitectura por capas (o Layered Architecture) es un patrón de diseño de software que consiste en dividir una aplicación en secciones horizontales, donde cada capa tiene un rol y una responsabilidad única. Se fundamenta en el principio de separación de responsabilidades (Separation of Concerns), lo que significa que cada nivel procesa una tarea específica y se comunica únicamente con sus capas adyacentes de manera jerárquica.\n\nEstructura tradicional (arquitectura de 3 capas)\nAunque un sistema puede configurarse con múltiples niveles (N-capas), el modelo estándar de la industria organiza el software en tres capas lógicas esenciales:\n\nCapa de Presentación (Interfaz de Usuario / UI): Es el punto de contacto directo con el usuario final. Se encarga de capturar las acciones del cliente, enviar los datos a la capa inferior y renderizar de forma visual la información de retorno (páginas web, apps móviles, HTML, etc.).\nCapa de Lógica de Negocio (Capa de Aplicación / BLL): Actúa como el motor del sistema. Modela, calcula y procesa todas las reglas operativas, validaciones y transformaciones de datos requeridas por la empresa. Nunca accede directamente al almacenamiento.\nCapa de Acceso a Datos (Persistencia / DAL): Su único objetivo es gestionar la comunicación con los almacenes de información (bases de datos SQL/NoSQL, archivos físicos o APIs de terceros). Recibe solicitudes de la capa de negocio para extraer, actualizar o eliminar registros.\n\n\n\nRegla de acoplamiento cerrado\nEn una arquitectura limpia por capas, estas operan de forma cerrada. El flujo de datos viaja de forma estrictamente descendente: la capa de presentación solo puede llamar a la de negocio, y la de negocio solo a la de datos. Se prohíbe terminantemente “saltarse” niveles (por ejemplo, que la interfaz de usuario ejecute consultas SQL directas a la base de datos).",
+    "crumbs": [
+      "📚 Unidades",
+      "1-Del código a producción. ¿Qué significa que una aplicación sea segura?"
+    ]
+  },
+  {
+    "objectID": "unidades/ud1/index.html#servidores-y-entornos-de-ejecución",
+    "href": "unidades/ud1/index.html#servidores-y-entornos-de-ejecución",
+    "title": "UD1. Del código a producción. ¿Qué significa que una aplicación sea segura?",
+    "section": "Servidores y entornos de ejecución",
+    "text": "Servidores y entornos de ejecución\n\nMi aplicación funciona en local, ¿qué necesita para funcionar en producción?\nQué funcione en mi ordenador no significa que esté preparada para producción\n\nEjemplo:\nMi equipo MACOS -&gt; Node.js -&gt; Aplicación\nServidor -&gt; Node.js -&gt; Aplicación",
     "crumbs": [
       "📚 Unidades",
       "1-Del código a producción. ¿Qué significa que una aplicación sea segura?"

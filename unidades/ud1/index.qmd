@@ -2,13 +2,7 @@
 title: "UD1. Del código a producción. ¿Qué significa que una aplicación sea segura?"
 ---
 
-1. Arquitectura y comunicación
-Cliente-servidor.
-Servidores y entornos de ejecución.
-HTTP y HTTPS.
-APIs REST.
-JSON.
-Arquitectura por capas.
+
 1. El ecosistema de una aplicación
 Componentes.
 Dependencias.
@@ -240,3 +234,35 @@ Un archivo o cadena JSON está compuesto exclusivamente por dos estructuras de d
 ```
 
 >**Los datos que llegan desde fuera no son confiables**
+
+## Arquitectura por capas
+
+![Arquitectura 3 capas](./images/u1_5.png)
+
+La **arquitectura por capas** (o Layered Architecture) es un patrón de diseño de software que consiste en dividir una aplicación en secciones horizontales, donde cada capa tiene un rol y una responsabilidad única. 
+Se fundamenta en el principio de **separación de responsabilidades** (Separation of Concerns), lo que significa que cada nivel procesa una tarea específica y se comunica únicamente con sus capas adyacentes de manera jerárquica.
+
+### Estructura tradicional (arquitectura de 3 capas)
+
+Aunque un sistema puede configurarse con múltiples niveles (N-capas), el modelo estándar de la industria organiza el software en tres capas lógicas esenciales:
+
+- **Capa de Presentación** (Interfaz de Usuario / UI): Es el punto de contacto directo con el usuario final. Se encarga de capturar las acciones del cliente, enviar los datos a la capa inferior y renderizar de forma visual la información de retorno (páginas web, apps móviles, HTML, etc.).
+- **Capa de Lógica de Negocio** (Capa de Aplicación / BLL): Actúa como el motor del sistema. Modela, calcula y procesa todas las reglas operativas, validaciones y transformaciones de datos requeridas por la empresa. Nunca accede directamente al almacenamiento.
+- **Capa de Acceso a Datos** (Persistencia / DAL): Su único objetivo es gestionar la comunicación con los almacenes de información (bases de datos SQL/NoSQL, archivos físicos o APIs de terceros). Recibe solicitudes de la capa de negocio para extraer, actualizar o eliminar registros.
+
+### Regla de acoplamiento cerrado
+
+En una arquitectura limpia por capas, estas operan de forma **cerrada**. El flujo de datos viaja de forma estrictamente descendente: la capa de presentación solo puede llamar a la de negocio, y la de negocio solo a la de datos. Se prohíbe terminantemente "saltarse" niveles (por ejemplo, que la interfaz de usuario ejecute consultas SQL directas a la base de datos).
+
+## Servidores y entornos de ejecución
+
+>Mi aplicación funciona en local, ¿qué necesita para funcionar en producción?
+>
+>**Qué funcione en mi ordenador no significa que esté preparada para producción**
+
+Ejemplo:
+
+**Mi equipo MACOS -> Node.js -> Aplicación**
+
+**Servidor -> Node.js -> Aplicación**
+
