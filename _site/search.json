@@ -322,9 +322,9 @@
   {
     "objectID": "laboratorios/ud1/lab1.html",
     "href": "laboratorios/ud1/lab1.html",
-    "title": "UD1 · Lab 1 · ¿Dónde se ejecuta?",
+    "title": "UD1 · Lab 1 · ¿Dónde se ejecuta? ¿Cómo se comunica una aplicación?",
     "section": "",
-    "text": "🧪 ¿Dónde se ejecuta?\nImagina que tenemos distintas piezas de software utilizando distintas tecnologías:\n\nReact\nJavaScript en navegador.\nNode.js\nPython\nAplicación Android\nBase de datos\n\nDebes responder, para cada una:\n\n¿Dónde se ejecuta?\n¿Qué necesita para ejecutarse?\n\n\nEsta actividad es conceptual",
+    "text": "Imagina que tenemos distintas piezas de software utilizando distintas tecnologías:\n\nReact\nJavaScript en navegador.\nNode.js\nPython\nAplicación Android\nBase de datos\n\nDebes responder, para cada una:\n\n¿Dónde se ejecuta?\n¿Qué necesita para ejecutarse?\n\n\nEsta actividad es conceptual",
     "crumbs": [
       "🧪 Laboratorios",
       "UD1 · Lab 1 · ¿Dónde se ejecuta?"
@@ -860,6 +860,61 @@
     "crumbs": [
       "📚 Unidades",
       "1-Del código a producción. ¿Qué significa que una aplicación sea segura?"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud1/lab1.html#herramientas",
+    "href": "laboratorios/ud1/lab1.html#herramientas",
+    "title": "UD1 · Lab 1 · ¿Dónde se ejecuta? ¿Cómo se comunica una aplicación?",
+    "section": "Herramientas",
+    "text": "Herramientas\n\nNavegador.\nDevTools.\nUna aplicación web sencilla que tú elijas.",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD1 · Lab 1 · ¿Dónde se ejecuta?"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud1/lab1.html#qué-debemos-hacer",
+    "href": "laboratorios/ud1/lab1.html#qué-debemos-hacer",
+    "title": "UD1 · Lab 1 · ¿Dónde se ejecuta? ¿Cómo se comunica una aplicación?",
+    "section": "¿Qué debemos hacer?",
+    "text": "¿Qué debemos hacer?\n\nAbrir la aplicación.\nAbrir DevTools.\nIr a Network.\nIdentificar peticiones.",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD1 · Lab 1 · ¿Dónde se ejecuta?"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud1/lab1.html#observan",
+    "href": "laboratorios/ud1/lab1.html#observan",
+    "title": "UD1 · Lab 1 · ¿Dónde se ejecuta? ¿Cómo se comunica una aplicación?",
+    "section": "Observan:",
+    "text": "Observan:\nURL. Método. Request. Response. JSON. Headers.\nPor ejemplo:",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD1 · Lab 1 · ¿Dónde se ejecuta?"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud1/lab1.html#observamos",
+    "href": "laboratorios/ud1/lab1.html#observamos",
+    "title": "UD1 · Lab 1 · ¿Dónde se ejecuta? ¿Cómo se comunica una aplicación?",
+    "section": "Observamos:",
+    "text": "Observamos:\n\nURL.\nMétodo.\nRequest.\nResponse.\nJSON.\nHeaders.\n\nPor ejemplo:\nGET /api/products\nRespuesta:\n[\n  {\n    \"id\": 1,\n    \"name\": \"Producto\"\n  }\n]\n\nTenemos que ver que una aplicación está formada por componentes que se comunican",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD1 · Lab 1 · ¿Dónde se ejecuta?"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud1/lab1.html#responde",
+    "href": "laboratorios/ud1/lab1.html#responde",
+    "title": "UD1 · Lab 1 · ¿Dónde se ejecuta? ¿Cómo se comunica una aplicación?",
+    "section": "Responde",
+    "text": "Responde\n\n¿Qué información estamos enviando?\n¿Qué información estamos recibiendo?\n¿Qué ocurre si alguien la modifica?",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD1 · Lab 1 · ¿Dónde se ejecuta?"
     ]
   }
 ]

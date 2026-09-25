@@ -1,5 +1,5 @@
 ---
-title: "UD1 · Lab 1 · ¿Dónde se ejecuta?"
+title: "UD1 · Lab 1 · ¿Dónde se ejecuta? ¿Cómo se comunica una aplicación?"
 ---
 
 # 🧪 ¿Dónde se ejecuta?
@@ -19,3 +19,50 @@ Debes responder, para cada una:
 - ¿Qué necesita para ejecutarse?
 
 >Esta actividad es conceptual
+
+
+# 🧪 ¿Cómo se comunica?
+
+## Herramientas
+- Navegador.
+- DevTools.
+- Una aplicación web sencilla que tú elijas.
+
+## ¿Qué debemos hacer?
+
+- Abrir la aplicación.
+- Abrir DevTools.
+- Ir a Network.
+- Identificar peticiones.
+
+
+## Observamos:
+
+- URL.
+- Método.
+- Request.
+- Response.
+- JSON.
+- Headers.
+
+Por ejemplo:
+
+`GET /api/products`
+
+Respuesta:
+
+```json
+[
+  {
+    "id": 1,
+    "name": "Producto"
+  }
+]
+```
+>Tenemos que ver que una aplicación está formada por componentes que se comunican
+
+## Responde
+
+- ¿Qué información estamos enviando?
+- ¿Qué información estamos recibiendo?
+- ¿Qué ocurre si alguien la modifica?
