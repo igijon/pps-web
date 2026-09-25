@@ -308,6 +308,7 @@ Una regla de oro en la puesta en producción segura es el aislamiento. El softwa
 
 ### Conceptos clave de la seguridad en entornos
 
-**Principio de Menor Privilegio**: Los desarrolladores no deben tener acceso a las credenciales ni a las bases de datos de producción.
-**Gestión Segura de Secretos**: Prohibido guardar contraseñas, tokens de API o claves criptográficas en el código fuente (Git). Se deben inyectar en tiempo de ejecución usando gestores de secretos (Vault, AWS Secrets Manager, GitHub Secrets).
-**Paridad de Entornos**: Los entornos de QA y Producción deben ser lo más idénticos posibles (mediante Contenedores/Docker e Infraestructura como Código - IaC) para evitar el clásico "en mi máquina sí funcionaba".
+- **Principio de Menor Privilegio**: Los desarrolladores no deben tener acceso a las credenciales ni a las bases de datos de producción.
+- **Gestión Segura de Secretos**: Prohibido guardar contraseñas, tokens de API o claves criptográficas en el código fuente (Git). Se deben inyectar en tiempo de ejecución usando gestores de secretos (Vault, AWS Secrets Manager, GitHub Secrets).
+- **Paridad de Entornos**: Los entornos de QA y Producción deben ser lo más idénticos posibles (mediante Contenedores/Docker e Infraestructura como Código - IaC) para evitar el clásico "en mi máquina sí funcionaba".
+
