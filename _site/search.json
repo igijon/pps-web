@@ -806,5 +806,60 @@
       "📚 Unidades",
       "1-Del código a producción. ¿Qué significa que una aplicación sea segura?"
     ]
+  },
+  {
+    "objectID": "unidades/ud1/index.html#componentes",
+    "href": "unidades/ud1/index.html#componentes",
+    "title": "UD1. Del código a producción. ¿Qué significa que una aplicación sea segura?",
+    "section": "Componentes",
+    "text": "Componentes",
+    "crumbs": [
+      "📚 Unidades",
+      "1-Del código a producción. ¿Qué significa que una aplicación sea segura?"
+    ]
+  },
+  {
+    "objectID": "unidades/ud1/index.html#dependencias",
+    "href": "unidades/ud1/index.html#dependencias",
+    "title": "UD1. Del código a producción. ¿Qué significa que una aplicación sea segura?",
+    "section": "Dependencias",
+    "text": "Dependencias",
+    "crumbs": [
+      "📚 Unidades",
+      "1-Del código a producción. ¿Qué significa que una aplicación sea segura?"
+    ]
+  },
+  {
+    "objectID": "unidades/ud1/index.html#entornos-de-desarrollo-pruebas-y-producción",
+    "href": "unidades/ud1/index.html#entornos-de-desarrollo-pruebas-y-producción",
+    "title": "UD1. Del código a producción. ¿Qué significa que una aplicación sea segura?",
+    "section": "Entornos de desarrollo, pruebas y producción",
+    "text": "Entornos de desarrollo, pruebas y producción\nUna regla de oro en la puesta en producción segura es el aislamiento. El software debe pasar por distintas “cajas de arena” (sandbox) antes de llegar al usuario final.\n\n\n\nEntornos\n\n\n\nConceptos clave de la seguridad en entornos\nPrincipio de Menor Privilegio: Los desarrolladores no deben tener acceso a las credenciales ni a las bases de datos de producción. Gestión Segura de Secretos: Prohibido guardar contraseñas, tokens de API o claves criptográficas en el código fuente (Git). Se deben inyectar en tiempo de ejecución usando gestores de secretos (Vault, AWS Secrets Manager, GitHub Secrets). Paridad de Entornos: Los entornos de QA y Producción deben ser lo más idénticos posibles (mediante Contenedores/Docker e Infraestructura como Código - IaC) para evitar el clásico “en mi máquina sí funcionaba”.",
+    "crumbs": [
+      "📚 Unidades",
+      "1-Del código a producción. ¿Qué significa que una aplicación sea segura?"
+    ]
+  },
+  {
+    "objectID": "unidades/ud1/index.html#componentes-la-anatomía-del-software",
+    "href": "unidades/ud1/index.html#componentes-la-anatomía-del-software",
+    "title": "UD1. Del código a producción. ¿Qué significa que una aplicación sea segura?",
+    "section": "Componentes (la anatomía del software)",
+    "text": "Componentes (la anatomía del software)\nPara proteger un sistema, primero debemos conocer sus partes. Un sistema no es solo un archivo ejecutable; es un conjunto de piezas interconectadas:\n\nFrontend (Capa de Presentación): El código que se ejecuta en el cliente (navegador, app móvil). Foco de seguridad: Validación de datos en el cliente (que nunca sustituye a la del servidor) y protección contra ataques como XSS (Cross-Site Scripting).\nBackend (Lógica de Negocio y APIs): El núcleo que procesa los datos y gestiona los servicios. Foco de seguridad: Autenticación, autorización (RBAC) y sanitización de entradas.\nAlmacenamiento y Persistencia (Bases de Datos, Caché): Dónde residen los datos (SQL, NoSQL, Redis). Foco de seguridad: Cifrado en reposo y en tránsito, y prevención de inyecciones (SQLi).\nServicios Periféricos y Middleware: Pasarelas de pago, servidores de mensajería (RabbitMQ, Kafka) o servicios de identidad (OAuth/OIDC).",
+    "crumbs": [
+      "📚 Unidades",
+      "1-Del código a producción. ¿Qué significa que una aplicación sea segura?"
+    ]
+  },
+  {
+    "objectID": "unidades/ud1/index.html#dependencias-el-software-de-terceros",
+    "href": "unidades/ud1/index.html#dependencias-el-software-de-terceros",
+    "title": "UD1. Del código a producción. ¿Qué significa que una aplicación sea segura?",
+    "section": "Dependencias (el software de terceros)",
+    "text": "Dependencias (el software de terceros)\nHoy en día, más del 80% del código de una aplicación moderna proviene de librerías de código abierto y frameworks (npm, PyPI, NuGet, Maven).\n\n¿Qué es una dependencia?\nCódigo preescrito por terceros que integramos para no reinventar la rueda (ej. Express en Node, SQLAlchemy en Python).\n\n\nDependencias Transitivas\nLas librerías que tus librerías necesitan. Un riesgo invisible si no se monitoriza.\n\n\nRiesgos de Seguridad Asociados\n\nVulnerabilidades conocidas (CVEs): Fallos de seguridad descubiertos en versiones antiguas de una librería.\nAtaques a la Cadena de Suministro (Supply Chain Attacks): Inyección de código malicioso en repositorios públicos por el secuestro de la cuenta de un desarrollador legítimo.\n\n\n\nBuenas Prácticas de Producción Segura\n\nUso de herramientas SCA (Software Composition Analysis) como npm audit, Snyk o OWASP Dependency-Check integradas en el pipeline.\nFijar versiones exactas (lockfiles) para evitar sorpresas en el despliegue.",
+    "crumbs": [
+      "📚 Unidades",
+      "1-Del código a producción. ¿Qué significa que una aplicación sea segura?"
+    ]
   }
 ]

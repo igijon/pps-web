@@ -250,6 +250,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#servidores-y-entornos-de-ejecución" id="toc-servidores-y-entornos-de-ejecución" class="nav-link" data-scroll-target="#servidores-y-entornos-de-ejecución">Servidores y entornos de ejecución</a></li>
   </ul></li>
+  <li><a href="#el-ecosistema-de-una-aplicación" id="toc-el-ecosistema-de-una-aplicación" class="nav-link" data-scroll-target="#el-ecosistema-de-una-aplicación">🌗 4. El ecosistema de una aplicación</a>
+  <ul class="collapse">
+  <li><a href="#componentes-la-anatomía-del-software" id="toc-componentes-la-anatomía-del-software" class="nav-link" data-scroll-target="#componentes-la-anatomía-del-software">Componentes (la anatomía del software)</a></li>
+  <li><a href="#dependencias-el-software-de-terceros" id="toc-dependencias-el-software-de-terceros" class="nav-link" data-scroll-target="#dependencias-el-software-de-terceros">Dependencias (el software de terceros)</a>
+  <ul class="collapse">
+  <li><a href="#qué-es-una-dependencia" id="toc-qué-es-una-dependencia" class="nav-link" data-scroll-target="#qué-es-una-dependencia">¿Qué es una dependencia?</a></li>
+  <li><a href="#dependencias-transitivas" id="toc-dependencias-transitivas" class="nav-link" data-scroll-target="#dependencias-transitivas">Dependencias Transitivas</a></li>
+  <li><a href="#riesgos-de-seguridad-asociados" id="toc-riesgos-de-seguridad-asociados" class="nav-link" data-scroll-target="#riesgos-de-seguridad-asociados">Riesgos de Seguridad Asociados</a></li>
+  <li><a href="#buenas-prácticas-de-producción-segura" id="toc-buenas-prácticas-de-producción-segura" class="nav-link" data-scroll-target="#buenas-prácticas-de-producción-segura">Buenas Prácticas de Producción Segura</a></li>
+  </ul></li>
+  <li><a href="#entornos-de-desarrollo-pruebas-y-producción" id="toc-entornos-de-desarrollo-pruebas-y-producción" class="nav-link" data-scroll-target="#entornos-de-desarrollo-pruebas-y-producción">Entornos de desarrollo, pruebas y producción</a>
+  <ul class="collapse">
+  <li><a href="#conceptos-clave-de-la-seguridad-en-entornos" id="toc-conceptos-clave-de-la-seguridad-en-entornos" class="nav-link" data-scroll-target="#conceptos-clave-de-la-seguridad-en-entornos">Conceptos clave de la seguridad en entornos</a></li>
+  </ul></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -495,8 +510,61 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Ejemplo:</p>
 <p><strong>Mi equipo MACOS -&gt; Node.js -&gt; Aplicación</strong></p>
 <p><strong>Servidor -&gt; Node.js -&gt; Aplicación</strong></p>
+</section>
+</section>
+<section id="el-ecosistema-de-una-aplicación" class="level1">
+<h1>🌗 4. El ecosistema de una aplicación</h1>
+<section id="componentes-la-anatomía-del-software" class="level2">
+<h2 class="anchored" data-anchor-id="componentes-la-anatomía-del-software">Componentes (la anatomía del software)</h2>
+<p>Para proteger un sistema, primero debemos conocer sus partes. Un sistema no es solo un archivo ejecutable; es un conjunto de piezas interconectadas:</p>
+<ul>
+<li><strong>Frontend</strong> (Capa de Presentación): El código que se ejecuta en el cliente (navegador, app móvil). <em>Foco de seguridad</em>: Validación de datos en el cliente (que nunca sustituye a la del servidor) y protección contra ataques como XSS (Cross-Site Scripting).</li>
+<li><strong>Backend</strong> (Lógica de Negocio y APIs): El núcleo que procesa los datos y gestiona los servicios. <em>Foco de seguridad</em>: Autenticación, autorización (RBAC) y sanitización de entradas.</li>
+<li><strong>Almacenamiento y Persistencia</strong> (Bases de Datos, Caché): Dónde residen los datos (SQL, NoSQL, Redis). <em>Foco de seguridad</em>: Cifrado en reposo y en tránsito, y prevención de inyecciones (SQLi).</li>
+<li><strong>Servicios Periféricos y Middleware</strong>: Pasarelas de pago, servidores de mensajería (RabbitMQ, Kafka) o servicios de identidad (OAuth/OIDC).</li>
+</ul>
+</section>
+<section id="dependencias-el-software-de-terceros" class="level2">
+<h2 class="anchored" data-anchor-id="dependencias-el-software-de-terceros">Dependencias (el software de terceros)</h2>
+<p>Hoy en día, más del 80% del código de una aplicación moderna proviene de librerías de código abierto y frameworks (npm, PyPI, NuGet, Maven).</p>
+<section id="qué-es-una-dependencia" class="level3">
+<h3 class="anchored" data-anchor-id="qué-es-una-dependencia">¿Qué es una dependencia?</h3>
+<p>Código preescrito por terceros que integramos para no reinventar la rueda (ej. Express en Node, SQLAlchemy en Python).</p>
+</section>
+<section id="dependencias-transitivas" class="level3">
+<h3 class="anchored" data-anchor-id="dependencias-transitivas">Dependencias Transitivas</h3>
+<p>Las librerías que tus librerías necesitan. Un riesgo invisible si no se monitoriza.</p>
+</section>
+<section id="riesgos-de-seguridad-asociados" class="level3">
+<h3 class="anchored" data-anchor-id="riesgos-de-seguridad-asociados">Riesgos de Seguridad Asociados</h3>
+<ul>
+<li><strong>Vulnerabilidades conocidas (CVEs)</strong>: Fallos de seguridad descubiertos en versiones antiguas de una librería.</li>
+<li><strong>Ataques a la Cadena de Suministro (Supply Chain Attacks)</strong>: Inyección de código malicioso en repositorios públicos por el secuestro de la cuenta de un desarrollador legítimo.</li>
+</ul>
+</section>
+<section id="buenas-prácticas-de-producción-segura" class="level3">
+<h3 class="anchored" data-anchor-id="buenas-prácticas-de-producción-segura">Buenas Prácticas de Producción Segura</h3>
+<ul>
+<li><p>Uso de herramientas <strong>SCA (Software Composition Analysis)</strong> como npm audit, Snyk o OWASP Dependency-Check integradas en el pipeline.</p></li>
+<li><p>Fijar versiones exactas (lockfiles) para evitar sorpresas en el despliegue.</p></li>
+</ul>
+</section>
+</section>
+<section id="entornos-de-desarrollo-pruebas-y-producción" class="level2">
+<h2 class="anchored" data-anchor-id="entornos-de-desarrollo-pruebas-y-producción">Entornos de desarrollo, pruebas y producción</h2>
+<p>Una regla de oro en la puesta en producción segura es el aislamiento. El software debe pasar por distintas “cajas de arena” (<em>sandbox</em>) antes de llegar al usuario final.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./images/ud1_6.png" class="img-fluid figure-img"></p>
+<figcaption>Entornos</figcaption>
+</figure>
+</div>
+<section id="conceptos-clave-de-la-seguridad-en-entornos" class="level3">
+<h3 class="anchored" data-anchor-id="conceptos-clave-de-la-seguridad-en-entornos">Conceptos clave de la seguridad en entornos</h3>
+<p><strong>Principio de Menor Privilegio</strong>: Los desarrolladores no deben tener acceso a las credenciales ni a las bases de datos de producción. <strong>Gestión Segura de Secretos</strong>: Prohibido guardar contraseñas, tokens de API o claves criptográficas en el código fuente (Git). Se deben inyectar en tiempo de ejecución usando gestores de secretos (Vault, AWS Secrets Manager, GitHub Secrets). <strong>Paridad de Entornos</strong>: Los entornos de QA y Producción deben ser lo más idénticos posibles (mediante Contenedores/Docker e Infraestructura como Código - IaC) para evitar el clásico “en mi máquina sí funcionaba”.</p>
 
 
+</section>
 </section>
 </section>
 

@@ -266,3 +266,48 @@ Ejemplo:
 
 **Servidor -> Node.js -> Aplicación**
 
+# 🌗 4. El ecosistema de una aplicación
+
+## Componentes (la anatomía del software)
+
+Para proteger un sistema, primero debemos conocer sus partes. Un sistema no es solo un archivo ejecutable; es un conjunto de piezas interconectadas:
+
+- **Frontend** (Capa de Presentación): El código que se ejecuta en el cliente (navegador, app móvil). *Foco de seguridad*: Validación de datos en el cliente (que nunca sustituye a la del servidor) y protección contra ataques como XSS (Cross-Site Scripting).
+- **Backend** (Lógica de Negocio y APIs): El núcleo que procesa los datos y gestiona los servicios. *Foco de seguridad*: Autenticación, autorización (RBAC) y sanitización de entradas.
+- **Almacenamiento y Persistencia** (Bases de Datos, Caché): Dónde residen los datos (SQL, NoSQL, Redis). *Foco de seguridad*: Cifrado en reposo y en tránsito, y prevención de inyecciones (SQLi).
+- **Servicios Periféricos y Middleware**: Pasarelas de pago, servidores de mensajería (RabbitMQ, Kafka) o servicios de identidad (OAuth/OIDC).
+
+## Dependencias (el software de terceros)
+
+Hoy en día, más del 80% del código de una aplicación moderna proviene de librerías de código abierto y frameworks (npm, PyPI, NuGet, Maven).
+
+### ¿Qué es una dependencia?
+
+Código preescrito por terceros que integramos para no reinventar la rueda (ej. Express en Node, SQLAlchemy en Python).
+
+### Dependencias Transitivas
+
+Las librerías que tus librerías necesitan. Un riesgo invisible si no se monitoriza.
+
+### Riesgos de Seguridad Asociados
+
+- **Vulnerabilidades conocidas (CVEs)**: Fallos de seguridad descubiertos en versiones antiguas de una librería.
+- **Ataques a la Cadena de Suministro (Supply Chain Attacks)**: Inyección de código malicioso en repositorios públicos por el secuestro de la cuenta de un desarrollador legítimo.
+
+### Buenas Prácticas de Producción Segura
+
+- Uso de herramientas **SCA (Software Composition Analysis)** como npm audit, Snyk o OWASP Dependency-Check integradas en el pipeline. 
+
+- Fijar versiones exactas (lockfiles) para evitar sorpresas en el despliegue.
+
+## Entornos de desarrollo, pruebas y producción
+
+Una regla de oro en la puesta en producción segura es el aislamiento. El software debe pasar por distintas "cajas de arena" (*sandbox*) antes de llegar al usuario final.
+
+![Entornos](./images/ud1_6.png)
+
+### Conceptos clave de la seguridad en entornos
+
+**Principio de Menor Privilegio**: Los desarrolladores no deben tener acceso a las credenciales ni a las bases de datos de producción.
+**Gestión Segura de Secretos**: Prohibido guardar contraseñas, tokens de API o claves criptográficas en el código fuente (Git). Se deben inyectar en tiempo de ejecución usando gestores de secretos (Vault, AWS Secrets Manager, GitHub Secrets).
+**Paridad de Entornos**: Los entornos de QA y Producción deben ser lo más idénticos posibles (mediante Contenedores/Docker e Infraestructura como Código - IaC) para evitar el clásico "en mi máquina sí funcionaba".
