@@ -126,7 +126,7 @@
     "section": "",
     "text": "🏆 Proyecto Intermodular Final\nAquí construiremos el proyecto final.",
     "crumbs": [
-      "🏆 Proyecto Intermodular Final"
+      "🏆 Proyecto Final"
     ]
   },
   {
@@ -497,7 +497,7 @@
     "href": "laboratorios/ud1/lab2.html",
     "title": "UD1 · Lab 2 · ¿Qué estamos ejecutando realmente?",
     "section": "",
-    "text": "🧪 ¿Qué estamos ejecutando realmente?",
+    "text": "Vamos a probar una aplicación sencilla.\nDescarga la parte front:\nHeroes React Front\nHeroes Node Back\nAbrimos los dos proyectos en VSCode y analizamos su estructura.\nAnalizamos el ficher package.json: - Tenemos que ver los scripts de ejecución - Tenemos que ver las dependencias que tienen\n\n\nnpm install\nnpm run start:dev\n\n\n\nnpm install\nnpm run dev\nDebes ver algo como esto en el navegador:\n\n\n\nResultado App Heroes\n\n\n\n\n\n\n¿Qué dependencias observas y de qué tipo en cada componente de la aplicación?\nObserva el tráfico de red que se produce, request y response correspondientes cuando interactúas con la aplicación y haz un esquema de lo que has obtenido:\n\nRequest indicando tipo y respuesta\nRespuesta JSON obtenida",
     "crumbs": [
       "🧪 Laboratorios",
       "UD1 · Lab 2 · ¿Qué estamos ejecutando realmente?"
@@ -834,7 +834,7 @@
     "href": "unidades/ud1/index.html#entornos-de-desarrollo-pruebas-y-producción",
     "title": "UD1. Del código a producción. ¿Qué significa que una aplicación sea segura?",
     "section": "Entornos de desarrollo, pruebas y producción",
-    "text": "Entornos de desarrollo, pruebas y producción\nUna regla de oro en la puesta en producción segura es el aislamiento. El software debe pasar por distintas “cajas de arena” (sandbox) antes de llegar al usuario final.\n\n\n\nEntornos\n\n\n\nConceptos clave de la seguridad en entornos\nPrincipio de Menor Privilegio: Los desarrolladores no deben tener acceso a las credenciales ni a las bases de datos de producción. Gestión Segura de Secretos: Prohibido guardar contraseñas, tokens de API o claves criptográficas en el código fuente (Git). Se deben inyectar en tiempo de ejecución usando gestores de secretos (Vault, AWS Secrets Manager, GitHub Secrets). Paridad de Entornos: Los entornos de QA y Producción deben ser lo más idénticos posibles (mediante Contenedores/Docker e Infraestructura como Código - IaC) para evitar el clásico “en mi máquina sí funcionaba”.",
+    "text": "Entornos de desarrollo, pruebas y producción\nUna regla de oro en la puesta en producción segura es el aislamiento. El software debe pasar por distintas “cajas de arena” (sandbox) antes de llegar al usuario final.\n\n\n\nEntornos\n\n\n\nConceptos clave de la seguridad en entornos\n\nPrincipio de Menor Privilegio: Los desarrolladores no deben tener acceso a las credenciales ni a las bases de datos de producción.\nGestión Segura de Secretos: Prohibido guardar contraseñas, tokens de API o claves criptográficas en el código fuente (Git). Se deben inyectar en tiempo de ejecución usando gestores de secretos (Vault, AWS Secrets Manager, GitHub Secrets).\nParidad de Entornos: Los entornos de QA y Producción deben ser lo más idénticos posibles (mediante Contenedores/Docker e Infraestructura como Código - IaC) para evitar el clásico “en mi máquina sí funcionaba”.",
     "crumbs": [
       "📚 Unidades",
       "1-Del código a producción. ¿Qué significa que una aplicación sea segura?"
@@ -956,6 +956,39 @@
     "title": "UD1 · Lab 2 · ¿Qué estamos ejecutando realmente?",
     "section": "Responde",
     "text": "Responde\n\n¿Qué información estamos enviando?\n¿Qué información estamos recibiendo?\n¿Qué ocurre si alguien la modifica?",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD1 · Lab 2 · ¿Qué estamos ejecutando realmente?"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud1/lab2.html#montamos-nuestro-proyecto-back",
+    "href": "laboratorios/ud1/lab2.html#montamos-nuestro-proyecto-back",
+    "title": "UD1 · Lab 2 · ¿Qué estamos ejecutando realmente?",
+    "section": "",
+    "text": "npm install\nnpm run start:dev",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD1 · Lab 2 · ¿Qué estamos ejecutando realmente?"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud1/lab2.html#montamos-nuestro-proyecto-front",
+    "href": "laboratorios/ud1/lab2.html#montamos-nuestro-proyecto-front",
+    "title": "UD1 · Lab 2 · ¿Qué estamos ejecutando realmente?",
+    "section": "",
+    "text": "npm install\nnpm run dev\nDebes ver algo como esto en el navegador:\n\n\n\nResultado App Heroes",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD1 · Lab 2 · ¿Qué estamos ejecutando realmente?"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud1/lab2.html#cuestionario",
+    "href": "laboratorios/ud1/lab2.html#cuestionario",
+    "title": "UD1 · Lab 2 · ¿Qué estamos ejecutando realmente?",
+    "section": "",
+    "text": "¿Qué dependencias observas y de qué tipo en cada componente de la aplicación?\nObserva el tráfico de red que se produce, request y response correspondientes cuando interactúas con la aplicación y haz un esquema de lo que has obtenido:\n\nRequest indicando tipo y respuesta\nRespuesta JSON obtenida",
     "crumbs": [
       "🧪 Laboratorios",
       "UD1 · Lab 2 · ¿Qué estamos ejecutando realmente?"

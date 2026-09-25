@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>UD1 · Lab 2 · ¿Qué estamos ejecutando realmente? – Proyecto Intermodular</title>
+<title>UD1 · Lab 2 · ¿Qué estamos ejecutando realmente? – Puesta en Producción Segura</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -25,6 +25,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -102,7 +137,7 @@ ul.task-list li input[type="checkbox"] {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="../../">Proyecto Intermodular</a> 
+      <a href="../../">Puesta en Producción Segura</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -190,7 +225,12 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#qué-estamos-ejecutando-realmente" id="toc-qué-estamos-ejecutando-realmente" class="nav-link active" data-scroll-target="#qué-estamos-ejecutando-realmente">🧪 ¿Qué estamos ejecutando realmente?</a></li>
+  <li><a href="#qué-estamos-ejecutando-realmente" id="toc-qué-estamos-ejecutando-realmente" class="nav-link active" data-scroll-target="#qué-estamos-ejecutando-realmente">🧪 ¿Qué estamos ejecutando realmente?</a>
+  <ul class="collapse">
+  <li><a href="#montamos-nuestro-proyecto-back" id="toc-montamos-nuestro-proyecto-back" class="nav-link" data-scroll-target="#montamos-nuestro-proyecto-back">Montamos nuestro proyecto back</a></li>
+  <li><a href="#montamos-nuestro-proyecto-front" id="toc-montamos-nuestro-proyecto-front" class="nav-link" data-scroll-target="#montamos-nuestro-proyecto-front">Montamos nuestro proyecto front</a></li>
+  <li><a href="#cuestionario" id="toc-cuestionario" class="nav-link" data-scroll-target="#cuestionario">Cuestionario</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -218,8 +258,42 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="qué-estamos-ejecutando-realmente" class="level1">
 <h1>🧪 ¿Qué estamos ejecutando realmente?</h1>
+<p>Vamos a probar una aplicación sencilla.</p>
+<p>Descarga la parte front:</p>
+<p><a href="https://github.com/igijon/react_heroes_app">Heroes React Front</a></p>
+<p><a href="https://github.com/igijon/react_heroes_app">Heroes Node Back</a></p>
+<p>Abrimos los dos proyectos en VSCode y analizamos su estructura.</p>
+<p>Analizamos el ficher <code>package.json</code>: - Tenemos que ver los scripts de ejecución - Tenemos que ver las dependencias que tienen</p>
+<section id="montamos-nuestro-proyecto-back" class="level2">
+<h2 class="anchored" data-anchor-id="montamos-nuestro-proyecto-back">Montamos nuestro proyecto back</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">npm</span> install</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">npm</span> run start:dev</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="montamos-nuestro-proyecto-front" class="level2">
+<h2 class="anchored" data-anchor-id="montamos-nuestro-proyecto-front">Montamos nuestro proyecto front</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">npm</span> install</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">npm</span> run dev</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Debes ver algo como esto en el navegador:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./images/ud1_lab2_1.png" class="img-fluid figure-img"></p>
+<figcaption>Resultado App Heroes</figcaption>
+</figure>
+</div>
+</section>
+<section id="cuestionario" class="level2">
+<h2 class="anchored" data-anchor-id="cuestionario">Cuestionario</h2>
+<ul>
+<li>¿Qué dependencias observas y de qué tipo en cada componente de la aplicación?</li>
+<li>Observa el tráfico de red que se produce, request y response correspondientes cuando interactúas con la aplicación y haz un esquema de lo que has obtenido:
+<ul>
+<li>Request indicando tipo y respuesta</li>
+<li>Respuesta JSON obtenida</li>
+</ul></li>
+</ul>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

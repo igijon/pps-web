@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>UD1. Del código a producción. ¿Qué significa que una aplicación sea segura? – Proyecto Intermodular</title>
+<title>UD1. Del código a producción. ¿Qué significa que una aplicación sea segura? – Puesta en Producción Segura</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -137,7 +137,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="../../">Proyecto Intermodular</a> 
+      <a href="../../">Puesta en Producción Segura</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -183,6 +183,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="../../laboratorios/ud1/lab1.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">UD1 · Lab 1 · ¿Dónde se ejecuta?</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../laboratorios/ud1/lab2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">UD1 · Lab 2 · ¿Qué estamos ejecutando realmente?</span></a>
   </div>
 </li>
       </ul>
@@ -561,7 +567,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <section id="conceptos-clave-de-la-seguridad-en-entornos" class="level3">
 <h3 class="anchored" data-anchor-id="conceptos-clave-de-la-seguridad-en-entornos">Conceptos clave de la seguridad en entornos</h3>
-<p><strong>Principio de Menor Privilegio</strong>: Los desarrolladores no deben tener acceso a las credenciales ni a las bases de datos de producción. <strong>Gestión Segura de Secretos</strong>: Prohibido guardar contraseñas, tokens de API o claves criptográficas en el código fuente (Git). Se deben inyectar en tiempo de ejecución usando gestores de secretos (Vault, AWS Secrets Manager, GitHub Secrets). <strong>Paridad de Entornos</strong>: Los entornos de QA y Producción deben ser lo más idénticos posibles (mediante Contenedores/Docker e Infraestructura como Código - IaC) para evitar el clásico “en mi máquina sí funcionaba”.</p>
+<ul>
+<li><strong>Principio de Menor Privilegio</strong>: Los desarrolladores no deben tener acceso a las credenciales ni a las bases de datos de producción.</li>
+<li><strong>Gestión Segura de Secretos</strong>: Prohibido guardar contraseñas, tokens de API o claves criptográficas en el código fuente (Git). Se deben inyectar en tiempo de ejecución usando gestores de secretos (Vault, AWS Secrets Manager, GitHub Secrets).</li>
+<li><strong>Paridad de Entornos</strong>: Los entornos de QA y Producción deben ser lo más idénticos posibles (mediante Contenedores/Docker e Infraestructura como Código - IaC) para evitar el clásico “en mi máquina sí funcionaba”.</li>
+</ul>
 
 
 </section>
