@@ -3,9 +3,14 @@ title: "Puesta en Producción Segura"
 ---
 
 <div class="home-hero">
-<div class="home-eyebrow">Puesta en Producción Segura · CIBER</div>
+<div class="home-hero-content">
+<div class="home-eyebrow">PUESTA EN PRODUCCIÓN SEGURA · CIBER</div>
 <h1>Aprender.<br><span>Construir.</span></h1>
 <p>Un espacio para investigar, diseñar, desarrollar y presentar soluciones reales trabajando como un equipo profesional.</p>
+</div>
+<div class="home-hero-image">
+<img src="images/candado.webp" alt="Programación Orientada a Objetos con Python">
+</div>
 </div>
 
 <div class="home-manifesto">
