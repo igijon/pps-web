@@ -15,7 +15,9 @@ Descarga la parte front:
 Abrimos los dos proyectos en VSCode y analizamos su estructura.
 
 Analizamos el ficher `package.json`:
+
 - Tenemos que ver los scripts de ejecución
+
 - Tenemos que ver las dependencias que tienen
 
 ## Montamos nuestro proyecto back

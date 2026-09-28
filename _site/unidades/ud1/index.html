@@ -242,6 +242,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#apis-rest" id="toc-apis-rest" class="nav-link" data-scroll-target="#apis-rest">APIs REST</a>
   <ul class="collapse">
   <li><a href="#cómo-funciona" id="toc-cómo-funciona" class="nav-link" data-scroll-target="#cómo-funciona">¿Cómo funciona?</a></li>
+  <li><a href="#requestresponse" id="toc-requestresponse" class="nav-link" data-scroll-target="#requestresponse">Request/response</a></li>
   <li><a href="#métodos-y-códigos-básicos" id="toc-métodos-y-códigos-básicos" class="nav-link" data-scroll-target="#métodos-y-códigos-básicos">Métodos y códigos básicos</a></li>
   </ul></li>
   <li><a href="#json" id="toc-json" class="nav-link" data-scroll-target="#json">JSON</a>
@@ -296,11 +297,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<ol type="1">
-<li>El ecosistema de una aplicación Componentes. Dependencias. Entornos de desarrollo, pruebas y producción.</li>
-<li>Primera aproximación a la seguridad Entradas externas. Superficie de ataque. Seguridad desde el diseño.</li>
-<li>Nuevas aplicaciones Aplicaciones integradas con LLM. Nuevos componentes y superficie de ataque.</li>
-</ol>
+<!-- 
+1. El ecosistema de una aplicación
+Componentes.
+Dependencias.
+Entornos de desarrollo, pruebas y producción.
+1. Primera aproximación a la seguridad
+Entradas externas.
+Superficie de ataque.
+Seguridad desde el diseño.
+1. Nuevas aplicaciones
+Aplicaciones integradas con LLM.
+Nuevos componentes y superficie de ataque. -->
 <blockquote class="blockquote">
 <p><strong>¿Qué ocurre desde que escribimos código hasta que un usuario utiliza una aplicación?</strong></p>
 </blockquote>
@@ -433,7 +441,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong>El servidor</strong>: Es el sistema que recibe la petición, procesa la información en el <em>backend</em> (como buscar en una base de datos) y devuelve un resultado.</li>
 </ul>
 <p>Los datos se suelen enviar y recibir en formato , que es un formato de texto ligero.</p>
-<p>### Request/response</p>
+</section>
+<section id="requestresponse" class="level3">
+<h3 class="anchored" data-anchor-id="requestresponse">Request/response</h3>
 <p><strong>Request (Solicitud / Petición):</strong> Es el mensaje que envía el cliente (por ejemplo, tu navegador web) pidiendo un recurso, datos o una acción al servidor. Incluye métodos como <code>GET</code> o <code>POST</code>, cabeceras y datos.</p>
 <p><strong>Response:</strong> Es el mensaje que el servidor devuelve al cliente tras procesar la solicitud. Incluye un código de estado (como 200 para éxito o 404 para no encontrado) y la información solicitada.</p>
 </section>
@@ -441,14 +451,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="métodos-y-códigos-básicos">Métodos y códigos básicos</h3>
 <p><strong>Métodos HTTP básicos (Acciones)</strong></p>
 <p>Los métodos indican al servidor <strong>qué acción</strong> se desea realizar sobre un recurso.</p>
-<p>• <strong>GET:</strong> Solicita datos o información de un servidor. <strong>No modifica nada</strong> en el servidor, solo lee (por ejemplo, cargar una página web o ver un perfil). • <strong>POST:</strong> Envía datos al servidor para <strong>crear un nuevo recurso</strong> (por ejemplo, registrar un nuevo usuario o publicar un comentario). • <strong>PUT:</strong> Envía datos para <strong>actualizar por completo</strong> un recurso existente. Si no existe, a veces lo crea. • <strong>DELETE:</strong> Solicita la <strong>eliminación</strong> de un recurso específico en el servidor. • <strong>PATCH:</strong> Aplica <strong>modificaciones parciales</strong> a un recurso (a diferencia de PUT, no lo reemplaza entero).</p>
+<p>• <strong>GET:</strong> Solicita datos o información de un servidor. <strong>No modifica nada</strong> en el servidor, solo lee (por ejemplo, cargar una página web o ver un perfil).</p>
+<p>• <strong>POST:</strong> Envía datos al servidor para <strong>crear un nuevo recurso</strong> (por ejemplo, registrar un nuevo usuario o publicar un comentario).</p>
+<p>• <strong>PUT:</strong> Envía datos para <strong>actualizar por completo</strong> un recurso existente. Si no existe, a veces lo crea.</p>
+<p>• <strong>DELETE:</strong> Solicita la <strong>eliminación</strong> de un recurso específico en el servidor.</p>
+<p>• <strong>PATCH:</strong> Aplica <strong>modificaciones parciales</strong> a un recurso (a diferencia de PUT, no lo reemplaza entero).</p>
 <p><strong>Códigos de estado HTTP básicos (Respuestas)</strong></p>
 <p>Los códigos son números de tres dígitos que el servidor devuelve para indicar el <strong>resultado de la petición</strong>.</p>
 <p>Se dividen en grupos según su primer dígito:</p>
-<p><strong>🟢 2xx: Éxito (Todo salió bien)</strong> • <strong>200 OK:</strong> La petición fue exitosa y el servidor devuelve los datos solicitados. • <strong>201 Created:</strong> La petición fue exitosa y se ha <strong>creado un nuevo recurso</strong> (común tras un POST).</p>
-<p><strong>🟡 3xx: Redirección (Hay que ir a otro lado)</strong> • <strong>301 Moved Permanently:</strong> El recurso solicitado se ha mudado de forma permanente a una nueva dirección (URL). • <strong>302 Found:</strong> El recurso está temporalmente en otra dirección.</p>
-<p><strong>🔴 4xx: Errores del Cliente (El error está en tu petición)</strong> • <strong>400 Bad Request:</strong> El servidor no entiende la petición porque está mal redactada o corrupta. • <strong>401 Unauthorized:</strong> No tienes permiso para ver el recurso; necesitas <strong>iniciar sesión</strong>. • <strong>403 Forbidden:</strong> El servidor entiende quién eres, pero <strong>tienes prohibido</strong> el acceso a ese recurso. • <strong>404 Not Found:</strong> El recurso solicitado <strong>no existe</strong> o no se pudo encontrar en el servidor.</p>
-<p><strong>🟣 5xx: Errores del Servidor (El error es de la web/sistema)</strong> • <strong>500 Internal Server Error:</strong> El servidor encontró una condición inesperada que le impide cumplir con la petición (un fallo genérico en el código del servidor). • <strong>503 Service Unavailable:</strong> El servidor <strong>no está disponible</strong> temporalmente, generalmente por mantenimiento o sobrecarga.</p>
+<p><strong>🟢 2xx: Éxito (Todo salió bien)</strong></p>
+<p>• <strong>200 OK:</strong> La petición fue exitosa y el servidor devuelve los datos solicitados.</p>
+<p>• <strong>201 Created:</strong> La petición fue exitosa y se ha <strong>creado un nuevo recurso</strong> (común tras un POST).</p>
+<p><strong>🟡 3xx: Redirección (Hay que ir a otro lado)</strong></p>
+<p>• <strong>301 Moved Permanently:</strong> El recurso solicitado se ha mudado de forma permanente a una nueva dirección (URL).</p>
+<p>• <strong>302 Found:</strong> El recurso está temporalmente en otra dirección.</p>
+<p><strong>🔴 4xx: Errores del Cliente (El error está en tu petición)</strong></p>
+<p>• <strong>400 Bad Request:</strong> El servidor no entiende la petición porque está mal redactada o corrupta.</p>
+<p>• <strong>401 Unauthorized:</strong> No tienes permiso para ver el recurso; necesitas <strong>iniciar sesión</strong>.</p>
+<p>• <strong>403 Forbidden:</strong> El servidor entiende quién eres, pero <strong>tienes prohibido</strong> el acceso a ese recurso.</p>
+<p>• <strong>404 Not Found:</strong> El recurso solicitado <strong>no existe</strong> o no se pudo encontrar en el servidor.</p>
+<p><strong>🟣 5xx: Errores del Servidor (El error es de la web/sistema)</strong></p>
+<p>• <strong>500 Internal Server Error:</strong> El servidor encontró una condición inesperada que le impide cumplir con la petición (un fallo genérico en el código del servidor).</p>
+<p>• <strong>503 Service Unavailable:</strong> El servidor <strong>no está disponible</strong> temporalmente, generalmente por mantenimiento o sobrecarga.</p>
 </section>
 </section>
 <section id="json" class="level2">

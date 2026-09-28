@@ -2,7 +2,7 @@
 title: "UD1. Del código a producción. ¿Qué significa que una aplicación sea segura?"
 ---
 
-
+<!-- 
 1. El ecosistema de una aplicación
 Componentes.
 Dependencias.
@@ -13,7 +13,7 @@ Superficie de ataque.
 Seguridad desde el diseño.
 1. Nuevas aplicaciones
 Aplicaciones integradas con LLM.
-Nuevos componentes y superficie de ataque.
+Nuevos componentes y superficie de ataque. -->
 
 
 
@@ -157,8 +157,9 @@ Una API REST funciona mediante un modelo de cliente y servidor:
 - **El servidor**: Es el sistema que recibe la petición, procesa la información en el *backend* (como buscar en una base de datos) y devuelve un resultado.
  
 Los datos se suelen enviar y recibir en formato , que es un formato de texto ligero.
+
  
- ### Request/response
+### Request/response
 
  **Request (Solicitud / Petición):** Es el mensaje que envía el cliente (por ejemplo, tu navegador web) pidiendo un recurso, datos o una acción al servidor. Incluye métodos como `GET` o `POST`, cabeceras y datos. 
 
@@ -171,9 +172,13 @@ Los datos se suelen enviar y recibir en formato , que es un formato de texto lig
 Los métodos indican al servidor **qué acción** se desea realizar sobre un recurso.
 
 • **GET:** Solicita datos o información de un servidor. **No modifica nada** en el servidor, solo lee (por ejemplo, cargar una página web o ver un perfil).
+
 • **POST:** Envía datos al servidor para **crear un nuevo recurso** (por ejemplo, registrar un nuevo usuario o publicar un comentario).
+
 • **PUT:** Envía datos para **actualizar por completo** un recurso existente. Si no existe, a veces lo crea.
+
 • **DELETE:** Solicita la **eliminación** de un recurso específico en el servidor.
+
 • **PATCH:** Aplica **modificaciones parciales** a un recurso (a diferencia de PUT, no lo reemplaza entero).
 
 **Códigos de estado HTTP básicos (Respuestas)**
@@ -183,21 +188,31 @@ Los códigos son números de tres dígitos que el servidor devuelve para indicar
 Se dividen en grupos según su primer dígito:
 
 **🟢 2xx: Éxito (Todo salió bien)**
+
 • **200 OK:** La petición fue exitosa y el servidor devuelve los datos solicitados.
+
 • **201 Created:** La petición fue exitosa y se ha **creado un nuevo recurso** (común tras un POST).
 
 **🟡 3xx: Redirección (Hay que ir a otro lado)**
+
 • **301 Moved Permanently:** El recurso solicitado se ha mudado de forma permanente a una nueva dirección (URL).
+
 • **302 Found:** El recurso está temporalmente en otra dirección.
 
 **🔴 4xx: Errores del Cliente (El error está en tu petición)**
+
 • **400 Bad Request:** El servidor no entiende la petición porque está mal redactada o corrupta.
+
 • **401 Unauthorized:** No tienes permiso para ver el recurso; necesitas **iniciar sesión**.
+
 • **403 Forbidden:** El servidor entiende quién eres, pero **tienes prohibido** el acceso a ese recurso.
+
 • **404 Not Found:** El recurso solicitado **no existe** o no se pudo encontrar en el servidor.
 
 **🟣 5xx: Errores del Servidor (El error es de la web/sistema)**
+
 • **500 Internal Server Error:** El servidor encontró una condición inesperada que le impide cumplir con la petición (un fallo genérico en el código del servidor).
+
 • **503 Service Unavailable:** El servidor **no está disponible** temporalmente, generalmente por mantenimiento o sobrecarga.
 
 ## JSON
