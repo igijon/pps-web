@@ -40,6 +40,9 @@ website:
       - href: recursos/index.qmd
         text: "📦 Recursos"
 
+      - href: sobremi/index.qmd
+        text: "😎 Sobre mí"
+
 format:
   html:
     theme: cosmo
