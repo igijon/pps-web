@@ -446,7 +446,7 @@ Nuevos componentes y superficie de ataque. -->
 <li><strong>El cliente</strong>: Es quien hace la petición, como una aplicación móvil, una página web o tu navegador.</li>
 <li><strong>El servidor</strong>: Es el sistema que recibe la petición, procesa la información en el <em>backend</em> (como buscar en una base de datos) y devuelve un resultado.</li>
 </ul>
-<p>Los datos se suelen enviar y recibir en formato , que es un formato de texto ligero.</p>
+<p>Los datos se suelen enviar y recibir en formato JSON, que es un formato de texto ligero.</p>
 </section>
 <section id="requestresponse" class="level3">
 <h3 class="anchored" data-anchor-id="requestresponse">Request/response</h3>
@@ -555,7 +555,7 @@ Nuevos componentes y superficie de ataque. -->
 <p>Para proteger un sistema, primero debemos conocer sus partes. Un sistema no es solo un archivo ejecutable; es un conjunto de piezas interconectadas:</p>
 <ul>
 <li><strong>Frontend</strong> (Capa de Presentación): El código que se ejecuta en el cliente (navegador, app móvil). <em>Foco de seguridad</em>: Validación de datos en el cliente (que nunca sustituye a la del servidor) y protección contra ataques como XSS (Cross-Site Scripting).</li>
-<li><strong>Backend</strong> (Lógica de Negocio y APIs): El núcleo que procesa los datos y gestiona los servicios. <em>Foco de seguridad</em>: Autenticación, autorización (RBAC) y sanitización de entradas.</li>
+<li><strong>Backend</strong> (Lógica de Negocio y APIs): El núcleo que procesa los datos y gestiona los servicios. <em>Foco de seguridad</em>: Autenticación, autorización (RBAC: control de acceso basado en roles) y sanitización de entradas.</li>
 <li><strong>Almacenamiento y Persistencia</strong> (Bases de Datos, Caché): Dónde residen los datos (SQL, NoSQL, Redis). <em>Foco de seguridad</em>: Cifrado en reposo y en tránsito, y prevención de inyecciones (SQLi).</li>
 <li><strong>Servicios Periféricos y Middleware</strong>: Pasarelas de pago, servidores de mensajería (RabbitMQ, Kafka) o servicios de identidad (OAuth/OIDC).</li>
 </ul>

@@ -28,10 +28,13 @@ Soy Inma Gijón, profesora de Sistemas y Aplicaciones Informáticas. Imparto mó
 
 <div class="about-card">
 <div class="about-card-icon">🐙</div>
-<div class="about-card-label">Github</div>
-<div class="about-card-title">Repositorios</div>
+<div class="about-card-label">Github y Discord</div>
+<div class="about-card-title">Repositorios y comunicación</div>
 <div class="about-card-text">
 [igijon](https://github.com/igijon)
+</div>
+<div class="about-card-text">
+[Discord](https://discord.gg/8dTPHqZ4T)
 </div>
 </div>
 
