@@ -1069,5 +1069,71 @@
       "📚 Unidades",
       "1-Del código a producción. ¿Qué significa que una aplicación sea segura?"
     ]
+  },
+  {
+    "objectID": "unidades/ud1/index.html#añadiendo-un-llm",
+    "href": "unidades/ud1/index.html#añadiendo-un-llm",
+    "title": "UD1. Del código a producción. ¿Qué significa que una aplicación sea segura?",
+    "section": "Añadiendo un LLM",
+    "text": "Añadiendo un LLM\nUSUARIO\n   ↓\nFRONTEND\n   ↓\nBACKEND\n   ↓\nLLM\ny quizá:\n                    ┌──→ DATABASE\n                    │\nUSUARIO → BACKEND → LLM\n                    │\n                    └──→ HERRAMIENTAS\nHemos añadido otros elementos:\n\notro servicio\notra comunicación\nnuevos datos\nprompts\nrespuestas generadas\ncredenciales/API keys\nproveedor externo\nposiblemente herramientas",
+    "crumbs": [
+      "📚 Unidades",
+      "1-Del código a producción. ¿Qué significa que una aplicación sea segura?"
+    ]
+  },
+  {
+    "objectID": "unidades/ud1/index.html#nuestra-aplicación-sin-llm-tendría-una-estructura-similar-a-esta",
+    "href": "unidades/ud1/index.html#nuestra-aplicación-sin-llm-tendría-una-estructura-similar-a-esta",
+    "title": "UD1. Del código a producción. ¿Qué significa que una aplicación sea segura?",
+    "section": "Nuestra aplicación sin LLM tendría una estructura similar a esta:",
+    "text": "Nuestra aplicación sin LLM tendría una estructura similar a esta:\nUSUARIO\n   ↓\nFRONTEND\n   ↓\nBACKEND\n   ↓\nDATABASE\n\n¿Qué componentes tenemos?",
+    "crumbs": [
+      "📚 Unidades",
+      "1-Del código a producción. ¿Qué significa que una aplicación sea segura?"
+    ]
+  },
+  {
+    "objectID": "unidades/ud1/index.html#hemos-añadido-otros-elementos",
+    "href": "unidades/ud1/index.html#hemos-añadido-otros-elementos",
+    "title": "UD1. Del código a producción. ¿Qué significa que una aplicación sea segura?",
+    "section": "Hemos añadido otros elementos:",
+    "text": "Hemos añadido otros elementos:",
+    "crumbs": [
+      "📚 Unidades",
+      "1-Del código a producción. ¿Qué significa que una aplicación sea segura?"
+    ]
+  },
+  {
+    "objectID": "unidades/ud1/index.html#por-qué-esto-afecta-a-la-seguridasd",
+    "href": "unidades/ud1/index.html#por-qué-esto-afecta-a-la-seguridasd",
+    "title": "UD1. Del código a producción. ¿Qué significa que una aplicación sea segura?",
+    "section": "¿Por qué esto afecta a la seguridasd?",
+    "text": "¿Por qué esto afecta a la seguridasd?",
+    "crumbs": [
+      "📚 Unidades",
+      "1-Del código a producción. ¿Qué significa que una aplicación sea segura?"
+    ]
+  },
+  {
+    "objectID": "unidades/ud1/index.html#por-qué-esto-afecta-a-la-seguridad",
+    "href": "unidades/ud1/index.html#por-qué-esto-afecta-a-la-seguridad",
+    "title": "UD1. Del código a producción. ¿Qué significa que una aplicación sea segura?",
+    "section": "¿Por qué esto afecta a la seguridad?",
+    "text": "¿Por qué esto afecta a la seguridad?\nImagina:\nUsuario\n   ↓\n\"Resume mis tareas\"\n   ↓\nBackend\n   ↓\nLLM\nAhora el LLM puede recibir información que antes no existía en el flujo.\nPor ejemplo:\nUsuario:\n\"Resume mis tareas\"\n\nAplicación:\nAquí están sus tareas:\n- Comprar leche\n- Preparar examen\n- ...\n¿Qué pasa si esas tareas contienen información privada?\n\n¿Qué datos estamos enviando al modelo?",
+    "crumbs": [
+      "📚 Unidades",
+      "1-Del código a producción. ¿Qué significa que una aplicación sea segura?"
+    ]
+  },
+  {
+    "objectID": "unidades/ud1/index.html#el-prompt-es-una-entrada-externa",
+    "href": "unidades/ud1/index.html#el-prompt-es-una-entrada-externa",
+    "title": "UD1. Del código a producción. ¿Qué significa que una aplicación sea segura?",
+    "section": "El prompt es una entrada externa",
+    "text": "El prompt es una entrada externa\nEsta es probablemente la idea más importante de este tipo de aplicaciones:\nFormulario → entrada externa\nURL        → entrada externa\nJSON       → entrada externa\nPrompt     → entrada externa\nEl usuario podría escribir:\n\"Resume mis tareas\"\nPero también podría introducir instrucciones que cambien el comportamiento esperado.\nUn LLM no debe recibir automáticamente la confianza que nosotros damos a nuestro código\nLos prompts proporcionados por los usuarios deben considerarse entradas no confiables",
+    "crumbs": [
+      "📚 Unidades",
+      "1-Del código a producción. ¿Qué significa que una aplicación sea segura?"
+    ]
   }
 ]

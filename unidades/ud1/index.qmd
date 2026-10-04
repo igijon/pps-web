@@ -759,7 +759,116 @@ la tarea pertenece al usuario.
 
 # 🤖 Nuevas aplicaciones
 
-## Aplicaciones integradas con LLM
+**¿Qué ocurre cuando metemos un LLM?**
 
-## Nuevos componentes y superficie de ataque
+<!-- TODO! qué es un LLM, hablar un poquito de prompt engineering, agentes, RAG, embeddings, fine-tuning, ... -->
 
+>Debemos entender que añadir **IA generativa** introduce **nuevos componentes, comunicaciones, datos y superficies de ataque**
+
+## Nuestra aplicación sin LLM tendría una estructura similar a esta:
+
+```txt
+USUARIO
+   ↓
+FRONTEND
+   ↓
+BACKEND
+   ↓
+DATABASE
+```
+
+>¿Qué **componentes** tenemos?
+
+## Añadiendo un LLM
+
+```txt
+USUARIO
+   ↓
+FRONTEND
+   ↓
+BACKEND
+   ↓
+LLM
+```
+y quizá:
+
+```txt
+                    ┌──→ DATABASE
+                    │
+USUARIO → BACKEND → LLM
+                    │
+                    └──→ HERRAMIENTAS
+```
+
+Hemos añadido otros elementos:
+
+- otro servicio
+- otra comunicación
+- nuevos datos
+- prompts
+- respuestas generadas
+- credenciales/API keys
+- proveedor externo
+- posiblemente herramientas
+
+## ¿Por qué esto afecta a la seguridad?
+
+Imagina:
+
+```txt
+Usuario
+   ↓
+"Resume mis tareas"
+   ↓
+Backend
+   ↓
+LLM
+```
+
+Ahora el LLM puede recibir información que antes no existía en el flujo.
+
+Por ejemplo:
+
+```txt
+Usuario:
+"Resume mis tareas"
+
+Aplicación:
+Aquí están sus tareas:
+- Comprar leche
+- Preparar examen
+- ...
+```
+
+¿Qué pasa si esas tareas contienen información privada?
+
+>**¿Qué datos estamos enviando al modelo?**
+
+<!-- TODO! qué es un modelo -->
+
+## El prompt es una entrada externa
+
+Esta es probablemente la idea más importante de este tipo de aplicaciones:
+
+```txt
+Formulario → entrada externa
+URL        → entrada externa
+JSON       → entrada externa
+Prompt     → entrada externa
+```
+
+El usuario podría escribir:
+
+```txt
+"Resume mis tareas"
+```
+
+Pero también podría introducir instrucciones que cambien el comportamiento esperado. 
+
+**Un LLM no debe recibir automáticamente la confianza que nosotros damos a nuestro código**
+
+**Los prompts proporcionados por los usuarios deben considerarse entradas no confiables**
+
+<!-- TODO!Definir claramente una actividad para ver qué cambia cuando añadimos un modelo de IA -->
+
+<!-- TODO! LABORATORIO FINAL -->

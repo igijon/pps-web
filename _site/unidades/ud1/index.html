@@ -298,8 +298,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#nuevas-aplicaciones" id="toc-nuevas-aplicaciones" class="nav-link" data-scroll-target="#nuevas-aplicaciones">🤖 Nuevas aplicaciones</a>
   <ul class="collapse">
-  <li><a href="#aplicaciones-integradas-con-llm" id="toc-aplicaciones-integradas-con-llm" class="nav-link" data-scroll-target="#aplicaciones-integradas-con-llm">Aplicaciones integradas con LLM</a></li>
-  <li><a href="#nuevos-componentes-y-superficie-de-ataque" id="toc-nuevos-componentes-y-superficie-de-ataque" class="nav-link" data-scroll-target="#nuevos-componentes-y-superficie-de-ataque">Nuevos componentes y superficie de ataque</a></li>
+  <li><a href="#nuestra-aplicación-sin-llm-tendría-una-estructura-similar-a-esta" id="toc-nuestra-aplicación-sin-llm-tendría-una-estructura-similar-a-esta" class="nav-link" data-scroll-target="#nuestra-aplicación-sin-llm-tendría-una-estructura-similar-a-esta">Nuestra aplicación sin LLM tendría una estructura similar a esta:</a></li>
+  <li><a href="#añadiendo-un-llm" id="toc-añadiendo-un-llm" class="nav-link" data-scroll-target="#añadiendo-un-llm">Añadiendo un LLM</a></li>
+  <li><a href="#por-qué-esto-afecta-a-la-seguridad" id="toc-por-qué-esto-afecta-a-la-seguridad" class="nav-link" data-scroll-target="#por-qué-esto-afecta-a-la-seguridad">¿Por qué esto afecta a la seguridad?</a></li>
+  <li><a href="#el-prompt-es-una-entrada-externa" id="toc-el-prompt-es-una-entrada-externa" class="nav-link" data-scroll-target="#el-prompt-es-una-entrada-externa">El prompt es una entrada externa</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -1037,11 +1039,91 @@ Content-Type: application/json</code></pre>
 </section>
 <section id="nuevas-aplicaciones" class="level1">
 <h1>🤖 Nuevas aplicaciones</h1>
-<section id="aplicaciones-integradas-con-llm" class="level2">
-<h2 class="anchored" data-anchor-id="aplicaciones-integradas-con-llm">Aplicaciones integradas con LLM</h2>
+<p><strong>¿Qué ocurre cuando metemos un LLM?</strong></p>
+<!-- TODO! qué es un LLM, hablar un poquito de prompt engineering, agentes, RAG, embeddings, fine-tuning, ... -->
+<blockquote class="blockquote">
+<p>Debemos entender que añadir <strong>IA generativa</strong> introduce <strong>nuevos componentes, comunicaciones, datos y superficies de ataque</strong></p>
+</blockquote>
+<section id="nuestra-aplicación-sin-llm-tendría-una-estructura-similar-a-esta" class="level2">
+<h2 class="anchored" data-anchor-id="nuestra-aplicación-sin-llm-tendría-una-estructura-similar-a-esta">Nuestra aplicación sin LLM tendría una estructura similar a esta:</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>USUARIO</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>   ↓</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>FRONTEND</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>   ↓</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>BACKEND</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>   ↓</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>DATABASE</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<blockquote class="blockquote">
+<p>¿Qué <strong>componentes</strong> tenemos?</p>
+</blockquote>
 </section>
-<section id="nuevos-componentes-y-superficie-de-ataque" class="level2">
-<h2 class="anchored" data-anchor-id="nuevos-componentes-y-superficie-de-ataque">Nuevos componentes y superficie de ataque</h2>
+<section id="añadiendo-un-llm" class="level2">
+<h2 class="anchored" data-anchor-id="añadiendo-un-llm">Añadiendo un LLM</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>USUARIO</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>   ↓</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>FRONTEND</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>   ↓</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>BACKEND</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>   ↓</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>LLM</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>y quizá:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>                    ┌──→ DATABASE</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>                    │</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>USUARIO → BACKEND → LLM</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>                    │</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>                    └──→ HERRAMIENTAS</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Hemos añadido otros elementos:</p>
+<ul>
+<li>otro servicio</li>
+<li>otra comunicación</li>
+<li>nuevos datos</li>
+<li>prompts</li>
+<li>respuestas generadas</li>
+<li>credenciales/API keys</li>
+<li>proveedor externo</li>
+<li>posiblemente herramientas</li>
+</ul>
+</section>
+<section id="por-qué-esto-afecta-a-la-seguridad" class="level2">
+<h2 class="anchored" data-anchor-id="por-qué-esto-afecta-a-la-seguridad">¿Por qué esto afecta a la seguridad?</h2>
+<p>Imagina:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>Usuario</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>   ↓</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>"Resume mis tareas"</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>   ↓</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>Backend</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>   ↓</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>LLM</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Ahora el LLM puede recibir información que antes no existía en el flujo.</p>
+<p>Por ejemplo:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>Usuario:</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>"Resume mis tareas"</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>Aplicación:</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>Aquí están sus tareas:</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>- Comprar leche</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>- Preparar examen</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>- ...</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>¿Qué pasa si esas tareas contienen información privada?</p>
+<blockquote class="blockquote">
+<p><strong>¿Qué datos estamos enviando al modelo?</strong></p>
+</blockquote>
+<!-- TODO! qué es un modelo -->
+</section>
+<section id="el-prompt-es-una-entrada-externa" class="level2">
+<h2 class="anchored" data-anchor-id="el-prompt-es-una-entrada-externa">El prompt es una entrada externa</h2>
+<p>Esta es probablemente la idea más importante de este tipo de aplicaciones:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>Formulario → entrada externa</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>URL        → entrada externa</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>JSON       → entrada externa</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>Prompt     → entrada externa</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>El usuario podría escribir:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>"Resume mis tareas"</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Pero también podría introducir instrucciones que cambien el comportamiento esperado.</p>
+<p><strong>Un LLM no debe recibir automáticamente la confianza que nosotros damos a nuestro código</strong></p>
+<p><strong>Los prompts proporcionados por los usuarios deben considerarse entradas no confiables</strong></p>
+<!-- TODO!Definir claramente una actividad para ver qué cambia cuando añadimos un modelo de IA -->
+<!-- TODO! LABORATORIO FINAL -->
 
 
 </section>
