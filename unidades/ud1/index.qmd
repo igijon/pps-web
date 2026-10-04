@@ -443,7 +443,9 @@ No → rechazar
 
 ### Frontera de confianza/Trust boundary
 
-<!-- TODO! preguntar qué es exactametne la frontera de confianza -->
+Es una **línea imaginaria** o arquitectónica que separa dos zonas de una aplicación con distintos niveles de confianza, privilegios o controles de seguridad.
+
+Es el control de acceso **o aduana** donde los datos pasan de un entorno en el que no tienes control (no confiable) a un entorno que tú gestionas y consideras seguro (confiable).
 
 ```txt
              FRONTERA
@@ -463,6 +465,36 @@ No → rechazar
 ```
 
 **Todo lo que atraviese esta frontera debe considerarse no confiable**
+
+#### Cruzar la frontera exige verificación
+Cuando un dato cruza una frontera de confianza de una zona de menor confianza a una de mayor confianza, **nunca puede pasar libremente**. Debe ser validado, sanitizado o autenticado inmediatamente en el punto de entrada.
+
+Si permitimos que un dato cruce la frontera sin verificarlo, se produce una vulnerabilidad, ya que el sistema interno asumirá que el dato es seguro por el simple hecho de estar "dentro".
+
+#### Ejemplos de fronteras de confianza
+
+- **Entre el navegador (cliente) y la API (servidor)**: esta es la frontera más crítica. El navegador está en la zona "no confiable" (el dispositivo del usuario) y la API está en la zona "confiable" (tu centro de datos o nube).
+- **Entre la aplicación y la base de datos**: aunque ambos servidores estén en tu red privada, la base de datos es una zona con un nivel de privilegio distinto. Los datos que la aplicación envía a la base de datos deben cruzar una frontera mediante consultas preparadas (para evitar SQLi).
+- **Entre tu servidor y APIs de terceros**: si tu aplicación consume datos de un servicio externo (por ejemplo, la API del clima o un sistema de pasarela de pagos), estos datos provienen de una zona fuera de tu control y deben validar antes de procesarse.
+- **Entre microservicios**: en arquitecturas modernas, un microservicio de cara al público (BFF (Backend For Frontend)) tiene menos privilegios que un microservicio interno de procesamiento de pagos. La comunicación entre ellos cruza una frontera de confianza que requiere tokens de autenticación (como JWT (JSON Web Token) que es un estándar que permite intercambiar información de identidad entre un cliente y un servidor de forma **segura, compacta y autocontenida**, llevando el porpio token toda la información necesaria sobre el usuario y sus permisos, sin que el servidor tenga que buscar nada en una BDD o en la memoria para validar la petición).
+
+Ejemplo:
+
+```txt
+[ ZONA NO CONFIABLE ]             ||             [ ZONA CONFIABLE ]
+ Dispositivo del Usuario           ||              Servidor / Backend
+                                   ||
+   Fichero: "malware.exe.jpg" =====||=====>  [PUNTO DE ENTRADA / ADUANA]
+                                   ||         - ¿Es realmente una imagen?
+                                   ||         - ¿El tamaño es correcto?
+                                   ||         - ¿Se cambia el nombre a un UUID?
+                                   ||
+                                   ||        Si pasa: Se guarda en el sistema.
+                                   ||        Si falla: Se destruye el flujo.
+                                   ||
+                            FRONTERA DE CONFIANZA
+```
+
 
 ### ¿Qué cosas pueden ser entradas externas?
 
@@ -632,29 +664,34 @@ Probamos
 **OPCIÓN B**
 
 ```txt
-Diseñamos
-   ↓
-¿Qué datos tenemos?
-¿Quién puede acceder?
-¿Qué puede hacer cada usuario?
-¿Qué podría salir mal?
-   ↓
-Diseñamos controles
-   ↓
-Programamos
-   ↓
-Probamos
+                 ITERACIÓN
+                     │
+                     ↓
+              ┌─────────────┐
+              │ NECESIDAD   │
+              └──────┬──────┘
+                     ↓
+                 DISEÑO
+                     ↓
+             DECISIONES DE
+                SEGURIDAD
+                     ↓
+               DESARROLLO
+                     ↓
+                 TESTING
+                     ↓
+             APRENDIZAJES
+                     │
+                     └───────────→ siguiente iteración
 ```
 
 La segunda sería **Security by Design**
 
-<!-- TODO! analizar exactamente si habría que poner un bucle ahí o no -->
+>Hablamos de iteraciones si conectamos con metodologías **agile**.
 
 ### ¿Qué significa realmente?
 
->No significa **hacer hacking durante el diseño**, significa **incorporar preguntas de seguridad en las decisiones iniciales**
-
-<!-- TODO! Tenemos que mirar qué es hacer hacking -->
+>No significa **hacer hacking durante el diseño**(hacer pruebas de ataque sobre una aplicación), significa **incorporar preguntas de seguridad en las decisiones iniciales**
 
 Por ejemplo:
 
@@ -719,7 +756,6 @@ Se ha producido un error.
 
 >Threat modeling consiste en pensar de forma estructurada qué podría salir mal antes de construir el sistema.
 
-<!-- TODO! Qué es stride -->
 Por ahora podemos utilizar esta plantilla:
 
 ```txt
@@ -761,9 +797,201 @@ la tarea pertenece al usuario.
 
 **¿Qué ocurre cuando metemos un LLM?**
 
-<!-- TODO! qué es un LLM, hablar un poquito de prompt engineering, agentes, RAG, embeddings, fine-tuning, ... -->
+Un **LLM (Large Language Model)** o modelo de lenguaje de gran tamaño es un modelo de IA entrenado con grandes cantidades de texto que puede procesar y generar lenguaje natural. Ejemplos: GPT, Claude, Gemini, Llama...
+
+>LLM no es una aplicación completa. **Es un componente que podemos integrar dentro de una aplicación**
 
 >Debemos entender que añadir **IA generativa** introduce **nuevos componentes, comunicaciones, datos y superficies de ataque**
+
+## Algunos conceptos
+
+### Prompt engineering
+
+Es diseñar las instrucciones que damos a un modelo para obtener respuestas más útiles, consistentes y adecuadas a nuestro objetivo.
+
+>**El prompt proporcionado por el usuario es una entrada externa y no debemos asumir que es confiable**. El usuario puede intentar introducir instrucciones que hagan que el modelo se comporte de una manera distinta de la prevista por el desarrollador (**prompt injection**).
+
+### Embeddings
+
+Un embedding es una **representación numérica de información**, normalmente un texto, que intenta capturar aspectos de su significado.
+
+```txt
+"Quiero aprender Python"
+```
+
+Se transforma en:
+
+```txt
+[0.21, -0.73, 0.14, 0.82, ...]
+```
+
+>Textos con significados relacionados tienden a tener representaciones vectoriales cercanas
+
+Por ejemplo:
+
+```txt
+"Quiero aprender Python"
+          ↕
+"Curso de programación en Python"
+```
+
+Tendrán **embeddings relacionados**.
+
+### RAG (Retrieval Augmented Generation)
+
+Generación aumentada mediante recuperación.
+
+>En lugar de pedir al LLM que responda únicamente utilizando lo que aprendió durante su entrenamiento, nuestra aplicación busca información relevante y se la proporciona al modelo como contexto.
+
+Por ejemplo, imagina que quieres crear un asistente sobre tu material sobre **PPS**.
+
+Sin RAG:
+
+```txt
+Usuario
+   ↓
+LLM
+   ↓
+Respuesta
+```
+
+Con RAG:
+
+```txt
+                     ┌──→ Documentos
+                     │
+Usuario → pregunta → búsqueda
+                     │
+                     ↓
+                  contexto
+                     ↓
+                    LLM
+                     ↓
+                 respuesta
+```
+
+Una implementación típica sería:
+
+```txt
+Documentos
+    ↓
+Dividir documentos
+    ↓
+Embeddings
+    ↓
+Base de datos vectorial
+```
+
+Cuando llega una pregunta:
+
+```txt
+Pregunta
+   ↓
+Embedding de la pregunta
+   ↓
+Búsqueda de documentos similares
+   ↓
+Fragmentos relevantes
+   ↓
+LLM
+   ↓
+Respuesta
+```
+
+Esto es interesante a nivel de seguridad porque aparecen muchos **componentes nuevos**:
+
+```txt
+Usuario
+ ↓
+Aplicación
+ ↓
+Vector DB
+ ↓
+Documentos
+ ↓
+LLM
+```
+
+Y nuevas preguntas:
+
+¿Qué documentos puede recuperar el usuario?
+
+¿Puede acceder a documentos de otro usuario?
+
+¿Qué información enviamos al LLM?
+
+¿Podemos confiar en los documentos?
+
+¿Qué ocurre si un documento contiene instrucciones maliciosas?
+
+Aquí empiezas a ver cómo **la arquitectura de IA aumenta la superficie de ataque**.
+
+### Agentes
+
+Un chatbot tradicional podría ser:
+
+```txt
+Usuario
+  ↓
+Prompt
+  ↓
+LLM
+  ↓
+Respuesta
+```
+
+Un agente puede tener:
+
+```txt
+                 ┌──→ Base de datos
+                 │
+Usuario → LLM ───┼──→ API
+                 │
+                 ├──→ Calendario
+                 │
+                 └──→ Email
+```
+
+>**Un agente utiliza un modelo para decidir qué acciones realizar utilizando herramientas externas**
+
+Un LLM que simplemente responde:
+
+```txt
+"El viernes tienes una reunión."
+```
+
+tiene unas capacidades.
+
+Pero un agente que puede:
+
+```txt
+consultarCalendario()
+crearEvento()
+enviarEmail()
+eliminarTarea()
+```
+
+tiene **capacidad de actuar**.
+
+>Cuantas más capacidades damos a un componente de IA, mayor es la superficie de ataque y mayor debe ser el control sobre sus permisos.
+
+### Fine-tuning
+
+>Consiste en entrenar/adaptar un mnodelo previamente entrenado utilizando datos adicionales para modificar su comportamient hacia una tarea o dominio concreto.
+
+Conceptualmente:
+
+```txt
+Modelo base
+     +
+datos específicos (fine-tuning)
+     ↓
+modelo adaptado
+```
+
+>Mediante prompt engineering no se modifica el modelo, mediante RAG tampoco porque le estamos dando la información externa en el momento de responder pero con fine-tuning sí modificamos/adaptamos el comportamiento mediante entrenamiento adicional.
+
+
 
 ## Nuestra aplicación sin LLM tendría una estructura similar a esta:
 
@@ -844,7 +1072,7 @@ Aquí están sus tareas:
 
 >**¿Qué datos estamos enviando al modelo?**
 
-<!-- TODO! qué es un modelo -->
+>Aclaración sobre el concepto de modelo: un **modelo** es un sistema que ha aprendido patrones a partir de datos y que utiliza este conocimiento aprendido para producir una salida cuando recibe una entrada.
 
 ## El prompt es una entrada externa
 
