@@ -327,3 +327,439 @@ Una regla de oro en la puesta en producción segura es el aislamiento. El softwa
 - **Gestión Segura de Secretos**: Prohibido guardar contraseñas, tokens de API o claves criptográficas en el código fuente (Git). Se deben inyectar en tiempo de ejecución usando gestores de secretos (Vault, AWS Secrets Manager, GitHub Secrets).
 - **Paridad de Entornos**: Los entornos de QA y Producción deben ser lo más idénticos posibles (mediante Contenedores/Docker e Infraestructura como Código - IaC) para evitar el clásico "en mi máquina sí funcionaba".
 
+# ⛑️ Primera aproximación a la seguridad
+
+>Hasta ahora hemos estudiado **cómo funciona una aplicación**.
+>Ahora vamos a empezar a preguntarnos **qué puede salir mal**.
+
+>**¿Podemos confiar en los datos?**
+
+En el **Laboratorio 2** hemos observado:
+
+```txt
+Navegador
+   │
+   │ HTTP Request
+   ▼
+Backend
+   │
+   │ Response
+   ▼
+Navegador
+```
+
+>**¿Podemos confiar en lo que envía el navegador?**
+
+>**Una aplicación nunca debe asumir que los datos que recibe son correctos o confiables**
+
+## Entradas externas
+
+Una **entrada externa** es cualquier información que llega a nuestra aplicación desde fuera de la parte del sistema que estamos considerando confiable.
+
+Por ejemplo:
+
+```txt
+Usuario
+   ↓
+Formulario
+   ↓
+Frontend
+   ↓
+Backend
+   ↓
+Base de datos
+```
+
+El usuario puede introducir:
+
+```txt
+Nombre: Ana
+Edad: 25
+```
+
+Pero también podría enviar:
+
+```txt
+Nombre: <algo inesperado>
+Edad: abc
+```
+
+O directanmente manipular la petición HTTP.
+
+Por ejemplo:
+
+```http
+POST /api/tasks
+Content-Type: application/json
+```
+
+```json
+{
+  "title": "Preparar examen",
+  "priority": "alta"
+}
+```
+El frontend puede tener:
+
+```js
+if (!["alta", "media", "baja"].includes(priority)) {
+    // error
+}
+```
+
+Pero **esto no significa que el backend esté protegido**.
+
+Un usuario puede abrir DevTools y modificar la petición antes de enviarla.
+
+Hay una distinción fundamental:
+
+**Validación del frontend** que sirve principalmente para:
+
+- mejorar la experiencia de usuario
+- detectar errores
+- evitar peticiones innecesarias
+- ayudar al usuario
+
+Pero **no es una frontera de seguridad**.
+
+**Validación del backend** que es la que debe asumir que el dato puede haber sido manipulado.
+
+Por ejemplo:
+
+```txt
+Frontend
+   ↓
+"priority = alta"
+   ↓
+HTTP
+   ↓
+Backend
+   ↓
+¿priority es realmente un valor permitido?
+   ↓
+Sí → continuar
+No → rechazar
+```
+
+### Frontera de confianza/Trust boundary
+
+<!-- TODO! preguntar qué es exactametne la frontera de confianza -->
+
+```txt
+             FRONTERA
+                ↓
+┌─────────────────────────────┐
+│       NUESTRO SISTEMA       │
+│                             │
+│       Backend               │
+│          ↓                  │
+│       Database              │
+└─────────────────────────────┘
+                ↑
+                │
+          datos externos
+                │
+        Usuario / Internet
+```
+
+**Todo lo que atraviese esta frontera debe considerarse no confiable**
+
+### ¿Qué cosas pueden ser entradas externas?
+
+| Entrada         | Ejemplo                       |
+| --------------- | ----------------------------- |
+| Formulario      | nombre, email                 |
+| URL             | `/users/123`                  |
+| Query parameter | `?page=3`                     |
+| JSON            | cuerpo de una petición        |
+| Cabeceras HTTP  | `Authorization`, `User-Agent` |
+| Cookies         | sesión                        |
+| Ficheros        | imagen subida                 |
+| API externa     | datos recibidos               |
+| Webhook         | evento externo                |
+| Prompt          | texto enviado a un LLM        |
+| Datos de móvil  | ubicación, texto, fichero     |
+| Mensaje         | WebSocket, chat               |
+
+<!-- TODO! Cómo se puede manipular un JSON en una petición desde DEVTools, ejemplo completo. Proponer una actividad paso a paso sin tener una aplicación definida -->
+
+>Observación principal: **el navegador es del usuario**
+
+
+**Puntos fundamentales**:
+- Toda entrada externa puede ser manipulada
+- El usuario controla el cliente
+- El frontend no es una frontera de seguridad
+- El servidor **siempre** debe validar lo que recibe
+
+## Superficie de ataque
+
+>**¿Por dónde podrían atacar nuestra aplicación?**
+
+Si existen entradas externas, ¿cuáles son todos los puntos por los que alguien puede interactuar con nuestra aplicación?
+
+Aquí entra en juego el concepto de **Superficie de Ataque**.
+
+Una **superficie de ataque** es el conjunto de puntos de entrada, interfaces, componentes y funcionalidades que podrían ser utilizados para interactuar con un sistema y potencialmente atacarlo.
+
+>Pensad en una casa. No sólo existe la puerta principal. Hay ventanas, garaje terraza, tejado... Cada uno puede convertirse en un punto de entrada.
+
+Por ejemplo, en una aplicación típica:
+
+```txt
+              APLICACIÓN
+                   │
+       ┌───────────┼───────────┐
+       ↓           ↓           ↓
+    Frontend     API        Admin
+       │           │           │
+    Formularios Endpoints   Panel
+                   │
+                Database
+```
+
+### Conceptos principales
+
+**Activo**
+
+Algo que queremos proteger. Por ejemplo: contraseña, datos personales, información médica, dinero, tokens, código fuente, datos de clientes...
+
+`Datos personales` sería un **activo**.
+
+**Punto de entrada**
+
+Lugar por donde algo externo puede entrar. Ejemplos: formulario, endpoint, URL, fichero, cookie, API, prompt...
+
+`POST /api/users` sería un **punto de entrada**.
+
+**Componente**
+
+Una pieza del sistema. Ejemplo: frontend, backend, Node.js, PostgreSQL, Redis, librerías, servidor, proveedor LLM...
+
+`PostgreSQL` sería un **componente**.
+
+### Dibujamos la superficie de ataque
+
+<!-- TODO! Propuesta de actividad detallada para dibujar la superficie de ataque sin tener la aplicación de ejemplo  -->
+
+Podemos tener una plantilla similar a esta:
+
+```txt
+                 MI APLICACIÓN
+                       │
+       ┌───────────────┼────────────────┐
+       ↓               ↓                ↓
+    CLIENTE          API              OTROS
+       │               │
+       ↓               ↓
+ Formularios       Endpoints
+ URLs              Parámetros
+ Cookies           JSON
+       │               │
+       └───────┬───────┘
+               ↓
+             BACKEND
+               │
+        ┌──────┴──────┐
+        ↓             ↓
+    DATABASE       SERVICIOS
+```
+
+Para identificar todos los puntos de una aplicación donde entra información externa, por ahora podríamos utilizar:
+
+- Código fuente
+- DevTools
+- Arquitectura definida en documentación
+- Documentación de APIs correspondiente...
+
+Podemos tener una tabla de trabajo similar a esta:
+
+| Punto        | ¿Qué entra?      | ¿Quién lo controla? | ¿Qué podría salir mal? |
+| ------------ | ---------------- | ------------------- | ---------------------- |
+| Login        | usuario/password | usuario             | datos incorrectos      |
+| `/api/tasks` | JSON             | usuario             | datos inesperados      |
+| URL          | ID               | usuario             | ID no válido           |
+| Fichero      | imagen           | usuario             | fichero malicioso      |
+| Cookie       | sesión           | navegador           | manipulación           |
+
+<br>
+
+**De momento no necesitamos saber explotar estos problemas, pero sí VERLOS**
+
+## Seguridad desde el diseño
+
+>**La seguridad debe formar parte del diseño de la aplicación y no ser un parche posterior**
+
+### Ejemplo Aplicación Citas Médicas
+
+Tenemos: 
+- pacientes
+- médicos
+- administradores
+
+Un paciente puede:
+
+- Ver sus citas
+- Cancelar sus citas
+
+Un médico puede:
+
+- Ver sus pacientes
+- Consultar sus citas
+
+Un administrador puede:
+
+- Gestionar usuarios
+
+
+> **Pregunta: ¿Cuándo debemos pensar en seguridad?**
+
+
+**OPCIÓN A**
+
+```txt
+Diseñamos
+   ↓
+Programamos
+   ↓
+Terminamos
+   ↓
+Probamos
+   ↓
+"Oh, ahora vamos a poner seguridad"
+```
+
+**OPCIÓN B**
+
+```txt
+Diseñamos
+   ↓
+¿Qué datos tenemos?
+¿Quién puede acceder?
+¿Qué puede hacer cada usuario?
+¿Qué podría salir mal?
+   ↓
+Diseñamos controles
+   ↓
+Programamos
+   ↓
+Probamos
+```
+
+La segunda sería **Security by Design**
+
+<!-- TODO! analizar exactamente si habría que poner un bucle ahí o no -->
+
+### ¿Qué significa realmente?
+
+>No significa **hacer hacking durante el diseño**, significa **incorporar preguntas de seguridad en las decisiones iniciales**
+
+<!-- TODO! Tenemos que mirar qué es hacer hacking -->
+
+Por ejemplo:
+
+**Datos**
+
+¿Qué datos almacenamos? ¿Cuáles son especialmente sensibles?
+
+```txt
+Nombre
+Email
+Historial médico
+```
+**Usuarios**
+
+¿Quién utiliza la aplicación?
+
+```txt
+Paciente
+Médico
+Administrador
+```
+
+**Autorización**
+
+¿Qué puede hacer cada uno?
+
+```txt
+Paciente -> Sus citas
+Médico -> Citas de sus pacientes
+Administrador -> Gestión
+```
+
+**Entradas**
+
+¿Qué información recibimos?
+
+```txt
+Login
+Formulario
+ID de cita
+Fichero
+API
+```
+**Errores**
+
+¿Qué ocurre si algo falla?
+
+Mostramos:
+
+```txt
+Error: database connection failed at 192.168.1.25
+```
+
+O algo genérico como:
+
+```txt
+Se ha producido un error.
+```
+<!-- TODO! Ver una actividad en detalle para diseñar con seguirdad -->
+
+### Threat Modeling / Modelado de amenazas
+
+>Threat modeling consiste en pensar de forma estructurada qué podría salir mal antes de construir el sistema.
+
+<!-- TODO! Qué es stride -->
+Por ahora podemos utilizar esta plantilla:
+
+```txt
+ACTIVO
+   ↓
+¿Quién puede atacarlo?
+   ↓
+¿Por dónde puede entrar?
+   ↓
+¿Qué podría hacer?
+   ↓
+¿Qué consecuencia tendría?
+   ↓
+¿Qué control podemos diseñar?
+```
+Ejemplo:
+
+```txt
+Activo:
+Tareas privadas
+
+Entrada:
+GET /api/tasks/123
+
+Problema:
+Un usuario cambia 123 por 124
+
+Consecuencia:
+Puede consultar una tarea ajena
+
+Decisión de diseño:
+El servidor debe comprobar que
+la tarea pertenece al usuario.
+```
+
+>Antes de programar, **debo preguntarme qué puede salir mal**, esto es **Security by Design**
+
+# 🤖 Nuevas aplicaciones
+
+## Aplicaciones integradas con LLM
+
+## Nuevos componentes y superficie de ataque
+

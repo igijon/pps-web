@@ -1003,5 +1003,71 @@
     "crumbs": [
       "😎 Sobre mí"
     ]
+  },
+  {
+    "objectID": "unidades/ud1/index.html#entradas-externas",
+    "href": "unidades/ud1/index.html#entradas-externas",
+    "title": "UD1. Del código a producción. ¿Qué significa que una aplicación sea segura?",
+    "section": "Entradas externas",
+    "text": "Entradas externas\nUna entrada externa es cualquier información que llega a nuestra aplicación desde fuera de la parte del sistema que estamos considerando confiable.\nPor ejemplo:\nUsuario\n   ↓\nFormulario\n   ↓\nFrontend\n   ↓\nBackend\n   ↓\nBase de datos\nEl usuario puede introducir:\nNombre: Ana\nEdad: 25\nPero también podría enviar:\nNombre: &lt;algo inesperado&gt;\nEdad: abc\nO directanmente manipular la petición HTTP.\nPor ejemplo:\nPOST /api/tasks\nContent-Type: application/json\n{\n  \"title\": \"Preparar examen\",\n  \"priority\": \"alta\"\n}\nEl frontend puede tener:\nif (![\"alta\", \"media\", \"baja\"].includes(priority)) {\n    // error\n}\nPero esto no significa que el backend esté protegido.\nUn usuario puede abrir DevTools y modificar la petición antes de enviarla.\nHay una distinción fundamental:\nValidación del frontend que sirve principalmente para:\n\nmejorar la experiencia de usuario\ndetectar errores\nevitar peticiones innecesarias\nayudar al usuario\n\nPero no es una frontera de seguridad.\nValidación del backend que es la que debe asumir que el dato puede haber sido manipulado.\nPor ejemplo:\nFrontend\n   ↓\n\"priority = alta\"\n   ↓\nHTTP\n   ↓\nBackend\n   ↓\n¿priority es realmente un valor permitido?\n   ↓\nSí → continuar\nNo → rechazar\n\nFrontera de confianza/Trust boundary\n\n             FRONTERA\n                ↓\n┌─────────────────────────────┐\n│       NUESTRO SISTEMA       │\n│                             │\n│       Backend               │\n│          ↓                  │\n│       Database              │\n└─────────────────────────────┘\n                ↑\n                │\n          datos externos\n                │\n        Usuario / Internet\nTodo lo que atraviese esta frontera debe considerarse no confiable\n\n\n¿Qué cosas pueden ser entradas externas?\n\n\n\nEntrada\nEjemplo\n\n\n\n\nFormulario\nnombre, email\n\n\nURL\n/users/123\n\n\nQuery parameter\n?page=3\n\n\nJSON\ncuerpo de una petición\n\n\nCabeceras HTTP\nAuthorization, User-Agent\n\n\nCookies\nsesión\n\n\nFicheros\nimagen subida\n\n\nAPI externa\ndatos recibidos\n\n\nWebhook\nevento externo\n\n\nPrompt\ntexto enviado a un LLM\n\n\nDatos de móvil\nubicación, texto, fichero\n\n\nMensaje\nWebSocket, chat\n\n\n\n\n\nObservación principal: el navegador es del usuario\n\nPuntos fundamentales: - Toda entrada externa puede ser manipulada - El usuario controla el cliente - El frontend no es una frontera de seguridad - El servidor siempre debe validar lo que recibe",
+    "crumbs": [
+      "📚 Unidades",
+      "1-Del código a producción. ¿Qué significa que una aplicación sea segura?"
+    ]
+  },
+  {
+    "objectID": "unidades/ud1/index.html#superficie-de-ataque",
+    "href": "unidades/ud1/index.html#superficie-de-ataque",
+    "title": "UD1. Del código a producción. ¿Qué significa que una aplicación sea segura?",
+    "section": "Superficie de ataque",
+    "text": "Superficie de ataque\n\n¿Por dónde podrían atacar nuestra aplicación?\n\nSi existen entradas externas, ¿cuáles son todos los puntos por los que alguien puede interactuar con nuestra aplicación?\nAquí entra en juego el concepto de Superficie de Ataque.\nUna superficie de ataque es el conjunto de puntos de entrada, interfaces, componentes y funcionalidades que podrían ser utilizados para interactuar con un sistema y potencialmente atacarlo.\n\nPensad en una casa. No sólo existe la puerta principal. Hay ventanas, garaje terraza, tejado… Cada uno puede convertirse en un punto de entrada.\n\nPor ejemplo, en una aplicación típica:\n              APLICACIÓN\n                   │\n       ┌───────────┼───────────┐\n       ↓           ↓           ↓\n    Frontend     API        Admin\n       │           │           │\n    Formularios Endpoints   Panel\n                   │\n                Database\n### Conceptos principales\nActivo\nAlgo que queremos proteger. Por ejemplo: contraseña, datos personales, información médica, dinero, tokens, código fuente, datos de clientes…\nDatos personales sería un activo.\nPunto de entrada\nLugar por donde algo externo puede entrar. Ejemplos: formulario, endpoint, URL, fichero, cookie, API, prompt…\nPOST /api/users sería un punto de entrada.\nComponente\nUna pieza del sistema. Ejemplo: frontend, backend, Node.js, PostgreSQL, Redis, librerías, servidor, proveedor LLM…\nPostgreSQL sería un componente.\n\nDibujamos la superficie de ataque\n\nPodemos tener una plantilla similar a esta:\n                 MI APLICACIÓN\n                       │\n       ┌───────────────┼────────────────┐\n       ↓               ↓                ↓\n    CLIENTE          API              OTROS\n       │               │\n       ↓               ↓\n Formularios       Endpoints\n URLs              Parámetros\n Cookies           JSON\n       │               │\n       └───────┬───────┘\n               ↓\n             BACKEND\n               │\n        ┌──────┴──────┐\n        ↓             ↓\n    DATABASE       SERVICIOS\nPara identificar todos los puntos de una aplicación donde entra información externa, por ahora podríamos utilizar:\n\nCódigo fuente\nDevTools\nArquitectura definida en documentación\nDocumentación de APIs correspondiente…\n\nPodemos tener una tabla de trabajo similar a esta:\n\n\n\n\n\n\n\n\n\nPunto\n¿Qué entra?\n¿Quién lo controla?\n¿Qué podría salir mal?\n\n\n\n\nLogin\nusuario/password\nusuario\ndatos incorrectos\n\n\n/api/tasks\nJSON\nusuario\ndatos inesperados\n\n\nURL\nID\nusuario\nID no válido\n\n\nFichero\nimagen\nusuario\nfichero malicioso\n\n\nCookie\nsesión\nnavegador\nmanipulación\n\n\n\n\nDe momento no necesitamos saber explotar estos problemas, pero sí VERLOS",
+    "crumbs": [
+      "📚 Unidades",
+      "1-Del código a producción. ¿Qué significa que una aplicación sea segura?"
+    ]
+  },
+  {
+    "objectID": "unidades/ud1/index.html#seguridad-desde-el-diseño",
+    "href": "unidades/ud1/index.html#seguridad-desde-el-diseño",
+    "title": "UD1. Del código a producción. ¿Qué significa que una aplicación sea segura?",
+    "section": "Seguridad desde el diseño",
+    "text": "Seguridad desde el diseño\n\nLa seguridad debe formar parte del diseño de la aplicación y no ser un parche posterior\n\n\nEjemplo Aplicación Citas Médicas\nTenemos: - pacientes - médicos - administradores\nUn paciente puede:\n\nVer sus citas\nCancelar sus citas\n\nUn médico puede:\n\nVer sus pacientes\nConsultar sus citas\n\nUn administrador puede:\n\nGestionar usuarios\n\n\nPregunta: ¿Cuándo debemos pensar en seguridad?\n\nOPCIÓN A\nDiseñamos\n   ↓\nProgramamos\n   ↓\nTerminamos\n   ↓\nProbamos\n   ↓\n\"Oh, ahora vamos a poner seguridad\"\nOPCIÓN B\nDiseñamos\n   ↓\n¿Qué datos tenemos?\n¿Quién puede acceder?\n¿Qué puede hacer cada usuario?\n¿Qué podría salir mal?\n   ↓\nDiseñamos controles\n   ↓\nProgramamos\n   ↓\nProbamos\nLa segunda sería Security by Design\n\n\n\n¿Qué significa realmente?\n\nNo significa hacer hacking durante el diseño, significa incorporar preguntas de seguridad en las decisiones iniciales\n\n\nPor ejemplo:\nDatos\n¿Qué datos almacenamos? ¿Cuáles son especialmente sensibles?\nNombre\nEmail\nHistorial médico\nUsuarios\n¿Quién utiliza la aplicación?\nPaciente\nMédico\nAdministrador\nAutorización\n¿Qué puede hacer cada uno?\nPaciente -&gt; Sus citas\nMédico -&gt; Citas de sus pacientes\nAdministrador -&gt; Gestión\nEntradas\n¿Qué información recibimos?\nLogin\nFormulario\nID de cita\nFichero\nAPI\nErrores\n¿Qué ocurre si algo falla?\nMostramos:\nError: database connection failed at 192.168.1.25\nO algo genérico como:\nSe ha producido un error.\n\n\n\nThreat Modeling / Modelado de amenazas\n\nThreat modeling consiste en pensar de forma estructurada qué podría salir mal antes de construir el sistema.\n\n\nPor ahora podemos utilizar esta plantilla:\nACTIVO\n   ↓\n¿Quién puede atacarlo?\n   ↓\n¿Por dónde puede entrar?\n   ↓\n¿Qué podría hacer?\n   ↓\n¿Qué consecuencia tendría?\n   ↓\n¿Qué control podemos diseñar?\nEjemplo:\nActivo:\nTareas privadas\n\nEntrada:\nGET /api/tasks/123\n\nProblema:\nUn usuario cambia 123 por 124\n\nConsecuencia:\nPuede consultar una tarea ajena\n\nDecisión de diseño:\nEl servidor debe comprobar que\nla tarea pertenece al usuario.\n\nAntes de programar, debo preguntarme qué puede salir mal, esto es Security by Design",
+    "crumbs": [
+      "📚 Unidades",
+      "1-Del código a producción. ¿Qué significa que una aplicación sea segura?"
+    ]
+  },
+  {
+    "objectID": "unidades/ud1/index.html#aplicaciones-integradas-con-llm",
+    "href": "unidades/ud1/index.html#aplicaciones-integradas-con-llm",
+    "title": "UD1. Del código a producción. ¿Qué significa que una aplicación sea segura?",
+    "section": "Aplicaciones integradas con LLM",
+    "text": "Aplicaciones integradas con LLM",
+    "crumbs": [
+      "📚 Unidades",
+      "1-Del código a producción. ¿Qué significa que una aplicación sea segura?"
+    ]
+  },
+  {
+    "objectID": "unidades/ud1/index.html#nuevos-componentes-y-superficie-de-ataque",
+    "href": "unidades/ud1/index.html#nuevos-componentes-y-superficie-de-ataque",
+    "title": "UD1. Del código a producción. ¿Qué significa que una aplicación sea segura?",
+    "section": "Nuevos componentes y superficie de ataque",
+    "text": "Nuevos componentes y superficie de ataque",
+    "crumbs": [
+      "📚 Unidades",
+      "1-Del código a producción. ¿Qué significa que una aplicación sea segura?"
+    ]
+  },
+  {
+    "objectID": "unidades/ud1/index.html#entradas-externas-superficie-de-ataque",
+    "href": "unidades/ud1/index.html#entradas-externas-superficie-de-ataque",
+    "title": "UD1. Del código a producción. ¿Qué significa que una aplicación sea segura?",
+    "section": "Entradas externas## Superficie de ataque",
+    "text": "Entradas externas## Superficie de ataque",
+    "crumbs": [
+      "📚 Unidades",
+      "1-Del código a producción. ¿Qué significa que una aplicación sea segura?"
+    ]
   }
 ]

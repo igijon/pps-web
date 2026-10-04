@@ -278,6 +278,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#conceptos-clave-de-la-seguridad-en-entornos" id="toc-conceptos-clave-de-la-seguridad-en-entornos" class="nav-link" data-scroll-target="#conceptos-clave-de-la-seguridad-en-entornos">Conceptos clave de la seguridad en entornos</a></li>
   </ul></li>
   </ul></li>
+  <li><a href="#primera-aproximación-a-la-seguridad" id="toc-primera-aproximación-a-la-seguridad" class="nav-link" data-scroll-target="#primera-aproximación-a-la-seguridad">⛑️ Primera aproximación a la seguridad</a>
+  <ul class="collapse">
+  <li><a href="#entradas-externas" id="toc-entradas-externas" class="nav-link" data-scroll-target="#entradas-externas">Entradas externas</a>
+  <ul class="collapse">
+  <li><a href="#frontera-de-confianzatrust-boundary" id="toc-frontera-de-confianzatrust-boundary" class="nav-link" data-scroll-target="#frontera-de-confianzatrust-boundary">Frontera de confianza/Trust boundary</a></li>
+  <li><a href="#qué-cosas-pueden-ser-entradas-externas" id="toc-qué-cosas-pueden-ser-entradas-externas" class="nav-link" data-scroll-target="#qué-cosas-pueden-ser-entradas-externas">¿Qué cosas pueden ser entradas externas?</a></li>
+  </ul></li>
+  <li><a href="#superficie-de-ataque" id="toc-superficie-de-ataque" class="nav-link" data-scroll-target="#superficie-de-ataque">Superficie de ataque</a>
+  <ul class="collapse">
+  <li><a href="#dibujamos-la-superficie-de-ataque" id="toc-dibujamos-la-superficie-de-ataque" class="nav-link" data-scroll-target="#dibujamos-la-superficie-de-ataque">Dibujamos la superficie de ataque</a></li>
+  </ul></li>
+  <li><a href="#seguridad-desde-el-diseño" id="toc-seguridad-desde-el-diseño" class="nav-link" data-scroll-target="#seguridad-desde-el-diseño">Seguridad desde el diseño</a>
+  <ul class="collapse">
+  <li><a href="#ejemplo-aplicación-citas-médicas" id="toc-ejemplo-aplicación-citas-médicas" class="nav-link" data-scroll-target="#ejemplo-aplicación-citas-médicas">Ejemplo Aplicación Citas Médicas</a></li>
+  <li><a href="#qué-significa-realmente" id="toc-qué-significa-realmente" class="nav-link" data-scroll-target="#qué-significa-realmente">¿Qué significa realmente?</a></li>
+  <li><a href="#threat-modeling-modelado-de-amenazas" id="toc-threat-modeling-modelado-de-amenazas" class="nav-link" data-scroll-target="#threat-modeling-modelado-de-amenazas">Threat Modeling / Modelado de amenazas</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#nuevas-aplicaciones" id="toc-nuevas-aplicaciones" class="nav-link" data-scroll-target="#nuevas-aplicaciones">🤖 Nuevas aplicaciones</a>
+  <ul class="collapse">
+  <li><a href="#aplicaciones-integradas-con-llm" id="toc-aplicaciones-integradas-con-llm" class="nav-link" data-scroll-target="#aplicaciones-integradas-con-llm">Aplicaciones integradas con LLM</a></li>
+  <li><a href="#nuevos-componentes-y-superficie-de-ataque" id="toc-nuevos-componentes-y-superficie-de-ataque" class="nav-link" data-scroll-target="#nuevos-componentes-y-superficie-de-ataque">Nuevos componentes y superficie de ataque</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -602,9 +625,425 @@ Nuevos componentes y superficie de ataque. -->
 <li><strong>Gestión Segura de Secretos</strong>: Prohibido guardar contraseñas, tokens de API o claves criptográficas en el código fuente (Git). Se deben inyectar en tiempo de ejecución usando gestores de secretos (Vault, AWS Secrets Manager, GitHub Secrets).</li>
 <li><strong>Paridad de Entornos</strong>: Los entornos de QA y Producción deben ser lo más idénticos posibles (mediante Contenedores/Docker e Infraestructura como Código - IaC) para evitar el clásico “en mi máquina sí funcionaba”.</li>
 </ul>
-
-
 </section>
+</section>
+</section>
+<section id="primera-aproximación-a-la-seguridad" class="level1">
+<h1>⛑️ Primera aproximación a la seguridad</h1>
+<blockquote class="blockquote">
+<p>Hasta ahora hemos estudiado <strong>cómo funciona una aplicación</strong>. Ahora vamos a empezar a preguntarnos <strong>qué puede salir mal</strong>.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p><strong>¿Podemos confiar en los datos?</strong></p>
+</blockquote>
+<p>En el <strong>Laboratorio 2</strong> hemos observado:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>Navegador</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>   │</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>   │ HTTP Request</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>   ▼</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>Backend</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>   │</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>   │ Response</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>   ▼</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>Navegador</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<blockquote class="blockquote">
+<p><strong>¿Podemos confiar en lo que envía el navegador?</strong></p>
+</blockquote>
+<blockquote class="blockquote">
+<p><strong>Una aplicación nunca debe asumir que los datos que recibe son correctos o confiables</strong></p>
+</blockquote>
+<section id="entradas-externas" class="level2">
+<h2 class="anchored" data-anchor-id="entradas-externas">Entradas externas</h2>
+<p>Una <strong>entrada externa</strong> es cualquier información que llega a nuestra aplicación desde fuera de la parte del sistema que estamos considerando confiable.</p>
+<p>Por ejemplo:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>Usuario</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>   ↓</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>Formulario</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>   ↓</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>Frontend</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>   ↓</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>Backend</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>   ↓</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>Base de datos</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>El usuario puede introducir:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>Nombre: Ana</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>Edad: 25</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Pero también podría enviar:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>Nombre: &lt;algo inesperado&gt;</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>Edad: abc</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>O directanmente manipular la petición HTTP.</p>
+<p>Por ejemplo:</p>
+<pre class="http"><code>POST /api/tasks
+Content-Type: application/json</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"title"</span><span class="fu">:</span> <span class="st">"Preparar examen"</span><span class="fu">,</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"priority"</span><span class="fu">:</span> <span class="st">"alta"</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>El frontend puede tener:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="op">!</span>[<span class="st">"alta"</span><span class="op">,</span> <span class="st">"media"</span><span class="op">,</span> <span class="st">"baja"</span>]<span class="op">.</span><span class="fu">includes</span>(priority)) {</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// error</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Pero <strong>esto no significa que el backend esté protegido</strong>.</p>
+<p>Un usuario puede abrir DevTools y modificar la petición antes de enviarla.</p>
+<p>Hay una distinción fundamental:</p>
+<p><strong>Validación del frontend</strong> que sirve principalmente para:</p>
+<ul>
+<li>mejorar la experiencia de usuario</li>
+<li>detectar errores</li>
+<li>evitar peticiones innecesarias</li>
+<li>ayudar al usuario</li>
+</ul>
+<p>Pero <strong>no es una frontera de seguridad</strong>.</p>
+<p><strong>Validación del backend</strong> que es la que debe asumir que el dato puede haber sido manipulado.</p>
+<p>Por ejemplo:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>Frontend</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>   ↓</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>"priority = alta"</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>   ↓</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>HTTP</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>   ↓</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>Backend</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>   ↓</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>¿priority es realmente un valor permitido?</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>   ↓</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>Sí → continuar</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>No → rechazar</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="frontera-de-confianzatrust-boundary" class="level3">
+<h3 class="anchored" data-anchor-id="frontera-de-confianzatrust-boundary">Frontera de confianza/Trust boundary</h3>
+<!-- TODO! preguntar qué es exactametne la frontera de confianza -->
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>             FRONTERA</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>                ↓</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>┌─────────────────────────────┐</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>│       NUESTRO SISTEMA       │</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>│                             │</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>│       Backend               │</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>│          ↓                  │</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>│       Database              │</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>└─────────────────────────────┘</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>                ↑</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>                │</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>          datos externos</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>                │</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>        Usuario / Internet</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Todo lo que atraviese esta frontera debe considerarse no confiable</strong></p>
+</section>
+<section id="qué-cosas-pueden-ser-entradas-externas" class="level3">
+<h3 class="anchored" data-anchor-id="qué-cosas-pueden-ser-entradas-externas">¿Qué cosas pueden ser entradas externas?</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Entrada</th>
+<th>Ejemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Formulario</td>
+<td>nombre, email</td>
+</tr>
+<tr class="even">
+<td>URL</td>
+<td><code>/users/123</code></td>
+</tr>
+<tr class="odd">
+<td>Query parameter</td>
+<td><code>?page=3</code></td>
+</tr>
+<tr class="even">
+<td>JSON</td>
+<td>cuerpo de una petición</td>
+</tr>
+<tr class="odd">
+<td>Cabeceras HTTP</td>
+<td><code>Authorization</code>, <code>User-Agent</code></td>
+</tr>
+<tr class="even">
+<td>Cookies</td>
+<td>sesión</td>
+</tr>
+<tr class="odd">
+<td>Ficheros</td>
+<td>imagen subida</td>
+</tr>
+<tr class="even">
+<td>API externa</td>
+<td>datos recibidos</td>
+</tr>
+<tr class="odd">
+<td>Webhook</td>
+<td>evento externo</td>
+</tr>
+<tr class="even">
+<td>Prompt</td>
+<td>texto enviado a un LLM</td>
+</tr>
+<tr class="odd">
+<td>Datos de móvil</td>
+<td>ubicación, texto, fichero</td>
+</tr>
+<tr class="even">
+<td>Mensaje</td>
+<td>WebSocket, chat</td>
+</tr>
+</tbody>
+</table>
+<!-- TODO! Cómo se puede manipular un JSON en una petición desde DEVTools, ejemplo completo. Proponer una actividad paso a paso sin tener una aplicación definida -->
+<blockquote class="blockquote">
+<p>Observación principal: <strong>el navegador es del usuario</strong></p>
+</blockquote>
+<p><strong>Puntos fundamentales</strong>: - Toda entrada externa puede ser manipulada - El usuario controla el cliente - El frontend no es una frontera de seguridad - El servidor <strong>siempre</strong> debe validar lo que recibe</p>
+</section>
+</section>
+<section id="superficie-de-ataque" class="level2">
+<h2 class="anchored" data-anchor-id="superficie-de-ataque">Superficie de ataque</h2>
+<blockquote class="blockquote">
+<p><strong>¿Por dónde podrían atacar nuestra aplicación?</strong></p>
+</blockquote>
+<p>Si existen entradas externas, ¿cuáles son todos los puntos por los que alguien puede interactuar con nuestra aplicación?</p>
+<p>Aquí entra en juego el concepto de <strong>Superficie de Ataque</strong>.</p>
+<p>Una <strong>superficie de ataque</strong> es el conjunto de puntos de entrada, interfaces, componentes y funcionalidades que podrían ser utilizados para interactuar con un sistema y potencialmente atacarlo.</p>
+<blockquote class="blockquote">
+<p>Pensad en una casa. No sólo existe la puerta principal. Hay ventanas, garaje terraza, tejado… Cada uno puede convertirse en un punto de entrada.</p>
+</blockquote>
+<p>Por ejemplo, en una aplicación típica:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>              APLICACIÓN</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>                   │</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>       ┌───────────┼───────────┐</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>       ↓           ↓           ↓</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    Frontend     API        Admin</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>       │           │           │</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    Formularios Endpoints   Panel</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>                   │</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>                Database</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>###&nbsp;Conceptos principales</p>
+<p><strong>Activo</strong></p>
+<p>Algo que queremos proteger. Por ejemplo: contraseña, datos personales, información médica, dinero, tokens, código fuente, datos de clientes…</p>
+<p><code>Datos personales</code> sería un <strong>activo</strong>.</p>
+<p><strong>Punto de entrada</strong></p>
+<p>Lugar por donde algo externo puede entrar. Ejemplos: formulario, endpoint, URL, fichero, cookie, API, prompt…</p>
+<p><code>POST /api/users</code> sería un <strong>punto de entrada</strong>.</p>
+<p><strong>Componente</strong></p>
+<p>Una pieza del sistema. Ejemplo: frontend, backend, Node.js, PostgreSQL, Redis, librerías, servidor, proveedor LLM…</p>
+<p><code>PostgreSQL</code> sería un <strong>componente</strong>.</p>
+<section id="dibujamos-la-superficie-de-ataque" class="level3">
+<h3 class="anchored" data-anchor-id="dibujamos-la-superficie-de-ataque">Dibujamos la superficie de ataque</h3>
+<!-- TODO! Propuesta de actividad detallada para dibujar la superficie de ataque sin tener la aplicación de ejemplo  -->
+<p>Podemos tener una plantilla similar a esta:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>                 MI APLICACIÓN</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>                       │</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>       ┌───────────────┼────────────────┐</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>       ↓               ↓                ↓</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    CLIENTE          API              OTROS</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>       │               │</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>       ↓               ↓</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a> Formularios       Endpoints</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a> URLs              Parámetros</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a> Cookies           JSON</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>       │               │</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>       └───────┬───────┘</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>               ↓</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>             BACKEND</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>               │</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>        ┌──────┴──────┐</span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>        ↓             ↓</span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>    DATABASE       SERVICIOS</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Para identificar todos los puntos de una aplicación donde entra información externa, por ahora podríamos utilizar:</p>
+<ul>
+<li>Código fuente</li>
+<li>DevTools</li>
+<li>Arquitectura definida en documentación</li>
+<li>Documentación de APIs correspondiente…</li>
+</ul>
+<p>Podemos tener una tabla de trabajo similar a esta:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 17%">
+<col style="width: 23%">
+<col style="width: 27%">
+<col style="width: 31%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Punto</th>
+<th>¿Qué entra?</th>
+<th>¿Quién lo controla?</th>
+<th>¿Qué podría salir mal?</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Login</td>
+<td>usuario/password</td>
+<td>usuario</td>
+<td>datos incorrectos</td>
+</tr>
+<tr class="even">
+<td><code>/api/tasks</code></td>
+<td>JSON</td>
+<td>usuario</td>
+<td>datos inesperados</td>
+</tr>
+<tr class="odd">
+<td>URL</td>
+<td>ID</td>
+<td>usuario</td>
+<td>ID no válido</td>
+</tr>
+<tr class="even">
+<td>Fichero</td>
+<td>imagen</td>
+<td>usuario</td>
+<td>fichero malicioso</td>
+</tr>
+<tr class="odd">
+<td>Cookie</td>
+<td>sesión</td>
+<td>navegador</td>
+<td>manipulación</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<p><strong>De momento no necesitamos saber explotar estos problemas, pero sí VERLOS</strong></p>
+</section>
+</section>
+<section id="seguridad-desde-el-diseño" class="level2">
+<h2 class="anchored" data-anchor-id="seguridad-desde-el-diseño">Seguridad desde el diseño</h2>
+<blockquote class="blockquote">
+<p><strong>La seguridad debe formar parte del diseño de la aplicación y no ser un parche posterior</strong></p>
+</blockquote>
+<section id="ejemplo-aplicación-citas-médicas" class="level3">
+<h3 class="anchored" data-anchor-id="ejemplo-aplicación-citas-médicas">Ejemplo Aplicación Citas Médicas</h3>
+<p>Tenemos: - pacientes - médicos - administradores</p>
+<p>Un paciente puede:</p>
+<ul>
+<li>Ver sus citas</li>
+<li>Cancelar sus citas</li>
+</ul>
+<p>Un médico puede:</p>
+<ul>
+<li>Ver sus pacientes</li>
+<li>Consultar sus citas</li>
+</ul>
+<p>Un administrador puede:</p>
+<ul>
+<li>Gestionar usuarios</li>
+</ul>
+<blockquote class="blockquote">
+<p><strong>Pregunta: ¿Cuándo debemos pensar en seguridad?</strong></p>
+</blockquote>
+<p><strong>OPCIÓN A</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>Diseñamos</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>   ↓</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>Programamos</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>   ↓</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>Terminamos</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>   ↓</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>Probamos</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>   ↓</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>"Oh, ahora vamos a poner seguridad"</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>OPCIÓN B</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>Diseñamos</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>   ↓</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>¿Qué datos tenemos?</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>¿Quién puede acceder?</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>¿Qué puede hacer cada usuario?</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>¿Qué podría salir mal?</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>   ↓</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>Diseñamos controles</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>   ↓</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>Programamos</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>   ↓</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>Probamos</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>La segunda sería <strong>Security by Design</strong></p>
+<!-- TODO! analizar exactamente si habría que poner un bucle ahí o no -->
+</section>
+<section id="qué-significa-realmente" class="level3">
+<h3 class="anchored" data-anchor-id="qué-significa-realmente">¿Qué significa realmente?</h3>
+<blockquote class="blockquote">
+<p>No significa <strong>hacer hacking durante el diseño</strong>, significa <strong>incorporar preguntas de seguridad en las decisiones iniciales</strong></p>
+</blockquote>
+<!-- TODO! Tenemos que mirar qué es hacer hacking -->
+<p>Por ejemplo:</p>
+<p><strong>Datos</strong></p>
+<p>¿Qué datos almacenamos? ¿Cuáles son especialmente sensibles?</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>Nombre</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>Email</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>Historial médico</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Usuarios</strong></p>
+<p>¿Quién utiliza la aplicación?</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>Paciente</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>Médico</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>Administrador</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Autorización</strong></p>
+<p>¿Qué puede hacer cada uno?</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>Paciente -&gt; Sus citas</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>Médico -&gt; Citas de sus pacientes</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>Administrador -&gt; Gestión</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Entradas</strong></p>
+<p>¿Qué información recibimos?</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>Login</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>Formulario</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>ID de cita</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>Fichero</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>API</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Errores</strong></p>
+<p>¿Qué ocurre si algo falla?</p>
+<p>Mostramos:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>Error: database connection failed at 192.168.1.25</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>O algo genérico como:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>Se ha producido un error.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<!-- TODO! Ver una actividad en detalle para diseñar con seguirdad -->
+</section>
+<section id="threat-modeling-modelado-de-amenazas" class="level3">
+<h3 class="anchored" data-anchor-id="threat-modeling-modelado-de-amenazas">Threat Modeling / Modelado de amenazas</h3>
+<blockquote class="blockquote">
+<p>Threat modeling consiste en pensar de forma estructurada qué podría salir mal antes de construir el sistema.</p>
+</blockquote>
+<!-- TODO! Qué es stride -->
+<p>Por ahora podemos utilizar esta plantilla:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>ACTIVO</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>   ↓</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>¿Quién puede atacarlo?</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>   ↓</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>¿Por dónde puede entrar?</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>   ↓</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>¿Qué podría hacer?</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>   ↓</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>¿Qué consecuencia tendría?</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>   ↓</span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>¿Qué control podemos diseñar?</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Ejemplo:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>Activo:</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>Tareas privadas</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>Entrada:</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>GET /api/tasks/123</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>Problema:</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>Un usuario cambia 123 por 124</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>Consecuencia:</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>Puede consultar una tarea ajena</span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>Decisión de diseño:</span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>El servidor debe comprobar que</span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>la tarea pertenece al usuario.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<blockquote class="blockquote">
+<p>Antes de programar, <strong>debo preguntarme qué puede salir mal</strong>, esto es <strong>Security by Design</strong></p>
+</blockquote>
+</section>
+</section>
+</section>
+<section id="nuevas-aplicaciones" class="level1">
+<h1>🤖 Nuevas aplicaciones</h1>
+<section id="aplicaciones-integradas-con-llm" class="level2">
+<h2 class="anchored" data-anchor-id="aplicaciones-integradas-con-llm">Aplicaciones integradas con LLM</h2>
+</section>
+<section id="nuevos-componentes-y-superficie-de-ataque" class="level2">
+<h2 class="anchored" data-anchor-id="nuevos-componentes-y-superficie-de-ataque">Nuevos componentes y superficie de ataque</h2>
+
+
 </section>
 </section>
 
