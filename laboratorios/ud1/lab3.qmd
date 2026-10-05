@@ -1,0 +1,365 @@
+---
+title: "UD1 · Lab 3 · ¿Podemos confiar en lo que nos envía el navegador?"
+---
+
+# 🎯 Desafío
+
+Hasta ahora hemos observado cómo una aplicación web se comunica mediante peticiones HTTP.
+
+>**¿Podemos confiar en que el navegador siempre enviará al servidor exactamente los datos que esperamos?**
+
+En este laboratorio vamos a investigar qué ocurre cuando un usuario modifica una petición HTTP antes de que llegue al servidor.
+
+>No se trata de atacar una aplicación externa, sino de analizar **una aplicación de laboratorio sobre la que tenemos permiso para realizar pruebas**
+
+Has podido observar que, cuando realizas una acción desde la interfaz, el navegador genera una petición HTTP:
+
+```txt
+Usuario 
+↓ 
+Interfaz React 
+↓ 
+Petición HTTP 
+↓ 
+API REST 
+↓ 
+Backend
+```
+
+En este laboratorio vas a comprobar qué ocurre si modificas algunas de las peticiones que genera la aplicación **Heroes**.
+
+# 🧭 Conocemos nuestra API
+
+Antes de modificar ninguna petición necesitamos conocer qué operaciones ofrece el backend.
+
+El controlador de NestJS define las siguientes rutas:
+
+|Método|	Ruta|	Operación|
+| - | - | - |
+|GET |	/api/heroes	| Obtener héroes |
+|GET	|/api/heroes/summary	|Obtener resumen|
+|GET	|/api/heroes/search	|Buscar héroes|
+|GET	|/api/heroes/:id	|Obtener un héroe|
+|POST	|/api/heroes	|Crear un héroe|
+|PATCH	|/api/heroes/:id	|Modificar un héroe|
+|DELETE	|/api/heroes/:id	|Eliminar un héroe|
+
+<br>
+
+Estas rutas están definidas directamente en `HeroesController`.
+
+La API utiliza además el prefijo global: `/api`
+
+y, cuando se ejecuta localmente con la configuración por defecto, el servidor utiliza el puerto `3000`.
+
+Por lo tanto, durante el laboratorio trabajaresmo normalmente con :
+
+`http://localhost:3000/api`
+
+>**Importante:** realiza las pruebas contra tu instancia local del backend, no contra una API de producción o una aplicación que no te pertenezca.
+
+# 🔎 El frontend no es la API
+
+En el laboratorio anterior utilizamos la interfaz para generar peticiones.
+
+Ahora vamos a observar algo diferente.
+
+La interfaz gráfica **no tiene por qué proporcionar acceso a todas las operaciones disponibles en la API**
+
+Por ejemplo, el backend dispone de:
+
+`POST /api/heroes`
+
+para crear un héroe.
+
+Sin embargo, la interfaz que estamos utilizando en este laboratorio todavía no proporciona un formulario para crear héroes.
+
+Esto nos lleva a una pregunta:
+
+>**Si una operación existe en la API pero no existe en la interfaz, ¿podemos utilizarla igualmente?**
+
+# 🧪 Reto 1 - Descubre qué puede hacer realmente la API
+
+Consulta el código del backend y localiza el controlador:
+
+`src/heroes/heroes.controller.ts`
+
+Identifica:
+
+- Las rutas disponibles
+- Los métodos HTTP
+- Los parámetros de las rutas
+- Qué operaciones reciben información en el body
+- Qué operaciones utilizan parámetros en la URL
+
+>**Qué diferencia existe entre utilizar una funcionalidad desde la interfaz y poder utilizar directamente el endpoint que la implementa**
+
+# 🧪 Reto 2 - Construimos una petición que el frontend nunca genera
+
+Vamos a probar el endpoint:
+
+`POST /api/heroes`
+
+Este endpoint permite crear un héroe.
+
+El backend espera que el body contenga información sobre el nuevo héroe.
+
+Según `CreateHeroDto` (Data Transfer Object), los campos son:
+
+```json
+{ 
+  "name": "...", 
+  "slug": "...", 
+  "alias": "...", 
+  "powers": [], 
+  "description": "...", 
+  "strength": 0, 
+  "intelligence": 0, 
+  "speed": 0, 
+  "durability": 0, 
+  "team": "...", 
+  "image": "...", 
+  "firstAppearance": "...", 
+  "status": "...", 
+  "category": "...", 
+  "universe": "..." }
+```
+
+El backend establece reglas para estos campos mediante `class-validator:` varios deben ser cadenas no vacías, `powers` debe ser un array de cadenas y las características `strength, intelligence, speed` y `durability` deben ser numéricas.
+
+## Tu misión
+
+Construye una petición:
+
+`POST http://localhost:3000/api/heroes`
+`Content-Type: application/json`
+
+con un héroe inventado por ti.
+
+Por ejemplo:
+
+```json
+{ 
+  "name": "Nova", 
+"slug": "nova", 
+"alias": "Nova", 
+"powers": [ "Control de energía", "Vuelo" ], 
+"description": "Heroína capaz de controlar grandes cantidades de energía.", 
+"strength": 80, 
+"intelligence": 90, 
+"speed": 85, 
+"durability": 75, 
+"team": "Guardians", 
+"image": "https://example.com/nova.jpg", 
+"firstAppearance": "2026", 
+"status": "active", 
+"category": "Hero", 
+"universe": "Marvel" }
+```
+
+Crea datos propios.
+
+Contesta:
+
+- ¿Qué código HTTP devuelve el servidor?
+- ¿Qué información devuelve?
+- ¿Se ha creado realmente el héroe?
+- ¿Qué identificador le ha asignado el backend?
+- ¿La aplicación React intervino en algún momento?
+
+
+# 🔬 ¿Qué acaba de ocurrir?
+
+Acabas de realizar una operación que la **interfaz gráfica no proporciona**.
+
+> La interfaz de una aplicación no define por sí sola todo lo que puede hacer su API.
+
+
+# 🧪 Reto 3 - ¿Qué ocurre si enviamos datos incorrectos?
+
+Partimos de una petición válida.
+
+**Primera prueba - Tipo incorrecto** 
+Inntroduce datos de un tipo incorrecto para ver qué ocurre
+
+**Segunda prueba - Campo obligatorio vacío**
+Establece un campo que sepas que es obligatorio como vacío.
+
+**Tercera prueba - Array incorrecto**
+En un valor que recibe un array, prueba a establecer un valor distinto.
+
+**Cuarta prueba - Campo desconocido**
+Añade un campo que no está en el DTO.
+
+
+Elabora una tabla indicando para cada prueba si ha sido aceptada por el servidor, qué crees que debería hacer el servidor en dicho caso y si cumple o no con tus expectativas.
+
+# 🧠 ¿Quién está validando?
+
+Ahora vuelve al código del backend.
+
+Busca `main.ts`.
+
+Encontrarás que NestJS utiliza un `ValidationPipe` global y que está configurado con:
+
+```js
+whitelist: true
+forbidNonWhitelisted: true
+transform: true
+```
+
+Esto significa que el backend está aplicando reglas de validación sobre los DTO y, además, rechaza propiedades que no estén permitidas por ellos.
+
+Relaciona ahora lo que has observado en las pruebas con el código.
+
+**Preguntas**
+
+- ¿Qué diferencia existe entre la validación que podría realizar el frontend y la validación que realiza el backend?
+
+- ¿Qué ocurriría si eliminásemos las validaciones del frontend?
+
+- ¿Seguiría siendo necesario validar en el backend?
+¿Por qué?
+
+- ¿Qué problema intenta evitar forbidNonWhitelisted?
+
+# 🧪 Reto 4 - Modificamos una petición existente
+
+Ahora vuelve a una operación que **sí realice el frontend**.
+
+Utiliza **DevTools -> Network** y localiza una petición generada por la aplicación.
+
+Analiza:
+
+- URL
+- Método
+- headers
+- parámetros
+- body
+- respuesta
+
+A continuación, busca una forma de repetir esa petición modificando alguno de sus datos.
+
+> Puedes utilizar, por ejemplo la opción del navegador para copiar la petición como `cURL`, hacerlo desde DevTools o utilizar Postman
+
+**Investiga**
+
+Modifica uno de los elementos de la petición:
+
+```txt
+URL 
+Método 
+Parámetros
+Headers 
+Body
+```
+
+>¿El servidor recibe necesariamente la petición tal y como la construye la interfaz?
+
+# 🧪 Reto 5 - El identificador también es un dato externo
+
+La API permite obtener, modificar y eliminar un héroe utilizando un identificador:
+
+`GET /api/heroes/:id`
+`PATCH /api/heroes/:id`
+`DELETE /api/heroes/:id`
+
+Por ejemplo:
+
+`GET /api/heroes/1`
+
+Investiga:
+
+`/api/heroes/1`
+`/api/heroes/2`
+`/api/heroes/3`
+
+y observa qué ocurre cuando utilizas:
+
+- un identificador existente;
+- un identificador inexistente;
+-un valor que no corresponde con ningún héroe.
+
+**Preguntas**
+
+- ¿Quién decide qué valor aparece en :id?
+- ¿Puede modificarlo el usuario?
+- ¿Qué debería comprobar el servidor?
+- ¿Qué diferencia existe entre que un identificador tenga un formato correcto y que el usuario tenga permiso para acceder al recurso?
+
+>💡 Todavía no necesitamos estudiar las vulnerabilidades de autorización en profundidad. Quédate con la pregunta: ¿quién puede hacer qué sobre qué recurso?
+
+# 🔐 La frontera de confianza
+
+Ya podemos representar nuestra aplicación de otra manera:
+
+```txt
+FRONTERA DE CONFIANZA
+┌──────────────────────────┐
+│         CLIENTE          │
+│                          │
+│  Navegador               │
+│  React                   │
+│  JavaScript              │
+│  Formularios             │
+└────────────┬─────────────┘
+             │
+             │ HTTP / HTTPS
+             ▼
+┌──────────────────────────┐
+│           API            │
+│                          │
+│  Endpoints               │
+│  Validación              │
+│  Lógica de negocio       │
+└────────────┬─────────────┘
+             │
+             ▼
+┌──────────────────────────┐
+│          Datos           │
+└──────────────────────────┘
+
+```
+
+¿El ciente, se encuentra dentro o fuera de nuestra frontera de confianza? ¿Se debe considerar confiable, no confiable...?
+
+# 🧩 Validación != autorización
+
+**Validación**
+
+>¿Los datos recibidos cumplen las reglas esperadas?
+
+Por ejemplo:
+
+```txt
+strength → ¿es un número?
+name     → ¿es una cadena no vacía?
+powers   → ¿es un array de cadenas?
+```
+
+**Autorización**
+
+Pregunta:
+
+>¿Este usuario puede realizar esta operación sobre este recurso?
+
+Por ejemplo:
+
+`PATCH /api/heroes/7`
+
+Puede ser una petición perfectamente válida desde el punto de vista sintáctico.
+
+Pero todavía debemos preguntarnos:
+
+>¿Tiene este usuario permiso para modificar el héroe 7?
+
+Son problemas diferentes.
+
+# 📝 Entrega - Informe de confianza de la API
+
+A partir de todo lo analizado, elabora un informe indicando en primer lugar la documentación del API y posteriormente todos los análisis y resultados obtenidos. Justifica tus respuestas en todo momento.
+En este laboratorio **no utilizamos IA**.
+
+# Conclusión
+
+> ¿Por qué no puede el servidor confiar en que el frontend haya controlado correctamente los datos?

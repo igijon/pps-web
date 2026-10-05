@@ -336,18 +336,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<!-- 
-1. El ecosistema de una aplicación
-Componentes.
-Dependencias.
-Entornos de desarrollo, pruebas y producción.
-1. Primera aproximación a la seguridad
-Entradas externas.
-Superficie de ataque.
-Seguridad desde el diseño.
-1. Nuevas aplicaciones
-Aplicaciones integradas con LLM.
-Nuevos componentes y superficie de ataque. -->
 <blockquote class="blockquote">
 <p><strong>¿Qué ocurre desde que escribimos código hasta que un usuario utiliza una aplicación?</strong></p>
 </blockquote>
@@ -829,7 +817,13 @@ Content-Type: application/json</code></pre>
 <blockquote class="blockquote">
 <p>Observación principal: <strong>el navegador es del usuario</strong></p>
 </blockquote>
-<p><strong>Puntos fundamentales</strong>: - Toda entrada externa puede ser manipulada - El usuario controla el cliente - El frontend no es una frontera de seguridad - El servidor <strong>siempre</strong> debe validar lo que recibe</p>
+<p><strong>Puntos fundamentales</strong>:</p>
+<ul>
+<li>Toda entrada externa puede ser manipulada</li>
+<li>El usuario controla el cliente</li>
+<li>El frontend no es una frontera de seguridad</li>
+<li>El servidor <strong>siempre</strong> debe validar lo que recibe</li>
+</ul>
 </section>
 </section>
 <section id="superficie-de-ataque" class="level2">

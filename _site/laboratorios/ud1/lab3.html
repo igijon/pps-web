@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>UD1 · Lab 3 · ¿Podemos confiar en lo que nos envía el navegador? – Puesta en Producción Segura</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-1bdbca75b362e6c5a8c09207907ff998.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-sidebar docked quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../laboratorios/ud1/lab1.html">🧪 Laboratorios</a></li><li class="breadcrumb-item"><a href="../../laboratorios/ud1/lab3.html">UD1 · Lab 3 · ¿Podemos confiar en lo que nos envía el navegador?</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../../">Puesta en Producción Segura</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">🏠 Inicio</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">📚 Unidades</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../unidades/ud1/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">1-Del código a producción. ¿Qué significa que una aplicación sea segura?</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">🧪 Laboratorios</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../laboratorios/ud1/lab1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">UD1 · Lab 1 · ¿Dónde se ejecuta?</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../laboratorios/ud1/lab2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">UD1 · Lab 2 · ¿Qué estamos ejecutando realmente?</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../laboratorios/ud1/lab3.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">UD1 · Lab 3 · ¿Podemos confiar en lo que nos envía el navegador?</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">🚀 Desafíos</span></span>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../proyecto-final/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">🏆 Proyecto Final</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../ia/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">🤖 IA</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../recursos/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">📦 Recursos</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sobremi/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">😎 Sobre mí</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#desafío" id="toc-desafío" class="nav-link active" data-scroll-target="#desafío">🎯 Desafío</a></li>
+  <li><a href="#conocemos-nuestra-api" id="toc-conocemos-nuestra-api" class="nav-link" data-scroll-target="#conocemos-nuestra-api">🧭 Conocemos nuestra API</a></li>
+  <li><a href="#el-frontend-no-es-la-api" id="toc-el-frontend-no-es-la-api" class="nav-link" data-scroll-target="#el-frontend-no-es-la-api">🔎 El frontend no es la API</a></li>
+  <li><a href="#reto-1---descubre-qué-puede-hacer-realmente-la-api" id="toc-reto-1---descubre-qué-puede-hacer-realmente-la-api" class="nav-link" data-scroll-target="#reto-1---descubre-qué-puede-hacer-realmente-la-api">🧪 Reto 1 - Descubre qué puede hacer realmente la API</a></li>
+  <li><a href="#reto-2---construimos-una-petición-que-el-frontend-nunca-genera" id="toc-reto-2---construimos-una-petición-que-el-frontend-nunca-genera" class="nav-link" data-scroll-target="#reto-2---construimos-una-petición-que-el-frontend-nunca-genera">🧪 Reto 2 - Construimos una petición que el frontend nunca genera</a>
+  <ul class="collapse">
+  <li><a href="#tu-misión" id="toc-tu-misión" class="nav-link" data-scroll-target="#tu-misión">Tu misión</a></li>
+  </ul></li>
+  <li><a href="#qué-acaba-de-ocurrir" id="toc-qué-acaba-de-ocurrir" class="nav-link" data-scroll-target="#qué-acaba-de-ocurrir">🔬 ¿Qué acaba de ocurrir?</a></li>
+  <li><a href="#reto-3---qué-ocurre-si-enviamos-datos-incorrectos" id="toc-reto-3---qué-ocurre-si-enviamos-datos-incorrectos" class="nav-link" data-scroll-target="#reto-3---qué-ocurre-si-enviamos-datos-incorrectos">🧪 Reto 3 - ¿Qué ocurre si enviamos datos incorrectos?</a></li>
+  <li><a href="#quién-está-validando" id="toc-quién-está-validando" class="nav-link" data-scroll-target="#quién-está-validando">🧠 ¿Quién está validando?</a></li>
+  <li><a href="#reto-4---modificamos-una-petición-existente" id="toc-reto-4---modificamos-una-petición-existente" class="nav-link" data-scroll-target="#reto-4---modificamos-una-petición-existente">🧪 Reto 4 - Modificamos una petición existente</a></li>
+  <li><a href="#reto-5---el-identificador-también-es-un-dato-externo" id="toc-reto-5---el-identificador-también-es-un-dato-externo" class="nav-link" data-scroll-target="#reto-5---el-identificador-también-es-un-dato-externo">🧪 Reto 5 - El identificador también es un dato externo</a></li>
+  <li><a href="#la-frontera-de-confianza" id="toc-la-frontera-de-confianza" class="nav-link" data-scroll-target="#la-frontera-de-confianza">🔐 La frontera de confianza</a></li>
+  <li><a href="#validación-autorización" id="toc-validación-autorización" class="nav-link" data-scroll-target="#validación-autorización">🧩 Validación != autorización</a></li>
+  <li><a href="#entrega---informe-de-confianza-de-la-api" id="toc-entrega---informe-de-confianza-de-la-api" class="nav-link" data-scroll-target="#entrega---informe-de-confianza-de-la-api">📝 Entrega - Informe de confianza de la API</a></li>
+  <li><a href="#conclusión" id="toc-conclusión" class="nav-link" data-scroll-target="#conclusión">Conclusión</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../laboratorios/ud1/lab1.html">🧪 Laboratorios</a></li><li class="breadcrumb-item"><a href="../../laboratorios/ud1/lab3.html">UD1 · Lab 3 · ¿Podemos confiar en lo que nos envía el navegador?</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">UD1 · Lab 3 · ¿Podemos confiar en lo que nos envía el navegador?</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="desafío" class="level1">
+<h1>🎯 Desafío</h1>
+<p>Hasta ahora hemos observado cómo una aplicación web se comunica mediante peticiones HTTP.</p>
+<blockquote class="blockquote">
+<p><strong>¿Podemos confiar en que el navegador siempre enviará al servidor exactamente los datos que esperamos?</strong></p>
+</blockquote>
+<p>En este laboratorio vamos a investigar qué ocurre cuando un usuario modifica una petición HTTP antes de que llegue al servidor.</p>
+<blockquote class="blockquote">
+<p>No se trata de atacar una aplicación externa, sino de analizar <strong>una aplicación de laboratorio sobre la que tenemos permiso para realizar pruebas</strong></p>
+</blockquote>
+<p>Has podido observar que, cuando realizas una acción desde la interfaz, el navegador genera una petición HTTP:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>Usuario </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>↓ </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>Interfaz React </span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>↓ </span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>Petición HTTP </span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>↓ </span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>API REST </span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>↓ </span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>Backend</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>En este laboratorio vas a comprobar qué ocurre si modificas algunas de las peticiones que genera la aplicación <strong>Heroes</strong>.</p>
+</section>
+<section id="conocemos-nuestra-api" class="level1">
+<h1>🧭 Conocemos nuestra API</h1>
+<p>Antes de modificar ninguna petición necesitamos conocer qué operaciones ofrece el backend.</p>
+<p>El controlador de NestJS define las siguientes rutas:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Método</th>
+<th>Ruta</th>
+<th>Operación</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>GET</td>
+<td>/api/heroes</td>
+<td>Obtener héroes</td>
+</tr>
+<tr class="even">
+<td>GET</td>
+<td>/api/heroes/summary</td>
+<td>Obtener resumen</td>
+</tr>
+<tr class="odd">
+<td>GET</td>
+<td>/api/heroes/search</td>
+<td>Buscar héroes</td>
+</tr>
+<tr class="even">
+<td>GET</td>
+<td>/api/heroes/:id</td>
+<td>Obtener un héroe</td>
+</tr>
+<tr class="odd">
+<td>POST</td>
+<td>/api/heroes</td>
+<td>Crear un héroe</td>
+</tr>
+<tr class="even">
+<td>PATCH</td>
+<td>/api/heroes/:id</td>
+<td>Modificar un héroe</td>
+</tr>
+<tr class="odd">
+<td>DELETE</td>
+<td>/api/heroes/:id</td>
+<td>Eliminar un héroe</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<p>Estas rutas están definidas directamente en <code>HeroesController</code>.</p>
+<p>La API utiliza además el prefijo global: <code>/api</code></p>
+<p>y, cuando se ejecuta localmente con la configuración por defecto, el servidor utiliza el puerto <code>3000</code>.</p>
+<p>Por lo tanto, durante el laboratorio trabajaresmo normalmente con :</p>
+<p><code>http://localhost:3000/api</code></p>
+<blockquote class="blockquote">
+<p><strong>Importante:</strong> realiza las pruebas contra tu instancia local del backend, no contra una API de producción o una aplicación que no te pertenezca.</p>
+</blockquote>
+</section>
+<section id="el-frontend-no-es-la-api" class="level1">
+<h1>🔎 El frontend no es la API</h1>
+<p>En el laboratorio anterior utilizamos la interfaz para generar peticiones.</p>
+<p>Ahora vamos a observar algo diferente.</p>
+<p>La interfaz gráfica <strong>no tiene por qué proporcionar acceso a todas las operaciones disponibles en la API</strong></p>
+<p>Por ejemplo, el backend dispone de:</p>
+<p><code>POST /api/heroes</code></p>
+<p>para crear un héroe.</p>
+<p>Sin embargo, la interfaz que estamos utilizando en este laboratorio todavía no proporciona un formulario para crear héroes.</p>
+<p>Esto nos lleva a una pregunta:</p>
+<blockquote class="blockquote">
+<p><strong>Si una operación existe en la API pero no existe en la interfaz, ¿podemos utilizarla igualmente?</strong></p>
+</blockquote>
+</section>
+<section id="reto-1---descubre-qué-puede-hacer-realmente-la-api" class="level1">
+<h1>🧪 Reto 1 - Descubre qué puede hacer realmente la API</h1>
+<p>Consulta el código del backend y localiza el controlador:</p>
+<p><code>src/heroes/heroes.controller.ts</code></p>
+<p>Identifica:</p>
+<ul>
+<li>Las rutas disponibles</li>
+<li>Los métodos HTTP</li>
+<li>Los parámetros de las rutas</li>
+<li>Qué operaciones reciben información en el body</li>
+<li>Qué operaciones utilizan parámetros en la URL</li>
+</ul>
+<blockquote class="blockquote">
+<p><strong>Qué diferencia existe entre utilizar una funcionalidad desde la interfaz y poder utilizar directamente el endpoint que la implementa</strong></p>
+</blockquote>
+</section>
+<section id="reto-2---construimos-una-petición-que-el-frontend-nunca-genera" class="level1">
+<h1>🧪 Reto 2 - Construimos una petición que el frontend nunca genera</h1>
+<p>Vamos a probar el endpoint:</p>
+<p><code>POST /api/heroes</code></p>
+<p>Este endpoint permite crear un héroe.</p>
+<p>El backend espera que el body contenga información sobre el nuevo héroe.</p>
+<p>Según <code>CreateHeroDto</code> (Data Transfer Object), los campos son:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span> </span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"name"</span><span class="fu">:</span> <span class="st">"..."</span><span class="fu">,</span> </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"slug"</span><span class="fu">:</span> <span class="st">"..."</span><span class="fu">,</span> </span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"alias"</span><span class="fu">:</span> <span class="st">"..."</span><span class="fu">,</span> </span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"powers"</span><span class="fu">:</span> <span class="ot">[]</span><span class="fu">,</span> </span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"description"</span><span class="fu">:</span> <span class="st">"..."</span><span class="fu">,</span> </span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"strength"</span><span class="fu">:</span> <span class="dv">0</span><span class="fu">,</span> </span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"intelligence"</span><span class="fu">:</span> <span class="dv">0</span><span class="fu">,</span> </span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"speed"</span><span class="fu">:</span> <span class="dv">0</span><span class="fu">,</span> </span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"durability"</span><span class="fu">:</span> <span class="dv">0</span><span class="fu">,</span> </span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"team"</span><span class="fu">:</span> <span class="st">"..."</span><span class="fu">,</span> </span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"image"</span><span class="fu">:</span> <span class="st">"..."</span><span class="fu">,</span> </span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"firstAppearance"</span><span class="fu">:</span> <span class="st">"..."</span><span class="fu">,</span> </span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"status"</span><span class="fu">:</span> <span class="st">"..."</span><span class="fu">,</span> </span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"category"</span><span class="fu">:</span> <span class="st">"..."</span><span class="fu">,</span> </span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"universe"</span><span class="fu">:</span> <span class="st">"..."</span> <span class="fu">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>El backend establece reglas para estos campos mediante <code>class-validator:</code> varios deben ser cadenas no vacías, <code>powers</code> debe ser un array de cadenas y las características <code>strength, intelligence, speed</code> y <code>durability</code> deben ser numéricas.</p>
+<section id="tu-misión" class="level2">
+<h2 class="anchored" data-anchor-id="tu-misión">Tu misión</h2>
+<p>Construye una petición:</p>
+<p><code>POST http://localhost:3000/api/heroes</code> <code>Content-Type: application/json</code></p>
+<p>con un héroe inventado por ti.</p>
+<p>Por ejemplo:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span> </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"name"</span><span class="fu">:</span> <span class="st">"Nova"</span><span class="fu">,</span> </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="dt">"slug"</span><span class="fu">:</span> <span class="st">"nova"</span><span class="fu">,</span> </span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="dt">"alias"</span><span class="fu">:</span> <span class="st">"Nova"</span><span class="fu">,</span> </span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="dt">"powers"</span><span class="fu">:</span> <span class="ot">[</span> <span class="st">"Control de energía"</span><span class="ot">,</span> <span class="st">"Vuelo"</span> <span class="ot">]</span><span class="fu">,</span> </span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="dt">"description"</span><span class="fu">:</span> <span class="st">"Heroína capaz de controlar grandes cantidades de energía."</span><span class="fu">,</span> </span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="dt">"strength"</span><span class="fu">:</span> <span class="dv">80</span><span class="fu">,</span> </span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="dt">"intelligence"</span><span class="fu">:</span> <span class="dv">90</span><span class="fu">,</span> </span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="dt">"speed"</span><span class="fu">:</span> <span class="dv">85</span><span class="fu">,</span> </span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="dt">"durability"</span><span class="fu">:</span> <span class="dv">75</span><span class="fu">,</span> </span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="dt">"team"</span><span class="fu">:</span> <span class="st">"Guardians"</span><span class="fu">,</span> </span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="dt">"image"</span><span class="fu">:</span> <span class="st">"https://example.com/nova.jpg"</span><span class="fu">,</span> </span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="dt">"firstAppearance"</span><span class="fu">:</span> <span class="st">"2026"</span><span class="fu">,</span> </span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="dt">"status"</span><span class="fu">:</span> <span class="st">"active"</span><span class="fu">,</span> </span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="dt">"category"</span><span class="fu">:</span> <span class="st">"Hero"</span><span class="fu">,</span> </span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="dt">"universe"</span><span class="fu">:</span> <span class="st">"Marvel"</span> <span class="fu">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Crea datos propios.</p>
+<p>Contesta:</p>
+<ul>
+<li>¿Qué código HTTP devuelve el servidor?</li>
+<li>¿Qué información devuelve?</li>
+<li>¿Se ha creado realmente el héroe?</li>
+<li>¿Qué identificador le ha asignado el backend?</li>
+<li>¿La aplicación React intervino en algún momento?</li>
+</ul>
+</section>
+</section>
+<section id="qué-acaba-de-ocurrir" class="level1">
+<h1>🔬 ¿Qué acaba de ocurrir?</h1>
+<p>Acabas de realizar una operación que la <strong>interfaz gráfica no proporciona</strong>.</p>
+<blockquote class="blockquote">
+<p>La interfaz de una aplicación no define por sí sola todo lo que puede hacer su API.</p>
+</blockquote>
+</section>
+<section id="reto-3---qué-ocurre-si-enviamos-datos-incorrectos" class="level1">
+<h1>🧪 Reto 3 - ¿Qué ocurre si enviamos datos incorrectos?</h1>
+<p>Partimos de una petición válida.</p>
+<p><strong>Primera prueba - Tipo incorrecto</strong> Inntroduce datos de un tipo incorrecto para ver qué ocurre</p>
+<p><strong>Segunda prueba - Campo obligatorio vacío</strong> Establece un campo que sepas que es obligatorio como vacío.</p>
+<p><strong>Tercera prueba - Array incorrecto</strong> En un valor que recibe un array, prueba a establecer un valor distinto.</p>
+<p><strong>Cuarta prueba - Campo desconocido</strong> Añade un campo que no está en el DTO.</p>
+<p>Elabora una tabla indicando para cada prueba si ha sido aceptada por el servidor, qué crees que debería hacer el servidor en dicho caso y si cumple o no con tus expectativas.</p>
+</section>
+<section id="quién-está-validando" class="level1">
+<h1>🧠 ¿Quién está validando?</h1>
+<p>Ahora vuelve al código del backend.</p>
+<p>Busca <code>main.ts</code>.</p>
+<p>Encontrarás que NestJS utiliza un <code>ValidationPipe</code> global y que está configurado con:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>whitelist<span class="op">:</span> <span class="kw">true</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>forbidNonWhitelisted<span class="op">:</span> <span class="kw">true</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>transform<span class="op">:</span> <span class="kw">true</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Esto significa que el backend está aplicando reglas de validación sobre los DTO y, además, rechaza propiedades que no estén permitidas por ellos.</p>
+<p>Relaciona ahora lo que has observado en las pruebas con el código.</p>
+<p><strong>Preguntas</strong></p>
+<ul>
+<li><p>¿Qué diferencia existe entre la validación que podría realizar el frontend y la validación que realiza el backend?</p></li>
+<li><p>¿Qué ocurriría si eliminásemos las validaciones del frontend?</p></li>
+<li><p>¿Seguiría siendo necesario validar en el backend? ¿Por qué?</p></li>
+<li><p>¿Qué problema intenta evitar forbidNonWhitelisted?</p></li>
+</ul>
+</section>
+<section id="reto-4---modificamos-una-petición-existente" class="level1">
+<h1>🧪 Reto 4 - Modificamos una petición existente</h1>
+<p>Ahora vuelve a una operación que <strong>sí realice el frontend</strong>.</p>
+<p>Utiliza <strong>DevTools -&gt; Network</strong> y localiza una petición generada por la aplicación.</p>
+<p>Analiza:</p>
+<ul>
+<li>URL</li>
+<li>Método</li>
+<li>headers</li>
+<li>parámetros</li>
+<li>body</li>
+<li>respuesta</li>
+</ul>
+<p>A continuación, busca una forma de repetir esa petición modificando alguno de sus datos.</p>
+<blockquote class="blockquote">
+<p>Puedes utilizar, por ejemplo la opción del navegador para copiar la petición como <code>cURL</code>, hacerlo desde DevTools o utilizar Postman</p>
+</blockquote>
+<p><strong>Investiga</strong></p>
+<p>Modifica uno de los elementos de la petición:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>URL </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>Método </span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>Parámetros</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>Headers </span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>Body</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<blockquote class="blockquote">
+<p>¿El servidor recibe necesariamente la petición tal y como la construye la interfaz?</p>
+</blockquote>
+</section>
+<section id="reto-5---el-identificador-también-es-un-dato-externo" class="level1">
+<h1>🧪 Reto 5 - El identificador también es un dato externo</h1>
+<p>La API permite obtener, modificar y eliminar un héroe utilizando un identificador:</p>
+<p><code>GET /api/heroes/:id</code> <code>PATCH /api/heroes/:id</code> <code>DELETE /api/heroes/:id</code></p>
+<p>Por ejemplo:</p>
+<p><code>GET /api/heroes/1</code></p>
+<p>Investiga:</p>
+<p><code>/api/heroes/1</code> <code>/api/heroes/2</code> <code>/api/heroes/3</code></p>
+<p>y observa qué ocurre cuando utilizas:</p>
+<ul>
+<li>un identificador existente;</li>
+<li>un identificador inexistente; -un valor que no corresponde con ningún héroe.</li>
+</ul>
+<p><strong>Preguntas</strong></p>
+<ul>
+<li>¿Quién decide qué valor aparece en :id?</li>
+<li>¿Puede modificarlo el usuario?</li>
+<li>¿Qué debería comprobar el servidor?</li>
+<li>¿Qué diferencia existe entre que un identificador tenga un formato correcto y que el usuario tenga permiso para acceder al recurso?</li>
+</ul>
+<blockquote class="blockquote">
+<p>💡 Todavía no necesitamos estudiar las vulnerabilidades de autorización en profundidad. Quédate con la pregunta: ¿quién puede hacer qué sobre qué recurso?</p>
+</blockquote>
+</section>
+<section id="la-frontera-de-confianza" class="level1">
+<h1>🔐 La frontera de confianza</h1>
+<p>Ya podemos representar nuestra aplicación de otra manera:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>FRONTERA DE CONFIANZA</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>┌──────────────────────────┐</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>│         CLIENTE          │</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>│                          │</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>│  Navegador               │</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>│  React                   │</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>│  JavaScript              │</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>│  Formularios             │</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>└────────────┬─────────────┘</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>             │</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>             │ HTTP / HTTPS</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>             ▼</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>┌──────────────────────────┐</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>│           API            │</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>│                          │</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>│  Endpoints               │</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>│  Validación              │</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>│  Lógica de negocio       │</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>└────────────┬─────────────┘</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>             │</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>             ▼</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>┌──────────────────────────┐</span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>│          Datos           │</span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>└──────────────────────────┘</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>¿El ciente, se encuentra dentro o fuera de nuestra frontera de confianza? ¿Se debe considerar confiable, no confiable…?</p>
+</section>
+<section id="validación-autorización" class="level1">
+<h1>🧩 Validación != autorización</h1>
+<p><strong>Validación</strong></p>
+<blockquote class="blockquote">
+<p>¿Los datos recibidos cumplen las reglas esperadas?</p>
+</blockquote>
+<p>Por ejemplo:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>strength → ¿es un número?</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>name     → ¿es una cadena no vacía?</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>powers   → ¿es un array de cadenas?</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Autorización</strong></p>
+<p>Pregunta:</p>
+<blockquote class="blockquote">
+<p>¿Este usuario puede realizar esta operación sobre este recurso?</p>
+</blockquote>
+<p>Por ejemplo:</p>
+<p><code>PATCH /api/heroes/7</code></p>
+<p>Puede ser una petición perfectamente válida desde el punto de vista sintáctico.</p>
+<p>Pero todavía debemos preguntarnos:</p>
+<blockquote class="blockquote">
+<p>¿Tiene este usuario permiso para modificar el héroe 7?</p>
+</blockquote>
+<p>Son problemas diferentes.</p>
+</section>
+<section id="entrega---informe-de-confianza-de-la-api" class="level1">
+<h1>📝 Entrega - Informe de confianza de la API</h1>
+<p>A partir de todo lo analizado, elabora un informe indicando en primer lugar la documentación del API y posteriormente todos los análisis y resultados obtenidos. Justifica tus respuestas en todo momento. En este laboratorio <strong>no utilizamos IA</strong>.</p>
+</section>
+<section id="conclusión" class="level1">
+<h1>Conclusión</h1>
+<blockquote class="blockquote">
+<p>¿Por qué no puede el servidor confiar en que el frontend haya controlado correctamente los datos?</p>
+</blockquote>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

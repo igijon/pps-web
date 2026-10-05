@@ -2,21 +2,6 @@
 title: "UD1. Del código a producción. ¿Qué significa que una aplicación sea segura?"
 ---
 
-<!-- 
-1. El ecosistema de una aplicación
-Componentes.
-Dependencias.
-Entornos de desarrollo, pruebas y producción.
-1. Primera aproximación a la seguridad
-Entradas externas.
-Superficie de ataque.
-Seguridad desde el diseño.
-1. Nuevas aplicaciones
-Aplicaciones integradas con LLM.
-Nuevos componentes y superficie de ataque. -->
-
-
-
 > **¿Qué ocurre desde que escribimos código hasta que un usuario utiliza una aplicación?**
 
 # 📚 1. Aplicaciones modernas
@@ -519,6 +504,7 @@ Ejemplo:
 
 
 **Puntos fundamentales**:
+
 - Toda entrada externa puede ser manipulada
 - El usuario controla el cliente
 - El frontend no es una frontera de seguridad
