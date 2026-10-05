@@ -191,6 +191,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">UD1 · Lab 2 · ¿Qué estamos ejecutando realmente?</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../laboratorios/ud1/lab3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">UD1 · Lab 3 · ¿Podemos confiar en lo que nos envía el navegador?</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -287,6 +293,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#superficie-de-ataque" id="toc-superficie-de-ataque" class="nav-link" data-scroll-target="#superficie-de-ataque">Superficie de ataque</a>
   <ul class="collapse">
+  <li><a href="#conceptos-principales" id="toc-conceptos-principales" class="nav-link" data-scroll-target="#conceptos-principales">Conceptos principales</a></li>
   <li><a href="#dibujamos-la-superficie-de-ataque" id="toc-dibujamos-la-superficie-de-ataque" class="nav-link" data-scroll-target="#dibujamos-la-superficie-de-ataque">Dibujamos la superficie de ataque</a></li>
   </ul></li>
   <li><a href="#seguridad-desde-el-diseño" id="toc-seguridad-desde-el-diseño" class="nav-link" data-scroll-target="#seguridad-desde-el-diseño">Seguridad desde el diseño</a>
@@ -309,7 +316,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#nuestra-aplicación-sin-llm-tendría-una-estructura-similar-a-esta" id="toc-nuestra-aplicación-sin-llm-tendría-una-estructura-similar-a-esta" class="nav-link" data-scroll-target="#nuestra-aplicación-sin-llm-tendría-una-estructura-similar-a-esta">Nuestra aplicación sin LLM tendría una estructura similar a esta:</a></li>
   <li><a href="#añadiendo-un-llm" id="toc-añadiendo-un-llm" class="nav-link" data-scroll-target="#añadiendo-un-llm">Añadiendo un LLM</a></li>
   <li><a href="#por-qué-esto-afecta-a-la-seguridad" id="toc-por-qué-esto-afecta-a-la-seguridad" class="nav-link" data-scroll-target="#por-qué-esto-afecta-a-la-seguridad">¿Por qué esto afecta a la seguridad?</a></li>
-  <li><a href="#el-prompt-es-una-entrada-externa" id="toc-el-prompt-es-una-entrada-externa" class="nav-link" data-scroll-target="#el-prompt-es-una-entrada-externa">El prompt es una entrada externa</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -847,7 +853,8 @@ Content-Type: application/json</code></pre>
 <span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    Formularios Endpoints   Panel</span>
 <span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>                   │</span>
 <span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>                Database</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>###&nbsp;Conceptos principales</p>
+<section id="conceptos-principales" class="level3">
+<h3 class="anchored" data-anchor-id="conceptos-principales">Conceptos principales</h3>
 <p><strong>Activo</strong></p>
 <p>Algo que queremos proteger. Por ejemplo: contraseña, datos personales, información médica, dinero, tokens, código fuente, datos de clientes…</p>
 <p><code>Datos personales</code> sería un <strong>activo</strong>.</p>
@@ -857,6 +864,7 @@ Content-Type: application/json</code></pre>
 <p><strong>Componente</strong></p>
 <p>Una pieza del sistema. Ejemplo: frontend, backend, Node.js, PostgreSQL, Redis, librerías, servidor, proveedor LLM…</p>
 <p><code>PostgreSQL</code> sería un <strong>componente</strong>.</p>
+</section>
 <section id="dibujamos-la-superficie-de-ataque" class="level3">
 <h3 class="anchored" data-anchor-id="dibujamos-la-superficie-de-ataque">Dibujamos la superficie de ataque</h3>
 <!-- TODO! Propuesta de actividad detallada para dibujar la superficie de ataque sin tener la aplicación de ejemplo  -->
@@ -946,7 +954,12 @@ Content-Type: application/json</code></pre>
 </blockquote>
 <section id="ejemplo-aplicación-citas-médicas" class="level3">
 <h3 class="anchored" data-anchor-id="ejemplo-aplicación-citas-médicas">Ejemplo Aplicación Citas Médicas</h3>
-<p>Tenemos: - pacientes - médicos - administradores</p>
+<p>Tenemos:</p>
+<ul>
+<li>pacientes</li>
+<li>médicos</li>
+<li>administradores</li>
+</ul>
 <p>Un paciente puede:</p>
 <ul>
 <li>Ver sus citas</li>
@@ -1207,7 +1220,7 @@ Content-Type: application/json</code></pre>
 <section id="fine-tuning" class="level3">
 <h3 class="anchored" data-anchor-id="fine-tuning">Fine-tuning</h3>
 <blockquote class="blockquote">
-<p>Consiste en entrenar/adaptar un mnodelo previamente entrenado utilizando datos adicionales para modificar su comportamient hacia una tarea o dominio concreto.</p>
+<p>Consiste en entrenar/adaptar un modelo previamente entrenado utilizando datos adicionales para modificar su comportamiento hacia una tarea o dominio concreto.</p>
 </blockquote>
 <p>Conceptualmente:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb37"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>Modelo base</span>
@@ -1287,21 +1300,6 @@ Content-Type: application/json</code></pre>
 <blockquote class="blockquote">
 <p>Aclaración sobre el concepto de modelo: un <strong>modelo</strong> es un sistema que ha aprendido patrones a partir de datos y que utiliza este conocimiento aprendido para producir una salida cuando recibe una entrada.</p>
 </blockquote>
-</section>
-<section id="el-prompt-es-una-entrada-externa" class="level2">
-<h2 class="anchored" data-anchor-id="el-prompt-es-una-entrada-externa">El prompt es una entrada externa</h2>
-<p>Esta es probablemente la idea más importante de este tipo de aplicaciones:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb43"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>Formulario → entrada externa</span>
-<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>URL        → entrada externa</span>
-<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>JSON       → entrada externa</span>
-<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>Prompt     → entrada externa</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>El usuario podría escribir:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb44"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>"Resume mis tareas"</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Pero también podría introducir instrucciones que cambien el comportamiento esperado.</p>
-<p><strong>Un LLM no debe recibir automáticamente la confianza que nosotros damos a nuestro código</strong></p>
-<p><strong>Los prompts proporcionados por los usuarios deben considerarse entradas no confiables</strong></p>
-<!-- TODO!Definir claramente una actividad para ver qué cambia cuando añadimos un modelo de IA -->
-<!-- TODO! LABORATORIO FINAL -->
 
 
 </section>

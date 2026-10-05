@@ -358,6 +358,9 @@ Son problemas diferentes.
 # 📝 Entrega - Informe de confianza de la API
 
 A partir de todo lo analizado, elabora un informe indicando en primer lugar la documentación del API y posteriormente todos los análisis y resultados obtenidos. Justifica tus respuestas en todo momento.
+
+Elabora también un **dibujo de la superficie de ataque** que identificas en esta aplicación.
+
 En este laboratorio **no utilizamos IA**.
 
 # Conclusión

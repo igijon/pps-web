@@ -536,7 +536,8 @@ Por ejemplo, en una aplicación típica:
                 Database
 ```
 
-### Conceptos principales
+
+### Conceptos principales
 
 **Activo**
 
@@ -611,6 +612,7 @@ Podemos tener una tabla de trabajo similar a esta:
 ### Ejemplo Aplicación Citas Médicas
 
 Tenemos: 
+
 - pacientes
 - médicos
 - administradores
@@ -963,7 +965,7 @@ tiene **capacidad de actuar**.
 
 ### Fine-tuning
 
->Consiste en entrenar/adaptar un mnodelo previamente entrenado utilizando datos adicionales para modificar su comportamient hacia una tarea o dominio concreto.
+>Consiste en entrenar/adaptar un modelo previamente entrenado utilizando datos adicionales para modificar su comportamiento hacia una tarea o dominio concreto.
 
 Conceptualmente:
 
@@ -1059,30 +1061,3 @@ Aquí están sus tareas:
 >**¿Qué datos estamos enviando al modelo?**
 
 >Aclaración sobre el concepto de modelo: un **modelo** es un sistema que ha aprendido patrones a partir de datos y que utiliza este conocimiento aprendido para producir una salida cuando recibe una entrada.
-
-## El prompt es una entrada externa
-
-Esta es probablemente la idea más importante de este tipo de aplicaciones:
-
-```txt
-Formulario → entrada externa
-URL        → entrada externa
-JSON       → entrada externa
-Prompt     → entrada externa
-```
-
-El usuario podría escribir:
-
-```txt
-"Resume mis tareas"
-```
-
-Pero también podría introducir instrucciones que cambien el comportamiento esperado. 
-
-**Un LLM no debe recibir automáticamente la confianza que nosotros damos a nuestro código**
-
-**Los prompts proporcionados por los usuarios deben considerarse entradas no confiables**
-
-<!-- TODO!Definir claramente una actividad para ver qué cambia cuando añadimos un modelo de IA -->
-
-<!-- TODO! LABORATORIO FINAL -->
