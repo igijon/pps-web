@@ -32,6 +32,8 @@ website:
             contents:
               - href: laboratorios/ud2/lab1.qmd
                 text: "UD2 · Lab 1 · Detectives del testing: encontrar defectos en una aplicación"
+              - href: laboratorios/ud2/lab2.qmd
+                text: "UD2 · Lab 2 · ¿Podemos confiar en este código?"
               
     
       - section: "🚀 Desafíos"

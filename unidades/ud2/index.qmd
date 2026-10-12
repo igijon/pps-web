@@ -212,3 +212,64 @@ test('acepta una cantidad positiva', () => {
 });
 ```
 
+# ❌ Pruebas negativas y límites de entrada
+
+## Pruebas positivas frente a pruebas negativas
+
+Una **prueba positiva** comprueba que el sistema acepta una entrada válida y produce el resultado esperado.
+
+Una **prueba negativa** verifica que el sistema rechaza una entrada no válida o responde de forma controlada ante una situación inesperada.
+
+| Tipo      | Entrada                      | Comportamiento esperado                                      |
+|-----------|------------------------------|--------------------------------------------------------------|
+| Positiva  | Un precio de 80 €            | Calcula el resultado correcto.                               |
+| Positiva  | Un cliente de tipo premium   | Aplica la regla de descuento correspondiente.                |
+| Negativa  | Un precio negativo           | Rechaza la entrada.                                          |
+| Negativa  | Un precio como texto         | Rechaza la entrada si se exige un número.                    |
+| Negativa  | Un tipo de cliente desconocido | No aplica reglas por defecto sin control.                  |
+| Negativa  | `NaN` o `Infinity`           | Rechaza valores que no representan importes válidos.        |
+
+> Una **prueba negativa o no tiene por qué terminar en una excepción**. Puede comprobar que la función devuelve un error controlado, que rechaza la operación o que responde con un código HTTP apropiado. Lo importante es que el comportamiento sea el esperado.
+
+## Cómo elegir casos de prueba sin probar todas las posibilidades
+
+No es viable probar todas las entradas posibles. Para seleccionar casos útiles, vamos a utilizar dos técnicas.
+
+**Partición de equivalencia**. Agrupamos entradas kque deberían comportarse de la misma manera y elegimos representantes de cada grupo.
+
+Por ejemplo, si una aplicación acepta importes iguales o superiores a cero:
+
+- Importes válidos: `0, 25, 100`.
+- Importes negativos: `-1, -100`.
+- Valores que no son números: `"25", null, undefined`.
+- Valores numéricos no finitos: `NaN, Infinity`.
+
+
+No hace falta probar todos los valores que comparten la misma regla, aunque conviene elegir suficientes ejemplos para detectar errores relevantes.
+
+**Análisis de valores límite**. Comprobamos especialmente los extremos de una regla, porque es frecuente que los defectos aparezcan al usar operadores incorrectos.
+
+Si el descuento se aplica a partir de 100€, los casos importantes son:
+
+- `99.99`: no debe aplicarse
+- `100`: debe aplicarse
+- `100.01`: debe aplicarse
+
+Ese análisis ayuda a detectar, por ejemplo, que alguien haya escrito `>` en lucar de `>=`.
+
+## Las aserciones también comprueban errores
+
+Con Vitest, podemos verificar tanto el resultado correcto como el rechazo de una entrada.
+
+```js
+import { expect, test } from "vitest";
+
+test("rechaza un importe negativo", () => {
+  expect(() => calcularTotal(-10, "standard"))
+    .toThrow();
+});
+```
+
+En este ejemplo no comprobamos solamente que algo falla: especificamos que la función debe lanzar una excepción. En otros diseños, la función podría devolver un resultado de error y la aserción sería distinta.
+
+La prueba debe reflejar el contrato que hemos definido para la función, no adaptarse a cualquier comportamiento que produzca el código.

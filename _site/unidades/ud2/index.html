@@ -229,6 +229,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">UD2 · Lab 1 · Detectives del testing: encontrar defectos en una aplicación</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../laboratorios/ud2/lab2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">UD2 · Lab 2 · ¿Podemos confiar en este código?</span></a>
+  </div>
+</li>
       </ul>
   </li>
       </ul>
@@ -284,6 +290,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#crea-los-archivos" id="toc-crea-los-archivos" class="nav-link" data-scroll-target="#crea-los-archivos">Crea los archivos</a></li>
   <li><a href="#el-patrón-arrange-act-assert" id="toc-el-patrón-arrange-act-assert" class="nav-link" data-scroll-target="#el-patrón-arrange-act-assert">El patrón Arrange-Act-Assert</a></li>
   </ul></li>
+  </ul></li>
+  <li><a href="#pruebas-negativas-y-límites-de-entrada" id="toc-pruebas-negativas-y-límites-de-entrada" class="nav-link" data-scroll-target="#pruebas-negativas-y-límites-de-entrada">❌ Pruebas negativas y límites de entrada</a>
+  <ul class="collapse">
+  <li><a href="#pruebas-positivas-frente-a-pruebas-negativas" id="toc-pruebas-positivas-frente-a-pruebas-negativas" class="nav-link" data-scroll-target="#pruebas-positivas-frente-a-pruebas-negativas">Pruebas positivas frente a pruebas negativas</a></li>
+  <li><a href="#cómo-elegir-casos-de-prueba-sin-probar-todas-las-posibilidades" id="toc-cómo-elegir-casos-de-prueba-sin-probar-todas-las-posibilidades" class="nav-link" data-scroll-target="#cómo-elegir-casos-de-prueba-sin-probar-todas-las-posibilidades">Cómo elegir casos de prueba sin probar todas las posibilidades</a></li>
+  <li><a href="#las-aserciones-también-comprueban-errores" id="toc-las-aserciones-también-comprueban-errores" class="nav-link" data-scroll-target="#las-aserciones-también-comprueban-errores">Las aserciones también comprueban errores</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -558,9 +570,99 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Assert</span></span>
 <span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expect</span>(resultado)<span class="op">.</span><span class="fu">toBe</span>(<span class="kw">true</span>)<span class="op">;</span></span>
 <span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-
-
 </section>
+</section>
+</section>
+<section id="pruebas-negativas-y-límites-de-entrada" class="level1">
+<h1>❌ Pruebas negativas y límites de entrada</h1>
+<section id="pruebas-positivas-frente-a-pruebas-negativas" class="level2">
+<h2 class="anchored" data-anchor-id="pruebas-positivas-frente-a-pruebas-negativas">Pruebas positivas frente a pruebas negativas</h2>
+<p>Una <strong>prueba positiva</strong> comprueba que el sistema acepta una entrada válida y produce el resultado esperado.</p>
+<p>Una <strong>prueba negativa</strong> verifica que el sistema rechaza una entrada no válida o responde de forma controlada ante una situación inesperada.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 10%">
+<col style="width: 29%">
+<col style="width: 60%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Tipo</th>
+<th>Entrada</th>
+<th>Comportamiento esperado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Positiva</td>
+<td>Un precio de 80 €</td>
+<td>Calcula el resultado correcto.</td>
+</tr>
+<tr class="even">
+<td>Positiva</td>
+<td>Un cliente de tipo premium</td>
+<td>Aplica la regla de descuento correspondiente.</td>
+</tr>
+<tr class="odd">
+<td>Negativa</td>
+<td>Un precio negativo</td>
+<td>Rechaza la entrada.</td>
+</tr>
+<tr class="even">
+<td>Negativa</td>
+<td>Un precio como texto</td>
+<td>Rechaza la entrada si se exige un número.</td>
+</tr>
+<tr class="odd">
+<td>Negativa</td>
+<td>Un tipo de cliente desconocido</td>
+<td>No aplica reglas por defecto sin control.</td>
+</tr>
+<tr class="even">
+<td>Negativa</td>
+<td><code>NaN</code> o <code>Infinity</code></td>
+<td>Rechaza valores que no representan importes válidos.</td>
+</tr>
+</tbody>
+</table>
+<blockquote class="blockquote">
+<p>Una <strong>prueba negativa o no tiene por qué terminar en una excepción</strong>. Puede comprobar que la función devuelve un error controlado, que rechaza la operación o que responde con un código HTTP apropiado. Lo importante es que el comportamiento sea el esperado.</p>
+</blockquote>
+</section>
+<section id="cómo-elegir-casos-de-prueba-sin-probar-todas-las-posibilidades" class="level2">
+<h2 class="anchored" data-anchor-id="cómo-elegir-casos-de-prueba-sin-probar-todas-las-posibilidades">Cómo elegir casos de prueba sin probar todas las posibilidades</h2>
+<p>No es viable probar todas las entradas posibles. Para seleccionar casos útiles, vamos a utilizar dos técnicas.</p>
+<p><strong>Partición de equivalencia</strong>. Agrupamos entradas kque deberían comportarse de la misma manera y elegimos representantes de cada grupo.</p>
+<p>Por ejemplo, si una aplicación acepta importes iguales o superiores a cero:</p>
+<ul>
+<li>Importes válidos: <code>0, 25, 100</code>.</li>
+<li>Importes negativos: <code>-1, -100</code>.</li>
+<li>Valores que no son números: <code>"25", null, undefined</code>.</li>
+<li>Valores numéricos no finitos: <code>NaN, Infinity</code>.</li>
+</ul>
+<p>No hace falta probar todos los valores que comparten la misma regla, aunque conviene elegir suficientes ejemplos para detectar errores relevantes.</p>
+<p><strong>Análisis de valores límite</strong>. Comprobamos especialmente los extremos de una regla, porque es frecuente que los defectos aparezcan al usar operadores incorrectos.</p>
+<p>Si el descuento se aplica a partir de 100€, los casos importantes son:</p>
+<ul>
+<li><code>99.99</code>: no debe aplicarse</li>
+<li><code>100</code>: debe aplicarse</li>
+<li><code>100.01</code>: debe aplicarse</li>
+</ul>
+<p>Ese análisis ayuda a detectar, por ejemplo, que alguien haya escrito <code>&gt;</code> en lucar de <code>&gt;=</code>.</p>
+</section>
+<section id="las-aserciones-también-comprueban-errores" class="level2">
+<h2 class="anchored" data-anchor-id="las-aserciones-también-comprueban-errores">Las aserciones también comprueban errores</h2>
+<p>Con Vitest, podemos verificar tanto el resultado correcto como el rechazo de una entrada.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { expect<span class="op">,</span> test } <span class="im">from</span> <span class="st">"vitest"</span><span class="op">;</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">test</span>(<span class="st">"rechaza un importe negativo"</span><span class="op">,</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expect</span>(() <span class="kw">=&gt;</span> <span class="fu">calcularTotal</span>(<span class="op">-</span><span class="dv">10</span><span class="op">,</span> <span class="st">"standard"</span>))</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">toThrow</span>()<span class="op">;</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>En este ejemplo no comprobamos solamente que algo falla: especificamos que la función debe lanzar una excepción. En otros diseños, la función podría devolver un resultado de error y la aserción sería distinta.</p>
+<p>La prueba debe reflejar el contrato que hemos definido para la función, no adaptarse a cualquier comportamiento que produzca el código.</p>
+
+
 </section>
 </section>
 

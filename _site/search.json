@@ -1411,5 +1411,122 @@
       "UD2",
       "UD2 · Lab 1 · Detectives del testing: encontrar defectos en una aplicación"
     ]
+  },
+  {
+    "objectID": "unidades/ud2/index.html#pruebas-positivas-frente-a-pruebas-negativas",
+    "href": "unidades/ud2/index.html#pruebas-positivas-frente-a-pruebas-negativas",
+    "title": "UD2. Testing. Encontrar problemas antes de producción",
+    "section": "Pruebas positivas frente a pruebas negativas",
+    "text": "Pruebas positivas frente a pruebas negativas\nUna prueba positiva comprueba que el sistema acepta una entrada válida y produce el resultado esperado.\nUna prueba negativa verifica que el sistema rechaza una entrada no válida o responde de forma controlada ante una situación inesperada.\n\n\n\n\n\n\n\n\nTipo\nEntrada\nComportamiento esperado\n\n\n\n\nPositiva\nUn precio de 80 €\nCalcula el resultado correcto.\n\n\nPositiva\nUn cliente de tipo premium\nAplica la regla de descuento correspondiente.\n\n\nNegativa\nUn precio negativo\nRechaza la entrada.\n\n\nNegativa\nUn precio como texto\nRechaza la entrada si se exige un número.\n\n\nNegativa\nUn tipo de cliente desconocido\nNo aplica reglas por defecto sin control.\n\n\nNegativa\nNaN o Infinity\nRechaza valores que no representan importes válidos.\n\n\n\n\nUna prueba negativa o no tiene por qué terminar en una excepción. Puede comprobar que la función devuelve un error controlado, que rechaza la operación o que responde con un código HTTP apropiado. Lo importante es que el comportamiento sea el esperado.",
+    "crumbs": [
+      "📚 Unidades",
+      "2-Testing. Encontrar problemas antes de produccion"
+    ]
+  },
+  {
+    "objectID": "unidades/ud2/index.html#cómo-elegir-casos-de-prueba-sin-probar-todas-las-posibilidades",
+    "href": "unidades/ud2/index.html#cómo-elegir-casos-de-prueba-sin-probar-todas-las-posibilidades",
+    "title": "UD2. Testing. Encontrar problemas antes de producción",
+    "section": "Cómo elegir casos de prueba sin probar todas las posibilidades",
+    "text": "Cómo elegir casos de prueba sin probar todas las posibilidades\nNo es viable probar todas las entradas posibles. Para seleccionar casos útiles, vamos a utilizar dos técnicas.\nPartición de equivalencia. Agrupamos entradas kque deberían comportarse de la misma manera y elegimos representantes de cada grupo.\nPor ejemplo, si una aplicación acepta importes iguales o superiores a cero:\n\nImportes válidos: 0, 25, 100.\nImportes negativos: -1, -100.\nValores que no son números: \"25\", null, undefined.\nValores numéricos no finitos: NaN, Infinity.\n\nNo hace falta probar todos los valores que comparten la misma regla, aunque conviene elegir suficientes ejemplos para detectar errores relevantes.\nAnálisis de valores límite. Comprobamos especialmente los extremos de una regla, porque es frecuente que los defectos aparezcan al usar operadores incorrectos.\nSi el descuento se aplica a partir de 100€, los casos importantes son:\n\n99.99: no debe aplicarse\n100: debe aplicarse\n100.01: debe aplicarse\n\nEse análisis ayuda a detectar, por ejemplo, que alguien haya escrito &gt; en lucar de &gt;=.",
+    "crumbs": [
+      "📚 Unidades",
+      "2-Testing. Encontrar problemas antes de produccion"
+    ]
+  },
+  {
+    "objectID": "unidades/ud2/index.html#las-aserciones-también-comprueban-errores",
+    "href": "unidades/ud2/index.html#las-aserciones-también-comprueban-errores",
+    "title": "UD2. Testing. Encontrar problemas antes de producción",
+    "section": "Las aserciones también comprueban errores",
+    "text": "Las aserciones también comprueban errores\nCon Vitest, podemos verificar tanto el resultado correcto como el rechazo de una entrada.\nimport { expect, test } from \"vitest\";\n\ntest(\"rechaza un importe negativo\", () =&gt; {\n  expect(() =&gt; calcularTotal(-10, \"standard\"))\n    .toThrow();\n});\nEn este ejemplo no comprobamos solamente que algo falla: especificamos que la función debe lanzar una excepción. En otros diseños, la función podría devolver un resultado de error y la aserción sería distinta.\nLa prueba debe reflejar el contrato que hemos definido para la función, no adaptarse a cualquier comportamiento que produzca el código.",
+    "crumbs": [
+      "📚 Unidades",
+      "2-Testing. Encontrar problemas antes de produccion"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud2/lab2.html",
+    "href": "laboratorios/ud2/lab2.html",
+    "title": "UD2 · Lab 2 · ¿Podemos confiar en este código?",
+    "section": "",
+    "text": "Una pequeña tienda online está desarrollando su sistema de descuentos. Antes de integrar esta funcionalidad en la aplicación, el equipo quiere comprobar que los cálculos son correctos y que los datos recibidos no provocan comportamientos inesperados.\nOtro desarrollador ha implementado la función, pero todavía no existe una batería de pruebas que permita verificar su comportamiento.\nTu trabajo consiste en revisar la implementación, diseñar pruebas automatizadas y corregir los defectos que encuentres.\nImportante: no se trata de conseguir que todas las pruebas pasen modificando las expectativas. Las pruebas deben comprobar el comportamiento que debería tener la aplicación según sus requisitos.\n\n\n\nLa tienda establece las siguientes reglas:\n\nExisten dos tipos de cliente: standard y premium.\nLos clientes estándar no reciben descuentos.\nLos clientes premium reciben un descuento del 5 % en compras inferiores a 100 €.\nLos clientes premium reciben un descuento del 10 % en compras de 100 € o más.\nEl importe de la compra debe ser válido y no puede ser negativo.\nNo se deben aceptar tipos de cliente desconocidos.\nSi los datos no son válidos, la función debe comunicar el error de forma controlada.\n\nAntes de continuar, piensa: ¿qué significa exactamente que un importe sea válido? ¿Basta con comprobar que no es negativo?\n\n\n\nCrea el archivo src/discount.js y copia la siguiente implementación.\nexport function calculateDiscount(amount, customerType) {\n  if (amount &lt; 0) {\n    throw new Error(\"El importe no puede ser negativo\");\n  }\n\n  let rate = 0;\n\n  if (customerType === \"premium\") {\n    rate = amount &gt; 100 ? 0.10 : 0.05;\n  }\n\n  return amount * rate;\n}\nNo corrijas todavía el código. Primero debes conseguir evidencias de su comportamiento.\n\n\n\n\n\nAnaliza los requisitos y el código. Anota al menos cinco situaciones diferentes en las que la función podría no comportarse como esperamos.\nNo basta con enumerar entradas: indica qué resultado o comportamiento esperarías en cada caso.\nPuedes explorar distintas categorías:\n\nValores habituales.\nValores próximos a un límite.\nEntradas de tipos inesperados.\nValores numéricos especiales.\nOpciones o datos que la aplicación no reconoce.\n\nNo es necesario probar todas las posibilidades imaginables. Tu objetivo es seleccionar casos que aporten información útil.\n\n\n\nAntes de programar, completa una tabla como esta con tus propios casos:\n\n\n\nEntrada\nComportamiento esperado\n¿Qué requisito comprueba?\n\n\n\n\nCaso 1\nPor determinar\nPor determinar\n\n\nCaso 2\nPor determinar\nPor determinar\n\n\nCaso 3\nPor determinar\nPor determinar\n\n\nCaso 4\nPor determinar\nPor determinar\n\n\nCaso 5\nPor determinar\nPor determinar\n\n\n\nIncluye pruebas positivas y negativas. Asegúrate de justificar por qué has seleccionado cada entrada.\nPista: si una regla cambia cuando el importe alcanza una cantidad concreta, ¿qué valores te ayudarían a comprobar que el límite está bien implementado?\n\n\n\nUtiliza Vitest para convertir tus casos de prueba en tests automatizados.\n\nCrea tests/discount.test.js.\nImporta la función que vas a comprobar.\nEscribe una prueba por cada comportamiento que quieras verificar.\nUtiliza aserciones para comparar el resultado obtenido con el esperado.\nEn los casos inválidos, comprueba que el comportamiento coincide con el contrato definido para la función.\n\nPuedes utilizar test.each si consideras que varios casos pueden comprobarse mediante una misma estructura de prueba.\n\ntest.each permite ejecutar la misma prueba varias veces con distintos datos de entrada. Es especialmente útil en este laboratorio de testing porque tendrás que comprobar distintos importes, tipos de cliente y entradas inválidas sin duplciar código.\n\nimport { test, expect } from \"vitest\";\nimport { calculateDiscount } from \"../src/discount.js\";\n\ntest(\"standard no recibe descuento en una compra de 20 €\", () =&gt; {\n  expect(calculateDiscount(20, \"standard\")).toBe(0);\n});\n\ntest(\"standard no recibe descuento en una compra de 80 €\", () =&gt; {\n  expect(calculateDiscount(80, \"standard\")).toBe(0);\n});\n\ntest(\"standard no recibe descuento en una compra de 150 €\", () =&gt; {\n  expect(calculateDiscount(150, \"standard\")).toBe(0);\n});\nPodría escribirse como:\nimport { test, expect } from \"vitest\";\nimport { calculateDiscount } from \"../src/discount.js\";\n\ntest.each([20, 80, 150])(\n  \"un cliente standard no recibe descuento con un importe de %s €\",\n  (amount) =&gt; {\n    expect(calculateDiscount(amount, \"standard\")).toBe(0);\n  }\n);\nEjecuta las pruebas.\nRegistra qué pruebas pasan y cuáles fallan. No cambies todavía la implementación.\n\n\n\nCuando tengas los resultados, responde:\n\n¿Qué requisitos cumple la implementación actual?\n¿Qué defectos has conseguido demostrar mediante pruebas?\n¿Hay alguna entrada que produzca un resultado aparentemente válido, pero que no debería aceptarse?\n¿Qué prueba te ha proporcionado la información más interesante? ¿Por qué?\n¿Podría existir algún defecto que todavía no hayas detectado?\n\nDistingue entre un defecto demostrado por una prueba y un posible riesgo que aún necesitarías investigar.\n\n\n\n\n\n\nModifica calculateDiscount para que cumpla todos los requisitos.\nPuedes reorganizar las validaciones y utilizar las herramientas del lenguaje que consideres apropiadas. No necesitas limitarte a añadir condiciones a las ya existentes.\nAntes de dar por terminada la corrección, comprueba que:\n\nLos datos válidos siguen produciendo los resultados esperados.\nLos datos inválidos se rechazan.\nLos límites de las reglas de negocio se respetan.\nNo has introducido nuevos defectos al corregir los anteriores.\n\nVuelve a ejecutar toda la batería de pruebas.\n\n\n\n\nAl terminar, entrega:\n\nEl archivo de pruebas automatizadas.\nLa implementación corregida.\nUna breve explicación de dos defectos detectados y cómo los has demostrado.\nUn ejemplo de prueba negativa y su utilidad.\nUna conclusión sobre qué limitaciones tiene la batería de pruebas que has diseñado.",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD2",
+      "UD2 · Lab 2 · ¿Podemos confiar en este código?"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud2/lab2.html#contexto",
+    "href": "laboratorios/ud2/lab2.html#contexto",
+    "title": "UD2 · Lab 2 · ¿Podemos confiar en este código?",
+    "section": "",
+    "text": "Una pequeña tienda online está desarrollando su sistema de descuentos. Antes de integrar esta funcionalidad en la aplicación, el equipo quiere comprobar que los cálculos son correctos y que los datos recibidos no provocan comportamientos inesperados.\nOtro desarrollador ha implementado la función, pero todavía no existe una batería de pruebas que permita verificar su comportamiento.\nTu trabajo consiste en revisar la implementación, diseñar pruebas automatizadas y corregir los defectos que encuentres.\nImportante: no se trata de conseguir que todas las pruebas pasen modificando las expectativas. Las pruebas deben comprobar el comportamiento que debería tener la aplicación según sus requisitos.",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD2",
+      "UD2 · Lab 2 · ¿Podemos confiar en este código?"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud2/lab2.html#requisitos-de-la-aplicación",
+    "href": "laboratorios/ud2/lab2.html#requisitos-de-la-aplicación",
+    "title": "UD2 · Lab 2 · ¿Podemos confiar en este código?",
+    "section": "",
+    "text": "La tienda establece las siguientes reglas:\n\nExisten dos tipos de cliente: standard y premium.\nLos clientes estándar no reciben descuentos.\nLos clientes premium reciben un descuento del 5 % en compras inferiores a 100 €.\nLos clientes premium reciben un descuento del 10 % en compras de 100 € o más.\nEl importe de la compra debe ser válido y no puede ser negativo.\nNo se deben aceptar tipos de cliente desconocidos.\nSi los datos no son válidos, la función debe comunicar el error de forma controlada.\n\nAntes de continuar, piensa: ¿qué significa exactamente que un importe sea válido? ¿Basta con comprobar que no es negativo?",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD2",
+      "UD2 · Lab 2 · ¿Podemos confiar en este código?"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud2/lab2.html#código-que-debes-revisar",
+    "href": "laboratorios/ud2/lab2.html#código-que-debes-revisar",
+    "title": "UD2 · Lab 2 · ¿Podemos confiar en este código?",
+    "section": "",
+    "text": "Crea el archivo src/discount.js y copia la siguiente implementación.\nexport function calculateDiscount(amount, customerType) {\n  if (amount &lt; 0) {\n    throw new Error(\"El importe no puede ser negativo\");\n  }\n\n  let rate = 0;\n\n  if (customerType === \"premium\") {\n    rate = amount &gt; 100 ? 0.10 : 0.05;\n  }\n\n  return amount * rate;\n}\nNo corrijas todavía el código. Primero debes conseguir evidencias de su comportamiento.",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD2",
+      "UD2 · Lab 2 · ¿Podemos confiar en este código?"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud2/lab2.html#investigación-diseña-tus-propias-pruebas",
+    "href": "laboratorios/ud2/lab2.html#investigación-diseña-tus-propias-pruebas",
+    "title": "UD2 · Lab 2 · ¿Podemos confiar en este código?",
+    "section": "",
+    "text": "Analiza los requisitos y el código. Anota al menos cinco situaciones diferentes en las que la función podría no comportarse como esperamos.\nNo basta con enumerar entradas: indica qué resultado o comportamiento esperarías en cada caso.\nPuedes explorar distintas categorías:\n\nValores habituales.\nValores próximos a un límite.\nEntradas de tipos inesperados.\nValores numéricos especiales.\nOpciones o datos que la aplicación no reconoce.\n\nNo es necesario probar todas las posibilidades imaginables. Tu objetivo es seleccionar casos que aporten información útil.\n\n\n\nAntes de programar, completa una tabla como esta con tus propios casos:\n\n\n\nEntrada\nComportamiento esperado\n¿Qué requisito comprueba?\n\n\n\n\nCaso 1\nPor determinar\nPor determinar\n\n\nCaso 2\nPor determinar\nPor determinar\n\n\nCaso 3\nPor determinar\nPor determinar\n\n\nCaso 4\nPor determinar\nPor determinar\n\n\nCaso 5\nPor determinar\nPor determinar\n\n\n\nIncluye pruebas positivas y negativas. Asegúrate de justificar por qué has seleccionado cada entrada.\nPista: si una regla cambia cuando el importe alcanza una cantidad concreta, ¿qué valores te ayudarían a comprobar que el límite está bien implementado?\n\n\n\nUtiliza Vitest para convertir tus casos de prueba en tests automatizados.\n\nCrea tests/discount.test.js.\nImporta la función que vas a comprobar.\nEscribe una prueba por cada comportamiento que quieras verificar.\nUtiliza aserciones para comparar el resultado obtenido con el esperado.\nEn los casos inválidos, comprueba que el comportamiento coincide con el contrato definido para la función.\n\nPuedes utilizar test.each si consideras que varios casos pueden comprobarse mediante una misma estructura de prueba.\n\ntest.each permite ejecutar la misma prueba varias veces con distintos datos de entrada. Es especialmente útil en este laboratorio de testing porque tendrás que comprobar distintos importes, tipos de cliente y entradas inválidas sin duplciar código.\n\nimport { test, expect } from \"vitest\";\nimport { calculateDiscount } from \"../src/discount.js\";\n\ntest(\"standard no recibe descuento en una compra de 20 €\", () =&gt; {\n  expect(calculateDiscount(20, \"standard\")).toBe(0);\n});\n\ntest(\"standard no recibe descuento en una compra de 80 €\", () =&gt; {\n  expect(calculateDiscount(80, \"standard\")).toBe(0);\n});\n\ntest(\"standard no recibe descuento en una compra de 150 €\", () =&gt; {\n  expect(calculateDiscount(150, \"standard\")).toBe(0);\n});\nPodría escribirse como:\nimport { test, expect } from \"vitest\";\nimport { calculateDiscount } from \"../src/discount.js\";\n\ntest.each([20, 80, 150])(\n  \"un cliente standard no recibe descuento con un importe de %s €\",\n  (amount) =&gt; {\n    expect(calculateDiscount(amount, \"standard\")).toBe(0);\n  }\n);\nEjecuta las pruebas.\nRegistra qué pruebas pasan y cuáles fallan. No cambies todavía la implementación.\n\n\n\nCuando tengas los resultados, responde:\n\n¿Qué requisitos cumple la implementación actual?\n¿Qué defectos has conseguido demostrar mediante pruebas?\n¿Hay alguna entrada que produzca un resultado aparentemente válido, pero que no debería aceptarse?\n¿Qué prueba te ha proporcionado la información más interesante? ¿Por qué?\n¿Podría existir algún defecto que todavía no hayas detectado?\n\nDistingue entre un defecto demostrado por una prueba y un posible riesgo que aún necesitarías investigar.",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD2",
+      "UD2 · Lab 2 · ¿Podemos confiar en este código?"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud2/lab2.html#corrección-y-regresión",
+    "href": "laboratorios/ud2/lab2.html#corrección-y-regresión",
+    "title": "UD2 · Lab 2 · ¿Podemos confiar en este código?",
+    "section": "",
+    "text": "Modifica calculateDiscount para que cumpla todos los requisitos.\nPuedes reorganizar las validaciones y utilizar las herramientas del lenguaje que consideres apropiadas. No necesitas limitarte a añadir condiciones a las ya existentes.\nAntes de dar por terminada la corrección, comprueba que:\n\nLos datos válidos siguen produciendo los resultados esperados.\nLos datos inválidos se rechazan.\nLos límites de las reglas de negocio se respetan.\nNo has introducido nuevos defectos al corregir los anteriores.\n\nVuelve a ejecutar toda la batería de pruebas.",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD2",
+      "UD2 · Lab 2 · ¿Podemos confiar en este código?"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud2/lab2.html#entrega",
+    "href": "laboratorios/ud2/lab2.html#entrega",
+    "title": "UD2 · Lab 2 · ¿Podemos confiar en este código?",
+    "section": "",
+    "text": "Al terminar, entrega:\n\nEl archivo de pruebas automatizadas.\nLa implementación corregida.\nUna breve explicación de dos defectos detectados y cómo los has demostrado.\nUn ejemplo de prueba negativa y su utilidad.\nUna conclusión sobre qué limitaciones tiene la batería de pruebas que has diseñado.",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD2",
+      "UD2 · Lab 2 · ¿Podemos confiar en este código?"
+    ]
   }
 ]

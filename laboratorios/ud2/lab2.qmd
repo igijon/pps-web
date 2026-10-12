@@ -1,0 +1,176 @@
+---
+title: "UD2 · Lab 2 · ¿Podemos confiar en este código?"
+---
+
+# 🧪 Laboratorio 2. ¿Podemos confiar en este código?
+
+
+## 1. Contexto
+
+Una pequeña tienda online está desarrollando su sistema de descuentos. Antes de integrar esta funcionalidad en la aplicación, el equipo quiere comprobar que los cálculos son correctos y que los datos recibidos no provocan comportamientos inesperados.
+
+Otro desarrollador ha implementado la función, pero todavía no existe una batería de pruebas que permita verificar su comportamiento.
+
+Tu trabajo consiste en revisar la implementación, diseñar pruebas automatizadas y corregir los defectos que encuentres.
+
+**Importante:** no se trata de conseguir que todas las pruebas pasen modificando las expectativas. Las pruebas deben comprobar el comportamiento que debería tener la aplicación según sus requisitos.
+
+## 2. Requisitos de la aplicación
+
+La tienda establece las siguientes reglas:
+
+- Existen dos tipos de cliente: `standard` y `premium`.
+- Los clientes estándar no reciben descuentos.
+- Los clientes premium reciben un descuento del 5 % en compras inferiores a 100 €.
+- Los clientes premium reciben un descuento del 10 % en compras de 100 € o más.
+- El importe de la compra debe ser válido y no puede ser negativo.
+- No se deben aceptar tipos de cliente desconocidos.
+- Si los datos no son válidos, la función debe comunicar el error de forma controlada.
+
+Antes de continuar, piensa: ¿qué significa exactamente que un importe sea válido? ¿Basta con comprobar que no es negativo?
+
+## 3. Código que debes revisar
+
+Crea el archivo `src/discount.js` y copia la siguiente implementación.
+
+```javascript
+export function calculateDiscount(amount, customerType) {
+  if (amount < 0) {
+    throw new Error("El importe no puede ser negativo");
+  }
+
+  let rate = 0;
+
+  if (customerType === "premium") {
+    rate = amount > 100 ? 0.10 : 0.05;
+  }
+
+  return amount * rate;
+}
+```
+
+No corrijas todavía el código. Primero debes conseguir evidencias de su comportamiento.
+
+## 4. Investigación: diseña tus propias pruebas
+
+### Tarea 1. Identifica los riesgos
+
+Analiza los requisitos y el código. Anota al menos **cinco situaciones diferentes** en las que la función podría no comportarse como esperamos.
+
+No basta con enumerar entradas: indica qué resultado o comportamiento esperarías en cada caso.
+
+Puedes explorar distintas categorías:
+
+- Valores habituales.
+- Valores próximos a un límite.
+- Entradas de tipos inesperados.
+- Valores numéricos especiales.
+- Opciones o datos que la aplicación no reconoce.
+
+No es necesario probar todas las posibilidades imaginables. Tu objetivo es seleccionar casos que aporten información útil.
+
+### Tarea 2. Diseña una batería de pruebas
+
+Antes de programar, completa una tabla como esta con tus propios casos:
+
+| Entrada | Comportamiento esperado | ¿Qué requisito comprueba? |
+|---|---|---|
+| Caso 1 | Por determinar | Por determinar |
+| Caso 2 | Por determinar | Por determinar |
+| Caso 3 | Por determinar | Por determinar |
+| Caso 4 | Por determinar | Por determinar |
+| Caso 5 | Por determinar | Por determinar |
+
+Incluye pruebas positivas y negativas. Asegúrate de justificar por qué has seleccionado cada entrada.
+
+**Pista:** si una regla cambia cuando el importe alcanza una cantidad concreta, ¿qué valores te ayudarían a comprobar que el límite está bien implementado?
+
+### Tarea 3. Automatiza las pruebas
+
+Utiliza Vitest para convertir tus casos de prueba en tests automatizados.
+
+1. Crea `tests/discount.test.js`.
+2. Importa la función que vas a comprobar.
+3. Escribe una prueba por cada comportamiento que quieras verificar.
+4. Utiliza aserciones para comparar el resultado obtenido con el esperado.
+5. En los casos inválidos, comprueba que el comportamiento coincide con el contrato definido para la función.
+
+Puedes utilizar `test.each` si consideras que varios casos pueden comprobarse mediante una misma estructura de prueba.
+
+> `test.each` permite ejecutar la misma prueba varias veces con distintos datos de entrada. Es especialmente útil en este laboratorio de testing porque tendrás que comprobar distintos importes, tipos de cliente y entradas inválidas sin duplciar código.
+
+
+```js
+import { test, expect } from "vitest";
+import { calculateDiscount } from "../src/discount.js";
+
+test("standard no recibe descuento en una compra de 20 €", () => {
+  expect(calculateDiscount(20, "standard")).toBe(0);
+});
+
+test("standard no recibe descuento en una compra de 80 €", () => {
+  expect(calculateDiscount(80, "standard")).toBe(0);
+});
+
+test("standard no recibe descuento en una compra de 150 €", () => {
+  expect(calculateDiscount(150, "standard")).toBe(0);
+});
+```
+
+Podría escribirse como:
+
+```js
+import { test, expect } from "vitest";
+import { calculateDiscount } from "../src/discount.js";
+
+test.each([20, 80, 150])(
+  "un cliente standard no recibe descuento con un importe de %s €",
+  (amount) => {
+    expect(calculateDiscount(amount, "standard")).toBe(0);
+  }
+);
+```
+
+
+Ejecuta las pruebas.
+
+Registra qué pruebas pasan y cuáles fallan. No cambies todavía la implementación.
+
+### Tarea 4. Interpreta los resultados
+
+Cuando tengas los resultados, responde:
+
+1. ¿Qué requisitos cumple la implementación actual?
+2. ¿Qué defectos has conseguido demostrar mediante pruebas?
+3. ¿Hay alguna entrada que produzca un resultado aparentemente válido, pero que no debería aceptarse?
+4. ¿Qué prueba te ha proporcionado la información más interesante? ¿Por qué?
+5. ¿Podría existir algún defecto que todavía no hayas detectado?
+
+Distingue entre un defecto demostrado por una prueba y un posible riesgo que aún necesitarías investigar.
+
+## 5. Corrección y regresión
+
+### Tarea 5. Corrige la implementación
+
+Modifica `calculateDiscount` para que cumpla todos los requisitos.
+
+Puedes reorganizar las validaciones y utilizar las herramientas del lenguaje que consideres apropiadas. No necesitas limitarte a añadir condiciones a las ya existentes.
+
+Antes de dar por terminada la corrección, comprueba que:
+
+- Los datos válidos siguen produciendo los resultados esperados.
+- Los datos inválidos se rechazan.
+- Los límites de las reglas de negocio se respetan.
+- No has introducido nuevos defectos al corregir los anteriores.
+
+Vuelve a ejecutar toda la batería de pruebas.
+
+## 6. Entrega
+
+Al terminar, entrega:
+
+- El archivo de pruebas automatizadas.
+- La implementación corregida.
+- Una breve explicación de dos defectos detectados y cómo los has demostrado.
+- Un ejemplo de prueba negativa y su utilidad.
+- Una conclusión sobre qué limitaciones tiene la batería de pruebas que has diseñado.
