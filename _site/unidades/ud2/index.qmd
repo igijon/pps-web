@@ -1,0 +1,45 @@
+---
+title: "UD2. Testing. Encontrar problemas antes de producción"
+---
+
+>**¿Por qué necesitamos el testing?**
+
+# ✅ Fundamentos y testing automatizado
+
+Imaginemos que desarrollamos una aplicación para gestionar pedidos. El código calcula el importe multiplicando el precio por la cantidad de productos. Si el usuario compra tres unidades de un producto que cuesta 10€, el resultado debería ser 30€.
+
+Pero, ¿qué ocurre si la cantidad es negativa? ¿y si es cero? ¿y si llega el texto `tres`en lugar de un número?
+
+El código puede ejecutarse sin producir un error técnico, y aún así, generar un resultado incorrecto desde el punto de vista de negocio.
+
+La idea que debemos entender es esta:
+
+> Que un programa se ejecute sin errores no significa que se comporte correctamente ni que sea seguro.
+
+
+>**El testing consiste en comprobar de manera sistemática si un sistema se comporta como esperamos bajo determinadas condiciones**
+
+## Error humano, defecto y fallo
+
+Es útil distinguir tres conceptos:
+
+- **Error humano**: una persona toma una decisión equivocada o escribe una instrucción incorrecta.
+- **Defecto**: el error queda incorporado al código, al diseño o a la configuración.
+- **Fallo**: el sistema muestra un comportamiento incorrecto cuando se ejecuta en determinadas condiciones.
+
+Ejemplo: Un desarrollador olvida comprobar que la cantidad de un pedido sea positiva. Ese olvido es un error humano; la ausencia de validación es un defecto; aceptar un pedido con cantidad negativa es un fallo observable.
+
+## Verificacion y validación
+
+Aunque estén relacionadas, responden a preguntas distintas:
+
+| Concepto | Pregunta | Ejemplo |
+|---|---|---|
+| Verificación | ¿Estamos construyendo el producto de acuerdo con las especificaciones? | Comprobar que una función calcula el importe correctamente. |
+| Validación | ¿Estamos construyendo el producto adecuado para la necesidad real? | Comprobar que las reglas de pedidos responden a las necesidades del negocio. |
+
+Una aplicación puede superar pruebas técnicas y cumplir literalmente una especificación, pero esa especificación puede ser insuficiente. Por ejemplo, el sistema puede calcular bien los importes y no contemplar que un usuario no autorizado intente modificar un pedido.
+
+# Tipos de pruebas: la pirámide de testing
+
+![Pirámide de testing](.)

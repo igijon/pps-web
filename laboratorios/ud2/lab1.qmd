@@ -1,0 +1,199 @@
+---
+title: "UD2 · Lab 1 · Detectives del testing: encontrar defectos en una aplicación"
+---
+
+# 🧪 Laboratorio 1. Detectives del testing: encontrar defectos en una aplicación
+
+
+## 1. Objetivos
+
+Al finalizar el laboratorio, serás capaz de:
+
+- Crear y ejecutar pruebas automatizadas con Vitest.
+- Diseñar pruebas positivas, negativas y de valores límite.
+- Comprobar si una función cumple los requisitos establecidos.
+- Detectar defectos mediante los resultados de las pruebas.
+- Diferenciar entre corregir una función y comprobar que funciona correctamente.
+
+## 2. Contexto
+
+Vas a trabajar en el código de una pequeña aplicación de gestión de pedidos. Antes de publicar la aplicación, el equipo de desarrollo quiere comprobar que las operaciones básicas funcionan correctamente.
+
+Tu tarea consiste en analizar el código, diseñar casos de prueba y encontrar los defectos que podrían provocar errores en producción.
+
+**Importante:** no debes modificar el código de las funciones al principio. Primero tendrás que demostrar mediante pruebas que existe un problema.
+
+## 3. Preparación del proyecto
+
+Crea una carpeta para el laboratorio, crea el proyecto e instala `vitest` tal y como hemos visto en clase.
+
+Crea estos dos archivos:
+
+```text
+laboratorio-testing/
+├── pedido.js
+└── pedido.test.js
+```
+
+## 4. Código que debes verificar
+
+Copia el siguiente código en `pedido.js`.
+
+```javascript
+export function validarCantidad(cantidad) {
+  return Number.isInteger(cantidad) && cantidad >= 0;
+}
+
+export function calcularSubtotal(precio, cantidad) {
+  if (precio < 0 || cantidad < 0) {
+    return 0;
+  }
+
+  return precio * cantidad;
+}
+
+export function puedeTramitarPedido(cantidad, stock) {
+  return Number.isInteger(cantidad) &&
+    cantidad > 0 &&
+    cantidad <= stock + 1;
+}
+```
+
+No des por hecho que el código es correcto. Tu trabajo consiste precisamente en comprobarlo.
+
+## 5. Requisitos de la aplicación
+
+Antes de escribir las pruebas, interpreta los requisitos que debería cumplir cada función.
+
+| Función | Requisito |
+|---|---|
+| `validarCantidad(cantidad)` | Debe aceptar únicamente números enteros positivos. |
+| `calcularSubtotal(precio, cantidad)` | Debe calcular el precio total cuando el precio es finito y no negativo y la cantidad es un entero positivo. Si los datos no son válidos, debe devolver `null`. |
+| `puedeTramitarPedido(cantidad, stock)` | Debe devolver `true` únicamente si la cantidad es un entero positivo y no supera las unidades disponibles. En cualquier otro caso, debe devolver `false`. |
+
+Estos requisitos son la referencia para decidir qué resultado es correcto, no el comportamiento actual del código.
+
+## 6. Primera tarea. Preparar las primeras pruebas
+
+En `pedido.test.js`, escribe las siguientes pruebas para `validarCantidad`:
+
+```javascript
+import { test, expect } from 'vitest';
+import {
+  validarCantidad,
+  calcularSubtotal,
+  puedeTramitarPedido
+} from './pedido.js';
+
+test('acepta una cantidad positiva', () => {
+  expect(validarCantidad(3)).toBe(true);
+});
+
+test('rechaza una cantidad negativa', () => {
+  expect(validarCantidad(-2)).toBe(false);
+});
+```
+
+Ejecuta las pruebas:
+
+```bash
+npm test
+```
+
+Observa el resultado. Estas dos pruebas no son suficientes para demostrar que la función cumple todos los requisitos.
+
+## 7. Segunda tarea. Diseñar más casos de prueba
+
+Amplía las pruebas de `validarCantidad` con los siguientes casos:
+
+| Caso | Entrada | Resultado esperado |
+|---|---|---|
+| CP01 | `3` | `true` |
+| CP02 | `1` | `true` |
+| CP03 | `0` | `false` |
+| CP04 | `-2` | `false` |
+| CP05 | `1.5` | `false` |
+| CP06 | `"tres"` | `false` |
+| CP07 | `null` | `false` |
+| CP08 | `undefined` | `false` |
+
+**Tu tarea:** implementa las pruebas que faltan utilizando `test()` y `expect()`.
+
+Puedes crear una prueba por caso para que los resultados sean fáciles de interpretar.
+
+## 8. Tercera tarea. Verificar el cálculo del subtotal
+
+Ahora debes comprobar `calcularSubtotal(precio, cantidad)`.
+
+Diseña y ejecuta pruebas para estos escenarios:
+
+| Caso | Precio | Cantidad | Resultado esperado |
+|---|---:|---:|---:|
+| CS01 | `10` | `3` | `30` |
+| CS02 | `0` | `2` | `0` |
+| CS03 | `2.5` | `4` | `10` |
+| CS04 | `10` | `0` | `null` |
+| CS05 | `-5` | `2` | `null` |
+| CS06 | `10` | `1.5` | `null` |
+| CS07 | `"10"` | `2` | `null` |
+| CS08 | `10` | `null` | `null` |
+| CS09 | `10` | `undefined` | `null` |
+| CS10 | `Infinity` | `2` | `null` |
+
+Puedes utilizar `toBe()` para comprobar tanto números como `null`.
+
+**Pista:** que una operación matemática produzca un número no significa que los datos de entrada sean válidos. Piensa también en los valores que JavaScript convierte automáticamente y en los valores que no son finitos.
+
+## 9. Cuarta tarea. Comprobar el stock disponible
+
+La aplicación solo debe permitir tramitar pedidos que puedan atenderse con el stock disponible.
+
+Diseña pruebas para estos casos:
+
+| Caso | Cantidad solicitada | Stock disponible | Resultado esperado |
+|---|---:|---:|---|
+| ST01 | `3` | `5` | `true` |
+| ST02 | `5` | `5` | `true` |
+| ST03 | `6` | `5` | `false` |
+| ST04 | `1` | `0` | `false` |
+| ST05 | `0` | `5` | `false` |
+| ST06 | `-1` | `5` | `false` |
+| ST07 | `1.5` | `5` | `false` |
+| ST08 | `2` | `-1` | `false` |
+
+Implementa las pruebas y ejecuta de nuevo `npm test`.
+
+Anota qué casos fallan y qué información proporciona Vitest para ayudarte a localizar el defecto.
+
+## 10. Quinta tarea. Corregir los defectos
+
+Una vez identificados los fallos:
+
+1. Localiza la función responsable.
+2. Compara su implementación con el requisito correspondiente.
+3. Corrige el código de `pedido.js`.
+4. Ejecuta de nuevo todas las pruebas.
+5. Comprueba que las pruebas anteriores siguen funcionando.
+
+No elimines ni cambies las pruebas para conseguir que aparezcan como superadas. Las pruebas representan los requisitos de la aplicación.
+
+## 11. Evidencias que debes entregar
+
+Entrega un documento breve con:
+
+- El archivo `pedido.test.js` con todas las pruebas.
+- Una captura o registro de la ejecución inicial donde aparezcan los fallos.
+- Una breve explicación de los defectos encontrados.
+- El código corregido de `pedido.js`.
+- Una captura o registro de la ejecución final.
+- Una reflexión: ¿qué errores habrían llegado a producción si solo hubieras ejecutado las dos pruebas iniciales?
+
+## 12. Reflexión final
+
+Responde con tus propias palabras:
+
+1. ¿Por qué las pruebas iniciales no eran suficientes?
+2. ¿Qué diferencia hay entre una prueba positiva y una negativa?
+3. ¿Por qué conviene probar valores límite, como cero o la cantidad exacta de stock?
+4. ¿Qué información aporta Vitest cuando una prueba falla?
+5. ¿Podemos afirmar que la aplicación es segura porque todas estas pruebas pasan? Justifica la respuesta.

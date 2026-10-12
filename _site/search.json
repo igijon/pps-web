@@ -1189,5 +1189,227 @@
       "🧪 Laboratorios",
       "UD1 · Lab 3 · ¿Podemos confiar en lo que nos envía el navegador?"
     ]
+  },
+  {
+    "objectID": "unidades/ud2/index.html",
+    "href": "unidades/ud2/index.html",
+    "title": "UD2. Testing. Encontrar problemas antes de producción",
+    "section": "",
+    "text": "¿Por qué necesitamos el testing?",
+    "crumbs": [
+      "📚 Unidades",
+      "2-Testing. Encontrar problemas antes de produccion"
+    ]
+  },
+  {
+    "objectID": "unidades/ud2/index.html#error-humano-defecto-y-fallo",
+    "href": "unidades/ud2/index.html#error-humano-defecto-y-fallo",
+    "title": "UD2. Testing. Encontrar problemas antes de producción",
+    "section": "Error humano, defecto y fallo",
+    "text": "Error humano, defecto y fallo\nEs útil distinguir tres conceptos:\n\nError humano: una persona toma una decisión equivocada o escribe una instrucción incorrecta.\nDefecto: el error queda incorporado al código, al diseño o a la configuración.\nFallo: el sistema muestra un comportamiento incorrecto cuando se ejecuta en determinadas condiciones.\n\nEjemplo: Un desarrollador olvida comprobar que la cantidad de un pedido sea positiva. Ese olvido es un error humano; la ausencia de validación es un defecto; aceptar un pedido con cantidad negativa es un fallo observable.",
+    "crumbs": [
+      "📚 Unidades",
+      "2-Testing. Encontrar problemas antes de produccion"
+    ]
+  },
+  {
+    "objectID": "unidades/ud2/index.html#verificacion-y-validación",
+    "href": "unidades/ud2/index.html#verificacion-y-validación",
+    "title": "UD2. Testing. Encontrar problemas antes de producción",
+    "section": "Verificacion y validación",
+    "text": "Verificacion y validación\nAunque estén relacionadas, responden a preguntas distintas:\n\n\n\n\n\n\n\n\nConcepto\nPregunta\nEjemplo\n\n\n\n\nVerificación\n¿Estamos construyendo el producto de acuerdo con las especificaciones?\nComprobar que una función calcula el importe correctamente.\n\n\nValidación\n¿Estamos construyendo el producto adecuado para la necesidad real?\nComprobar que las reglas de pedidos responden a las necesidades del negocio.\n\n\n\nUna aplicación puede superar pruebas técnicas y cumplir literalmente una especificación, pero esa especificación puede ser insuficiente. Por ejemplo, el sistema puede calcular bien los importes y no contemplar que un usuario no autorizado intente modificar un pedido.",
+    "crumbs": [
+      "📚 Unidades",
+      "2-Testing. Encontrar problemas antes de produccion"
+    ]
+  },
+  {
+    "objectID": "unidades/ud2/index.html#tipos-de-pruebas-la-pirámide-de-testing",
+    "href": "unidades/ud2/index.html#tipos-de-pruebas-la-pirámide-de-testing",
+    "title": "UD2. Testing. Encontrar problemas antes de producción",
+    "section": "Tipos de pruebas: la pirámide de testing",
+    "text": "Tipos de pruebas: la pirámide de testing\n\n\n\nPirámide de testing\n\n\n\nPruebas unitarias: comprueban una unidad pequeña de código, como una función.\nPruebas de integración: comprueban que varios componentes funcionan correctamente juntos.\nPruebas E2E (end-to-end): verifican un flujo completo desde el punto de vista del usuario, por ejemplo, iniciar sesión y consultar un pedido.\n\n¿Por qué no hacer solamente pruebas E2E? Porque suelen implicar más componentes, son más lentas y, cuando fallan, puede resultar más difícil localizar la causa. Las pruebas unitarias son normalmente más rápidas y específicas.",
+    "crumbs": [
+      "📚 Unidades",
+      "2-Testing. Encontrar problemas antes de produccion"
+    ]
+  },
+  {
+    "objectID": "unidades/ud2/index.html#diseño-de-casos-de-prueba",
+    "href": "unidades/ud2/index.html#diseño-de-casos-de-prueba",
+    "title": "UD2. Testing. Encontrar problemas antes de producción",
+    "section": "Diseño de casos de prueba",
+    "text": "Diseño de casos de prueba\nAntes de enseñar una herramienta, conviene enseñar a pensar como tester. Automatizar una prueba mal diseñada solo permite repetir rápidamente una comprobación insuficiente.\nUn caso de prueba describe una situación concreta que queremos comprobar, incluyendo las condiciones iniciales, los datos utilizados y el resultado esperado.\n\n\n\nElemento\nSignificado\n\n\n\n\nIdentificador\nCódigo único del caso de prueba\n\n\nEntrada\nDatos que recibe la función\n\n\nResultado esperado\nComportamiento correcto según los requisitos\n\n\nResultado real\nLo que sucede al ejecutar el programa\n\n\nEstado\nSuperada o fallida\n\n\nEvidencia\nSalida de la herramienta, registro o captura\n\n\n\nEjemplo de requisito:\n\nEl sistema sólo debe aceptar cantidades enteras positivas para un pedido.\n\n\n\n\nCaso\nEntrada\nResultado esperado\n\n\n\n\nCP01\n3\nAceptar\n\n\nCP02\n1\nAceptar\n\n\nCP03\n0\nRechazar\n\n\nCP04\n-2\nRechazar\n\n\nCP05\n1.5\nRechazar\n\n\nCP06\n\"tres\"\nRechazar\n\n\n\n\n¿Qué otras entradas se os ocurren?\n\n¿Qué pasaría con null, un valor excesivamente grande, o una cadena vacía?",
+    "crumbs": [
+      "📚 Unidades",
+      "2-Testing. Encontrar problemas antes de produccion"
+    ]
+  },
+  {
+    "objectID": "unidades/ud2/index.html#primer-contacto-con-vitest",
+    "href": "unidades/ud2/index.html#primer-contacto-con-vitest",
+    "title": "UD2. Testing. Encontrar problemas antes de producción",
+    "section": "Primer contacto con Vitest",
+    "text": "Primer contacto con Vitest\n\n¿Qué es Vitest?\nVitest es un framework de testing para JavaScript. Proporciona herramientas para organizar pruebas, ejecutar funciones, comparar resultados y mostrar qué comprobaciones han pasado o fallado.\nNo sustituye al código de la aplicación. Lo ejecuta en el contexto de las pruebas y permite comprobar si su comportamiento coincide con lo esperado.\nEn esta unidad utilizaremos tres elementos:\n\ntest() o it(): define una prueba.\nexpect(): expresa qué resultado esperamos.\n\nUn matcher, como toBe(): compara el resultado real con el esperado.\nPor ejemplo:\nimport { test, expect } from 'vitest';\n\ntest('dos más dos es cuatro', () =&gt; {\n  expect(2 + 2).toBe(4);\n});\nLa prueba pasa si la expresión evaluada produce el resultado esperado. Si se cambia el 4 por 5, la prueba falla.\n\n\nPreparar el proyecto\nComo requisito necesitamos tener Node.js instalado y VSCode\nEn el terminal:\nmkdir ud2-testing\ncd ud2-testing\nnpm init -y\nnpm install --save-dev vitest\nEn el archivo package.json, añade \"type\": \"module\" y el script test. Conserva las dependencias que haya generado npm.\nUna configuración mínima sería:\n{\n  \"type\": \"module\",\n  \"scripts\": {\n    \"test\": \"vitest run\"\n  },\n  \"devDependencies\": {\n    \"vitest\": \"^3.0.0\"\n  }\n}\n\nLa versión del ejemplo es ilustrativa: al instalar Vitest, es preferible conservar la versión que npm haya instalado en lugar de copiar una versión antigua a mano. No sustituyas el package.json completo si el proyecto ya contiene otras dependencias.\n\n\n\nCrea los archivos\nVamos a formar esta estructura:\nud2-testing/\n├── package.json\n├── pedido.js\n└── pedido.test.js\npedido.js\nexport function validarCantidad(cantidad) {\n  return Number.isInteger(cantidad) && cantidad &gt; 0;\n}\npedido.test.js\nimport { test, expect } from 'vitest';\nimport { validarCantidad } from './pedido.js';\n\ntest('acepta una cantidad positiva', () =&gt; {\n  expect(validarCantidad(3)).toBe(true);\n});\n\ntest('rechaza una cantidad negativa', () =&gt; {\n  expect(validarCantidad(-2)).toBe(false);\n});\nEjecuta:\nnpm run test\nVitest debe mostrar dos pruebas superadas.\nEl archivo .test.js contiene las comprobaciones, mientras que pedido.js contiene la funcionalidad que queremos verificar.\n\n\nEl patrón Arrange-Act-Assert\nUna buena prueba suele tener tres fases:\n\nArrange: preparar los datos y las condiciones.\nAct: ejecutar la funcionalidad.\nAssert: comprobar el resultado.\n\nEn nuestra prueba:\ntest('acepta una cantidad positiva', () =&gt; {\n  // Arrange\n  const cantidad = 3;\n\n  // Act\n  const resultado = validarCantidad(cantidad);\n\n  // Assert\n  expect(resultado).toBe(true);\n});",
+    "crumbs": [
+      "📚 Unidades",
+      "2-Testing. Encontrar problemas antes de produccion"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud2/lab1.html",
+    "href": "laboratorios/ud2/lab1.html",
+    "title": "UD2 · Lab 1 · Detectives del testing: encontrar defectos en una aplicación",
+    "section": "",
+    "text": "Al finalizar el laboratorio, serás capaz de:\n\nCrear y ejecutar pruebas automatizadas con Vitest.\nDiseñar pruebas positivas, negativas y de valores límite.\nComprobar si una función cumple los requisitos establecidos.\nDetectar defectos mediante los resultados de las pruebas.\nDiferenciar entre corregir una función y comprobar que funciona correctamente.\n\n\n\n\nVas a trabajar en el código de una pequeña aplicación de gestión de pedidos. Antes de publicar la aplicación, el equipo de desarrollo quiere comprobar que las operaciones básicas funcionan correctamente.\nTu tarea consiste en analizar el código, diseñar casos de prueba y encontrar los defectos que podrían provocar errores en producción.\nImportante: no debes modificar el código de las funciones al principio. Primero tendrás que demostrar mediante pruebas que existe un problema.\n\n\n\nCrea una carpeta para el laboratorio, crea el proyecto e instala vitest tal y como hemos visto en clase.\nCrea estos dos archivos:\nlaboratorio-testing/\n├── pedido.js\n└── pedido.test.js\n\n\n\nCopia el siguiente código en pedido.js.\nexport function validarCantidad(cantidad) {\n  return Number.isInteger(cantidad) && cantidad &gt;= 0;\n}\n\nexport function calcularSubtotal(precio, cantidad) {\n  if (precio &lt; 0 || cantidad &lt; 0) {\n    return 0;\n  }\n\n  return precio * cantidad;\n}\n\nexport function puedeTramitarPedido(cantidad, stock) {\n  return Number.isInteger(cantidad) &&\n    cantidad &gt; 0 &&\n    cantidad &lt;= stock + 1;\n}\nNo des por hecho que el código es correcto. Tu trabajo consiste precisamente en comprobarlo.\n\n\n\nAntes de escribir las pruebas, interpreta los requisitos que debería cumplir cada función.\n\n\n\n\n\n\n\nFunción\nRequisito\n\n\n\n\nvalidarCantidad(cantidad)\nDebe aceptar únicamente números enteros positivos.\n\n\ncalcularSubtotal(precio, cantidad)\nDebe calcular el precio total cuando el precio es finito y no negativo y la cantidad es un entero positivo. Si los datos no son válidos, debe devolver null.\n\n\npuedeTramitarPedido(cantidad, stock)\nDebe devolver true únicamente si la cantidad es un entero positivo y no supera las unidades disponibles. En cualquier otro caso, debe devolver false.\n\n\n\nEstos requisitos son la referencia para decidir qué resultado es correcto, no el comportamiento actual del código.\n\n\n\nEn pedido.test.js, escribe las siguientes pruebas para validarCantidad:\nimport { test, expect } from 'vitest';\nimport {\n  validarCantidad,\n  calcularSubtotal,\n  puedeTramitarPedido\n} from './pedido.js';\n\ntest('acepta una cantidad positiva', () =&gt; {\n  expect(validarCantidad(3)).toBe(true);\n});\n\ntest('rechaza una cantidad negativa', () =&gt; {\n  expect(validarCantidad(-2)).toBe(false);\n});\nEjecuta las pruebas:\nnpm test\nObserva el resultado. Estas dos pruebas no son suficientes para demostrar que la función cumple todos los requisitos.\n\n\n\nAmplía las pruebas de validarCantidad con los siguientes casos:\n\n\n\nCaso\nEntrada\nResultado esperado\n\n\n\n\nCP01\n3\ntrue\n\n\nCP02\n1\ntrue\n\n\nCP03\n0\nfalse\n\n\nCP04\n-2\nfalse\n\n\nCP05\n1.5\nfalse\n\n\nCP06\n\"tres\"\nfalse\n\n\nCP07\nnull\nfalse\n\n\nCP08\nundefined\nfalse\n\n\n\nTu tarea: implementa las pruebas que faltan utilizando test() y expect().\nPuedes crear una prueba por caso para que los resultados sean fáciles de interpretar.\n\n\n\nAhora debes comprobar calcularSubtotal(precio, cantidad).\nDiseña y ejecuta pruebas para estos escenarios:\n\n\n\nCaso\nPrecio\nCantidad\nResultado esperado\n\n\n\n\nCS01\n10\n3\n30\n\n\nCS02\n0\n2\n0\n\n\nCS03\n2.5\n4\n10\n\n\nCS04\n10\n0\nnull\n\n\nCS05\n-5\n2\nnull\n\n\nCS06\n10\n1.5\nnull\n\n\nCS07\n\"10\"\n2\nnull\n\n\nCS08\n10\nnull\nnull\n\n\nCS09\n10\nundefined\nnull\n\n\nCS10\nInfinity\n2\nnull\n\n\n\nPuedes utilizar toBe() para comprobar tanto números como null.\nPista: que una operación matemática produzca un número no significa que los datos de entrada sean válidos. Piensa también en los valores que JavaScript convierte automáticamente y en los valores que no son finitos.\n\n\n\nLa aplicación solo debe permitir tramitar pedidos que puedan atenderse con el stock disponible.\nDiseña pruebas para estos casos:\n\n\n\nCaso\nCantidad solicitada\nStock disponible\nResultado esperado\n\n\n\n\nST01\n3\n5\ntrue\n\n\nST02\n5\n5\ntrue\n\n\nST03\n6\n5\nfalse\n\n\nST04\n1\n0\nfalse\n\n\nST05\n0\n5\nfalse\n\n\nST06\n-1\n5\nfalse\n\n\nST07\n1.5\n5\nfalse\n\n\nST08\n2\n-1\nfalse\n\n\n\nImplementa las pruebas y ejecuta de nuevo npm test.\nAnota qué casos fallan y qué información proporciona Vitest para ayudarte a localizar el defecto.\n\n\n\nUna vez identificados los fallos:\n\nLocaliza la función responsable.\nCompara su implementación con el requisito correspondiente.\nCorrige el código de pedido.js.\nEjecuta de nuevo todas las pruebas.\nComprueba que las pruebas anteriores siguen funcionando.\n\nNo elimines ni cambies las pruebas para conseguir que aparezcan como superadas. Las pruebas representan los requisitos de la aplicación.\n\n\n\nEntrega un documento breve con:\n\nEl archivo pedido.test.js con todas las pruebas.\nUna captura o registro de la ejecución inicial donde aparezcan los fallos.\nUna breve explicación de los defectos encontrados.\nEl código corregido de pedido.js.\nUna captura o registro de la ejecución final.\nUna reflexión: ¿qué errores habrían llegado a producción si solo hubieras ejecutado las dos pruebas iniciales?\n\n\n\n\nResponde con tus propias palabras:\n\n¿Por qué las pruebas iniciales no eran suficientes?\n¿Qué diferencia hay entre una prueba positiva y una negativa?\n¿Por qué conviene probar valores límite, como cero o la cantidad exacta de stock?\n¿Qué información aporta Vitest cuando una prueba falla?\n¿Podemos afirmar que la aplicación es segura porque todas estas pruebas pasan? Justifica la respuesta.",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD2",
+      "UD2 · Lab 1 · Detectives del testing: encontrar defectos en una aplicación"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud2/lab1.html#objetivos",
+    "href": "laboratorios/ud2/lab1.html#objetivos",
+    "title": "UD2 · Lab 1 · Detectives del testing: encontrar defectos en una aplicación",
+    "section": "",
+    "text": "Al finalizar el laboratorio, serás capaz de:\n\nCrear y ejecutar pruebas automatizadas con Vitest.\nDiseñar pruebas positivas, negativas y de valores límite.\nComprobar si una función cumple los requisitos establecidos.\nDetectar defectos mediante los resultados de las pruebas.\nDiferenciar entre corregir una función y comprobar que funciona correctamente.",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD2",
+      "UD2 · Lab 1 · Detectives del testing: encontrar defectos en una aplicación"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud2/lab1.html#contexto",
+    "href": "laboratorios/ud2/lab1.html#contexto",
+    "title": "UD2 · Lab 1 · Detectives del testing: encontrar defectos en una aplicación",
+    "section": "",
+    "text": "Vas a trabajar en el código de una pequeña aplicación de gestión de pedidos. Antes de publicar la aplicación, el equipo de desarrollo quiere comprobar que las operaciones básicas funcionan correctamente.\nTu tarea consiste en analizar el código, diseñar casos de prueba y encontrar los defectos que podrían provocar errores en producción.\nImportante: no debes modificar el código de las funciones al principio. Primero tendrás que demostrar mediante pruebas que existe un problema.",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD2",
+      "UD2 · Lab 1 · Detectives del testing: encontrar defectos en una aplicación"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud2/lab1.html#preparación-del-proyecto",
+    "href": "laboratorios/ud2/lab1.html#preparación-del-proyecto",
+    "title": "UD2 · Lab 1 · Detectives del testing: encontrar defectos en una aplicación",
+    "section": "",
+    "text": "Crea una carpeta para el laboratorio, crea el proyecto e instala vitest tal y como hemos visto en clase.\nCrea estos dos archivos:\nlaboratorio-testing/\n├── pedido.js\n└── pedido.test.js",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD2",
+      "UD2 · Lab 1 · Detectives del testing: encontrar defectos en una aplicación"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud2/lab1.html#código-que-debes-verificar",
+    "href": "laboratorios/ud2/lab1.html#código-que-debes-verificar",
+    "title": "UD2 · Lab 1 · Detectives del testing: encontrar defectos en una aplicación",
+    "section": "",
+    "text": "Copia el siguiente código en pedido.js.\nexport function validarCantidad(cantidad) {\n  return Number.isInteger(cantidad) && cantidad &gt;= 0;\n}\n\nexport function calcularSubtotal(precio, cantidad) {\n  if (precio &lt; 0 || cantidad &lt; 0) {\n    return 0;\n  }\n\n  return precio * cantidad;\n}\n\nexport function puedeTramitarPedido(cantidad, stock) {\n  return Number.isInteger(cantidad) &&\n    cantidad &gt; 0 &&\n    cantidad &lt;= stock + 1;\n}\nNo des por hecho que el código es correcto. Tu trabajo consiste precisamente en comprobarlo.",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD2",
+      "UD2 · Lab 1 · Detectives del testing: encontrar defectos en una aplicación"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud2/lab1.html#requisitos-de-la-aplicación",
+    "href": "laboratorios/ud2/lab1.html#requisitos-de-la-aplicación",
+    "title": "UD2 · Lab 1 · Detectives del testing: encontrar defectos en una aplicación",
+    "section": "",
+    "text": "Antes de escribir las pruebas, interpreta los requisitos que debería cumplir cada función.\n\n\n\n\n\n\n\nFunción\nRequisito\n\n\n\n\nvalidarCantidad(cantidad)\nDebe aceptar únicamente números enteros positivos.\n\n\ncalcularSubtotal(precio, cantidad)\nDebe calcular el precio total cuando el precio es finito y no negativo y la cantidad es un entero positivo. Si los datos no son válidos, debe devolver null.\n\n\npuedeTramitarPedido(cantidad, stock)\nDebe devolver true únicamente si la cantidad es un entero positivo y no supera las unidades disponibles. En cualquier otro caso, debe devolver false.\n\n\n\nEstos requisitos son la referencia para decidir qué resultado es correcto, no el comportamiento actual del código.",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD2",
+      "UD2 · Lab 1 · Detectives del testing: encontrar defectos en una aplicación"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud2/lab1.html#primera-tarea.-preparar-las-primeras-pruebas",
+    "href": "laboratorios/ud2/lab1.html#primera-tarea.-preparar-las-primeras-pruebas",
+    "title": "UD2 · Lab 1 · Detectives del testing: encontrar defectos en una aplicación",
+    "section": "",
+    "text": "En pedido.test.js, escribe las siguientes pruebas para validarCantidad:\nimport { test, expect } from 'vitest';\nimport {\n  validarCantidad,\n  calcularSubtotal,\n  puedeTramitarPedido\n} from './pedido.js';\n\ntest('acepta una cantidad positiva', () =&gt; {\n  expect(validarCantidad(3)).toBe(true);\n});\n\ntest('rechaza una cantidad negativa', () =&gt; {\n  expect(validarCantidad(-2)).toBe(false);\n});\nEjecuta las pruebas:\nnpm test\nObserva el resultado. Estas dos pruebas no son suficientes para demostrar que la función cumple todos los requisitos.",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD2",
+      "UD2 · Lab 1 · Detectives del testing: encontrar defectos en una aplicación"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud2/lab1.html#segunda-tarea.-diseñar-más-casos-de-prueba",
+    "href": "laboratorios/ud2/lab1.html#segunda-tarea.-diseñar-más-casos-de-prueba",
+    "title": "UD2 · Lab 1 · Detectives del testing: encontrar defectos en una aplicación",
+    "section": "",
+    "text": "Amplía las pruebas de validarCantidad con los siguientes casos:\n\n\n\nCaso\nEntrada\nResultado esperado\n\n\n\n\nCP01\n3\ntrue\n\n\nCP02\n1\ntrue\n\n\nCP03\n0\nfalse\n\n\nCP04\n-2\nfalse\n\n\nCP05\n1.5\nfalse\n\n\nCP06\n\"tres\"\nfalse\n\n\nCP07\nnull\nfalse\n\n\nCP08\nundefined\nfalse\n\n\n\nTu tarea: implementa las pruebas que faltan utilizando test() y expect().\nPuedes crear una prueba por caso para que los resultados sean fáciles de interpretar.",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD2",
+      "UD2 · Lab 1 · Detectives del testing: encontrar defectos en una aplicación"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud2/lab1.html#tercera-tarea.-verificar-el-cálculo-del-subtotal",
+    "href": "laboratorios/ud2/lab1.html#tercera-tarea.-verificar-el-cálculo-del-subtotal",
+    "title": "UD2 · Lab 1 · Detectives del testing: encontrar defectos en una aplicación",
+    "section": "",
+    "text": "Ahora debes comprobar calcularSubtotal(precio, cantidad).\nDiseña y ejecuta pruebas para estos escenarios:\n\n\n\nCaso\nPrecio\nCantidad\nResultado esperado\n\n\n\n\nCS01\n10\n3\n30\n\n\nCS02\n0\n2\n0\n\n\nCS03\n2.5\n4\n10\n\n\nCS04\n10\n0\nnull\n\n\nCS05\n-5\n2\nnull\n\n\nCS06\n10\n1.5\nnull\n\n\nCS07\n\"10\"\n2\nnull\n\n\nCS08\n10\nnull\nnull\n\n\nCS09\n10\nundefined\nnull\n\n\nCS10\nInfinity\n2\nnull\n\n\n\nPuedes utilizar toBe() para comprobar tanto números como null.\nPista: que una operación matemática produzca un número no significa que los datos de entrada sean válidos. Piensa también en los valores que JavaScript convierte automáticamente y en los valores que no son finitos.",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD2",
+      "UD2 · Lab 1 · Detectives del testing: encontrar defectos en una aplicación"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud2/lab1.html#cuarta-tarea.-comprobar-el-stock-disponible",
+    "href": "laboratorios/ud2/lab1.html#cuarta-tarea.-comprobar-el-stock-disponible",
+    "title": "UD2 · Lab 1 · Detectives del testing: encontrar defectos en una aplicación",
+    "section": "",
+    "text": "La aplicación solo debe permitir tramitar pedidos que puedan atenderse con el stock disponible.\nDiseña pruebas para estos casos:\n\n\n\nCaso\nCantidad solicitada\nStock disponible\nResultado esperado\n\n\n\n\nST01\n3\n5\ntrue\n\n\nST02\n5\n5\ntrue\n\n\nST03\n6\n5\nfalse\n\n\nST04\n1\n0\nfalse\n\n\nST05\n0\n5\nfalse\n\n\nST06\n-1\n5\nfalse\n\n\nST07\n1.5\n5\nfalse\n\n\nST08\n2\n-1\nfalse\n\n\n\nImplementa las pruebas y ejecuta de nuevo npm test.\nAnota qué casos fallan y qué información proporciona Vitest para ayudarte a localizar el defecto.",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD2",
+      "UD2 · Lab 1 · Detectives del testing: encontrar defectos en una aplicación"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud2/lab1.html#quinta-tarea.-corregir-los-defectos",
+    "href": "laboratorios/ud2/lab1.html#quinta-tarea.-corregir-los-defectos",
+    "title": "UD2 · Lab 1 · Detectives del testing: encontrar defectos en una aplicación",
+    "section": "",
+    "text": "Una vez identificados los fallos:\n\nLocaliza la función responsable.\nCompara su implementación con el requisito correspondiente.\nCorrige el código de pedido.js.\nEjecuta de nuevo todas las pruebas.\nComprueba que las pruebas anteriores siguen funcionando.\n\nNo elimines ni cambies las pruebas para conseguir que aparezcan como superadas. Las pruebas representan los requisitos de la aplicación.",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD2",
+      "UD2 · Lab 1 · Detectives del testing: encontrar defectos en una aplicación"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud2/lab1.html#evidencias-que-debes-entregar",
+    "href": "laboratorios/ud2/lab1.html#evidencias-que-debes-entregar",
+    "title": "UD2 · Lab 1 · Detectives del testing: encontrar defectos en una aplicación",
+    "section": "",
+    "text": "Entrega un documento breve con:\n\nEl archivo pedido.test.js con todas las pruebas.\nUna captura o registro de la ejecución inicial donde aparezcan los fallos.\nUna breve explicación de los defectos encontrados.\nEl código corregido de pedido.js.\nUna captura o registro de la ejecución final.\nUna reflexión: ¿qué errores habrían llegado a producción si solo hubieras ejecutado las dos pruebas iniciales?",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD2",
+      "UD2 · Lab 1 · Detectives del testing: encontrar defectos en una aplicación"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud2/lab1.html#reflexión-final",
+    "href": "laboratorios/ud2/lab1.html#reflexión-final",
+    "title": "UD2 · Lab 1 · Detectives del testing: encontrar defectos en una aplicación",
+    "section": "",
+    "text": "Responde con tus propias palabras:\n\n¿Por qué las pruebas iniciales no eran suficientes?\n¿Qué diferencia hay entre una prueba positiva y una negativa?\n¿Por qué conviene probar valores límite, como cero o la cantidad exacta de stock?\n¿Qué información aporta Vitest cuando una prueba falla?\n¿Podemos afirmar que la aplicación es segura porque todas estas pruebas pasan? Justifica la respuesta.",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD2",
+      "UD2 · Lab 1 · Detectives del testing: encontrar defectos en una aplicación"
+    ]
   }
 ]
