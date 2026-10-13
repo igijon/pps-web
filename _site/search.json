@@ -1528,5 +1528,40 @@
       "UD2",
       "UD2 · Lab 2 · ¿Podemos confiar en este código?"
     ]
+  },
+  {
+    "objectID": "unidades/ud2/index.html#api-testing",
+    "href": "unidades/ud2/index.html#api-testing",
+    "title": "UD2. Testing. Encontrar problemas antes de producción",
+    "section": "API testing",
+    "text": "API testing\n\n¿Qué estamos probando?\nEn una aplicación web podemos comprobar una funcionalidad desde distintos niveles.\n\n\n\nAplicación Web\n\n\nUna prueba unitaria comprueba una parte pequeña del código, como una función de cálculo. Una prueba de API envía una petición al backend y verifica su respuesta. Una prueba E2E recorre la aplicación desde la perspectiva del usuario, normalmente a través del navegador.\nLas pruebas de API pueden detectar defectos aunque la interfaz todavía no esté terminada.\n\n\n¿Qué debe comprobar una prueba de API?\nNo basta con comprobar que el servidor responde. Una API puede devolver 200 OK y, aún así, entregar datos incorrectos o incumplir reglas de negocio.\nEn las pruebas tendremos en cuenta cuatro dimensiones:\n\n\n\n\n\n\n\nDimensión\nQué comprobamos\n\n\n\n\nCódigo HTTP\nSi el servidor comunica el resultado esperado.\n\n\nCuerpo de la respuesta\nSi contiene los datos y la estructura correctos.\n\n\nReglas de negocio\nSi la operación respeta los requisitos de la aplicación.\n\n\nRobustez\nSi las entradas inválidas se rechazan de forma controlada.\n\n\n\nRecordando algunos códigos HTTP:\n\n\n\n\n\n\n\nCódigo\nSignificado habitual\n\n\n\n\n200 OK\nLa petición se ha procesado correctamente.\n\n\n201 Created\nSe ha creado un recurso.\n\n\n204 No Content\nLa operación ha tenido éxito y no devuelve contenido.\n\n\n400 Bad Request\nLa petición es inválida.\n\n\n401 Unauthorized\nFaltan credenciales válidas o no se han aceptado.\n\n\n403 Forbidden\nLa operación está prohibida para ese cliente.\n\n\n404 Not Found\nEl recurso solicitado no se encuentra o no se expone.\n\n\n500 Internal Server Error\nSe ha producido un error interno no controlado o genérico.\n\n\n\n\nLos códigos exactos dependen del contrato de la API. Por ejemplo, una petición inválida puede responder con 400 o 422, según el diseño adoptado.\n\nDesde seguridad, un código HTTP por sí solo no demuestra que el comportamiento sea seguro: también debemos comprobar el contenido de la respuesta, los datos afectados y si se han revelado detalles innecesarios.",
+    "crumbs": [
+      "📚 Unidades",
+      "2-Testing. Encontrar problemas antes de produccion"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud2/lab3.html",
+    "href": "laboratorios/ud2/lab3.html",
+    "title": "UD2 · Lab 3 · ¿Podemos confiar en la API?",
+    "section": "",
+    "text": "Disponemos del API REST de la aplicación de héroes, con la que trabajamos Aquí.\n\n\nTal y como hemos visto anteriormente, debes de tener claramente identificados:\n\nQué endpoints están disponibles\nQué método HTTP utiliza cada operación\nQué datos deben enviarse\nQué respuesta debería recibirse\nQué errores pueden producirse\n\nPuedes consultar el código y la documentación que generaste en laboratorios anteriores.\nDebes documentar al menos tres operaciones: dos de consulta y otra de modificación o creación que ofrezca este API.\n\n\n\nUna vez identificado el endpoint real, puedes utilizar este ejemplo y adaptarlo a la URL y al contrato de tu aplicación.\nimport { test, expect } from \"vitest\";\n\nconst BASE_URL = process.env.API_URL;\n\ntest(\"la API permite consultar los héroes\", async () =&gt; {\n  const response = await fetch(`${BASE_URL}/heroes`);\n\n  expect(response.status).toBe(200);\n\n  const heroes = await response.json();\n\n  expect(Array.isArray(heroes)).toBe(true);\n});\n\n\n\nDebemos mejorar la prueba anterior sin recibir todas las aserciones resueltas.\nComo mínimo, debes comprobar:\n\nQue la respuesta tiene el código esperado.\nQue el cuerpo contiene la estructura documentada.\nQue los elementos contienen los campos requeridos.\nQue el comportamiento coincide con los requisitos de la aplicación.\n\n\nDebemos comprender la diferencia entre comprobar que recibimos un array y comprobar que ese array contiene datos correctos.\n\n\n\n\nDebes investigar las entradas que incumplen reglas de la API y decidir qué comportamiento espera.\nDebes deducirlas del contrato y de las validaciones que encuentres en el backend.\nAlgunas líneas de investigación posibles son:\n\nEnviar un JSON incompleto\nOmitir un campo obligatorio\nEnviar un tipo de dato incorrecto\nSolicitar un identificador inexistente\nEnviar un valor que incumpla una regla de negocio.\n\nSi la API permite crear recursos, las pruebas que modifican esos datos deben utilizar recursos de prueba creados y evitar duplicados o efectos persistentes inesperados.\nNo se deben probar entradas maliciosas sobre servicios ajenos ni sistemas de producción",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD2",
+      "UD2 · Lab 3 · ¿Podemos confiar en esta API?"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud2/lab3.html#contexto",
+    "href": "laboratorios/ud2/lab3.html#contexto",
+    "title": "UD2 · Lab 3 · ¿Podemos confiar en la API?",
+    "section": "",
+    "text": "Disponemos del API REST de la aplicación de héroes, con la que trabajamos Aquí.\n\n\nTal y como hemos visto anteriormente, debes de tener claramente identificados:\n\nQué endpoints están disponibles\nQué método HTTP utiliza cada operación\nQué datos deben enviarse\nQué respuesta debería recibirse\nQué errores pueden producirse\n\nPuedes consultar el código y la documentación que generaste en laboratorios anteriores.\nDebes documentar al menos tres operaciones: dos de consulta y otra de modificación o creación que ofrezca este API.\n\n\n\nUna vez identificado el endpoint real, puedes utilizar este ejemplo y adaptarlo a la URL y al contrato de tu aplicación.\nimport { test, expect } from \"vitest\";\n\nconst BASE_URL = process.env.API_URL;\n\ntest(\"la API permite consultar los héroes\", async () =&gt; {\n  const response = await fetch(`${BASE_URL}/heroes`);\n\n  expect(response.status).toBe(200);\n\n  const heroes = await response.json();\n\n  expect(Array.isArray(heroes)).toBe(true);\n});\n\n\n\nDebemos mejorar la prueba anterior sin recibir todas las aserciones resueltas.\nComo mínimo, debes comprobar:\n\nQue la respuesta tiene el código esperado.\nQue el cuerpo contiene la estructura documentada.\nQue los elementos contienen los campos requeridos.\nQue el comportamiento coincide con los requisitos de la aplicación.\n\n\nDebemos comprender la diferencia entre comprobar que recibimos un array y comprobar que ese array contiene datos correctos.\n\n\n\n\nDebes investigar las entradas que incumplen reglas de la API y decidir qué comportamiento espera.\nDebes deducirlas del contrato y de las validaciones que encuentres en el backend.\nAlgunas líneas de investigación posibles son:\n\nEnviar un JSON incompleto\nOmitir un campo obligatorio\nEnviar un tipo de dato incorrecto\nSolicitar un identificador inexistente\nEnviar un valor que incumpla una regla de negocio.\n\nSi la API permite crear recursos, las pruebas que modifican esos datos deben utilizar recursos de prueba creados y evitar duplicados o efectos persistentes inesperados.\nNo se deben probar entradas maliciosas sobre servicios ajenos ni sistemas de producción",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD2",
+      "UD2 · Lab 3 · ¿Podemos confiar en esta API?"
+    ]
   }
 ]

@@ -273,3 +273,54 @@ test("rechaza un importe negativo", () => {
 En este ejemplo no comprobamos solamente que algo falla: especificamos que la función debe lanzar una excepción. En otros diseños, la función podría devolver un resultado de error y la aserción sería distinta.
 
 La prueba debe reflejar el contrato que hemos definido para la función, no adaptarse a cualquier comportamiento que produzca el código.
+
+# 🔗 API testing y pruebas E2E
+
+## API testing
+
+### ¿Qué estamos probando?
+
+En una aplicación web podemos comprobar una funcionalidad desde distintos niveles.
+
+![Aplicación Web](./images/2.png)
+
+Una **prueba unitaria** comprueba una parte pequeña del código, como una función de cálculo. 
+Una **prueba de API** envía una petición al backend y verifica su respuesta. 
+Una **prueba E2E** recorre la aplicación desde la perspectiva del usuario, normalmente a través del navegador.
+
+Las **pruebas de API** pueden detectar defectos aunque la interfaz todavía no esté terminada.
+
+### ¿Qué debe comprobar una prueba de API?
+
+No basta con comprobar que el servidor responde. Una API puede devolver `200 OK` y, aún así, entregar datos incorrectos o incumplir reglas de negocio.
+
+En las pruebas tendremos en cuenta cuatro dimensiones:
+
+| Dimensión             | Qué comprobamos                                                      |
+|-----------------------|----------------------------------------------------------------------|
+| Código HTTP           | Si el servidor comunica el resultado esperado.                      |
+| Cuerpo de la respuesta | Si contiene los datos y la estructura correctos.                    |
+| Reglas de negocio     | Si la operación respeta los requisitos de la aplicación.             |
+| Robustez              | Si las entradas inválidas se rechazan de forma controlada.           |
+
+Recordando algunos códigos HTTP:
+
+| Código | Significado habitual |
+|---|---|
+| `200 OK` | La petición se ha procesado correctamente. |
+| `201 Created` | Se ha creado un recurso. |
+| `204 No Content` | La operación ha tenido éxito y no devuelve contenido. |
+| `400 Bad Request` | La petición es inválida. |
+| `401 Unauthorized` | Faltan credenciales válidas o no se han aceptado. |
+| `403 Forbidden` | La operación está prohibida para ese cliente. |
+| `404 Not Found` | El recurso solicitado no se encuentra o no se expone. |
+| `500 Internal Server Error` | Se ha producido un error interno no controlado o genérico. |
+
+> Los códigos exactos dependen del contrato de la API. Por ejemplo, una petición inválida puede responder con `400` o `422`, según el diseño adoptado.
+
+
+Desde seguridad, un código HTTP por sí solo no demuestra que el comportamiento sea seguro: también debemos comprobar el contenido de la respuesta, los datos afectados y si se han revelado detalles innecesarios.
+
+
+
+

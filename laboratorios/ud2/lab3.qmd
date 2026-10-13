@@ -1,0 +1,78 @@
+---
+title: "UD2 · Lab 3 · ¿Podemos confiar en la API?"
+---
+
+# 🧪 Laboratorio 3. ¿Podemos confiar en la API?
+
+
+## 1. Contexto
+
+Disponemos del API REST de la aplicación de **héroes**, con la que trabajamos [Aquí](https://igijon.github.io/pps-web/laboratorios/ud1/lab2.html).
+
+### Tarea 1. Investiga el contrato de la API
+
+Tal y como hemos visto anteriormente, debes de tener claramente identificados:
+
+1. Qué endpoints están disponibles
+2. Qué método HTTP utiliza cada operación
+3. Qué datos deben enviarse
+4. Qué respuesta debería recibirse
+5. Qué errores pueden producirse
+
+Puedes consultar el código y la documentación que generaste en laboratorios anteriores.
+
+Debes documentar al menos tres operaciones: dos de consulta y otra de modificación o creación que ofrezca este API.
+
+### Tarea 2: Escribir una primera prueba
+
+Una vez identificado el endpoint real, puedes utilizar este ejemplo y adaptarlo a la URL y al contrato de tu aplicación.
+
+
+```js
+import { test, expect } from "vitest";
+
+const BASE_URL = process.env.API_URL;
+
+test("la API permite consultar los héroes", async () => {
+  const response = await fetch(`${BASE_URL}/heroes`);
+
+  expect(response.status).toBe(200);
+
+  const heroes = await response.json();
+
+  expect(Array.isArray(heroes)).toBe(true);
+});
+```
+### Tarea 3. Ampliar las comprobaciones
+
+Debemos mejorar la prueba anterior sin recibir todas las aserciones resueltas.
+
+Como mínimo, debes comprobar:
+
+- Que la respuesta tiene el código esperado.
+- Que el cuerpo contiene la estructura documentada.
+- Que los elementos contienen los campos requeridos.
+- Que el comportamiento coincide con los requisitos de la aplicación.
+
+> Debemos comprender la diferencia entre comprobar que recibimos un array y comprobar que ese array contiene datos correctos.
+
+
+### Tarea 4. Investigar las entradas inválidas.
+
+Debes investigar las entradas que incumplen reglas de la API y decidir qué comportamiento espera.
+
+Debes deducirlas del contrato y de las validaciones que encuentres en el backend.
+
+Algunas líneas de investigación posibles son:
+
+- Enviar un JSON incompleto
+- Omitir un campo obligatorio
+- Enviar un tipo de dato incorrecto
+- Solicitar un identificador inexistente
+- Enviar un valor que incumpla una regla de negocio.
+
+Si la API permite crear recursos, las pruebas que modifican esos datos deben utilizar recursos de prueba creados y evitar duplicados o efectos persistentes inesperados. 
+
+**No se deben probar entradas maliciosas sobre servicios ajenos ni sistemas de producción**
+
+

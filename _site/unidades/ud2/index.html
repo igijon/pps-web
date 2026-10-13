@@ -235,6 +235,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">UD2 · Lab 2 · ¿Podemos confiar en este código?</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../laboratorios/ud2/lab3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">UD2 · Lab 3 · ¿Podemos confiar en esta API?</span></a>
+  </div>
+</li>
       </ul>
   </li>
       </ul>
@@ -296,6 +302,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#pruebas-positivas-frente-a-pruebas-negativas" id="toc-pruebas-positivas-frente-a-pruebas-negativas" class="nav-link" data-scroll-target="#pruebas-positivas-frente-a-pruebas-negativas">Pruebas positivas frente a pruebas negativas</a></li>
   <li><a href="#cómo-elegir-casos-de-prueba-sin-probar-todas-las-posibilidades" id="toc-cómo-elegir-casos-de-prueba-sin-probar-todas-las-posibilidades" class="nav-link" data-scroll-target="#cómo-elegir-casos-de-prueba-sin-probar-todas-las-posibilidades">Cómo elegir casos de prueba sin probar todas las posibilidades</a></li>
   <li><a href="#las-aserciones-también-comprueban-errores" id="toc-las-aserciones-también-comprueban-errores" class="nav-link" data-scroll-target="#las-aserciones-también-comprueban-errores">Las aserciones también comprueban errores</a></li>
+  </ul></li>
+  <li><a href="#api-testing-y-pruebas-e2e" id="toc-api-testing-y-pruebas-e2e" class="nav-link" data-scroll-target="#api-testing-y-pruebas-e2e">🔗 API testing y pruebas E2E</a>
+  <ul class="collapse">
+  <li><a href="#api-testing" id="toc-api-testing" class="nav-link" data-scroll-target="#api-testing">API testing</a>
+  <ul class="collapse">
+  <li><a href="#qué-estamos-probando" id="toc-qué-estamos-probando" class="nav-link" data-scroll-target="#qué-estamos-probando">¿Qué estamos probando?</a></li>
+  <li><a href="#qué-debe-comprobar-una-prueba-de-api" id="toc-qué-debe-comprobar-una-prueba-de-api" class="nav-link" data-scroll-target="#qué-debe-comprobar-una-prueba-de-api">¿Qué debe comprobar una prueba de API?</a></li>
+  </ul></li>
   </ul></li>
   </ul>
 </nav>
@@ -661,8 +675,112 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>En este ejemplo no comprobamos solamente que algo falla: especificamos que la función debe lanzar una excepción. En otros diseños, la función podría devolver un resultado de error y la aserción sería distinta.</p>
 <p>La prueba debe reflejar el contrato que hemos definido para la función, no adaptarse a cualquier comportamiento que produzca el código.</p>
+</section>
+</section>
+<section id="api-testing-y-pruebas-e2e" class="level1">
+<h1>🔗 API testing y pruebas E2E</h1>
+<section id="api-testing" class="level2">
+<h2 class="anchored" data-anchor-id="api-testing">API testing</h2>
+<section id="qué-estamos-probando" class="level3">
+<h3 class="anchored" data-anchor-id="qué-estamos-probando">¿Qué estamos probando?</h3>
+<p>En una aplicación web podemos comprobar una funcionalidad desde distintos niveles.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./images/2.png" class="img-fluid figure-img"></p>
+<figcaption>Aplicación Web</figcaption>
+</figure>
+</div>
+<p>Una <strong>prueba unitaria</strong> comprueba una parte pequeña del código, como una función de cálculo. Una <strong>prueba de API</strong> envía una petición al backend y verifica su respuesta. Una <strong>prueba E2E</strong> recorre la aplicación desde la perspectiva del usuario, normalmente a través del navegador.</p>
+<p>Las <strong>pruebas de API</strong> pueden detectar defectos aunque la interfaz todavía no esté terminada.</p>
+</section>
+<section id="qué-debe-comprobar-una-prueba-de-api" class="level3">
+<h3 class="anchored" data-anchor-id="qué-debe-comprobar-una-prueba-de-api">¿Qué debe comprobar una prueba de API?</h3>
+<p>No basta con comprobar que el servidor responde. Una API puede devolver <code>200 OK</code> y, aún así, entregar datos incorrectos o incumplir reglas de negocio.</p>
+<p>En las pruebas tendremos en cuenta cuatro dimensiones:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 24%">
+<col style="width: 75%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Dimensión</th>
+<th>Qué comprobamos</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Código HTTP</td>
+<td>Si el servidor comunica el resultado esperado.</td>
+</tr>
+<tr class="even">
+<td>Cuerpo de la respuesta</td>
+<td>Si contiene los datos y la estructura correctos.</td>
+</tr>
+<tr class="odd">
+<td>Reglas de negocio</td>
+<td>Si la operación respeta los requisitos de la aplicación.</td>
+</tr>
+<tr class="even">
+<td>Robustez</td>
+<td>Si las entradas inválidas se rechazan de forma controlada.</td>
+</tr>
+</tbody>
+</table>
+<p>Recordando algunos códigos HTTP:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Código</th>
+<th>Significado habitual</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>200 OK</code></td>
+<td>La petición se ha procesado correctamente.</td>
+</tr>
+<tr class="even">
+<td><code>201 Created</code></td>
+<td>Se ha creado un recurso.</td>
+</tr>
+<tr class="odd">
+<td><code>204 No Content</code></td>
+<td>La operación ha tenido éxito y no devuelve contenido.</td>
+</tr>
+<tr class="even">
+<td><code>400 Bad Request</code></td>
+<td>La petición es inválida.</td>
+</tr>
+<tr class="odd">
+<td><code>401 Unauthorized</code></td>
+<td>Faltan credenciales válidas o no se han aceptado.</td>
+</tr>
+<tr class="even">
+<td><code>403 Forbidden</code></td>
+<td>La operación está prohibida para ese cliente.</td>
+</tr>
+<tr class="odd">
+<td><code>404 Not Found</code></td>
+<td>El recurso solicitado no se encuentra o no se expone.</td>
+</tr>
+<tr class="even">
+<td><code>500 Internal Server Error</code></td>
+<td>Se ha producido un error interno no controlado o genérico.</td>
+</tr>
+</tbody>
+</table>
+<blockquote class="blockquote">
+<p>Los códigos exactos dependen del contrato de la API. Por ejemplo, una petición inválida puede responder con <code>400</code> o <code>422</code>, según el diseño adoptado.</p>
+</blockquote>
+<p>Desde seguridad, un código HTTP por sí solo no demuestra que el comportamiento sea seguro: también debemos comprobar el contenido de la respuesta, los datos afectados y si se han revelado detalles innecesarios.</p>
 
 
+</section>
 </section>
 </section>
 
