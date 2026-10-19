@@ -321,6 +321,55 @@ Recordando algunos códigos HTTP:
 
 Desde seguridad, un código HTTP por sí solo no demuestra que el comportamiento sea seguro: también debemos comprobar el contenido de la respuesta, los datos afectados y si se han revelado detalles innecesarios.
 
+## Pruebas E2E con Playwright
+
+### ¿Qué cambia respecto al API testing?
+
+En las pruebas de API llamamos directamente al backend. En las pruebas E2E simulamos acciones de una persona utilizando la aplicación.
+
+![API testing - E2E testing](./images/3.png)
+
+Una prueba E2E puede detectar problemas de **integración** que una prueba directa de la API no encuentra: botones que no funcionan, formularios que envían campos incorrectos o interfaces que no muestran los errores recibidos.
+
+Sin embargo, suelen ser **más lentas y frágiles**. Por eso no debemos sustituir todas las pruebas unitarias y de API por pruebas E2E.
+
+### ¿Qué es Playwright?
+
+Permite automatizar navegadores para reproducir acciones como:
+
+- Abrir una página
+- Pulsar botones
+- Rellenar formularios
+- Esperar respuestas y cambios en la interfaz
+- Comprobar que aparecen mensajes o elementos
+- Verificar un flujo completo de usuario
+
+Para utilizarlo, debemos instalar sus dependencias de desarrollo en el proyecto frontend:
+
+```bash
+npm init playwright@latest
+```
+
+### Ejemplo de una prueba E2E
+
+Supongamos que la aplicación tiene una página de listado de héroes. Este ejemplo ilustra el tipo de comprobación que queremos realizar; los selectores y el texto deben ajustarse a la interfaz real.
+
+```js
+import { test, expect } from "@playwright/test";
+
+test("la página de héroes muestra el listado", async ({ page }) => {
+  await page.goto("/heroes");
+
+  await expect(
+    page.getByRole("heading", { name: /heroes/i })
+  ).toBeVisible();
+
+  await expect(
+    page.getByTestId("hero-list")
+  ).toBeVisible();
+});
+```
+
 
 
 

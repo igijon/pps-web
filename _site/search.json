@@ -1563,5 +1563,172 @@
       "UD2",
       "UD2 · Lab 3 · ¿Podemos confiar en esta API?"
     ]
+  },
+  {
+    "objectID": "unidades/ud2/index.html#pruebas-e2e-con-playwright",
+    "href": "unidades/ud2/index.html#pruebas-e2e-con-playwright",
+    "title": "UD2. Testing. Encontrar problemas antes de producción",
+    "section": "Pruebas E2E con Playwright",
+    "text": "Pruebas E2E con Playwright\n\n¿Qué cambia respecto al API testing?\nEn las pruebas de API llamamos directamente al backend. En las pruebas E2E simulamos acciones de una persona utilizando la aplicación.\n\n\n\nAPI testing - E2E testing\n\n\nUna prueba E2E puede detectar problemas de integración que una prueba directa de la API no encuentra: botones que no funcionan, formularios que envían campos incorrectos o interfaces que no muestran los errores recibidos.\nSin embargo, suelen ser más lentas y frágiles. Por eso no debemos sustituir todas las pruebas unitarias y de API por pruebas E2E.\n\n\n¿Qué es Playwright?\nPermite automatizar navegadores para reproducir acciones como:\n\nAbrir una página\nPulsar botones\nRellenar formularios\nEsperar respuestas y cambios en la interfaz\nComprobar que aparecen mensajes o elementos\nVerificar un flujo completo de usuario\n\nPara utilizarlo, debemos instalar sus dependencias de desarrollo en el proyecto frontend:\nnpm init playwright@latest\n\n\nEjemplo de una prueba E2E\nSupongamos que la aplicación tiene una página de listado de héroes. Este ejemplo ilustra el tipo de comprobación que queremos realizar; los selectores y el texto deben ajustarse a la interfaz real.\nimport { test, expect } from \"@playwright/test\";\n\ntest(\"la página de héroes muestra el listado\", async ({ page }) =&gt; {\n  await page.goto(\"/heroes\");\n\n  await expect(\n    page.getByRole(\"heading\", { name: /heroes/i })\n  ).toBeVisible();\n\n  await expect(\n    page.getByTestId(\"hero-list\")\n  ).toBeVisible();\n});",
+    "crumbs": [
+      "📚 Unidades",
+      "2-Testing. Encontrar problemas antes de produccion"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud2/lab4.html",
+    "href": "laboratorios/ud2/lab4.html",
+    "title": "UD2 · Lab 4 · E2E con PlayWright",
+    "section": "",
+    "text": "Para escribir y ejecutar pruebas con test() y expect() necesitamos también el ejecutor Playwright Test\nnpm install -D @playwright/test\nDespués necesitamos instalar un navegador que utilicen las pruebas, vamos a instalar Chromium:\nnpx playwright install chromium\nNo necesitamos crear un proyecto distinto, ni modificar nuestra aplicación de React.\n\n\n\nEn la raíz del proyecto, al mismo nivel que package.json, crea un archivo llamado playwright.config.ts (si lo tienes, edítalo).\nimport { defineConfig } from \"@playwright/test\";\n\nexport default defineConfig({\n  testDir: \"./tests/e2e\",\n\n  use: {\n    baseURL: \"http://127.0.0.1:5173\",\n    browserName: \"chromium\",\n    headless: true,\n  },\n\n  webServer: {\n    command: \"npm run dev -- --host 127.0.0.1\",\n    url: \"http://127.0.0.1:5173\",\n    reuseExistingServer: !process.env.CI,\n  },\n});\n¿Qué estamos configurando?\n\n\n\n\n\n\n\nPropiedad\nFunción\n\n\n\n\ntestDir\nCarpeta en la que guardaremos las pruebas\n\n\nbaseURL\nDirección de nuestra aplicación\n\n\nbrowserName\nNavegador que utilizará Playwright\n\n\nheadless\nEjecuta el navegador sin mostrar su ventana\n\n\nwebServer\nArranca Vite antes de ejecutar las pruebas y espera a que responda\n\n\n\nAsí no tendrás que abrir manualmente el servidor cada vez que quieras ejecutar esta prueba. Playwright lo iniciará por ti.\n\n\n\nCrea esta estructura de carpetas y archivos:\nreact_heroes_app/\n├── src/\n├── tests/\n│   └── e2e/\n│       └── heroes.spec.ts\n├── package.json\n├── playwright.config.ts\n└── vite.config.ts\nEl archivo heroes.spec.ts contendrá nuestras pruebas automatizadas.\n\n\n\nAbre tests/e2e/heroes.spec.ts y escribe:\n\nimport { test, expect } from \"@playwright/test\";\n\ntest(\"la página principal muestra el título\", async ({ page }) =&gt; {\n  await page.goto(\"/\");\n\n  await expect(\n    page.getByRole(\"heading\", {\n      name: \"Universo de SuperHéroes\",\n    })\n  ).toBeVisible();\n});\n\n\nimport { test, expect } from \"@playwright/test\";\n\ntest permite definir la prueba.\nexpect permite expresar una condición que debe cumplirse.\n\n\n\n\ntest(\"la página principal muestra el título\", async ({ page }) =&gt; {\nEl primer argumento es el nombre de la prueba. page es una página del navegador que Playwright nos proporciona para interactuar con ella.\n\n\n\nawait page.goto(\"/\");\nAbre la ruta /. Como hemos definido baseURL, equivale a visitar http://127.0.0.1:5173/.\n\n\n\nawait expect(\n  page.getByRole(\"heading\", {\n    name: \"Universo de SuperHéroes\",\n  })\n).toBeVisible();\nEsta instrucción busca un encabezado accesible cuyo nombre sea Universo de SuperHéroes y comprueba que esté visible.\nEn el proyecto, el texto se genera desde HomePage.tsx mediante el componente CustomJumbotron, que contiene un elemento HTML h1.\nNo estamos buscando el elemento mediante una clase CSS como .text-5xl. Buscamos por su función y nombre accesible, lo que suele producir pruebas más resistentes a los cambios de estilos.\n\n\n\nEn el mismo archivo, añade:\n\ntest(\"la pestaña Heroes activa el filtro correspondiente\", async ({ page }) =&gt; {\n  await page.goto(\"/\");\n\n  const heroesTab = page.getByRole(\"tab\", {\n    name: /^Heroes\\b/,\n  });\n\n  await heroesTab.click();\n\n  await expect(heroesTab).toHaveAttribute(\"aria-selected\", \"true\");\n  await expect(page).toHaveURL(/category=hero/);\n});\n¿Qué estamos haciendo?\n\nAbrimos la página principal\nLocalizamos la pestaña Heroes\nSimulamos un click real con click()\nComprobamos que la pestaña queda seleccionada.\nComprobamos que la URL contiene category=hero\n\n\nEsta prueba verifica la interacción y el cambio de estado de la interfaz, pero no demuestra por sí sola que el backend devuelva exclusivamente héroes. Para comprobar también los datos, tendremos que añadir una prueba con el backend disponible y verificar el contenido de las tarjetas.\n\n\n\n\nEn package.json, añade un script dentro de \"scripts\":\n\"test:e2e\": \"playwright test\"\nAhora ejecuta:\nnpm run test:e2e\nPlaywright arrancará Vite, ejecutará las dos pruebas y mostrará un resumen parecido a este si ambas pasan:\nRunning 2 tests using 1 worker\n\n  ✓ la página principal muestra el título\n  ✓ la pestaña Heroes activa el filtro correspondiente\n\n  2 passed\nSi quieres ver el navegador mientras se ejecuta la prueba puedes lanzar:\nnpx playwright test --headed\n\n\n\n\nModifica el componente CustomJumbotron de forma que el título contenga otro texto. Ejecuta las pruebas y pon un pantallazo con lo que has obtenido.\n\n\n\nAñade un nuevo caso de prueba que testee si se selecciona la pestaña Favoritos\n\n\n\nAñade una nueva prueba que testee dentro del home de la aplicación que el backend devuelve los héroes correspondientes y se carga el HeroGrid con dichos héroes.",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD2",
+      "UD2 · Lab 4 · E2E con PlayWright"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud2/lab4.html#contexto",
+    "href": "laboratorios/ud2/lab4.html#contexto",
+    "title": "UD2 · Lab 4 · E2E con PlayWright",
+    "section": "",
+    "text": "Disponemos del API REST de la aplicación de héroes, con la que trabajamos Aquí.\n\n\nTal y como hemos visto anteriormente, debes de tener claramente identificados:\n\nQué endpoints están disponibles\nQué método HTTP utiliza cada operación\nQué datos deben enviarse\nQué respuesta debería recibirse\nQué errores pueden producirse\n\nPuedes consultar el código y la documentación que generaste en laboratorios anteriores.\nDebes documentar al menos tres operaciones: dos de consulta y otra de modificación o creación que ofrezca este API.\n\n\n\nUna vez identificado el endpoint real, puedes utilizar este ejemplo y adaptarlo a la URL y al contrato de tu aplicación.\nimport { test, expect } from \"vitest\";\n\nconst BASE_URL = process.env.API_URL;\n\ntest(\"la API permite consultar los héroes\", async () =&gt; {\n  const response = await fetch(`${BASE_URL}/heroes`);\n\n  expect(response.status).toBe(200);\n\n  const heroes = await response.json();\n\n  expect(Array.isArray(heroes)).toBe(true);\n});\n\n\n\nDebemos mejorar la prueba anterior sin recibir todas las aserciones resueltas.\nComo mínimo, debes comprobar:\n\nQue la respuesta tiene el código esperado.\nQue el cuerpo contiene la estructura documentada.\nQue los elementos contienen los campos requeridos.\nQue el comportamiento coincide con los requisitos de la aplicación.\n\n\nDebemos comprender la diferencia entre comprobar que recibimos un array y comprobar que ese array contiene datos correctos.\n\n\n\n\nDebes investigar las entradas que incumplen reglas de la API y decidir qué comportamiento espera.\nDebes deducirlas del contrato y de las validaciones que encuentres en el backend.\nAlgunas líneas de investigación posibles son:\n\nEnviar un JSON incompleto\nOmitir un campo obligatorio\nEnviar un tipo de dato incorrecto\nSolicitar un identificador inexistente\nEnviar un valor que incumpla una regla de negocio.\n\nSi la API permite crear recursos, las pruebas que modifican esos datos deben utilizar recursos de prueba creados y evitar duplicados o efectos persistentes inesperados.\nNo se deben probar entradas maliciosas sobre servicios ajenos ni sistemas de producción",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD2",
+      "UD2 · Lab 4 · E2E con PlayWright"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud2/lab4.html#instalar-playwright-test",
+    "href": "laboratorios/ud2/lab4.html#instalar-playwright-test",
+    "title": "UD2 · Lab 4 · E2E con PlayWright",
+    "section": "",
+    "text": "Para escribir y ejecutar pruebas con test() y expect() necesitamos también el ejecutor Playwright Test\nnpm install -D @playwright/test\nDespués necesitamos instalar un navegador que utilicen las pruebas, vamos a instalar Chromium:\nnpx playwright install chromium\nNo necesitamos crear un proyecto distinto, ni modificar nuestra aplicación de React.",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD2",
+      "UD2 · Lab 4 · E2E con PlayWright"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud2/lab4.html#tarea-1.-investiga-el-contrato-de-la-api",
+    "href": "laboratorios/ud2/lab4.html#tarea-1.-investiga-el-contrato-de-la-api",
+    "title": "UD2 · Lab 4 · E2E con PlayWright",
+    "section": "",
+    "text": "Tal y como hemos visto anteriormente, debes de tener claramente identificados:\n\nQué endpoints están disponibles\nQué método HTTP utiliza cada operación\nQué datos deben enviarse\nQué respuesta debería recibirse\nQué errores pueden producirse\n\nPuedes consultar el código y la documentación que generaste en laboratorios anteriores.\nDebes documentar al menos tres operaciones: dos de consulta y otra de modificación o creación que ofrezca este API.\n\n\nUna vez identificado el endpoint real, puedes utilizar este ejemplo y adaptarlo a la URL y al contrato de tu aplicación.\nimport { test, expect } from \"vitest\";\n\nconst BASE_URL = process.env.API_URL;\n\ntest(\"la API permite consultar los héroes\", async () =&gt; {\n  const response = await fetch(`${BASE_URL}/heroes`);\n\n  expect(response.status).toBe(200);\n\n  const heroes = await response.json();\n\n  expect(Array.isArray(heroes)).toBe(true);\n});\n\n\n\nDebemos mejorar la prueba anterior sin recibir todas las aserciones resueltas.\nComo mínimo, debes comprobar:\n\nQue la respuesta tiene el código esperado.\nQue el cuerpo contiene la estructura documentada.\nQue los elementos contienen los campos requeridos.\nQue el comportamiento coincide con los requisitos de la aplicación.\n\n\nDebemos comprender la diferencia entre comprobar que recibimos un array y comprobar que ese array contiene datos correctos.\n\n\n\n\nDebes investigar las entradas que incumplen reglas de la API y decidir qué comportamiento espera.\nDebes deducirlas del contrato y de las validaciones que encuentres en el backend.\nAlgunas líneas de investigación posibles son:\n\nEnviar un JSON incompleto\nOmitir un campo obligatorio\nEnviar un tipo de dato incorrecto\nSolicitar un identificador inexistente\nEnviar un valor que incumpla una regla de negocio.\n\nSi la API permite crear recursos, las pruebas que modifican esos datos deben utilizar recursos de prueba creados y evitar duplicados o efectos persistentes inesperados.\nNo se deben probar entradas maliciosas sobre servicios ajenos ni sistemas de producción",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD2",
+      "UD2 · Lab 4 · E2E con PlayWright"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud2/lab4.html#paso-2.-crear-la-configuración-de-playwright",
+    "href": "laboratorios/ud2/lab4.html#paso-2.-crear-la-configuración-de-playwright",
+    "title": "UD2 · Lab 4 · E2E con PlayWright",
+    "section": "",
+    "text": "En la raíz del proyecto, al mismo nivel que package.json, crea un archivo llamado playwright.config.ts (si lo tienes, edítalo).\nimport { defineConfig } from \"@playwright/test\";\n\nexport default defineConfig({\n  testDir: \"./tests/e2e\",\n\n  use: {\n    baseURL: \"http://127.0.0.1:5173\",\n    browserName: \"chromium\",\n    headless: true,\n  },\n\n  webServer: {\n    command: \"npm run dev -- --host 127.0.0.1\",\n    url: \"http://127.0.0.1:5173\",\n    reuseExistingServer: !process.env.CI,\n  },\n});\n¿Qué estamos configurando?\n\n\n\n\n\n\n\nPropiedad\nFunción\n\n\n\n\ntestDir\nCarpeta en la que guardaremos las pruebas\n\n\nbaseURL\nDirección de nuestra aplicación\n\n\nbrowserName\nNavegador que utilizará Playwright\n\n\nheadless\nEjecuta el navegador sin mostrar su ventana\n\n\nwebServer\nArranca Vite antes de ejecutar las pruebas y espera a que responda\n\n\n\nAsí no tendrás que abrir manualmente el servidor cada vez que quieras ejecutar esta prueba. Playwright lo iniciará por ti.",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD2",
+      "UD2 · Lab 4 · E2E con PlayWright"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud2/lab4.html#tab-1",
+    "href": "laboratorios/ud2/lab4.html#tab-1",
+    "title": "UD2 · Lab 4 · E2E con PlayWright",
+    "section": "",
+    "text": "content",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD2",
+      "UD2 · Lab 4 · E2E con PlayWright"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud2/lab4.html#tab-2",
+    "href": "laboratorios/ud2/lab4.html#tab-2",
+    "title": "UD2 · Lab 4 · E2E con PlayWright",
+    "section": "",
+    "text": "content\n:::",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD2",
+      "UD2 · Lab 4 · E2E con PlayWright"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud2/lab4.html#crear-la-configuración-de-playwright",
+    "href": "laboratorios/ud2/lab4.html#crear-la-configuración-de-playwright",
+    "title": "UD2 · Lab 4 · E2E con PlayWright",
+    "section": "",
+    "text": "En la raíz del proyecto, al mismo nivel que package.json, crea un archivo llamado playwright.config.ts (si lo tienes, edítalo).\nimport { defineConfig } from \"@playwright/test\";\n\nexport default defineConfig({\n  testDir: \"./tests/e2e\",\n\n  use: {\n    baseURL: \"http://127.0.0.1:5173\",\n    browserName: \"chromium\",\n    headless: true,\n  },\n\n  webServer: {\n    command: \"npm run dev -- --host 127.0.0.1\",\n    url: \"http://127.0.0.1:5173\",\n    reuseExistingServer: !process.env.CI,\n  },\n});\n¿Qué estamos configurando?\n\n\n\n\n\n\n\nPropiedad\nFunción\n\n\n\n\ntestDir\nCarpeta en la que guardaremos las pruebas\n\n\nbaseURL\nDirección de nuestra aplicación\n\n\nbrowserName\nNavegador que utilizará Playwright\n\n\nheadless\nEjecuta el navegador sin mostrar su ventana\n\n\nwebServer\nArranca Vite antes de ejecutar las pruebas y espera a que responda\n\n\n\nAsí no tendrás que abrir manualmente el servidor cada vez que quieras ejecutar esta prueba. Playwright lo iniciará por ti.",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD2",
+      "UD2 · Lab 4 · E2E con PlayWright"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud2/lab4.html#crear-el-archivo-de-pruebas",
+    "href": "laboratorios/ud2/lab4.html#crear-el-archivo-de-pruebas",
+    "title": "UD2 · Lab 4 · E2E con PlayWright",
+    "section": "",
+    "text": "Crea esta estructura de carpetas y archivos:\nreact_heroes_app/\n├── src/\n├── tests/\n│   └── e2e/\n│       └── heroes.spec.ts\n├── package.json\n├── playwright.config.ts\n└── vite.config.ts\nEl archivo heroes.spec.ts contendrá nuestras pruebas automatizadas.",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD2",
+      "UD2 · Lab 4 · E2E con PlayWright"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud2/lab4.html#escribir-la-primera-prueba-comprobar-que-carga-la-página",
+    "href": "laboratorios/ud2/lab4.html#escribir-la-primera-prueba-comprobar-que-carga-la-página",
+    "title": "UD2 · Lab 4 · E2E con PlayWright",
+    "section": "",
+    "text": "Abre tests/e2e/heroes.spec.ts y escribe:\n\nimport { test, expect } from \"@playwright/test\";\n\ntest(\"la página principal muestra el título\", async ({ page }) =&gt; {\n  await page.goto(\"/\");\n\n  await expect(\n    page.getByRole(\"heading\", {\n      name: \"Universo de SuperHéroes\",\n    })\n  ).toBeVisible();\n});\n\n\nimport { test, expect } from \"@playwright/test\";\n\ntest permite definir la prueba.\nexpect permite expresar una condición que debe cumplirse.\n\n\n\n\ntest(\"la página principal muestra el título\", async ({ page }) =&gt; {\nEl primer argumento es el nombre de la prueba. page es una página del navegador que Playwright nos proporciona para interactuar con ella.\n\n\n\nawait page.goto(\"/\");\nAbre la ruta /. Como hemos definido baseURL, equivale a visitar http://127.0.0.1:5173/.\n\n\n\nawait expect(\n  page.getByRole(\"heading\", {\n    name: \"Universo de SuperHéroes\",\n  })\n).toBeVisible();\nEsta instrucción busca un encabezado accesible cuyo nombre sea Universo de SuperHéroes y comprueba que esté visible.\nEn el proyecto, el texto se genera desde HomePage.tsx mediante el componente CustomJumbotron, que contiene un elemento HTML h1.\nNo estamos buscando el elemento mediante una clase CSS como .text-5xl. Buscamos por su función y nombre accesible, lo que suele producir pruebas más resistentes a los cambios de estilos.\n\n\n\nEn el mismo archivo, añade:\n\ntest(\"la pestaña Heroes activa el filtro correspondiente\", async ({ page }) =&gt; {\n  await page.goto(\"/\");\n\n  const heroesTab = page.getByRole(\"tab\", {\n    name: /^Heroes\\b/,\n  });\n\n  await heroesTab.click();\n\n  await expect(heroesTab).toHaveAttribute(\"aria-selected\", \"true\");\n  await expect(page).toHaveURL(/category=hero/);\n});\n¿Qué estamos haciendo?\n\nAbrimos la página principal\nLocalizamos la pestaña Heroes\nSimulamos un click real con click()\nComprobamos que la pestaña queda seleccionada.\nComprobamos que la URL contiene category=hero\n\n\nEsta prueba verifica la interacción y el cambio de estado de la interfaz, pero no demuestra por sí sola que el backend devuelva exclusivamente héroes. Para comprobar también los datos, tendremos que añadir una prueba con el backend disponible y verificar el contenido de las tarjetas.\n\n\n\n\nEn package.json, añade un script dentro de \"scripts\":\n\"test:e2e\": \"playwright test\"\nAhora ejecuta:\nnpm run test:e2e\nPlaywright arrancará Vite, ejecutará las dos pruebas y mostrará un resumen parecido a este si ambas pasan:\nRunning 2 tests using 1 worker\n\n  ✓ la página principal muestra el título\n  ✓ la pestaña Heroes activa el filtro correspondiente\n\n  2 passed\nSi quieres ver el navegador mientras se ejecuta la prueba puedes lanzar:\nnpx playwright test --headed",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD2",
+      "UD2 · Lab 4 · E2E con PlayWright"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud2/lab4.html#qué-ocurre-si-una-prueba-falla",
+    "href": "laboratorios/ud2/lab4.html#qué-ocurre-si-una-prueba-falla",
+    "title": "UD2 · Lab 4 · E2E con PlayWright",
+    "section": "",
+    "text": "Modifica el componente CustomJumbotron de forma que el título contenga otro texto. Ejecuta las pruebas y pon un pantallazo con lo que has obtenido.",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD2",
+      "UD2 · Lab 4 · E2E con PlayWright"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud2/lab4.html#nueva-prueba",
+    "href": "laboratorios/ud2/lab4.html#nueva-prueba",
+    "title": "UD2 · Lab 4 · E2E con PlayWright",
+    "section": "",
+    "text": "Añade un nuevo caso de prueba que testee si se selecciona la pestaña Favoritos",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD2",
+      "UD2 · Lab 4 · E2E con PlayWright"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud2/lab4.html#opcional",
+    "href": "laboratorios/ud2/lab4.html#opcional",
+    "title": "UD2 · Lab 4 · E2E con PlayWright",
+    "section": "",
+    "text": "Añade una nueva prueba que testee dentro del home de la aplicación que el backend devuelve los héroes correspondientes y se carga el HeroGrid con dichos héroes.",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD2",
+      "UD2 · Lab 4 · E2E con PlayWright"
+    ]
   }
 ]

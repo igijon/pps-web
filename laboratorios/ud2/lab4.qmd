@@ -1,0 +1,209 @@
+---
+title: "UD2 · Lab 4 · E2E con PlayWright"
+---
+
+# 🧪 Laboratorio 4 · E2E con PlayWright
+
+
+## 1. Instalar Playwright Test
+
+Para escribir y ejecutar pruebas con `test()` y `expect()` necesitamos también el ejecutor **Playwright Test**
+
+```bash
+npm install -D @playwright/test
+```
+
+Después necesitamos instalar un navegador que utilicen las pruebas, vamos a instalar Chromium:
+
+```bash
+npx playwright install chromium
+```
+
+No necesitamos crear un proyecto distinto, ni modificar nuestra aplicación de React.
+
+## 2. Crear la configuración de Playwright
+
+En la raíz del proyecto, al mismo nivel que `package.json`, crea un archivo llamado `playwright.config.ts` (si lo tienes, edítalo).
+
+```ts
+import { defineConfig } from "@playwright/test";
+
+export default defineConfig({
+  testDir: "./tests/e2e",
+
+  use: {
+    baseURL: "http://127.0.0.1:5173",
+    browserName: "chromium",
+    headless: true,
+  },
+
+  webServer: {
+    command: "npm run dev -- --host 127.0.0.1",
+    url: "http://127.0.0.1:5173",
+    reuseExistingServer: !process.env.CI,
+  },
+});
+```
+
+¿Qué estamos configurando?
+
+| Propiedad | Función |
+| - | - |
+| `testDir` | Carpeta en la que guardaremos las pruebas |
+| `baseURL` | Dirección de nuestra aplicación |
+| `browserName` | Navegador que utilizará Playwright |
+| `headless` | Ejecuta el navegador sin mostrar su ventana |
+| `webServer` | Arranca Vite antes de ejecutar las pruebas y espera a que responda |
+
+Así no tendrás que abrir manualmente el servidor cada vez que quieras ejecutar esta prueba. Playwright lo iniciará por ti.
+
+## 3. Crear el archivo de pruebas
+
+Crea esta estructura de carpetas y archivos:
+
+```txt
+react_heroes_app/
+├── src/
+├── tests/
+│   └── e2e/
+│       └── heroes.spec.ts
+├── package.json
+├── playwright.config.ts
+└── vite.config.ts
+```
+
+El archivo `heroes.spec.ts` contendrá nuestras pruebas automatizadas.
+
+## 4. Escribir la primera prueba: comprobar que carga la página
+
+Abre `tests/e2e/heroes.spec.ts` y escribe:
+
+```ts
+
+import { test, expect } from "@playwright/test";
+
+test("la página principal muestra el título", async ({ page }) => {
+  await page.goto("/");
+
+  await expect(
+    page.getByRole("heading", {
+      name: "Universo de SuperHéroes",
+    })
+  ).toBeVisible();
+});
+```
+
+### Importamos las herramientas
+
+```ts
+import { test, expect } from "@playwright/test";
+```
+
+- `test` permite definir la prueba.
+- `expect` permite expresar una condición que debe cumplirse.
+
+### Definir la prueba
+
+```ts
+test("la página principal muestra el título", async ({ page }) => {
+```
+
+El primer argumento es el nombre de la prueba. `page` es una página del navegador que Playwright nos proporciona para interactuar con ella.
+
+### Navegar a la aplicación
+
+```ts
+await page.goto("/");
+```
+
+Abre la ruta `/`. Como hemos definido `baseURL`, equivale a visitar `http://127.0.0.1:5173/`.
+
+### Comprobar el resultado
+
+```ts
+await expect(
+  page.getByRole("heading", {
+    name: "Universo de SuperHéroes",
+  })
+).toBeVisible();
+```
+
+Esta instrucción busca un encabezado accesible cuyo nombre sea `Universo de SuperHéroes` y comprueba que esté visible.
+
+En el proyecto, el texto se genera desde `HomePage.tsx` mediante el componente `CustomJumbotron`, que contiene un elemento HTML `h1`.
+
+No estamos buscando el elemento mediante una clase CSS como `.text-5xl`. Buscamos por su función y nombre accesible, lo que suele producir pruebas más resistentes a los cambios de estilos.
+
+### Escribir una segunda prueba: seleccionar la pestaña Heroes
+
+En el mismo archivo, añade:
+
+```ts
+
+test("la pestaña Heroes activa el filtro correspondiente", async ({ page }) => {
+  await page.goto("/");
+
+  const heroesTab = page.getByRole("tab", {
+    name: /^Heroes\b/,
+  });
+
+  await heroesTab.click();
+
+  await expect(heroesTab).toHaveAttribute("aria-selected", "true");
+  await expect(page).toHaveURL(/category=hero/);
+});
+
+```
+
+¿Qué estamos haciendo?
+
+1. Abrimos la página principal
+2. Localizamos la pestaña `Heroes`
+3. Simulamos un click real con `click()`
+4. Comprobamos que la pestaña queda seleccionada.
+5. Comprobamos que la URL contiene `category=hero`
+
+>Esta prueba verifica la interacción y el cambio de estado de la interfaz, pero no demuestra por sí sola que el backend devuelva exclusivamente héroes. Para comprobar también los datos, tendremos que añadir una prueba con el backend disponible y verificar el contenido de las tarjetas.
+
+### Ejecutar las pruebas
+
+En `package.json`, añade un script dentro de `"scripts"`:
+
+```json
+"test:e2e": "playwright test"
+```
+
+Ahora ejecuta:
+
+```bash
+npm run test:e2e
+```
+
+Playwright arrancará Vite, ejecutará las dos pruebas y mostrará un resumen parecido a este si ambas pasan:
+
+```txt
+Running 2 tests using 1 worker
+
+  ✓ la página principal muestra el título
+  ✓ la pestaña Heroes activa el filtro correspondiente
+
+  2 passed
+```
+
+Si quieres ver el navegador mientras se ejecuta la prueba puedes lanzar:
+
+```bash
+npx playwright test --headed
+```
+
+## ¿Qué ocurre si una prueba falla?
+
+Modifica el componente `CustomJumbotron` de forma que el título contenga otro texto. Ejecuta las pruebas y pon un pantallazo con lo que has obtenido.
+
+## Nueva prueba
+
+Añade un nuevo caso de prueba que testee si se selecciona la pestaña `Favoritos`
+
+## Opcional
+
+Añade una nueva prueba que testee dentro del home de la aplicación que el backend devuelve los héroes correspondientes y se carga el `HeroGrid` con dichos héroes.

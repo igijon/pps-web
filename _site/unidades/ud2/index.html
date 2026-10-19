@@ -241,6 +241,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">UD2 · Lab 3 · ¿Podemos confiar en esta API?</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../laboratorios/ud2/lab4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">UD2 · Lab 4 · ¿E2E con PlayWright?</span></a>
+  </div>
+</li>
       </ul>
   </li>
       </ul>
@@ -309,6 +315,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#qué-estamos-probando" id="toc-qué-estamos-probando" class="nav-link" data-scroll-target="#qué-estamos-probando">¿Qué estamos probando?</a></li>
   <li><a href="#qué-debe-comprobar-una-prueba-de-api" id="toc-qué-debe-comprobar-una-prueba-de-api" class="nav-link" data-scroll-target="#qué-debe-comprobar-una-prueba-de-api">¿Qué debe comprobar una prueba de API?</a></li>
+  </ul></li>
+  <li><a href="#pruebas-e2e-con-playwright" id="toc-pruebas-e2e-con-playwright" class="nav-link" data-scroll-target="#pruebas-e2e-con-playwright">Pruebas E2E con Playwright</a>
+  <ul class="collapse">
+  <li><a href="#qué-cambia-respecto-al-api-testing" id="toc-qué-cambia-respecto-al-api-testing" class="nav-link" data-scroll-target="#qué-cambia-respecto-al-api-testing">¿Qué cambia respecto al API testing?</a></li>
+  <li><a href="#qué-es-playwright" id="toc-qué-es-playwright" class="nav-link" data-scroll-target="#qué-es-playwright">¿Qué es Playwright?</a></li>
+  <li><a href="#ejemplo-de-una-prueba-e2e" id="toc-ejemplo-de-una-prueba-e2e" class="nav-link" data-scroll-target="#ejemplo-de-una-prueba-e2e">Ejemplo de una prueba E2E</a></li>
   </ul></li>
   </ul></li>
   </ul>
@@ -778,6 +790,52 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Los códigos exactos dependen del contrato de la API. Por ejemplo, una petición inválida puede responder con <code>400</code> o <code>422</code>, según el diseño adoptado.</p>
 </blockquote>
 <p>Desde seguridad, un código HTTP por sí solo no demuestra que el comportamiento sea seguro: también debemos comprobar el contenido de la respuesta, los datos afectados y si se han revelado detalles innecesarios.</p>
+</section>
+</section>
+<section id="pruebas-e2e-con-playwright" class="level2">
+<h2 class="anchored" data-anchor-id="pruebas-e2e-con-playwright">Pruebas E2E con Playwright</h2>
+<section id="qué-cambia-respecto-al-api-testing" class="level3">
+<h3 class="anchored" data-anchor-id="qué-cambia-respecto-al-api-testing">¿Qué cambia respecto al API testing?</h3>
+<p>En las pruebas de API llamamos directamente al backend. En las pruebas E2E simulamos acciones de una persona utilizando la aplicación.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./images/3.png" class="img-fluid figure-img"></p>
+<figcaption>API testing - E2E testing</figcaption>
+</figure>
+</div>
+<p>Una prueba E2E puede detectar problemas de <strong>integración</strong> que una prueba directa de la API no encuentra: botones que no funcionan, formularios que envían campos incorrectos o interfaces que no muestran los errores recibidos.</p>
+<p>Sin embargo, suelen ser <strong>más lentas y frágiles</strong>. Por eso no debemos sustituir todas las pruebas unitarias y de API por pruebas E2E.</p>
+</section>
+<section id="qué-es-playwright" class="level3">
+<h3 class="anchored" data-anchor-id="qué-es-playwright">¿Qué es Playwright?</h3>
+<p>Permite automatizar navegadores para reproducir acciones como:</p>
+<ul>
+<li>Abrir una página</li>
+<li>Pulsar botones</li>
+<li>Rellenar formularios</li>
+<li>Esperar respuestas y cambios en la interfaz</li>
+<li>Comprobar que aparecen mensajes o elementos</li>
+<li>Verificar un flujo completo de usuario</li>
+</ul>
+<p>Para utilizarlo, debemos instalar sus dependencias de desarrollo en el proyecto frontend:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">npm</span> init playwright@latest</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="ejemplo-de-una-prueba-e2e" class="level3">
+<h3 class="anchored" data-anchor-id="ejemplo-de-una-prueba-e2e">Ejemplo de una prueba E2E</h3>
+<p>Supongamos que la aplicación tiene una página de listado de héroes. Este ejemplo ilustra el tipo de comprobación que queremos realizar; los selectores y el texto deben ajustarse a la interfaz real.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { test<span class="op">,</span> expect } <span class="im">from</span> <span class="st">"@playwright/test"</span><span class="op">;</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">test</span>(<span class="st">"la página de héroes muestra el listado"</span><span class="op">,</span> <span class="kw">async</span> ({ page }) <span class="kw">=&gt;</span> {</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">await</span> page<span class="op">.</span><span class="fu">goto</span>(<span class="st">"/heroes"</span>)<span class="op">;</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">await</span> <span class="fu">expect</span>(</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    page<span class="op">.</span><span class="fu">getByRole</span>(<span class="st">"heading"</span><span class="op">,</span> { <span class="dt">name</span><span class="op">:</span> <span class="ss">/heroes/i</span> })</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  )<span class="op">.</span><span class="fu">toBeVisible</span>()<span class="op">;</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>  <span class="cf">await</span> <span class="fu">expect</span>(</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>    page<span class="op">.</span><span class="fu">getByTestId</span>(<span class="st">"hero-list"</span>)</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>  )<span class="op">.</span><span class="fu">toBeVisible</span>()<span class="op">;</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 
 </section>
