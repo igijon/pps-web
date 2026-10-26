@@ -1730,5 +1730,477 @@
       "UD2",
       "UD2 · Lab 4 · E2E con PlayWright"
     ]
+  },
+  {
+    "objectID": "unidades/ud2/index.html#por-qué-necesitamos-más-que-tests-funcionales",
+    "href": "unidades/ud2/index.html#por-qué-necesitamos-más-que-tests-funcionales",
+    "title": "UD2. Testing. Encontrar problemas antes de producción",
+    "section": "¿Por qué necesitamos más que tests funcionales?",
+    "text": "¿Por qué necesitamos más que tests funcionales?\nLos tests que hemos trabajado con Vitest permiten comprobar si una función devuelve el resultado esperado. Playwright permite verificar flujos del usuario en el navegador\nSin embargo, una aplicación puede superar esas pruebas y mantener problemas de seguridad.\nPor ejemplo:\n\nUna función calcula correctamente un resultado, pero construye una consulta SQL concatenando datos del usuario.\nUna página funciona correctamente, pero no incluye determinadas cabeceras de seguridad.\nUna API devuelve los datos esperados, pero permite consultar información sin autorización.\nUn formulario valida los datos en el navegador, pero el servidor no vuelve a validarlos.\n\nPor tanto, necesitamos distintas técnicas de verificación que aporten evidencias completementarias.",
+    "crumbs": [
+      "📚 Unidades",
+      "2-Testing. Encontrar problemas antes de produccion"
+    ]
+  },
+  {
+    "objectID": "unidades/ud2/index.html#sast-análisis-estático-de-seguridad",
+    "href": "unidades/ud2/index.html#sast-análisis-estático-de-seguridad",
+    "title": "UD2. Testing. Encontrar problemas antes de producción",
+    "section": "SAST: Análisis estático de seguridad",
+    "text": "SAST: Análisis estático de seguridad\nEl Static Application Security Testing analiza el código fuente u otros artefactos sin necesidad de ejecutar la aplicación.\nBusca patrones que pueden indicar problemas de seguridad: funciones peligrosas, tratamiento inadecuado de datos, secretos expuestos o construcciones que merecen una revisión.\n&lt;/&gt; Código fuente -&gt; Analizador SAST -&gt; Hallazgos\nUna herramienta que utilizaremos es Semgrep. Permite analizar código mediante reglas y utilizar conjuntos de reglas para detectar patrones de seguridad.\nfunction buscarUsuario(nombre) {\n    const consulta = \"SELECT * FROM usuarios WHERE nombre = '\" + nombre + \"'\";\n    return ejecutarConsulta(consulta);\n}\nLa concatenación de una entrada externa en una consulta SQL puede permitir una inyección SQL, dependiendo de cómo funcione ejecutarConsulta y de si existen otras protecciones.\nPor ejemplo:\nfunction buscarUsuario(nombre) {\n    const consulta = \"SELECT * FROM usuarios WHERE nombre = '\" + nombre + \"'\";\n    return ejecutarConsulta(consulta);\n}\n\nbuscarUsuario(\"' OR '1'='1' --\");\nLa consulta resultante sería algo como:\nSELECT * FROM usuarios WHERE nombre = '' OR '1'='1' --'\n\nEsto comprueba si el nombre está vacío o añade una condición que siempre es verdadera y -- inicia un comentario SQL que hace que el resto de la línea se ignore.\n\nUn análisis SAST puede señalar esa construcción. No obstante, hay que comprobar el contexto: encontrar un patrón sospechoso no demuestra siempre que exista una vulnerabilidad explotable.\nVentajas\n\nPuede detectar problemas antes de ejecutar o desplegar la aplicación.\nPermite analizar cambios durante el desarrollo.\nFacilita la integración en revisiones de código y pipelines.\n\nLimitaciones\n\nPuede producir falsos positivos\nPuede no comprender toda la lógica de negocio o el contexto de ejecución\nPuede pasar por alto vulnerabilidades que no coincidan con las reglas disponibles",
+    "crumbs": [
+      "📚 Unidades",
+      "2-Testing. Encontrar problemas antes de produccion"
+    ]
+  },
+  {
+    "objectID": "unidades/ud2/index.html#dast-análisis-dinámico-de-seguridad",
+    "href": "unidades/ud2/index.html#dast-análisis-dinámico-de-seguridad",
+    "title": "UD2. Testing. Encontrar problemas antes de producción",
+    "section": "DAST: Análisis dinámico de seguridad",
+    "text": "DAST: Análisis dinámico de seguridad\nEl Dynamic Application Security Testing examina una aplicación mientras está ejecutándose. La herramienta interactúa con ella mediante peticiones HTTP y analiza las respuestas y los comportamientos observados.\nUtilizaremos OWASP ZAP. Puede rastrear una aplicación, analizar pasivamente las comunicaciones y ejecutar análisis activos configurados para buscar vulnerabilidades.\nPor ejemplo, puede detectar:\n\nCabeceras de seguridad ausentes o mal configuradas.\nCookies que no tienen determinados atributos de seguridad.\nAlgunas formas de inyección o XSS.\nOtros comportamientos potencialmente inseguros observables desde el exterior.\n\nVentajas\n\nExamina el comportamiento real de la aplicación desplegada.\nPuede identificar problemas de configuración y respuestas HTTP.\nNo necesita acceso al código fuente.\n\nLimitaciones\n\nPuede no descubrir rutas que no haya explorado\nPuede no acceder a funciones que requieren autenticación\nNo detecta necesariamente todos los fallos de autorización o lógica de negocio\nUn escaneo activo puede enviar peticiones que modifiquen datos o afecten al servicio\n\n\nEmpezaremos con un análisis pasivo o Baseline Scan. No ejecutaremos pruebas activas contra aplicaciones públicas o sistemas sin autorización.",
+    "crumbs": [
+      "📚 Unidades",
+      "2-Testing. Encontrar problemas antes de produccion"
+    ]
+  },
+  {
+    "objectID": "unidades/ud2/index.html#por-qué-no",
+    "href": "unidades/ud2/index.html#por-qué-no",
+    "title": "UD2. Testing. Encontrar problemas antes de producción",
+    "section": "¿Por qué no?",
+    "text": "¿Por qué no?",
+    "crumbs": [
+      "📚 Unidades",
+      "2-Testing. Encontrar problemas antes de produccion"
+    ]
+  },
+  {
+    "objectID": "unidades/ud2/index.html#por-qué-no-basta-con-que-los-tests-pasen",
+    "href": "unidades/ud2/index.html#por-qué-no-basta-con-que-los-tests-pasen",
+    "title": "UD2. Testing. Encontrar problemas antes de producción",
+    "section": "¿Por qué no basta con que los tests pasen?",
+    "text": "¿Por qué no basta con que los tests pasen?\nImagina que una aplicción obtiene este resultado:\n\nTodos los test de Vitest pasan.\nLos flujos principales de Playwright funcionan.\nSemprep señala una posible inyección.\nZAP detecta una cabecera de seguridad ausente.\n\n¿Está preparada para producción?\nNo podemos responder mirando únicamente el número de tests superados. Los test funcionales verifican comportamientos esperados; SAST y DAST aportan otras evidencias sobre posibles problemas de seguridad.\n\nLa decisión debe considerar el contexto, las consecuencias de cada defecto, la confianza en la evidencia y los controles existentes.",
+    "crumbs": [
+      "📚 Unidades",
+      "2-Testing. Encontrar problemas antes de produccion"
+    ]
+  },
+  {
+    "objectID": "unidades/ud2/index.html#de-una-alerta-a-una-decisión",
+    "href": "unidades/ud2/index.html#de-una-alerta-a-una-decisión",
+    "title": "UD2. Testing. Encontrar problemas antes de producción",
+    "section": "De una alerta a una decisión",
+    "text": "De una alerta a una decisión\nPara gestionar un hallazgo, seguiremos este proceso:\n\n\n\nPasos",
+    "crumbs": [
+      "📚 Unidades",
+      "2-Testing. Encontrar problemas antes de produccion"
+    ]
+  },
+  {
+    "objectID": "unidades/ud2/index.html#cómo-priorizamos-los-hallazgos",
+    "href": "unidades/ud2/index.html#cómo-priorizamos-los-hallazgos",
+    "title": "UD2. Testing. Encontrar problemas antes de producción",
+    "section": "¿Cómo priorizamos los hallazgos?",
+    "text": "¿Cómo priorizamos los hallazgos?\nNo debemos confundir el nivel de alerta de una herramienta con el riesgo real para el negocio.\nPara priorizar, podemos utilizar estos criterios:\n\nImpacto: consecuencias sobre la confidencialidad, integridad o disponibilidad.\nProbabilidad: facilidad de explotación y condiciones necesarias.\nExposición: accesibilidad del componente y datos o funciones que protege.\nEvidencia: grado de confirmación de hallazgo.\nControles existentes: medidas que puedan reducir el riesgo, sin asumir que lo eliminan.\n\nUna política didáctica de ejemplo podría ser:\n\n\n\nPolítica didáctica de ejemplo",
+    "crumbs": [
+      "📚 Unidades",
+      "2-Testing. Encontrar problemas antes de produccion"
+    ]
+  },
+  {
+    "objectID": "unidades/ud2/index.html#qué-significa-integrar-seguridad-en-el-testing",
+    "href": "unidades/ud2/index.html#qué-significa-integrar-seguridad-en-el-testing",
+    "title": "UD2. Testing. Encontrar problemas antes de producción",
+    "section": "¿Qué significa integrar seguridad en el testing?",
+    "text": "¿Qué significa integrar seguridad en el testing?\nSignifica que las comprobaciones de seguridad forman parte del proceso habitual de desarrollo, y no se ejecutan únicamente al final.\nPodemos organizar las verificaciones en diferentes momentos:\n\n\n\nMomentos de verificación",
+    "crumbs": [
+      "📚 Unidades",
+      "2-Testing. Encontrar problemas antes de produccion"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud2/lab5.html",
+    "href": "laboratorios/ud2/lab5.html",
+    "title": "UD2 · Lab 5 · Análisis estático de seguridad con Semgrep",
+    "section": "",
+    "text": "En este laboratorio trabajarás con SAST (Static Application Security Testing), una técnica que permite analizar el código fuente para identificar patrones que podrían indicar problemas de seguridad, sin necesidad de ejecutar la aplicación.\nAl finalizar la práctica, deberás ser capaz de:\n\nInstalar y ejecutar Semgrep en tu equipo.\nAnalizar una aplicación JavaScript mediante reglas de seguridad.\nInterpretar los resultados de un análisis estático.\nInvestigar si una alerta representa una vulnerabilidad real, un falso positivo o un problema que necesita más información.\nProponer correcciones y pruebas que permitan comprobar que los problemas se han resuelto.\n\n\n\nTaskFlow es una pequeña aplicación JavaScript para gestionar tareas. Permite mostrar tareas iniciales y añadir nuevas mediante un formulario.\nLa aplicación funciona en el navegador y no necesita una base de datos. Sin embargo, su código incluye distintos patrones que merecen ser investigados desde el punto de vista de la seguridad.\nTu trabajo consiste en analizar el proyecto con Semgrep, interpretar los resultados y elaborar un informe técnico con tus conclusiones.\nImportante: una alerta de una herramienta de análisis estático no demuestra por sí sola que exista una vulnerabilidad explotable. Deberás estudiar el código y justificar tus conclusiones.\n\n\n\n\n\nDescarga el proyecto TaskFlow proporcionado para el laboratorio y descomprímelo en una carpeta de tu equipo.\nAbre esa carpeta con Visual Studio Code.\nLa estructura del proyecto es la siguiente:\ntaskflow-semgrep-lab/\n├── index.html\n├── app.js\n├── tareas.js\n├── data-access.js\n├── config.js\n├── semgrep.yml\n├── package.json\n└── README.md\nNo necesitas instalar dependencias de npm ni configurar una base de datos para realizar el análisis estático.\n\n\n\nEn macOS puedes instalar Semgrep mediante Homebrew.\nAbre Terminal y ejecuta:\nbrew install semgrep\nComprueba que la instalación ha terminado correctamente:\nsemgrep --version\nSi no tienes Homebrew instalado, puedes consultar las instrucciones en brew.sh.\n\n\n\nEn Windows puedes utilizar Python y pip.\nAbre PowerShell o el terminal de Visual Studio Code y comprueba que Python está disponible:\npy --version\nSi el comando no funciona, instala Python desde python.org y vuelve a abrir el terminal.\nInstala Semgrep:\npy -m pip install semgrep\nComprueba la instalación:\nsemgrep --version\nSi Windows no reconoce el comando semgrep, abre un terminal nuevo. Si el problema continúa, comprueba que la carpeta de ejecutables de Python está incluida en la variable de entorno PATH.\n\nNota: los métodos de instalación disponibles pueden cambiar entre versiones de Semgrep. Si la instalación mediante pip falla, consulta la documentación oficial de Semgrep.\n\n\n\n\nAbre un terminal desde la carpeta del proyecto.\nEn macOS puedes ejecutar:\nls\nEn Windows PowerShell:\nGet-ChildItem\nComprueba que aparece el archivo semgrep.yml. Lo necesitarás para ejecutar el análisis con las reglas incluidas en el laboratorio.\n\n\n\n\nDesde la raíz del proyecto, ejecuta:\nsemgrep scan --config semgrep.yml .\nEste comando funciona tanto en macOS como en Windows, siempre que Semgrep esté instalado y disponible en el terminal.\nSus elementos significan lo siguiente:\n\n\n\n\n\n\n\nElemento\nSignificado\n\n\n\n\nsemgrep\nEjecuta la herramienta.\n\n\nscan\nInicia un análisis del código.\n\n\n--config semgrep.yml\nIndica el archivo de reglas que se utilizará.\n\n\n.\nAnaliza el directorio actual y los archivos compatibles que encuentre.\n\n\n\nObserva los resultados. Semgrep puede mostrar el archivo afectado, la ubicación del código, la regla que ha generado la alerta y una explicación del problema potencial.\nNo te limites a copiar la salida del terminal: debes comprender qué significa cada hallazgo.\n\n\n\nAnaliza el código del proyecto y examina las alertas generadas por Semgrep.\nPara cada hallazgo, responde a las siguientes preguntas:\n\n¿En qué archivo y línea se encuentra?\n¿Qué patrón ha detectado la herramienta?\n¿Qué riesgo de seguridad intenta señalar?\n¿Qué datos intervienen y de dónde proceden?\n¿Existe suficiente evidencia para confirmar una vulnerabilidad?\n¿Qué información adicional necesitarías para determinar el riesgo real?\n¿Cómo corregirías el problema?\n¿Qué prueba realizarías para comprobar que la corrección funciona?\n\nNo todos los hallazgos tienen que tener la misma clasificación. En tu informe podrás distinguir entre:\n\nVulnerabilidad confirmada: existe evidencia suficiente para justificar que el problema es real en el contexto analizado.\nPosible falso positivo: la herramienta ha señalado un patrón que, tras investigar, no representa el problema descrito.\nPendiente de investigación: faltan datos para confirmar o descartar el riesgo.\nMejora preventiva: el patrón merece una mejora de seguridad, aunque no se haya demostrado una vulnerabilidad explotable.\n\nDebes justificar la clasificación elegida.\n\n\n\n\n\nAbre semgrep.yml y examina las reglas utilizadas en el laboratorio.\nIdentifica qué busca cada regla y qué tipo de riesgo pretende detectar.\nCompleta esta tabla:\n\n\n\n\n\n\n\n\n\nIdentificador de la regla\nPatrón que busca\nRiesgo potencial\n¿Qué habría que comprobar?\n\n\n\n\ntaskflow-js-dangerous-eval\n\n\n\n\n\ntaskflow-js-innerhtml\n\n\n\n\n\ntaskflow-sql-string-concat\n\n\n\n\n\ntaskflow-hardcoded-demo-key\n\n\n\n\n\n\n\n\n\nExamina los archivos JavaScript y relaciona las alertas con el código que las ha generado.\nNo des por hecho que una regla detectará todos los problemas posibles ni que todas las alertas tendrán la misma importancia.\nRegistra los resultados utilizando esta plantilla:\n\n\n\n\n\n\n\n\n\n\nArchivo y línea\nHallazgo\nEvidencia\nClasificación\nCorrección propuesta\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSi el análisis no genera el número de hallazgos que esperabas, comprueba la configuración utilizada y explica las limitaciones que has encontrado.\n\n\n\nExamina la función findUserQuery del archivo data-access.js.\nAnaliza cómo se construye la consulta SQL y responde:\n\n¿Qué ocurre si el parámetro name contiene caracteres que tienen significado en SQL?\n¿Por qué es importante distinguir entre datos e instrucciones?\n¿Qué diferencia existe entre concatenar una entrada en la consulta y utilizar parámetros?\n¿Se ejecuta realmente una consulta SQL en esta aplicación?\n¿Qué información necesitarías para confirmar que el problema sería explotable en una aplicación real?\n\nPropón una versión corregida de la función utilizando consultas parametrizadas. No es necesario conectarse a una base de datos, pero debes explicar qué responsabilidad tendría el controlador o la función que ejecuta la consulta.\n\n\n\nResponde razonadamente:\n\n¿Puede Semgrep demostrar por sí solo que una aplicación es segura?\n¿Qué problemas de seguridad podrían depender de la configuración del servidor o del comportamiento durante la ejecución?\n¿Qué diferencia existe entre detectar un patrón sospechoso y demostrar una vulnerabilidad?\n¿Qué otras pruebas complementarían este análisis?\n\n\n\n\nOpcionalmente, ejecuta:\nsemgrep scan --config auto .\nCompara los resultados con los obtenidos mediante semgrep.yml.\nIndica si aparecen hallazgos adicionales, si cambia la descripción de las alertas o si existen diferencias en la cobertura.\nTen en cuenta que la configuración automática puede depender de la versión instalada, de las reglas disponibles y de la conectividad. Si no puedes ejecutarla, documenta la limitación y continúa con las reglas locales.\n\n\n\n\nEntrega un informe breve en Markdown o PDF que incluya:\n\nEntorno: sistema operativo y versión de Semgrep.\nEjecución: comando utilizado y resultado general.\nRegistro de hallazgos: archivo, evidencia, riesgo y clasificación.\nCorrecciones propuestas: cambios recomendados y pruebas de verificación.\nLimitaciones: aspectos que el análisis no permite confirmar.\nConclusión: valoración de la utilidad de SAST y de la necesidad de complementar el análisis con otras técnicas.\n\nNo es necesario reproducir toda la salida del terminal. Selecciona las evidencias relevantes y explica tus conclusiones.\n\n\n\nResponde en unas pocas líneas:\nSi Semgrep no detectara ninguna alerta en TaskFlow, ¿podrías afirmar que la aplicación está preparada para producción? ¿Qué otras comprobaciones realizarías antes de autorizar su despliegue?",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD2",
+      "UD2 · Lab 5 · Análisis estático de seguridad con Semgrep"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud2/lab5.html#contexto",
+    "href": "laboratorios/ud2/lab5.html#contexto",
+    "title": "UD2 · Lab 5 · Análisis estático de seguridad con Semgrep",
+    "section": "",
+    "text": "TaskFlow es una pequeña aplicación JavaScript para gestionar tareas. Permite mostrar tareas iniciales y añadir nuevas mediante un formulario.\nLa aplicación funciona en el navegador y no necesita una base de datos. Sin embargo, su código incluye distintos patrones que merecen ser investigados desde el punto de vista de la seguridad.\nTu trabajo consiste en analizar el proyecto con Semgrep, interpretar los resultados y elaborar un informe técnico con tus conclusiones.\nImportante: una alerta de una herramienta de análisis estático no demuestra por sí sola que exista una vulnerabilidad explotable. Deberás estudiar el código y justificar tus conclusiones.",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD2",
+      "UD2 · Lab 5 · Análisis estático de seguridad con Semgrep"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud2/lab5.html#preparación-del-entorno",
+    "href": "laboratorios/ud2/lab5.html#preparación-del-entorno",
+    "title": "UD2 · Lab 5 · Análisis estático de seguridad con Semgrep",
+    "section": "",
+    "text": "Descarga el proyecto TaskFlow proporcionado para el laboratorio y descomprímelo en una carpeta de tu equipo.\nAbre esa carpeta con Visual Studio Code.\nLa estructura del proyecto es la siguiente:\ntaskflow-semgrep-lab/\n├── index.html\n├── app.js\n├── tareas.js\n├── data-access.js\n├── config.js\n├── semgrep.yml\n├── package.json\n└── README.md\nNo necesitas instalar dependencias de npm ni configurar una base de datos para realizar el análisis estático.\n\n\n\nEn macOS puedes instalar Semgrep mediante Homebrew.\nAbre Terminal y ejecuta:\nbrew install semgrep\nComprueba que la instalación ha terminado correctamente:\nsemgrep --version\nSi no tienes Homebrew instalado, puedes consultar las instrucciones en brew.sh.\n\n\n\nEn Windows puedes utilizar Python y pip.\nAbre PowerShell o el terminal de Visual Studio Code y comprueba que Python está disponible:\npy --version\nSi el comando no funciona, instala Python desde python.org y vuelve a abrir el terminal.\nInstala Semgrep:\npy -m pip install semgrep\nComprueba la instalación:\nsemgrep --version\nSi Windows no reconoce el comando semgrep, abre un terminal nuevo. Si el problema continúa, comprueba que la carpeta de ejecutables de Python está incluida en la variable de entorno PATH.\n\nNota: los métodos de instalación disponibles pueden cambiar entre versiones de Semgrep. Si la instalación mediante pip falla, consulta la documentación oficial de Semgrep.\n\n\n\n\nAbre un terminal desde la carpeta del proyecto.\nEn macOS puedes ejecutar:\nls\nEn Windows PowerShell:\nGet-ChildItem\nComprueba que aparece el archivo semgrep.yml. Lo necesitarás para ejecutar el análisis con las reglas incluidas en el laboratorio.",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD2",
+      "UD2 · Lab 5 · Análisis estático de seguridad con Semgrep"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud2/lab5.html#primera-ejecución-de-semgrep",
+    "href": "laboratorios/ud2/lab5.html#primera-ejecución-de-semgrep",
+    "title": "UD2 · Lab 5 · Análisis estático de seguridad con Semgrep",
+    "section": "",
+    "text": "Desde la raíz del proyecto, ejecuta:\nsemgrep scan --config semgrep.yml .\nEste comando funciona tanto en macOS como en Windows, siempre que Semgrep esté instalado y disponible en el terminal.\nSus elementos significan lo siguiente:\n\n\n\n\n\n\n\nElemento\nSignificado\n\n\n\n\nsemgrep\nEjecuta la herramienta.\n\n\nscan\nInicia un análisis del código.\n\n\n--config semgrep.yml\nIndica el archivo de reglas que se utilizará.\n\n\n.\nAnaliza el directorio actual y los archivos compatibles que encuentre.\n\n\n\nObserva los resultados. Semgrep puede mostrar el archivo afectado, la ubicación del código, la regla que ha generado la alerta y una explicación del problema potencial.\nNo te limites a copiar la salida del terminal: debes comprender qué significa cada hallazgo.",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD2",
+      "UD2 · Lab 5 · Análisis estático de seguridad con Semgrep"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud2/lab5.html#investigación-de-los-hallazgos",
+    "href": "laboratorios/ud2/lab5.html#investigación-de-los-hallazgos",
+    "title": "UD2 · Lab 5 · Análisis estático de seguridad con Semgrep",
+    "section": "",
+    "text": "Analiza el código del proyecto y examina las alertas generadas por Semgrep.\nPara cada hallazgo, responde a las siguientes preguntas:\n\n¿En qué archivo y línea se encuentra?\n¿Qué patrón ha detectado la herramienta?\n¿Qué riesgo de seguridad intenta señalar?\n¿Qué datos intervienen y de dónde proceden?\n¿Existe suficiente evidencia para confirmar una vulnerabilidad?\n¿Qué información adicional necesitarías para determinar el riesgo real?\n¿Cómo corregirías el problema?\n¿Qué prueba realizarías para comprobar que la corrección funciona?\n\nNo todos los hallazgos tienen que tener la misma clasificación. En tu informe podrás distinguir entre:\n\nVulnerabilidad confirmada: existe evidencia suficiente para justificar que el problema es real en el contexto analizado.\nPosible falso positivo: la herramienta ha señalado un patrón que, tras investigar, no representa el problema descrito.\nPendiente de investigación: faltan datos para confirmar o descartar el riesgo.\nMejora preventiva: el patrón merece una mejora de seguridad, aunque no se haya demostrado una vulnerabilidad explotable.\n\nDebes justificar la clasificación elegida.",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD2",
+      "UD2 · Lab 5 · Análisis estático de seguridad con Semgrep"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud2/lab5.html#actividades",
+    "href": "laboratorios/ud2/lab5.html#actividades",
+    "title": "UD2 · Lab 5 · Análisis estático de seguridad con Semgrep",
+    "section": "",
+    "text": "Abre semgrep.yml y examina las reglas utilizadas en el laboratorio.\nIdentifica qué busca cada regla y qué tipo de riesgo pretende detectar.\nCompleta esta tabla:\n\n\n\n\n\n\n\n\n\nIdentificador de la regla\nPatrón que busca\nRiesgo potencial\n¿Qué habría que comprobar?\n\n\n\n\ntaskflow-js-dangerous-eval\n\n\n\n\n\ntaskflow-js-innerhtml\n\n\n\n\n\ntaskflow-sql-string-concat\n\n\n\n\n\ntaskflow-hardcoded-demo-key\n\n\n\n\n\n\n\n\n\nExamina los archivos JavaScript y relaciona las alertas con el código que las ha generado.\nNo des por hecho que una regla detectará todos los problemas posibles ni que todas las alertas tendrán la misma importancia.\nRegistra los resultados utilizando esta plantilla:\n\n\n\n\n\n\n\n\n\n\nArchivo y línea\nHallazgo\nEvidencia\nClasificación\nCorrección propuesta\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSi el análisis no genera el número de hallazgos que esperabas, comprueba la configuración utilizada y explica las limitaciones que has encontrado.\n\n\n\nExamina la función findUserQuery del archivo data-access.js.\nAnaliza cómo se construye la consulta SQL y responde:\n\n¿Qué ocurre si el parámetro name contiene caracteres que tienen significado en SQL?\n¿Por qué es importante distinguir entre datos e instrucciones?\n¿Qué diferencia existe entre concatenar una entrada en la consulta y utilizar parámetros?\n¿Se ejecuta realmente una consulta SQL en esta aplicación?\n¿Qué información necesitarías para confirmar que el problema sería explotable en una aplicación real?\n\nPropón una versión corregida de la función utilizando consultas parametrizadas. No es necesario conectarse a una base de datos, pero debes explicar qué responsabilidad tendría el controlador o la función que ejecuta la consulta.\n\n\n\nResponde razonadamente:\n\n¿Puede Semgrep demostrar por sí solo que una aplicación es segura?\n¿Qué problemas de seguridad podrían depender de la configuración del servidor o del comportamiento durante la ejecución?\n¿Qué diferencia existe entre detectar un patrón sospechoso y demostrar una vulnerabilidad?\n¿Qué otras pruebas complementarían este análisis?\n\n\n\n\nOpcionalmente, ejecuta:\nsemgrep scan --config auto .\nCompara los resultados con los obtenidos mediante semgrep.yml.\nIndica si aparecen hallazgos adicionales, si cambia la descripción de las alertas o si existen diferencias en la cobertura.\nTen en cuenta que la configuración automática puede depender de la versión instalada, de las reglas disponibles y de la conectividad. Si no puedes ejecutarla, documenta la limitación y continúa con las reglas locales.",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD2",
+      "UD2 · Lab 5 · Análisis estático de seguridad con Semgrep"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud2/lab5.html#entrega",
+    "href": "laboratorios/ud2/lab5.html#entrega",
+    "title": "UD2 · Lab 5 · Análisis estático de seguridad con Semgrep",
+    "section": "",
+    "text": "Entrega un informe breve en Markdown o PDF que incluya:\n\nEntorno: sistema operativo y versión de Semgrep.\nEjecución: comando utilizado y resultado general.\nRegistro de hallazgos: archivo, evidencia, riesgo y clasificación.\nCorrecciones propuestas: cambios recomendados y pruebas de verificación.\nLimitaciones: aspectos que el análisis no permite confirmar.\nConclusión: valoración de la utilidad de SAST y de la necesidad de complementar el análisis con otras técnicas.\n\nNo es necesario reproducir toda la salida del terminal. Selecciona las evidencias relevantes y explica tus conclusiones.",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD2",
+      "UD2 · Lab 5 · Análisis estático de seguridad con Semgrep"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud2/lab5.html#criterios-de-evaluación",
+    "href": "laboratorios/ud2/lab5.html#criterios-de-evaluación",
+    "title": "UD2 · Lab 5 · Análisis estático de seguridad con Semgrep",
+    "section": "",
+    "text": "Criterio\nPuntuación\n\n\n\n\nInstalación y ejecución correcta de Semgrep\n1 punto\n\n\nComprensión de las reglas y los patrones detectados\n2 puntos\n\n\nInterpretación y clasificación razonada de los hallazgos\n3 puntos\n\n\nCalidad de las correcciones y de las pruebas propuestas\n2 puntos\n\n\nIdentificación de limitaciones y conclusiones del informe\n2 puntos\n\n\nTotal\n10 puntos\n\n\n\nSe valorará especialmente la capacidad de justificar las decisiones con evidencias. Enumerar alertas sin explicar su significado no se considera un análisis de seguridad completo.",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD2",
+      "UD2 · Lab 5 · Análisis estático de seguridad con Semgrep"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud2/lab5.html#reflexión-final",
+    "href": "laboratorios/ud2/lab5.html#reflexión-final",
+    "title": "UD2 · Lab 5 · Análisis estático de seguridad con Semgrep",
+    "section": "",
+    "text": "Responde en unas pocas líneas:\nSi Semgrep no detectara ninguna alerta en TaskFlow, ¿podrías afirmar que la aplicación está preparada para producción? ¿Qué otras comprobaciones realizarías antes de autorizar su despliegue?",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD2",
+      "UD2 · Lab 5 · Análisis estático de seguridad con Semgrep"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud2/lab6.html",
+    "href": "laboratorios/ud2/lab6.html",
+    "title": "UD2 · Lab 6 · Análisis dinámico de seguridad con OWASP ZAP",
+    "section": "",
+    "text": "En el laboratorio anterior utilizaste Semgrep para analizar el código fuente de TaskFlow e identificar posibles debilidades de seguridad. Este análisis se conoce como SAST (Static Application Security Testing).\nEn este laboratorio trabajarás con OWASP ZAP, una herramienta que permite analizar una aplicación web mientras está en ejecución. Este enfoque se denomina DAST (Dynamic Application Security Testing).\nAdemás, darás un paso más: modificarás la configuración del servidor que sirve TaskFlow para incorporar cabeceras HTTP de seguridad y comprobarás cómo afectan al comportamiento de la aplicación.\nEl objetivo no es conseguir que todas las herramientas dejen de mostrar alertas sin más, sino aprender a investigar los resultados, aplicar correcciones justificadas y comprobar si realmente mejoran la seguridad.\n\n\n\nNecesitarás:\n\nEl proyecto TaskFlow del laboratorio anterior.\nPython 3.\nUn navegador web.\nOWASP ZAP.\nUn editor de código.\n\nTrabajarás exclusivamente con la aplicación local proporcionada para el laboratorio.\n\n\nDescarga OWASP ZAP desde su página oficial:\nOWASP ZAP\n\n\n\nDescarga el instalador para Windows.\nEjecuta el instalador y sigue las instrucciones.\nSi el instalador requiere una instalación adicional de Java, sigue las indicaciones oficiales.\nAbre ZAP desde el menú Inicio.\n\nPara comprobar si Java está disponible desde PowerShell:\njava -version\nSi aparece un error, consulta los requisitos y las instrucciones de instalación de ZAP.\n\n\n\n\nDescarga el instalador para macOS.\nAbre el archivo descargado y sigue las instrucciones.\nInicia ZAP desde la carpeta Aplicaciones.\n\nConsulta los requisitos actualizados en:\nRequisitos ZAP\nNo necesitas instalar ZAP mediante Homebrew ni utilizar Docker para realizar esta práctica.\n\n\n\n\nDescomprime el proyecto del y abre la carpeta en tu editor de código.\nComprueba que puedes identificar los archivos principales de la aplicación, por ejemplo:\ntaskflow/\n├── index.html\n├── app.js\n├── tareas.js\n├── data-access.js\n├── config.js\n└── ...\nLa estructura concreta puede variar según la versión del proyecto. No elimines archivos ni cambies su contenido antes de realizar el primer análisis.\n\n\n\nPara que el navegador y ZAP puedan interactuar con la aplicación a través de HTTP, utiliza el servidor sencillo que proporciona Python.\nAbre un terminal en la carpeta que contiene index.html.\nWindows (PowerShell):\npy -m http.server 8000\nmacOS:\npython3 -m http.server 8000\nDeja el terminal abierto. Si el servidor se ha iniciado correctamente, podrás acceder a:\nhttp://127.0.0.1:8000\nComprueba que TaskFlow se muestra y que puedes utilizar sus funcionalidades principales.\nSi el puerto está ocupado, detén el servidor que lo utiliza o selecciona otro puerto y adapta las URL de la práctica.\nEste servidor es únicamente un servidor de archivos estáticos. No implementa una API, una base de datos ni un sistema de autenticación real.\n\n\n\n\n\n\nAbre OWASP ZAP y familiarízate con las principales zonas de su interfaz.\n\n\n\nElemento\nFunción\n\n\n\n\nSites\nMuestra los sitios y recursos descubiertos.\n\n\nHistory\nRegistra las peticiones y respuestas HTTP observadas.\n\n\nAlerts\nAgrupa las alertas de seguridad detectadas.\n\n\nRequest\nPermite examinar las peticiones enviadas.\n\n\nResponse\nPermite examinar las respuestas recibidas.\n\n\nQuick Start\nOfrece opciones para iniciar exploraciones.\n\n\n\nUtiliza la opción Manual Explore de Quick Start para abrir la aplicación en un navegador asociado a ZAP.\nIntroduce la URL:\nhttp://127.0.0.1:8000\nInteractúa con TaskFlow:\n\nConsulta la lista de tareas.\nAñade una tarea con un título normal.\nAñade otra tarea con caracteres especiales, como comillas, los símbolos &lt; y &gt; o una cadena que parezca HTML.\nComprueba cómo se muestra el contenido introducido.\nExamina las peticiones y respuestas que aparecen en History.\n\nNo utilices la opción Automated Scan en esta práctica. No es necesario ejecutar pruebas activas para completar las actividades.\n\n\n\n¿Qué función cumple ZAP cuando navegas con el navegador asociado?\n¿Qué información aparece en History?\n¿Qué método HTTP utiliza el navegador para solicitar la página principal?\n¿Qué código de estado devuelve el servidor?\n¿Qué cabeceras aparecen en la respuesta HTTP?\n¿Qué otros recursos se solicitan para representar la aplicación?\n¿Qué diferencias observas al introducir caracteres especiales en una tarea?\n\nDocumenta al menos dos peticiones y sus correspondientes respuestas.\n\n\n\n\nConsulta la pestaña Alerts después de explorar la aplicación.\nEl análisis pasivo de ZAP inspecciona las peticiones y respuestas observadas sin modificarlas para intentar explotar vulnerabilidades.\nLos resultados dependen de la aplicación, los recursos explorados y las reglas de la herramienta. Es posible que algunas alertas no aparezcan en tu ejecución.\nCompleta una tabla como la siguiente con las alertas más relevantes que encuentres:\n\n\n\n\n\n\n\n\n\n\nAlerta\nRiesgo indicado\nEvidencia\n¿Está confirmada?\nMedida correctora\n\n\n\n\nNombre de la alerta\nExplicación del riesgo\nRecurso o respuesta relacionada\nConfirmada, descartada o pendiente\nPropuesta razonada\n\n\n\nIncluye tres alertas si la herramienta genera suficientes resultados. Si aparecen menos, documenta las encontradas y explica las limitaciones.\nPara cada alerta:\n\nLee la descripción proporcionada por ZAP.\nIdentifica el recurso afectado.\nExamina la evidencia disponible.\nExplica el posible impacto en una aplicación real.\nPropón una medida correctora.\nJustifica si la alerta confirma una vulnerabilidad o necesita más comprobaciones.\n\nNo es suficiente copiar la descripción de ZAP. Debes interpretar los resultados.\n\n\n\n\nLas cabeceras HTTP permiten que un servidor proporcione instrucciones y metadatos al navegador. Algunas se utilizan para reducir riesgos de seguridad relacionados con la ejecución de contenido, la interpretación de archivos y la presentación de páginas dentro de otras páginas.\n\n\n\n\n\n\n\n\n\n\nCabecera\nFunción\nRiesgo que ayuda a reducir\n\n\n\n\nContent-Security-Policy\nDefine qué recursos puede cargar o ejecutar el navegador y desde dónde.\nAlgunos ataques XSS y la carga de recursos no autorizados.\n\n\nX-Content-Type-Options\nCon el valor nosniff, impide determinadas interpretaciones del contenido como un tipo MIME distinto del declarado.\nRiesgos derivados de la interpretación incorrecta del tipo de contenido.\n\n\nX-Frame-Options\nControla si una página puede mostrarse dentro de un marco.\nDeterminados ataques de clickjacking.\n\n\n\nEstas cabeceras proporcionan capas de protección adicionales, pero no garantizan por sí solas que una aplicación sea segura.\n\n\n\nCSP significa Content Security Policy, o Política de Seguridad del Contenido.\nEs un mecanismo que permite al servidor indicar al navegador qué recursos puede cargar o ejecutar una página web.\nPor ejemplo:\nContent-Security-Policy: default-src 'self'; script-src 'self'\nEn esta política:\n\ndefault-src 'self' establece una política predeterminada que permite recursos del mismo origen.\nscript-src 'self' permite cargar scripts desde el mismo origen, pero no autoriza por defecto scripts insertados directamente en el HTML.\n\nEl origen está determinado por el protocolo, el dominio y el puerto. En esta práctica utilizaremos http://127.0.0.1:8000.\nUna CSP restrictiva puede bloquear recursos legítimos si la aplicación depende de estilos o scripts en línea. Por eso, después de aplicar una política, es necesario comprobar el funcionamiento de la aplicación.\n\n\n\n\n\n\n\n\n\n\nDirectiva\nSignificado\n\n\n\n\ndefault-src 'self'\nPermite por defecto recursos del mismo origen.\n\n\nobject-src 'none'\nImpide cargar recursos mediante elementos como object y embed.\n\n\nbase-uri 'self'\nRestringe los valores permitidos para el elemento base.\n\n\nframe-ancestors 'none'\nImpide que la página se incruste dentro de un marco.\n\n\n\nframe-ancestors 'none' y X-Frame-Options: DENY tienen funciones relacionadas: ambos impiden que la página se muestre dentro de un marco. La primera directiva ofrece más flexibilidad y forma parte de CSP.\nPuedes consultar la documentación de referencia:\n\nhttps://owasp.org/www-project-secure-headers/\nhttps://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CSP\n\n\n\n\n\nEn esta parte modificarás el modo en que se sirve TaskFlow para añadir cabeceras HTTP de seguridad.\nNo basta con escribir las cabeceras en index.html: deben enviarse como cabeceras de la respuesta HTTP del servidor.\n\n\n\n\nVuelve al terminal donde ejecutaste python -m http.server.\nPulsa:\nCtrl + C\nEl servidor anterior debe detenerse antes de iniciar el nuevo.\n\n\n\nEn la carpeta de TaskFlow, crea un archivo llamado servidor_seguro.py.\nIntroduce el siguiente código:\nfrom http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer\n\n\nclass ManejadorSeguro(SimpleHTTPRequestHandler):\n\n    def end_headers(self):\n        self.send_header(\n            \"Content-Security-Policy\",\n            \"default-src 'self'; \"\n            \"script-src 'self'; \"\n            \"style-src 'self'; \"\n            \"object-src 'none'; \"\n            \"base-uri 'self'; \"\n            \"frame-ancestors 'none'\"\n        )\n\n        self.send_header(\"X-Content-Type-Options\", \"nosniff\")\n        self.send_header(\"X-Frame-Options\", \"DENY\")\n\n        super().end_headers()\n\n\nservidor = ThreadingHTTPServer(\n    (\"127.0.0.1\", 8000),\n    ManejadorSeguro\n)\n\nprint(\"TaskFlow disponible en http://127.0.0.1:8000\")\nservidor.serve_forever()\n\n\n\nAntes de ejecutarlo, identifica la función de cada parte.\n\n\n\n\n\n\n\nElemento\nFunción\n\n\n\n\nSimpleHTTPRequestHandler\nSirve archivos de una carpeta mediante HTTP.\n\n\nManejadorSeguro\nDefine un manejador personalizado para las peticiones.\n\n\nend_headers()\nAñade las cabeceras antes de finalizar cada respuesta.\n\n\nsend_header()\nIncorpora una cabecera HTTP a la respuesta.\n\n\nsuper().end_headers()\nFinaliza el envío de las cabeceras mediante el comportamiento original del manejador.\n\n\nThreadingHTTPServer\nCrea un servidor que puede atender peticiones en distintos hilos.\n\n\n127.0.0.1\nLimita la escucha a la interfaz local del equipo.\n\n\nserve_forever()\nMantiene el servidor atendiendo peticiones hasta que se detenga.\n\n\n\nLa CSP propuesta incluye script-src 'self' y style-src 'self'. Estas directivas permiten cargar scripts y hojas de estilo desde el mismo origen, pero no autorizan por defecto todos los scripts y estilos insertados directamente en el HTML.\n\n\n\nEjecuta el comando desde la carpeta que contiene index.html y servidor_seguro.py.\nWindows:\npy servidor_seguro.py\nmacOS:\npython3 servidor_seguro.py\nDeberías ver un mensaje similar a:\nTaskFlow disponible en http://127.0.0.1:8000\nEl terminal debe permanecer ocupado mientras el servidor esté funcionando. Esto es normal.\nSi aparece un error indicando que el puerto está ocupado, detén el otro servidor o selecciona un puerto libre y actualiza las URL de la práctica.\n\n\n\n\nAbre de nuevo:\nhttp://127.0.0.1:8000\nComprueba si la aplicación se muestra correctamente y si puedes añadir tareas.\n\nEs posible que los estilos o alguna funcionalidad dejen de funcionar por la CSP que acabas de introducir. No elimines la política para resolverlo sin investigar la causa.\n\n\n\nAbre las herramientas de desarrollo del navegador y selecciona la pestaña Console.\nBusca mensajes relacionados con Content Security Policy, especialmente los que indiquen que se ha bloqueado un estilo o un script en línea.\nPor ejemplo, un mensaje que indique que un estilo en línea ha sido bloqueado por default-src 'self' significa que el navegador ha aplicado la política predeterminada porque no se había autorizado ese tipo de estilo.\n\n\n\nExamina index.html, los archivos CSS y el JavaScript de la aplicación.\nBusca, entre otros, estos patrones:\nEstilos incluidos directamente en el HTML:\n&lt;style&gt;\n    .tarea {\n        margin-bottom: 1rem;\n    }\n&lt;/style&gt;\nAtributos style en elementos HTML:\n&lt;div style=\"display: flex; gap: 1rem;\"&gt;\nScripts insertados directamente en el HTML:\n&lt;script&gt;\n    console.log(\"Aplicación iniciada\");\n&lt;/script&gt;\nLa política configurada permite scripts y hojas de estilo del mismo origen, pero no autoriza por defecto todos los elementos anteriores.\n\n\n\nSi encuentras estilos dentro de una etiqueta style, trasládalos a un archivo CSS externo. Por ejemplo, crea styles.css:\n.tarea {\n    margin-bottom: 1rem;\n}\n\n.contenedor {\n    display: flex;\n    gap: 1rem;\n}\nY referencia el archivo desde index.html:\n&lt;link rel=\"stylesheet\" href=\"./styles.css\"&gt;\nAdapta las clases al código real de TaskFlow.\nSi encuentras atributos style en elementos HTML, sustitúyelos por clases CSS. Por ejemplo:\n&lt;div class=\"contenedor\"&gt;\nEn lugar de:\n&lt;div style=\"display: flex; gap: 1rem;\"&gt;\nSi el problema está en un bloque script insertado directamente en el HTML, traslada su contenido a un archivo JavaScript externo y referencia ese archivo desde el HTML.\nSi la aplicación asigna estilos dinámicamente mediante JavaScript, estudia si puedes utilizar classList.add() y clases CSS en lugar de asignar estilos directamente.\nNo añadas 'unsafe-inline' como primera solución en el CSP. Aunque permitiría ciertos estilos en línea, reduce la protección que proporciona la política. El objetivo es adaptar la aplicación a una configuración más restrictiva cuando sea viable.\n\n\n\nDespués de modificar el código:\n\nGuarda los archivos.\nRecarga la página.\nComprueba si han desaparecido los errores de CSP.\nVerifica que los estilos se muestran correctamente.\nPrueba las funcionalidades principales de TaskFlow.\nDocumenta los cambios realizados.\n\nNo des por solucionado el problema solo porque la consola deje de mostrar un mensaje. Comprueba también el comportamiento real de la aplicación.\n\n\n\n\nCon el servidor seguro en funcionamiento, abre un segundo terminal.\nEjecuta:\ncurl -I http://127.0.0.1:8000\nEl resultado debería incluir cabeceras semejantes a estas:\nContent-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'\nX-Content-Type-Options: nosniff\nX-Frame-Options: DENY\nEl orden de las cabeceras puede variar.\nComprueba también las cabeceras desde las herramientas de desarrollo del navegador:\n\nAbre la pestaña Network.\nRecarga la aplicación.\nSelecciona la petición correspondiente al documento HTML.\nExamina las cabeceras de respuesta.\n\nResponde:\n\n¿Qué cabeceras has añadido?\n¿Qué riesgo intenta reducir cada una?\n¿Por qué no es suficiente escribir una cabecera dentro de index.html?\n¿Qué diferencia existe entre una cabecera HTTP y una etiqueta HTML?\n¿Por qué es importante comprobar la respuesta real del servidor?\n\n\n\n\nVuelve a explorar TaskFlow con el navegador asociado a ZAP.\nComprueba si las alertas relacionadas con las cabeceras han cambiado.\nCompleta una tabla comparativa:\n\n\n\n\n\n\n\n\nAspecto\nAntes de modificar el servidor\nDespués de modificar el servidor\n\n\n\n\nCSP\n\n\n\n\nX-Content-Type-Options\n\n\n\n\nX-Frame-Options\n\n\n\n\nOtras alertas relevantes\n\n\n\n\nFuncionamiento de TaskFlow\n\n\n\n\n\nSi una alerta desaparece, explica qué cambio lo ha permitido. Si persiste, investiga si se debe a la configuración, al tipo de análisis, a un recurso concreto o a las limitaciones de la herramienta.\nRecuerda que las cabeceras que recibe el navegador pueden variar según la respuesta HTTP examinada. No des por supuesto que todas las respuestas tienen exactamente la misma configuración sin comprobarlo.\n\n\n\n\nRecupera los resultados del laboratorio 1 y compáralos con los obtenidos en este laboratorio.\n\n\n\nAspecto\nSemgrep (SAST)\nZAP (DAST)\n\n\n\n\nQué analiza\n\n\n\n\nNecesita ejecutar la aplicación\n\n\n\n\nQué tipos de problemas puede detectar\n\n\n\n\nQué evidencias proporciona\n\n\n\n\nPrincipales limitaciones\n\n\n\n\nQué comprobaciones manuales necesita\n\n\n\n\n\nResponde razonadamente:\n\n¿Puede Semgrep comprobar directamente qué cabeceras envía el servidor durante una petición real?\n¿Puede ZAP identificar todos los usos peligrosos de eval() o innerHTML del código fuente?\nSi Semgrep identifica un patrón potencialmente peligroso, ¿significa que ZAP necesariamente generará una alerta?\nSi ZAP no genera alertas, ¿podemos afirmar que la aplicación es segura?\n¿Por qué es útil combinar análisis estático y dinámico?\n¿Qué problemas has encontrado al aplicar la CSP?\n¿Qué ventajas tiene corregir la aplicación para cumplir una política restrictiva en lugar de permitir indiscriminadamente los estilos y scripts en línea?\n\nApoya las respuestas en evidencias obtenidas durante la práctica.\n\n\n\nEntrega un documento Markdown o PDF que incluya:\n\nInstalación y puesta en marcha: evidencia de que ZAP y TaskFlow funcionan.\nExploración HTTP: al menos dos peticiones y sus respuestas documentadas.\nAnálisis de alertas: tabla de hallazgos, evidencias y medidas correctoras.\nInvestigación de CSP: explicación del problema detectado y de cómo se ha corregido.\nConfiguración del servidor: código final de servidor_seguro.py.\nVerificación de cabeceras: salida de curl -I o captura de las cabeceras de respuesta.\nPruebas posteriores: evidencias de que TaskFlow sigue funcionando después de aplicar los cambios.\nComparación SAST/DAST: tabla completa y respuestas razonadas.\nConclusión: limitaciones del análisis automatizado y mejoras que aplicarías antes de desplegar una aplicación real.\n\nLas capturas deben mostrar información relevante y estar acompañadas de una explicación. No incluyas credenciales reales ni información sensible.\n\n\n\nEn este laboratorio trabajarás exclusivamente con TaskFlow en tu propio equipo.\n\nNo ejecutes análisis activos contra sistemas ajenos.\nNo utilices aplicaciones públicas como objetivos de prueba sin autorización expresa.\nNo confundas una alerta con una vulnerabilidad confirmada.\nNo interpretes la ausencia de alertas como una garantía de seguridad.\nNo debilites las políticas de seguridad sin justificarlo.\nDocumenta las limitaciones del entorno utilizado.\n\nEl servidor Python empleado en esta práctica es una herramienta didáctica, no un servidor de producción. La incorporación de algunas cabeceras de seguridad no sustituye a un despliegue profesional con configuración, gestión de errores, actualizaciones, registros y controles adicionales.\n\n\n\n\nOWASP ZAP: descarga\nOWASP ZAP: Getting Started\nOWASP Secure Headers Project\nMDN: Content Security Policy\nPython: módulo http.server",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD2",
+      "UD2 · Lab 6 · Análisis dinámico de seguridad con OWASP ZAP"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud2/lab6.html#contexto",
+    "href": "laboratorios/ud2/lab6.html#contexto",
+    "title": "UD2 · Lab 6 · Análisis dinámico de seguridad con OWASP ZAP",
+    "section": "",
+    "text": "En el laboratorio anterior utilizaste Semgrep para analizar el código fuente de TaskFlow e identificar posibles debilidades de seguridad. Este análisis se conoce como SAST (Static Application Security Testing).\nEn este laboratorio trabajarás con OWASP ZAP, una herramienta que permite analizar una aplicación web mientras está en ejecución. Este enfoque se denomina DAST (Dynamic Application Security Testing).\nAdemás, darás un paso más: modificarás la configuración del servidor que sirve TaskFlow para incorporar cabeceras HTTP de seguridad y comprobarás cómo afectan al comportamiento de la aplicación.\nEl objetivo no es conseguir que todas las herramientas dejen de mostrar alertas sin más, sino aprender a investigar los resultados, aplicar correcciones justificadas y comprobar si realmente mejoran la seguridad.",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD2",
+      "UD2 · Lab 6 · Análisis dinámico de seguridad con OWASP ZAP"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud2/lab6.html#preparación-del-entorno",
+    "href": "laboratorios/ud2/lab6.html#preparación-del-entorno",
+    "title": "UD2 · Lab 6 · Análisis dinámico de seguridad con OWASP ZAP",
+    "section": "",
+    "text": "Necesitarás:\n\nEl proyecto TaskFlow del laboratorio anterior.\nPython 3.\nUn navegador web.\nOWASP ZAP.\nUn editor de código.\n\nTrabajarás exclusivamente con la aplicación local proporcionada para el laboratorio.\n\n\nDescarga OWASP ZAP desde su página oficial:\nOWASP ZAP\n\n\n\nDescarga el instalador para Windows.\nEjecuta el instalador y sigue las instrucciones.\nSi el instalador requiere una instalación adicional de Java, sigue las indicaciones oficiales.\nAbre ZAP desde el menú Inicio.\n\nPara comprobar si Java está disponible desde PowerShell:\njava -version\nSi aparece un error, consulta los requisitos y las instrucciones de instalación de ZAP.\n\n\n\n\nDescarga el instalador para macOS.\nAbre el archivo descargado y sigue las instrucciones.\nInicia ZAP desde la carpeta Aplicaciones.\n\nConsulta los requisitos actualizados en:\nRequisitos ZAP\nNo necesitas instalar ZAP mediante Homebrew ni utilizar Docker para realizar esta práctica.\n\n\n\n\nDescomprime el proyecto del y abre la carpeta en tu editor de código.\nComprueba que puedes identificar los archivos principales de la aplicación, por ejemplo:\ntaskflow/\n├── index.html\n├── app.js\n├── tareas.js\n├── data-access.js\n├── config.js\n└── ...\nLa estructura concreta puede variar según la versión del proyecto. No elimines archivos ni cambies su contenido antes de realizar el primer análisis.\n\n\n\nPara que el navegador y ZAP puedan interactuar con la aplicación a través de HTTP, utiliza el servidor sencillo que proporciona Python.\nAbre un terminal en la carpeta que contiene index.html.\nWindows (PowerShell):\npy -m http.server 8000\nmacOS:\npython3 -m http.server 8000\nDeja el terminal abierto. Si el servidor se ha iniciado correctamente, podrás acceder a:\nhttp://127.0.0.1:8000\nComprueba que TaskFlow se muestra y que puedes utilizar sus funcionalidades principales.\nSi el puerto está ocupado, detén el servidor que lo utiliza o selecciona otro puerto y adapta las URL de la práctica.\nEste servidor es únicamente un servidor de archivos estáticos. No implementa una API, una base de datos ni un sistema de autenticación real.",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD2",
+      "UD2 · Lab 6 · Análisis dinámico de seguridad con OWASP ZAP"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud2/lab6.html#primera-ejecución-de-semgrep",
+    "href": "laboratorios/ud2/lab6.html#primera-ejecución-de-semgrep",
+    "title": "UD2 · Lab 6 · Análisis dinámico de seguridad con OWASP ZAP",
+    "section": "",
+    "text": "Desde la raíz del proyecto, ejecuta:\nsemgrep scan --config semgrep.yml .\nEste comando funciona tanto en macOS como en Windows, siempre que Semgrep esté instalado y disponible en el terminal.\nSus elementos significan lo siguiente:\n\n\n\n\n\n\n\nElemento\nSignificado\n\n\n\n\nsemgrep\nEjecuta la herramienta.\n\n\nscan\nInicia un análisis del código.\n\n\n--config semgrep.yml\nIndica el archivo de reglas que se utilizará.\n\n\n.\nAnaliza el directorio actual y los archivos compatibles que encuentre.\n\n\n\nObserva los resultados. Semgrep puede mostrar el archivo afectado, la ubicación del código, la regla que ha generado la alerta y una explicación del problema potencial.\nNo te limites a copiar la salida del terminal: debes comprender qué significa cada hallazgo.",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD2",
+      "UD2 · Lab 6 · Análisis dinámico de seguridad con OWASP ZAP"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud2/lab6.html#investigación-de-los-hallazgos",
+    "href": "laboratorios/ud2/lab6.html#investigación-de-los-hallazgos",
+    "title": "UD2 · Lab 6 · Análisis dinámico de seguridad con OWASP ZAP",
+    "section": "",
+    "text": "Analiza el código del proyecto y examina las alertas generadas por Semgrep.\nPara cada hallazgo, responde a las siguientes preguntas:\n\n¿En qué archivo y línea se encuentra?\n¿Qué patrón ha detectado la herramienta?\n¿Qué riesgo de seguridad intenta señalar?\n¿Qué datos intervienen y de dónde proceden?\n¿Existe suficiente evidencia para confirmar una vulnerabilidad?\n¿Qué información adicional necesitarías para determinar el riesgo real?\n¿Cómo corregirías el problema?\n¿Qué prueba realizarías para comprobar que la corrección funciona?\n\nNo todos los hallazgos tienen que tener la misma clasificación. En tu informe podrás distinguir entre:\n\nVulnerabilidad confirmada: existe evidencia suficiente para justificar que el problema es real en el contexto analizado.\nPosible falso positivo: la herramienta ha señalado un patrón que, tras investigar, no representa el problema descrito.\nPendiente de investigación: faltan datos para confirmar o descartar el riesgo.\nMejora preventiva: el patrón merece una mejora de seguridad, aunque no se haya demostrado una vulnerabilidad explotable.\n\nDebes justificar la clasificación elegida.",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD2",
+      "UD2 · Lab 6 · Análisis dinámico de seguridad con OWASP ZAP"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud2/lab6.html#actividades",
+    "href": "laboratorios/ud2/lab6.html#actividades",
+    "title": "UD2 · Lab 6 · Análisis dinámico de seguridad con OWASP ZAP",
+    "section": "",
+    "text": "Abre semgrep.yml y examina las reglas utilizadas en el laboratorio.\nIdentifica qué busca cada regla y qué tipo de riesgo pretende detectar.\nCompleta esta tabla:\n\n\n\n\n\n\n\n\n\nIdentificador de la regla\nPatrón que busca\nRiesgo potencial\n¿Qué habría que comprobar?\n\n\n\n\ntaskflow-js-dangerous-eval\n\n\n\n\n\ntaskflow-js-innerhtml\n\n\n\n\n\ntaskflow-sql-string-concat\n\n\n\n\n\ntaskflow-hardcoded-demo-key\n\n\n\n\n\n\n\n\n\nExamina los archivos JavaScript y relaciona las alertas con el código que las ha generado.\nNo des por hecho que una regla detectará todos los problemas posibles ni que todas las alertas tendrán la misma importancia.\nRegistra los resultados utilizando esta plantilla:\n\n\n\n\n\n\n\n\n\n\nArchivo y línea\nHallazgo\nEvidencia\nClasificación\nCorrección propuesta\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSi el análisis no genera el número de hallazgos que esperabas, comprueba la configuración utilizada y explica las limitaciones que has encontrado.\n\n\n\nExamina la función findUserQuery del archivo data-access.js.\nAnaliza cómo se construye la consulta SQL y responde:\n\n¿Qué ocurre si el parámetro name contiene caracteres que tienen significado en SQL?\n¿Por qué es importante distinguir entre datos e instrucciones?\n¿Qué diferencia existe entre concatenar una entrada en la consulta y utilizar parámetros?\n¿Se ejecuta realmente una consulta SQL en esta aplicación?\n¿Qué información necesitarías para confirmar que el problema sería explotable en una aplicación real?\n\nPropón una versión corregida de la función utilizando consultas parametrizadas. No es necesario conectarse a una base de datos, pero debes explicar qué responsabilidad tendría el controlador o la función que ejecuta la consulta.\n\n\n\nResponde razonadamente:\n\n¿Puede Semgrep demostrar por sí solo que una aplicación es segura?\n¿Qué problemas de seguridad podrían depender de la configuración del servidor o del comportamiento durante la ejecución?\n¿Qué diferencia existe entre detectar un patrón sospechoso y demostrar una vulnerabilidad?\n¿Qué otras pruebas complementarían este análisis?\n\n\n\n\nOpcionalmente, ejecuta:\nsemgrep scan --config auto .\nCompara los resultados con los obtenidos mediante semgrep.yml.\nIndica si aparecen hallazgos adicionales, si cambia la descripción de las alertas o si existen diferencias en la cobertura.\nTen en cuenta que la configuración automática puede depender de la versión instalada, de las reglas disponibles y de la conectividad. Si no puedes ejecutarla, documenta la limitación y continúa con las reglas locales.",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD2",
+      "UD2 · Lab 6 · Análisis dinámico de seguridad con OWASP ZAP"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud2/lab6.html#entrega",
+    "href": "laboratorios/ud2/lab6.html#entrega",
+    "title": "UD2 · Lab 6 · Análisis dinámico de seguridad con OWASP ZAP",
+    "section": "",
+    "text": "Entrega un informe breve en Markdown o PDF que incluya:\n\nEntorno: sistema operativo y versión de Semgrep.\nEjecución: comando utilizado y resultado general.\nRegistro de hallazgos: archivo, evidencia, riesgo y clasificación.\nCorrecciones propuestas: cambios recomendados y pruebas de verificación.\nLimitaciones: aspectos que el análisis no permite confirmar.\nConclusión: valoración de la utilidad de SAST y de la necesidad de complementar el análisis con otras técnicas.\n\nNo es necesario reproducir toda la salida del terminal. Selecciona las evidencias relevantes y explica tus conclusiones.",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD2",
+      "UD2 · Lab 6 · Análisis dinámico de seguridad con OWASP ZAP"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud2/lab6.html#reflexión-final",
+    "href": "laboratorios/ud2/lab6.html#reflexión-final",
+    "title": "UD2 · Lab 6 · Análisis dinámico de seguridad con OWASP ZAP",
+    "section": "",
+    "text": "Responde en unas pocas líneas:\nSi Semgrep no detectara ninguna alerta en TaskFlow, ¿podrías afirmar que la aplicación está preparada para producción? ¿Qué otras comprobaciones realizarías antes de autorizar su despliegue?",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD2",
+      "UD2 · Lab 6 · Análisis dinámico de seguridad con OWASP ZAP"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud2/lab6.html#objetivos",
+    "href": "laboratorios/ud2/lab6.html#objetivos",
+    "title": "UD2 · Lab 6 · Análisis dinámico de seguridad con OWASP ZAP",
+    "section": "",
+    "text": "Al finalizar el laboratorio deberás ser capaz de:\n\nInstalar y utilizar OWASP ZAP.\nExplorar una aplicación web y analizar peticiones y respuestas HTTP.\nInterpretar alertas de seguridad sin asumir que todas son vulnerabilidades confirmadas.\nComprender la función de algunas cabeceras HTTP de seguridad.\nConfigurar un servidor HTTP sencillo en Python.\nAplicar una política CSP y analizar sus efectos.\nCorregir problemas de compatibilidad provocados por una política de seguridad.\nComparar los resultados de un análisis antes y después de aplicar medidas correctoras.\nDocumentar evidencias, limitaciones y propuestas de mejora.",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD2",
+      "UD2 · Lab 6 · Análisis dinámico de seguridad con OWASP ZAP"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud2/lab6.html#primera-toma-de-contacto-con-zap",
+    "href": "laboratorios/ud2/lab6.html#primera-toma-de-contacto-con-zap",
+    "title": "UD2 · Lab 6 · Análisis dinámico de seguridad con OWASP ZAP",
+    "section": "",
+    "text": "Abre OWASP ZAP y familiarízate con su interfaz.\nLocaliza las siguientes zonas:\n\n\n\n\n\n\n\nElemento\nFunción\n\n\n\n\nSites\nMuestra los sitios y recursos descubiertos durante la exploración.\n\n\nHistory\nRegistra las peticiones y respuestas HTTP observadas por ZAP.\n\n\nAlerts\nAgrupa las alertas de seguridad detectadas.\n\n\nRequest\nPermite examinar la petición HTTP enviada.\n\n\nResponse\nPermite examinar la respuesta recibida.\n\n\nQuick Start\nOfrece opciones para explorar y analizar aplicaciones web.\n\n\n\nNo es necesario memorizar todas las opciones de la herramienta. Lo importante es comprender cómo se relacionan la aplicación, las peticiones HTTP, las respuestas y las alertas.",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD2",
+      "UD2 · Lab 6 · Análisis dinámico de seguridad con OWASP ZAP"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud2/lab6.html#actividad-1.-explorar-taskflow-a-través-de-zap",
+    "href": "laboratorios/ud2/lab6.html#actividad-1.-explorar-taskflow-a-través-de-zap",
+    "title": "UD2 · Lab 6 · Análisis dinámico de seguridad con OWASP ZAP",
+    "section": "",
+    "text": "El objetivo es conseguir que ZAP observe las interacciones que realizas con la aplicación.\n\nAccede a la pestaña Quick Start.\nLocaliza la opción Manual Explore.\nIntroduce la URL http://localhost:8000.\nSelecciona el navegador que quieras utilizar y pulsa el botón para abrirlo.\nInteractúa con TaskFlow utilizando ese navegador.\n\nNo utilices la opción Automated Scan en esta práctica: puede ejecutar un análisis activo.\nRealiza varias acciones en TaskFlow:\n\nConsulta la lista de tareas.\nAñade una tarea con un título normal.\nAñade otra tarea con caracteres especiales, por ejemplo &lt;, &gt; y comillas.\nExamina cómo se muestra el contenido introducido.\nRevisa las peticiones y respuestas registradas por ZAP.\n\n\n\n\n¿Qué diferencia hay entre navegar directamente por la aplicación y hacerlo a través del navegador abierto desde ZAP?\n¿Qué información aparece en la pestaña History?\n¿Qué método HTTP utiliza el navegador para solicitar la página principal?\n¿Qué código de estado HTTP devuelve el servidor al cargar la página?\n¿Qué diferencias encuentras entre las cabeceras de la petición y las de la respuesta?\n¿Qué recursos adicionales se solicitan para mostrar la aplicación?\n\nDocumenta al menos dos peticiones y sus correspondientes respuestas. Incluye el método HTTP, la URL, el código de estado y las cabeceras que consideres relevantes.",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD2",
+      "UD2 · Lab 6 · Análisis dinámico de seguridad con OWASP ZAP"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud2/lab6.html#actividad-2.-analizar-las-alertas-de-seguridad",
+    "href": "laboratorios/ud2/lab6.html#actividad-2.-analizar-las-alertas-de-seguridad",
+    "title": "UD2 · Lab 6 · Análisis dinámico de seguridad con OWASP ZAP",
+    "section": "",
+    "text": "Una vez que hayas explorado la aplicación, consulta la pestaña Alerts.\nZAP realiza análisis pasivos de las peticiones y respuestas que observa. Este tipo de análisis no modifica las peticiones ni las respuestas para intentar explotar vulnerabilidades.\nEntre otros aspectos, puede detectar configuraciones mejorables, como la ausencia de determinadas cabeceras HTTP de seguridad.\nExamina las alertas que haya generado tu exploración.\nNo es obligatorio que aparezcan alertas de todos los tipos: los resultados dependen de la aplicación, de los recursos explorados y de las reglas disponibles en tu instalación de ZAP.\n\n\nCrea una tabla con las alertas más relevantes que hayas encontrado.\n\n\n\n\n\n\n\n\n\n\nAlerta\nRiesgo indicado por ZAP\nEvidencia observada\n¿Es una vulnerabilidad confirmada?\nMedida correctora\n\n\n\n\nNombre de la alerta\nExplicación del riesgo\nPetición, respuesta o recurso relacionado\nSí, no o pendiente de verificar\nPropuesta de solución\n\n\n\nIncluye al menos tres alertas si ZAP genera suficientes resultados. Si obtienes menos, documenta todas las encontradas y explica las limitaciones del análisis.\nPara cada alerta:\n\nConsulta su descripción.\nIdentifica el recurso afectado.\nExamina la evidencia que proporciona ZAP.\nExplica qué podría suceder si el problema se diera en una aplicación real.\nPropón una medida correctora razonada.\nIndica si la alerta confirma un defecto o si necesita una comprobación adicional.\n\nNo copies únicamente el nombre y la descripción de la herramienta. Debes explicar los resultados con tus propias palabras.\n\n\n\nComprueba si la respuesta del servidor incluye cabeceras relacionadas con la seguridad.\nInvestiga, al menos, estas tres:\n\n\n\n\n\n\n\nCabecera\nFinalidad\n\n\n\n\nContent-Security-Policy\nPermite definir restricciones sobre los recursos que puede cargar o ejecutar el navegador.\n\n\nX-Content-Type-Options\nCon el valor nosniff, evita determinadas interpretaciones del contenido como un tipo MIME distinto del declarado.\n\n\nX-Frame-Options\nPermite controlar si la página puede mostrarse dentro de un marco, ayudando a prevenir determinados ataques de clickjacking.\n\n\n\nPara cada cabecera, responde:\n\n¿Está presente en las respuestas que has examinado?\n¿Qué riesgo intenta reducir?\n¿Qué configuración sería razonable para una aplicación real?\n¿La ausencia de la cabecera demuestra por sí sola que la aplicación es vulnerable?\n\nTen en cuenta que estas cabeceras tienen funciones diferentes y que una configuración adecuada depende de las características de la aplicación.",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD2",
+      "UD2 · Lab 6 · Análisis dinámico de seguridad con OWASP ZAP"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud2/lab6.html#actividad-3.-comparar-semgrep-y-zap",
+    "href": "laboratorios/ud2/lab6.html#actividad-3.-comparar-semgrep-y-zap",
+    "title": "UD2 · Lab 6 · Análisis dinámico de seguridad con OWASP ZAP",
+    "section": "",
+    "text": "En el laboratorio 1 utilizaste Semgrep para analizar el código fuente de TaskFlow. Ahora has utilizado ZAP para observar la aplicación en ejecución.\nRecupera los resultados de ambos laboratorios y completa la siguiente tabla.\n\n\n\nAspecto\nSemgrep (SAST)\nZAP (DAST)\n\n\n\n\nQué analiza\n\n\n\n\nNecesita ejecutar la aplicación\n\n\n\n\nQué tipos de problemas puede detectar\n\n\n\n\nQué evidencias proporciona\n\n\n\n\nPrincipales limitaciones\n\n\n\n\nQué comprobaciones manuales necesita\n\n\n\n\n\nDespués, responde razonadamente:\n\n¿Puede Semgrep detectar una cabecera HTTP que el servidor no envía? Explica tu respuesta.\n¿Puede ZAP identificar todos los usos peligrosos de eval() o innerHTML del código fuente?\nSi Semgrep identifica un uso peligroso de innerHTML, ¿significa que ZAP necesariamente generará una alerta?\nSi ZAP no genera alertas, ¿podemos afirmar que TaskFlow es segura?\n¿Por qué tiene sentido utilizar SAST y DAST de forma complementaria?\n\nApoya tus respuestas en evidencias obtenidas durante la práctica.",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD2",
+      "UD2 · Lab 6 · Análisis dinámico de seguridad con OWASP ZAP"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud2/lab6.html#actividad-4.-mejorar-la-seguridad",
+    "href": "laboratorios/ud2/lab6.html#actividad-4.-mejorar-la-seguridad",
+    "title": "UD2 · Lab 6 · Análisis dinámico de seguridad con OWASP ZAP",
+    "section": "",
+    "text": "Selecciona dos hallazgos del laboratorio, preferiblemente uno relacionado con el código fuente y otro con el comportamiento HTTP o la configuración.\nPara cada hallazgo:\n\nDescribe el problema.\nExplica su posible impacto.\nPropón una solución.\nIndica qué prueba realizarías para comprobar que la solución funciona.\nExplica cómo verificarías que el cambio no ha introducido una regresión.\n\nNo es obligatorio modificar la aplicación. Puedes presentar las soluciones mediante fragmentos de código, configuraciones o propuestas técnicas, siempre que estén justificadas.\nSi decides modificar el proyecto, conserva una copia del estado inicial y documenta los cambios realizados.",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD2",
+      "UD2 · Lab 6 · Análisis dinámico de seguridad con OWASP ZAP"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud2/lab6.html#entregables",
+    "href": "laboratorios/ud2/lab6.html#entregables",
+    "title": "UD2 · Lab 6 · Análisis dinámico de seguridad con OWASP ZAP",
+    "section": "",
+    "text": "Entrega un documento Markdown o PDF que incluya:\n\nInstalación y puesta en marcha: evidencia de que ZAP y TaskFlow funcionan.\nExploración HTTP: al menos dos peticiones y sus respuestas documentadas.\nAnálisis de alertas: tabla de hallazgos, evidencias y medidas correctoras.\nInvestigación de CSP: explicación del problema detectado y de cómo se ha corregido.\nConfiguración del servidor: código final de servidor_seguro.py.\nVerificación de cabeceras: salida de curl -I o captura de las cabeceras de respuesta.\nPruebas posteriores: evidencias de que TaskFlow sigue funcionando después de aplicar los cambios.\nComparación SAST/DAST: tabla completa y respuestas razonadas.\nConclusión: limitaciones del análisis automatizado y mejoras que aplicarías antes de desplegar una aplicación real.\n\nLas capturas deben mostrar información relevante y estar acompañadas de una explicación. No incluyas credenciales reales ni información sensible.",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD2",
+      "UD2 · Lab 6 · Análisis dinámico de seguridad con OWASP ZAP"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud2/lab6.html#criterios-de-evaluación",
+    "href": "laboratorios/ud2/lab6.html#criterios-de-evaluación",
+    "title": "UD2 · Lab 6 · Análisis dinámico de seguridad con OWASP ZAP",
+    "section": "",
+    "text": "Criterio\nPuntuación\n\n\n\n\nInstalación y puesta en marcha de ZAP y TaskFlow\n1 punto\n\n\nExploración y análisis de peticiones/respuestas HTTP\n1,5 puntos\n\n\nInterpretación de alertas y evidencias\n1,5 puntos\n\n\nComprensión y configuración de las cabeceras de seguridad\n1,5 puntos\n\n\nCorrección de los problemas de compatibilidad con CSP\n1,5 puntos\n\n\nVerificación de las cabeceras y pruebas posteriores\n1 punto\n\n\nComparación razonada entre SAST y DAST\n1 punto\n\n\nCalidad de la documentación\n1 punto\n\n\nTotal\n10 puntos\n\n\n\nLa evaluación valorará especialmente la justificación técnica de las correcciones. Eliminar una alerta desactivando una regla o debilitando indiscriminadamente la política no se considerará una solución suficiente.",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD2",
+      "UD2 · Lab 6 · Análisis dinámico de seguridad con OWASP ZAP"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud2/lab6.html#seguridad-y-uso-responsable",
+    "href": "laboratorios/ud2/lab6.html#seguridad-y-uso-responsable",
+    "title": "UD2 · Lab 6 · Análisis dinámico de seguridad con OWASP ZAP",
+    "section": "",
+    "text": "En este laboratorio trabajarás exclusivamente con TaskFlow en tu propio equipo.\n\nNo ejecutes análisis activos contra sistemas ajenos.\nNo utilices aplicaciones públicas como objetivos de prueba sin autorización expresa.\nNo confundas una alerta con una vulnerabilidad confirmada.\nNo interpretes la ausencia de alertas como una garantía de seguridad.\nNo debilites las políticas de seguridad sin justificarlo.\nDocumenta las limitaciones del entorno utilizado.\n\nEl servidor Python empleado en esta práctica es una herramienta didáctica, no un servidor de producción. La incorporación de algunas cabeceras de seguridad no sustituye a un despliegue profesional con configuración, gestión de errores, actualizaciones, registros y controles adicionales.",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD2",
+      "UD2 · Lab 6 · Análisis dinámico de seguridad con OWASP ZAP"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud2/lab6.html#documentación-de-referencia",
+    "href": "laboratorios/ud2/lab6.html#documentación-de-referencia",
+    "title": "UD2 · Lab 6 · Análisis dinámico de seguridad con OWASP ZAP",
+    "section": "",
+    "text": "OWASP ZAP: descarga\nOWASP ZAP: Getting Started\nOWASP Secure Headers Project\nMDN: Content Security Policy\nPython: módulo http.server",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD2",
+      "UD2 · Lab 6 · Análisis dinámico de seguridad con OWASP ZAP"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud2/lab6.html#anexo-de-consulta-cabeceras-http-de-seguridad.",
+    "href": "laboratorios/ud2/lab6.html#anexo-de-consulta-cabeceras-http-de-seguridad.",
+    "title": "UD2 · Lab 6 · Análisis dinámico de seguridad con OWASP ZAP",
+    "section": "",
+    "text": "Las cabeceras HTTP permiten que un servidor proporcione instrucciones y metadatos al navegador. Algunas ayudan a reducir riesgos relacionados con la ejecución de contenido, la interpretación de archivos y la presentación de páginas dentro de otras págonas.\nNo todas las cabeceras tienen que estar presentes en todas las aplicaciones ni una cabecera, por sí sola, garantiza que una aplicación sea segura.\n\n\n\nCabeceras\n\n\n\n\nUna respuesta HTTP podría incluir estas cabeceras:\nContent-Security-Policy: default-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'\nX-Content-Type-Options: nosniff\nX-Frame-Options: DENY\nInterpretación:\n\ndefault-src 'self': como política predeterminada, sólo permite cargar recursos del mismo origen.\nobject-src 'none': impide cargar recursos mediante elementos como object y embed.\nbase-uri 'self': restringe los valores permitidos para el elemento base.\nframe-ancestors 'none': impide que la página se incruste en un marco.\nnosniff: evita determinadas inferencias automáticas del tipo de contenido.\nDENY: impide que la página se muestre dentro de un marco, incluso en páginas del mismo origen.\n\nLa directiva frame-ancestors de CSP (Política de Seguridad de Contenido) y X-Frame-Options tienen funciones relacionadas. En navegadores modernos, frame-ancestors es la alternativa más flexible; mantener ambas puede ser por compatibildad.\n\nEstas políticas son ejemplos iniciales, no una configuración universal. Una CSP demasiado restrictiva puede impedir que funcionen recursos legítimos de la aplicación. Debes probarla después de aplicarla.",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD2",
+      "UD2 · Lab 6 · Análisis dinámico de seguridad con OWASP ZAP"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud2/lab6.html#primera-parte.-análisis-dinámico-con-owasp-zap",
+    "href": "laboratorios/ud2/lab6.html#primera-parte.-análisis-dinámico-con-owasp-zap",
+    "title": "UD2 · Lab 6 · Análisis dinámico de seguridad con OWASP ZAP",
+    "section": "",
+    "text": "Abre OWASP ZAP y familiarízate con las principales zonas de su interfaz.\n\n\n\nElemento\nFunción\n\n\n\n\nSites\nMuestra los sitios y recursos descubiertos.\n\n\nHistory\nRegistra las peticiones y respuestas HTTP observadas.\n\n\nAlerts\nAgrupa las alertas de seguridad detectadas.\n\n\nRequest\nPermite examinar las peticiones enviadas.\n\n\nResponse\nPermite examinar las respuestas recibidas.\n\n\nQuick Start\nOfrece opciones para iniciar exploraciones.\n\n\n\nUtiliza la opción Manual Explore de Quick Start para abrir la aplicación en un navegador asociado a ZAP.\nIntroduce la URL:\nhttp://127.0.0.1:8000\nInteractúa con TaskFlow:\n\nConsulta la lista de tareas.\nAñade una tarea con un título normal.\nAñade otra tarea con caracteres especiales, como comillas, los símbolos &lt; y &gt; o una cadena que parezca HTML.\nComprueba cómo se muestra el contenido introducido.\nExamina las peticiones y respuestas que aparecen en History.\n\nNo utilices la opción Automated Scan en esta práctica. No es necesario ejecutar pruebas activas para completar las actividades.\n\n\n\n¿Qué función cumple ZAP cuando navegas con el navegador asociado?\n¿Qué información aparece en History?\n¿Qué método HTTP utiliza el navegador para solicitar la página principal?\n¿Qué código de estado devuelve el servidor?\n¿Qué cabeceras aparecen en la respuesta HTTP?\n¿Qué otros recursos se solicitan para representar la aplicación?\n¿Qué diferencias observas al introducir caracteres especiales en una tarea?\n\nDocumenta al menos dos peticiones y sus correspondientes respuestas.\n\n\n\n\nConsulta la pestaña Alerts después de explorar la aplicación.\nEl análisis pasivo de ZAP inspecciona las peticiones y respuestas observadas sin modificarlas para intentar explotar vulnerabilidades.\nLos resultados dependen de la aplicación, los recursos explorados y las reglas de la herramienta. Es posible que algunas alertas no aparezcan en tu ejecución.\nCompleta una tabla como la siguiente con las alertas más relevantes que encuentres:\n\n\n\n\n\n\n\n\n\n\nAlerta\nRiesgo indicado\nEvidencia\n¿Está confirmada?\nMedida correctora\n\n\n\n\nNombre de la alerta\nExplicación del riesgo\nRecurso o respuesta relacionada\nConfirmada, descartada o pendiente\nPropuesta razonada\n\n\n\nIncluye tres alertas si la herramienta genera suficientes resultados. Si aparecen menos, documenta las encontradas y explica las limitaciones.\nPara cada alerta:\n\nLee la descripción proporcionada por ZAP.\nIdentifica el recurso afectado.\nExamina la evidencia disponible.\nExplica el posible impacto en una aplicación real.\nPropón una medida correctora.\nJustifica si la alerta confirma una vulnerabilidad o necesita más comprobaciones.\n\nNo es suficiente copiar la descripción de ZAP. Debes interpretar los resultados.",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD2",
+      "UD2 · Lab 6 · Análisis dinámico de seguridad con OWASP ZAP"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud2/lab6.html#anexo-de-consulta.-cabeceras-http-de-seguridad",
+    "href": "laboratorios/ud2/lab6.html#anexo-de-consulta.-cabeceras-http-de-seguridad",
+    "title": "UD2 · Lab 6 · Análisis dinámico de seguridad con OWASP ZAP",
+    "section": "",
+    "text": "Las cabeceras HTTP permiten que un servidor proporcione instrucciones y metadatos al navegador. Algunas se utilizan para reducir riesgos de seguridad relacionados con la ejecución de contenido, la interpretación de archivos y la presentación de páginas dentro de otras páginas.\n\n\n\n\n\n\n\n\n\n\nCabecera\nFunción\nRiesgo que ayuda a reducir\n\n\n\n\nContent-Security-Policy\nDefine qué recursos puede cargar o ejecutar el navegador y desde dónde.\nAlgunos ataques XSS y la carga de recursos no autorizados.\n\n\nX-Content-Type-Options\nCon el valor nosniff, impide determinadas interpretaciones del contenido como un tipo MIME distinto del declarado.\nRiesgos derivados de la interpretación incorrecta del tipo de contenido.\n\n\nX-Frame-Options\nControla si una página puede mostrarse dentro de un marco.\nDeterminados ataques de clickjacking.\n\n\n\nEstas cabeceras proporcionan capas de protección adicionales, pero no garantizan por sí solas que una aplicación sea segura.\n\n\n\nCSP significa Content Security Policy, o Política de Seguridad del Contenido.\nEs un mecanismo que permite al servidor indicar al navegador qué recursos puede cargar o ejecutar una página web.\nPor ejemplo:\nContent-Security-Policy: default-src 'self'; script-src 'self'\nEn esta política:\n\ndefault-src 'self' establece una política predeterminada que permite recursos del mismo origen.\nscript-src 'self' permite cargar scripts desde el mismo origen, pero no autoriza por defecto scripts insertados directamente en el HTML.\n\nEl origen está determinado por el protocolo, el dominio y el puerto. En esta práctica utilizaremos http://127.0.0.1:8000.\nUna CSP restrictiva puede bloquear recursos legítimos si la aplicación depende de estilos o scripts en línea. Por eso, después de aplicar una política, es necesario comprobar el funcionamiento de la aplicación.\n\n\n\n\n\n\n\n\n\n\nDirectiva\nSignificado\n\n\n\n\ndefault-src 'self'\nPermite por defecto recursos del mismo origen.\n\n\nobject-src 'none'\nImpide cargar recursos mediante elementos como object y embed.\n\n\nbase-uri 'self'\nRestringe los valores permitidos para el elemento base.\n\n\nframe-ancestors 'none'\nImpide que la página se incruste dentro de un marco.\n\n\n\nframe-ancestors 'none' y X-Frame-Options: DENY tienen funciones relacionadas: ambos impiden que la página se muestre dentro de un marco. La primera directiva ofrece más flexibilidad y forma parte de CSP.\nPuedes consultar la documentación de referencia:\n\nhttps://owasp.org/www-project-secure-headers/\nhttps://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CSP",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD2",
+      "UD2 · Lab 6 · Análisis dinámico de seguridad con OWASP ZAP"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud2/lab6.html#segunda-parte.-configurar-un-servidor-con-cabeceras-de-seguridad",
+    "href": "laboratorios/ud2/lab6.html#segunda-parte.-configurar-un-servidor-con-cabeceras-de-seguridad",
+    "title": "UD2 · Lab 6 · Análisis dinámico de seguridad con OWASP ZAP",
+    "section": "",
+    "text": "En esta parte modificarás el modo en que se sirve TaskFlow para añadir cabeceras HTTP de seguridad.\nNo basta con escribir las cabeceras en index.html: deben enviarse como cabeceras de la respuesta HTTP del servidor.\n\n\n\n\nVuelve al terminal donde ejecutaste python -m http.server.\nPulsa:\nCtrl + C\nEl servidor anterior debe detenerse antes de iniciar el nuevo.\n\n\n\nEn la carpeta de TaskFlow, crea un archivo llamado servidor_seguro.py.\nIntroduce el siguiente código:\nfrom http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer\n\n\nclass ManejadorSeguro(SimpleHTTPRequestHandler):\n\n    def end_headers(self):\n        self.send_header(\n            \"Content-Security-Policy\",\n            \"default-src 'self'; \"\n            \"script-src 'self'; \"\n            \"style-src 'self'; \"\n            \"object-src 'none'; \"\n            \"base-uri 'self'; \"\n            \"frame-ancestors 'none'\"\n        )\n\n        self.send_header(\"X-Content-Type-Options\", \"nosniff\")\n        self.send_header(\"X-Frame-Options\", \"DENY\")\n\n        super().end_headers()\n\n\nservidor = ThreadingHTTPServer(\n    (\"127.0.0.1\", 8000),\n    ManejadorSeguro\n)\n\nprint(\"TaskFlow disponible en http://127.0.0.1:8000\")\nservidor.serve_forever()\n\n\n\nAntes de ejecutarlo, identifica la función de cada parte.\n\n\n\n\n\n\n\nElemento\nFunción\n\n\n\n\nSimpleHTTPRequestHandler\nSirve archivos de una carpeta mediante HTTP.\n\n\nManejadorSeguro\nDefine un manejador personalizado para las peticiones.\n\n\nend_headers()\nAñade las cabeceras antes de finalizar cada respuesta.\n\n\nsend_header()\nIncorpora una cabecera HTTP a la respuesta.\n\n\nsuper().end_headers()\nFinaliza el envío de las cabeceras mediante el comportamiento original del manejador.\n\n\nThreadingHTTPServer\nCrea un servidor que puede atender peticiones en distintos hilos.\n\n\n127.0.0.1\nLimita la escucha a la interfaz local del equipo.\n\n\nserve_forever()\nMantiene el servidor atendiendo peticiones hasta que se detenga.\n\n\n\nLa CSP propuesta incluye script-src 'self' y style-src 'self'. Estas directivas permiten cargar scripts y hojas de estilo desde el mismo origen, pero no autorizan por defecto todos los scripts y estilos insertados directamente en el HTML.\n\n\n\nEjecuta el comando desde la carpeta que contiene index.html y servidor_seguro.py.\nWindows:\npy servidor_seguro.py\nmacOS:\npython3 servidor_seguro.py\nDeberías ver un mensaje similar a:\nTaskFlow disponible en http://127.0.0.1:8000\nEl terminal debe permanecer ocupado mientras el servidor esté funcionando. Esto es normal.\nSi aparece un error indicando que el puerto está ocupado, detén el otro servidor o selecciona un puerto libre y actualiza las URL de la práctica.\n\n\n\n\nAbre de nuevo:\nhttp://127.0.0.1:8000\nComprueba si la aplicación se muestra correctamente y si puedes añadir tareas.\n\nEs posible que los estilos o alguna funcionalidad dejen de funcionar por la CSP que acabas de introducir. No elimines la política para resolverlo sin investigar la causa.\n\n\n\nAbre las herramientas de desarrollo del navegador y selecciona la pestaña Console.\nBusca mensajes relacionados con Content Security Policy, especialmente los que indiquen que se ha bloqueado un estilo o un script en línea.\nPor ejemplo, un mensaje que indique que un estilo en línea ha sido bloqueado por default-src 'self' significa que el navegador ha aplicado la política predeterminada porque no se había autorizado ese tipo de estilo.\n\n\n\nExamina index.html, los archivos CSS y el JavaScript de la aplicación.\nBusca, entre otros, estos patrones:\nEstilos incluidos directamente en el HTML:\n&lt;style&gt;\n    .tarea {\n        margin-bottom: 1rem;\n    }\n&lt;/style&gt;\nAtributos style en elementos HTML:\n&lt;div style=\"display: flex; gap: 1rem;\"&gt;\nScripts insertados directamente en el HTML:\n&lt;script&gt;\n    console.log(\"Aplicación iniciada\");\n&lt;/script&gt;\nLa política configurada permite scripts y hojas de estilo del mismo origen, pero no autoriza por defecto todos los elementos anteriores.\n\n\n\nSi encuentras estilos dentro de una etiqueta style, trasládalos a un archivo CSS externo. Por ejemplo, crea styles.css:\n.tarea {\n    margin-bottom: 1rem;\n}\n\n.contenedor {\n    display: flex;\n    gap: 1rem;\n}\nY referencia el archivo desde index.html:\n&lt;link rel=\"stylesheet\" href=\"./styles.css\"&gt;\nAdapta las clases al código real de TaskFlow.\nSi encuentras atributos style en elementos HTML, sustitúyelos por clases CSS. Por ejemplo:\n&lt;div class=\"contenedor\"&gt;\nEn lugar de:\n&lt;div style=\"display: flex; gap: 1rem;\"&gt;\nSi el problema está en un bloque script insertado directamente en el HTML, traslada su contenido a un archivo JavaScript externo y referencia ese archivo desde el HTML.\nSi la aplicación asigna estilos dinámicamente mediante JavaScript, estudia si puedes utilizar classList.add() y clases CSS en lugar de asignar estilos directamente.\nNo añadas 'unsafe-inline' como primera solución en el CSP. Aunque permitiría ciertos estilos en línea, reduce la protección que proporciona la política. El objetivo es adaptar la aplicación a una configuración más restrictiva cuando sea viable.\n\n\n\nDespués de modificar el código:\n\nGuarda los archivos.\nRecarga la página.\nComprueba si han desaparecido los errores de CSP.\nVerifica que los estilos se muestran correctamente.\nPrueba las funcionalidades principales de TaskFlow.\nDocumenta los cambios realizados.\n\nNo des por solucionado el problema solo porque la consola deje de mostrar un mensaje. Comprueba también el comportamiento real de la aplicación.\n\n\n\n\nCon el servidor seguro en funcionamiento, abre un segundo terminal.\nEjecuta:\ncurl -I http://127.0.0.1:8000\nEl resultado debería incluir cabeceras semejantes a estas:\nContent-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'\nX-Content-Type-Options: nosniff\nX-Frame-Options: DENY\nEl orden de las cabeceras puede variar.\nComprueba también las cabeceras desde las herramientas de desarrollo del navegador:\n\nAbre la pestaña Network.\nRecarga la aplicación.\nSelecciona la petición correspondiente al documento HTML.\nExamina las cabeceras de respuesta.\n\nResponde:\n\n¿Qué cabeceras has añadido?\n¿Qué riesgo intenta reducir cada una?\n¿Por qué no es suficiente escribir una cabecera dentro de index.html?\n¿Qué diferencia existe entre una cabecera HTTP y una etiqueta HTML?\n¿Por qué es importante comprobar la respuesta real del servidor?\n\n\n\n\nVuelve a explorar TaskFlow con el navegador asociado a ZAP.\nComprueba si las alertas relacionadas con las cabeceras han cambiado.\nCompleta una tabla comparativa:\n\n\n\n\n\n\n\n\nAspecto\nAntes de modificar el servidor\nDespués de modificar el servidor\n\n\n\n\nCSP\n\n\n\n\nX-Content-Type-Options\n\n\n\n\nX-Frame-Options\n\n\n\n\nOtras alertas relevantes\n\n\n\n\nFuncionamiento de TaskFlow\n\n\n\n\n\nSi una alerta desaparece, explica qué cambio lo ha permitido. Si persiste, investiga si se debe a la configuración, al tipo de análisis, a un recurso concreto o a las limitaciones de la herramienta.\nRecuerda que las cabeceras que recibe el navegador pueden variar según la respuesta HTTP examinada. No des por supuesto que todas las respuestas tienen exactamente la misma configuración sin comprobarlo.",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD2",
+      "UD2 · Lab 6 · Análisis dinámico de seguridad con OWASP ZAP"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud2/lab6.html#tercera-parte.-comparación-entre-sast-y-dast",
+    "href": "laboratorios/ud2/lab6.html#tercera-parte.-comparación-entre-sast-y-dast",
+    "title": "UD2 · Lab 6 · Análisis dinámico de seguridad con OWASP ZAP",
+    "section": "",
+    "text": "Recupera los resultados del laboratorio 1 y compáralos con los obtenidos en este laboratorio.\n\n\n\nAspecto\nSemgrep (SAST)\nZAP (DAST)\n\n\n\n\nQué analiza\n\n\n\n\nNecesita ejecutar la aplicación\n\n\n\n\nQué tipos de problemas puede detectar\n\n\n\n\nQué evidencias proporciona\n\n\n\n\nPrincipales limitaciones\n\n\n\n\nQué comprobaciones manuales necesita\n\n\n\n\n\nResponde razonadamente:\n\n¿Puede Semgrep comprobar directamente qué cabeceras envía el servidor durante una petición real?\n¿Puede ZAP identificar todos los usos peligrosos de eval() o innerHTML del código fuente?\nSi Semgrep identifica un patrón potencialmente peligroso, ¿significa que ZAP necesariamente generará una alerta?\nSi ZAP no genera alertas, ¿podemos afirmar que la aplicación es segura?\n¿Por qué es útil combinar análisis estático y dinámico?\n¿Qué problemas has encontrado al aplicar la CSP?\n¿Qué ventajas tiene corregir la aplicación para cumplir una política restrictiva en lugar de permitir indiscriminadamente los estilos y scripts en línea?\n\nApoya las respuestas en evidencias obtenidas durante la práctica.",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD2",
+      "UD2 · Lab 6 · Análisis dinámico de seguridad con OWASP ZAP"
+    ]
   }
 ]

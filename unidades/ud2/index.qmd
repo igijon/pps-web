@@ -370,6 +370,152 @@ test("la página de héroes muestra el listado", async ({ page }) => {
 });
 ```
 
+# 🐟 SAST y DAST
+
+## ¿Por qué necesitamos más que tests funcionales?
+
+Los tests que hemos trabajado con Vitest permiten comprobar si una función devuelve el resultado esperado. Playwright permite verificar flujos del usuario en el navegador
+
+Sin embargo, una aplicación puede superar esas pruebas y mantener problemas de seguridad.
+
+Por ejemplo:
+
+- Una función calcula correctamente un resultado, pero construye una consulta SQL concatenando datos del usuario.
+- Una página funciona correctamente, pero no incluye determinadas cabeceras de seguridad.
+- Una API devuelve los datos esperados, pero permite consultar información sin autorización.
+- Un formulario valida los datos en el navegador, pero el servidor no vuelve a validarlos.
+
+Por tanto, necesitamos distintas técnicas de verificación que aporten evidencias completementarias.
+
+## SAST: Análisis estático de seguridad
+
+El *Static Application Security Testing* analiza el código fuente u otros artefactos sin necesidad de ejecutar la aplicación.
+
+Busca patrones que pueden indicar problemas de seguridad: funciones peligrosas, tratamiento inadecuado de datos, secretos expuestos o construcciones que merecen una revisión.
+
+**</> Código fuente -> Analizador SAST -> Hallazgos**
+
+Una herramienta que utilizaremos es **Semgrep**. Permite analizar código mediante reglas y utilizar conjuntos de reglas para detectar patrones de seguridad.
+
+```js
+function buscarUsuario(nombre) {
+    const consulta = "SELECT * FROM usuarios WHERE nombre = '" + nombre + "'";
+    return ejecutarConsulta(consulta);
+}
+```
+
+La concatenación de una entrada externa en una consulta SQL puede permitir una inyección SQL, dependiendo de cómo funcione `ejecutarConsulta` y de si existen otras protecciones.
+
+Por ejemplo:
+
+```js
+function buscarUsuario(nombre) {
+    const consulta = "SELECT * FROM usuarios WHERE nombre = '" + nombre + "'";
+    return ejecutarConsulta(consulta);
+}
+
+buscarUsuario("' OR '1'='1' --");
+```
+
+La consulta resultante sería algo como:
+
+```sql
+SELECT * FROM usuarios WHERE nombre = '' OR '1'='1' --'
+```
+
+>Esto comprueba si el nombre está vacío o añade una condición que siempre es verdadera y `--` inicia un comentario SQL que hace que el resto de la línea se ignore.
+
+
+Un análisis SAST puede señalar esa construcción. No obstante, hay que comprobar el contexto: **encontrar un patrón sospechoso no demuestra siempre que exista una vulnerabilidad explotable**.
+
+
+
+**Ventajas**
+
+- Puede detectar problemas antes de ejecutar o desplegar la aplicación.
+- Permite analizar cambios durante el desarrollo.
+- Facilita la integración en revisiones de código y pipelines.
+
+**Limitaciones**
+
+- Puede producir falsos positivos
+- Puede no comprender toda la lógica de negocio o el contexto de ejecución
+- Puede pasar por alto vulnerabilidades que no coincidan con las reglas disponibles
+
+## DAST: Análisis dinámico de seguridad
+
+El *Dynamic Application Security Testing* examina una aplicación mientras está ejecutándose. La herramienta interactúa con ella mediante peticiones HTTP y analiza las respuestas y los comportamientos observados.
+
+Utilizaremos **OWASP ZAP**. Puede rastrear una aplicación, analizar pasivamente las comunicaciones y ejecutar análisis activos configurados para buscar vulnerabilidades.
+
+Por ejemplo, puede detectar:
+
+- Cabeceras de seguridad ausentes o mal configuradas.
+- Cookies que no tienen determinados atributos de seguridad.
+- Algunas formas de inyección o XSS.
+- Otros comportamientos potencialmente inseguros observables desde el exterior.
+
+**Ventajas**
+
+- Examina el comportamiento real de la aplicación desplegada.
+- Puede identificar problemas de configuración y respuestas HTTP.
+- No necesita acceso al código fuente.
+
+**Limitaciones**
+
+- Puede no descubrir rutas que no haya explorado
+- Puede no acceder a funciones que requieren autenticación
+- No detecta necesariamente todos los fallos de autorización o lógica de negocio
+- Un escaneo activo puede enviar peticiones que modifiquen datos o afecten al servicio
+
+> Empezaremos con un análisis pasivo o *Baseline Scan*. No ejecutaremos pruebas activas contra aplicaciones públicas o sistemas sin autorización.
+
+# 📟 Seguridad integrada en el testing
+
+## ¿Por qué no basta con que los tests pasen?
+
+Imagina que una aplicción obtiene este resultado:
+
+- Todos los test de Vitest pasan.
+- Los flujos principales de Playwright funcionan.
+- Semprep señala una posible inyección.
+- ZAP detecta una cabecera de seguridad ausente.
+
+¿Está preparada para producción?
+
+No podemos responder mirando únicamente el número de tests superados. Los test funcionales verifican comportamientos esperados; SAST y DAST aportan otras evidencias sobre posibles problemas de seguridad.
+
+> La decisión debe considerar el contexto, las consecuencias de cada defecto, la confianza en la evidencia y los controles existentes.
+
+## De una alerta a una decisión
+
+Para gestionar un hallazgo, seguiremos este proceso:
+
+![Pasos](./images/4.png)
+
+## ¿Cómo priorizamos los hallazgos?
+
+No debemos confundir el nivel de alerta de una herramienta con el riesgo real para el negocio.
+
+Para priorizar, podemos utilizar estos criterios:
+
+- **Impacto**: consecuencias sobre la confidencialidad, integridad o disponibilidad.
+- **Probabilidad**: facilidad de explotación y condiciones necesarias.
+- **Exposición**: accesibilidad del componente y datos o funciones que protege.
+- **Evidencia**: grado de confirmación de hallazgo.
+- **Controles existentes**: medidas que puedan reducir el riesgo, sin asumir que lo eliminan.
+
+Una política didáctica de ejemplo podría ser:
+
+![Política didáctica de ejemplo](./images/5.png)
+
+## ¿Qué significa integrar seguridad en el testing?
+
+Significa que las comprobaciones de seguridad forman parte del proceso habitual de desarrollo, y no se ejecutan únicamente al final.
+
+Podemos organizar las verificaciones en diferentes momentos:
+
+![Momentos de verificación](./images/6.png)
 
 
 

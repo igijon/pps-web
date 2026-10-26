@@ -1,0 +1,554 @@
+---
+title: "UD2 · Lab 6 · Análisis dinámico de seguridad con OWASP ZAP"
+---
+
+# 🧪 Laboratorio 6. Análisis dinámico de seguridad con OWASP ZAP y configuración segura
+
+## 1. Contexto
+
+En el laboratorio anterior utilizaste Semgrep para analizar el código fuente de TaskFlow e identificar posibles debilidades de seguridad. Este análisis se conoce como **SAST** (*Static Application Security Testing*).
+
+En este laboratorio trabajarás con **OWASP ZAP**, una herramienta que permite analizar una aplicación web mientras está en ejecución. Este enfoque se denomina **DAST** (*Dynamic Application Security Testing*).
+
+Además, darás un paso más: modificarás la configuración del servidor que sirve TaskFlow para incorporar cabeceras HTTP de seguridad y comprobarás cómo afectan al comportamiento de la aplicación.
+
+El objetivo no es conseguir que todas las herramientas dejen de mostrar alertas sin más, sino aprender a investigar los resultados, aplicar correcciones justificadas y comprobar si realmente mejoran la seguridad.
+
+## 2. Preparación del entorno
+
+Necesitarás:
+
+- El proyecto [TaskFlow](https://github.com/igijon/javascript_semgrep_taskflow) del laboratorio anterior.
+- Python 3.
+- Un navegador web.
+- OWASP ZAP.
+- Un editor de código.
+
+Trabajarás exclusivamente con la aplicación local proporcionada para el laboratorio.
+
+### 2.1. Instalar OWASP ZAP
+
+Descarga OWASP ZAP desde su página oficial:
+
+[OWASP ZAP](https://www.zaproxy.org/download/)
+
+#### En Windows
+
+1. Descarga el instalador para Windows.
+2. Ejecuta el instalador y sigue las instrucciones.
+3. Si el instalador requiere una instalación adicional de Java, sigue las indicaciones oficiales.
+4. Abre ZAP desde el menú Inicio.
+
+Para comprobar si Java está disponible desde PowerShell:
+
+```powershell
+java -version
+```
+
+Si aparece un error, consulta los requisitos y las instrucciones de instalación de ZAP.
+
+#### En macOS
+
+1. Descarga el instalador para macOS.
+2. Abre el archivo descargado y sigue las instrucciones.
+3. Inicia ZAP desde la carpeta Aplicaciones.
+
+Consulta los requisitos actualizados en:
+
+[Requisitos ZAP](https://www.zaproxy.org/getting-started/)
+
+No necesitas instalar ZAP mediante Homebrew ni utilizar Docker para realizar esta práctica.
+
+### 2.2. Preparar TaskFlow
+
+Descomprime el proyecto del y abre la carpeta en tu editor de código.
+
+Comprueba que puedes identificar los archivos principales de la aplicación, por ejemplo:
+
+```text
+taskflow/
+├── index.html
+├── app.js
+├── tareas.js
+├── data-access.js
+├── config.js
+└── ...
+```
+
+La estructura concreta puede variar según la versión del proyecto. No elimines archivos ni cambies su contenido antes de realizar el primer análisis.
+
+### 2.3. Iniciar un servidor HTTP local
+
+Para que el navegador y ZAP puedan interactuar con la aplicación a través de HTTP, utiliza el servidor sencillo que proporciona Python.
+
+Abre un terminal en la carpeta que contiene `index.html`.
+
+**Windows (PowerShell):**
+
+```powershell
+py -m http.server 8000
+```
+
+**macOS:**
+
+```bash
+python3 -m http.server 8000
+```
+
+Deja el terminal abierto. Si el servidor se ha iniciado correctamente, podrás acceder a:
+
+[http://127.0.0.1:8000](http://127.0.0.1:8000)
+
+Comprueba que TaskFlow se muestra y que puedes utilizar sus funcionalidades principales.
+
+Si el puerto está ocupado, detén el servidor que lo utiliza o selecciona otro puerto y adapta las URL de la práctica.
+
+Este servidor es únicamente un servidor de archivos estáticos. No implementa una API, una base de datos ni un sistema de autenticación real.
+
+## 3. Primera parte. Análisis dinámico con OWASP ZAP
+
+### Actividad 1. Explorar la aplicación
+
+Abre OWASP ZAP y familiarízate con las principales zonas de su interfaz.
+
+| Elemento | Función |
+|---|---|
+| Sites | Muestra los sitios y recursos descubiertos. |
+| History | Registra las peticiones y respuestas HTTP observadas. |
+| Alerts | Agrupa las alertas de seguridad detectadas. |
+| Request | Permite examinar las peticiones enviadas. |
+| Response | Permite examinar las respuestas recibidas. |
+| Quick Start | Ofrece opciones para iniciar exploraciones. |
+
+Utiliza la opción **Manual Explore** de Quick Start para abrir la aplicación en un navegador asociado a ZAP.
+
+Introduce la URL:
+
+```text
+http://127.0.0.1:8000
+```
+
+Interactúa con TaskFlow:
+
+- Consulta la lista de tareas.
+- Añade una tarea con un título normal.
+- Añade otra tarea con caracteres especiales, como comillas, los símbolos `<` y `>` o una cadena que parezca HTML.
+- Comprueba cómo se muestra el contenido introducido.
+- Examina las peticiones y respuestas que aparecen en History.
+
+No utilices la opción Automated Scan en esta práctica. No es necesario ejecutar pruebas activas para completar las actividades.
+
+#### Cuestiones
+
+1. ¿Qué función cumple ZAP cuando navegas con el navegador asociado?
+2. ¿Qué información aparece en History?
+3. ¿Qué método HTTP utiliza el navegador para solicitar la página principal?
+4. ¿Qué código de estado devuelve el servidor?
+5. ¿Qué cabeceras aparecen en la respuesta HTTP?
+6. ¿Qué otros recursos se solicitan para representar la aplicación?
+7. ¿Qué diferencias observas al introducir caracteres especiales en una tarea?
+
+Documenta al menos dos peticiones y sus correspondientes respuestas.
+
+### Actividad 2. Interpretar las alertas
+
+Consulta la pestaña Alerts después de explorar la aplicación.
+
+El análisis pasivo de ZAP inspecciona las peticiones y respuestas observadas sin modificarlas para intentar explotar vulnerabilidades.
+
+Los resultados dependen de la aplicación, los recursos explorados y las reglas de la herramienta. Es posible que algunas alertas no aparezcan en tu ejecución.
+
+Completa una tabla como la siguiente con las alertas más relevantes que encuentres:
+
+| Alerta | Riesgo indicado | Evidencia | ¿Está confirmada? | Medida correctora |
+|---|---|---|---|---|
+| Nombre de la alerta | Explicación del riesgo | Recurso o respuesta relacionada | Confirmada, descartada o pendiente | Propuesta razonada |
+
+Incluye tres alertas si la herramienta genera suficientes resultados. Si aparecen menos, documenta las encontradas y explica las limitaciones.
+
+Para cada alerta:
+
+1. Lee la descripción proporcionada por ZAP.
+2. Identifica el recurso afectado.
+3. Examina la evidencia disponible.
+4. Explica el posible impacto en una aplicación real.
+5. Propón una medida correctora.
+6. Justifica si la alerta confirma una vulnerabilidad o necesita más comprobaciones.
+
+No es suficiente copiar la descripción de ZAP. Debes interpretar los resultados.
+
+## 4. Anexo de consulta. Cabeceras HTTP de seguridad
+
+Las cabeceras HTTP permiten que un servidor proporcione instrucciones y metadatos al navegador. Algunas se utilizan para reducir riesgos de seguridad relacionados con la ejecución de contenido, la interpretación de archivos y la presentación de páginas dentro de otras páginas.
+
+### 4.1. Cabeceras que vamos a investigar
+
+| Cabecera | Función | Riesgo que ayuda a reducir |
+|---|---|---|
+| `Content-Security-Policy` | Define qué recursos puede cargar o ejecutar el navegador y desde dónde. | Algunos ataques XSS y la carga de recursos no autorizados. |
+| `X-Content-Type-Options` | Con el valor `nosniff`, impide determinadas interpretaciones del contenido como un tipo MIME distinto del declarado. | Riesgos derivados de la interpretación incorrecta del tipo de contenido. |
+| `X-Frame-Options` | Controla si una página puede mostrarse dentro de un marco. | Determinados ataques de *clickjacking*. |
+
+Estas cabeceras proporcionan capas de protección adicionales, pero no garantizan por sí solas que una aplicación sea segura.
+
+### 4.2. ¿Qué es CSP?
+
+CSP significa *Content Security Policy*, o Política de Seguridad del Contenido.
+
+Es un mecanismo que permite al servidor indicar al navegador qué recursos puede cargar o ejecutar una página web.
+
+Por ejemplo:
+
+```http
+Content-Security-Policy: default-src 'self'; script-src 'self'
+```
+
+En esta política:
+
+- `default-src 'self'` establece una política predeterminada que permite recursos del mismo origen.
+- `script-src 'self'` permite cargar scripts desde el mismo origen, pero no autoriza por defecto scripts insertados directamente en el HTML.
+
+El origen está determinado por el protocolo, el dominio y el puerto. En esta práctica utilizaremos `http://127.0.0.1:8000`.
+
+Una CSP restrictiva puede bloquear recursos legítimos si la aplicación depende de estilos o scripts en línea. Por eso, después de aplicar una política, es necesario comprobar el funcionamiento de la aplicación.
+
+### 4.3. Directivas que utilizaremos
+
+| Directiva | Significado |
+|---|---|
+| `default-src 'self'` | Permite por defecto recursos del mismo origen. |
+| `object-src 'none'` | Impide cargar recursos mediante elementos como `object` y `embed`. |
+| `base-uri 'self'` | Restringe los valores permitidos para el elemento `base`. |
+| `frame-ancestors 'none'` | Impide que la página se incruste dentro de un marco. |
+
+`frame-ancestors 'none'` y `X-Frame-Options: DENY` tienen funciones relacionadas: ambos impiden que la página se muestre dentro de un marco. La primera directiva ofrece más flexibilidad y forma parte de CSP.
+
+Puedes consultar la documentación de referencia:
+
+- [https://owasp.org/www-project-secure-headers/](https://owasp.org/www-project-secure-headers/)
+- [https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CSP](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CSP)
+
+## 5. Segunda parte. Configurar un servidor con cabeceras de seguridad
+
+En esta parte modificarás el modo en que se sirve TaskFlow para añadir cabeceras HTTP de seguridad.
+
+No basta con escribir las cabeceras en `index.html`: deben enviarse como cabeceras de la respuesta HTTP del servidor.
+
+### Actividad 3. Crear el servidor seguro
+
+#### Paso 1. Detener el servidor anterior
+
+Vuelve al terminal donde ejecutaste `python -m http.server`.
+
+Pulsa:
+
+```text
+Ctrl + C
+```
+
+El servidor anterior debe detenerse antes de iniciar el nuevo.
+
+#### Paso 2. Crear el archivo Python
+
+En la carpeta de TaskFlow, crea un archivo llamado `servidor_seguro.py`.
+
+Introduce el siguiente código:
+
+```python
+from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
+
+
+class ManejadorSeguro(SimpleHTTPRequestHandler):
+
+    def end_headers(self):
+        self.send_header(
+            "Content-Security-Policy",
+            "default-src 'self'; "
+            "script-src 'self'; "
+            "style-src 'self'; "
+            "object-src 'none'; "
+            "base-uri 'self'; "
+            "frame-ancestors 'none'"
+        )
+
+        self.send_header("X-Content-Type-Options", "nosniff")
+        self.send_header("X-Frame-Options", "DENY")
+
+        super().end_headers()
+
+
+servidor = ThreadingHTTPServer(
+    ("127.0.0.1", 8000),
+    ManejadorSeguro
+)
+
+print("TaskFlow disponible en http://127.0.0.1:8000")
+servidor.serve_forever()
+```
+
+#### Paso 3. Comprender el código
+
+Antes de ejecutarlo, identifica la función de cada parte.
+
+| Elemento | Función |
+|---|---|
+| `SimpleHTTPRequestHandler` | Sirve archivos de una carpeta mediante HTTP. |
+| `ManejadorSeguro` | Define un manejador personalizado para las peticiones. |
+| `end_headers()` | Añade las cabeceras antes de finalizar cada respuesta. |
+| `send_header()` | Incorpora una cabecera HTTP a la respuesta. |
+| `super().end_headers()` | Finaliza el envío de las cabeceras mediante el comportamiento original del manejador. |
+| `ThreadingHTTPServer` | Crea un servidor que puede atender peticiones en distintos hilos. |
+| `127.0.0.1` | Limita la escucha a la interfaz local del equipo. |
+| `serve_forever()` | Mantiene el servidor atendiendo peticiones hasta que se detenga. |
+
+La CSP propuesta incluye `script-src 'self'` y `style-src 'self'`. Estas directivas permiten cargar scripts y hojas de estilo desde el mismo origen, pero no autorizan por defecto todos los scripts y estilos insertados directamente en el HTML.
+
+#### Paso 4. Iniciar el servidor seguro
+
+Ejecuta el comando desde la carpeta que contiene `index.html` y `servidor_seguro.py`.
+
+**Windows:**
+
+```powershell
+py servidor_seguro.py
+```
+
+**macOS:**
+
+```bash
+python3 servidor_seguro.py
+```
+
+Deberías ver un mensaje similar a:
+
+```text
+TaskFlow disponible en http://127.0.0.1:8000
+```
+
+El terminal debe permanecer ocupado mientras el servidor esté funcionando. Esto es normal.
+
+Si aparece un error indicando que el puerto está ocupado, detén el otro servidor o selecciona un puerto libre y actualiza las URL de la práctica.
+
+### Actividad 4. Comprobar el funcionamiento de TaskFlow
+
+Abre de nuevo:
+
+```text
+http://127.0.0.1:8000
+```
+
+Comprueba si la aplicación se muestra correctamente y si puedes añadir tareas.
+
+>**Es posible que los estilos o alguna funcionalidad dejen de funcionar por la CSP que acabas de introducir. No elimines la política para resolverlo sin investigar la causa.**
+
+#### Paso 1. Revisar la consola del navegador
+
+Abre las herramientas de desarrollo del navegador y selecciona la pestaña Console.
+
+Busca mensajes relacionados con `Content Security Policy`, especialmente los que indiquen que se ha bloqueado un estilo o un script en línea.
+
+Por ejemplo, un mensaje que indique que un estilo en línea ha sido bloqueado por `default-src 'self'` significa que el navegador ha aplicado la política predeterminada porque no se había autorizado ese tipo de estilo.
+
+#### Paso 2. Investigar el origen del problema
+
+Examina `index.html`, los archivos CSS y el JavaScript de la aplicación.
+
+Busca, entre otros, estos patrones:
+
+**Estilos incluidos directamente en el HTML:**
+
+```html
+<style>
+    .tarea {
+        margin-bottom: 1rem;
+    }
+</style>
+```
+
+**Atributos `style` en elementos HTML:**
+
+```html
+<div style="display: flex; gap: 1rem;">
+```
+
+**Scripts insertados directamente en el HTML:**
+
+```html
+<script>
+    console.log("Aplicación iniciada");
+</script>
+```
+
+La política configurada permite scripts y hojas de estilo del mismo origen, pero no autoriza por defecto todos los elementos anteriores.
+
+#### Paso 3. Corregir la aplicación
+
+Si encuentras estilos dentro de una etiqueta `style`, trasládalos a un archivo CSS externo. Por ejemplo, crea `styles.css`:
+
+```css
+.tarea {
+    margin-bottom: 1rem;
+}
+
+.contenedor {
+    display: flex;
+    gap: 1rem;
+}
+```
+
+Y referencia el archivo desde `index.html`:
+
+```html
+<link rel="stylesheet" href="./styles.css">
+```
+
+Adapta las clases al código real de TaskFlow.
+
+Si encuentras atributos `style` en elementos HTML, sustitúyelos por clases CSS. Por ejemplo:
+
+```html
+<div class="contenedor">
+```
+
+En lugar de:
+
+```html
+<div style="display: flex; gap: 1rem;">
+```
+
+Si el problema está en un bloque `script` insertado directamente en el HTML, traslada su contenido a un archivo JavaScript externo y referencia ese archivo desde el HTML.
+
+Si la aplicación asigna estilos dinámicamente mediante JavaScript, estudia si puedes utilizar `classList.add()` y clases CSS en lugar de asignar estilos directamente.
+
+**No añadas `'unsafe-inline'` como primera solución en el CSP.** Aunque permitiría ciertos estilos en línea, reduce la protección que proporciona la política. El objetivo es adaptar la aplicación a una configuración más restrictiva cuando sea viable.
+
+#### Paso 4. Verificar los cambios
+
+Después de modificar el código:
+
+1. Guarda los archivos.
+2. Recarga la página.
+3. Comprueba si han desaparecido los errores de CSP.
+4. Verifica que los estilos se muestran correctamente.
+5. Prueba las funcionalidades principales de TaskFlow.
+6. Documenta los cambios realizados.
+
+No des por solucionado el problema solo porque la consola deje de mostrar un mensaje. Comprueba también el comportamiento real de la aplicación.
+
+### Actividad 5. Verificar las cabeceras HTTP
+
+Con el servidor seguro en funcionamiento, abre un segundo terminal.
+
+Ejecuta:
+
+```bash
+curl -I http://127.0.0.1:8000
+```
+
+El resultado debería incluir cabeceras semejantes a estas:
+
+```http
+Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'
+X-Content-Type-Options: nosniff
+X-Frame-Options: DENY
+```
+
+El orden de las cabeceras puede variar.
+
+Comprueba también las cabeceras desde las herramientas de desarrollo del navegador:
+
+1. Abre la pestaña Network.
+2. Recarga la aplicación.
+3. Selecciona la petición correspondiente al documento HTML.
+4. Examina las cabeceras de respuesta.
+
+Responde:
+
+1. ¿Qué cabeceras has añadido?
+2. ¿Qué riesgo intenta reducir cada una?
+3. ¿Por qué no es suficiente escribir una cabecera dentro de `index.html`?
+4. ¿Qué diferencia existe entre una cabecera HTTP y una etiqueta HTML?
+5. ¿Por qué es importante comprobar la respuesta real del servidor?
+
+### Actividad 6. Repetir el análisis con ZAP
+
+Vuelve a explorar TaskFlow con el navegador asociado a ZAP.
+
+Comprueba si las alertas relacionadas con las cabeceras han cambiado.
+
+Completa una tabla comparativa:
+
+| Aspecto | Antes de modificar el servidor | Después de modificar el servidor |
+|---|---|---|
+| CSP | | |
+| X-Content-Type-Options | | |
+| X-Frame-Options | | |
+| Otras alertas relevantes | | |
+| Funcionamiento de TaskFlow | | |
+
+Si una alerta desaparece, explica qué cambio lo ha permitido. Si persiste, investiga si se debe a la configuración, al tipo de análisis, a un recurso concreto o a las limitaciones de la herramienta.
+
+Recuerda que las cabeceras que recibe el navegador pueden variar según la respuesta HTTP examinada. No des por supuesto que todas las respuestas tienen exactamente la misma configuración sin comprobarlo.
+
+## 6. Tercera parte. Comparación entre SAST y DAST
+
+Recupera los resultados del laboratorio 1 y compáralos con los obtenidos en este laboratorio.
+
+| Aspecto | Semgrep (SAST) | ZAP (DAST) |
+|---|---|---|
+| Qué analiza | | |
+| Necesita ejecutar la aplicación | | |
+| Qué tipos de problemas puede detectar | | |
+| Qué evidencias proporciona | | |
+| Principales limitaciones | | |
+| Qué comprobaciones manuales necesita | | |
+
+Responde razonadamente:
+
+1. ¿Puede Semgrep comprobar directamente qué cabeceras envía el servidor durante una petición real?
+2. ¿Puede ZAP identificar todos los usos peligrosos de `eval()` o `innerHTML` del código fuente?
+3. Si Semgrep identifica un patrón potencialmente peligroso, ¿significa que ZAP necesariamente generará una alerta?
+4. Si ZAP no genera alertas, ¿podemos afirmar que la aplicación es segura?
+5. ¿Por qué es útil combinar análisis estático y dinámico?
+6. ¿Qué problemas has encontrado al aplicar la CSP?
+7. ¿Qué ventajas tiene corregir la aplicación para cumplir una política restrictiva en lugar de permitir indiscriminadamente los estilos y scripts en línea?
+
+Apoya las respuestas en evidencias obtenidas durante la práctica.
+
+## 7. Entregables
+
+Entrega un documento Markdown o PDF que incluya:
+
+1. **Instalación y puesta en marcha:** evidencia de que ZAP y TaskFlow funcionan.
+2. **Exploración HTTP:** al menos dos peticiones y sus respuestas documentadas.
+3. **Análisis de alertas:** tabla de hallazgos, evidencias y medidas correctoras.
+4. **Investigación de CSP:** explicación del problema detectado y de cómo se ha corregido.
+5. **Configuración del servidor:** código final de `servidor_seguro.py`.
+6. **Verificación de cabeceras:** salida de `curl -I` o captura de las cabeceras de respuesta.
+7. **Pruebas posteriores:** evidencias de que TaskFlow sigue funcionando después de aplicar los cambios.
+8. **Comparación SAST/DAST:** tabla completa y respuestas razonadas.
+9. **Conclusión:** limitaciones del análisis automatizado y mejoras que aplicarías antes de desplegar una aplicación real.
+
+Las capturas deben mostrar información relevante y estar acompañadas de una explicación. No incluyas credenciales reales ni información sensible.
+
+
+## 8. Seguridad y uso responsable
+
+En este laboratorio trabajarás exclusivamente con TaskFlow en tu propio equipo.
+
+- No ejecutes análisis activos contra sistemas ajenos.
+- No utilices aplicaciones públicas como objetivos de prueba sin autorización expresa.
+- No confundas una alerta con una vulnerabilidad confirmada.
+- No interpretes la ausencia de alertas como una garantía de seguridad.
+- No debilites las políticas de seguridad sin justificarlo.
+- Documenta las limitaciones del entorno utilizado.
+
+El servidor Python empleado en esta práctica es una herramienta didáctica, no un servidor de producción. La incorporación de algunas cabeceras de seguridad no sustituye a un despliegue profesional con configuración, gestión de errores, actualizaciones, registros y controles adicionales.
+
+## 9. Documentación de referencia
+
+- [OWASP ZAP: descarga](https://www.zaproxy.org/download/)
+- [OWASP ZAP: Getting Started](https://www.zaproxy.org/getting-started/)
+- [OWASP Secure Headers Project](https://owasp.org/www-project-secure-headers/)
+- [MDN: Content Security Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CSP)
+- [Python: módulo `http.server`](https://docs.python.org/3/library/http.server.html)

@@ -244,7 +244,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../laboratorios/ud2/lab4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">UD2 · Lab 4 · ¿E2E con PlayWright?</span></a>
+ <span class="menu-text">UD2 · Lab 4 · E2E con PlayWright</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../laboratorios/ud2/lab5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">UD2 · Lab 5 · Análisis estático de seguridad con Semgrep</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../laboratorios/ud2/lab6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">UD2 · Lab 6 · Análisis dinámico de seguridad con OWASP ZAP</span></a>
   </div>
 </li>
       </ul>
@@ -322,6 +334,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#qué-es-playwright" id="toc-qué-es-playwright" class="nav-link" data-scroll-target="#qué-es-playwright">¿Qué es Playwright?</a></li>
   <li><a href="#ejemplo-de-una-prueba-e2e" id="toc-ejemplo-de-una-prueba-e2e" class="nav-link" data-scroll-target="#ejemplo-de-una-prueba-e2e">Ejemplo de una prueba E2E</a></li>
   </ul></li>
+  </ul></li>
+  <li><a href="#sast-y-dast" id="toc-sast-y-dast" class="nav-link" data-scroll-target="#sast-y-dast">🐟 SAST y DAST</a>
+  <ul class="collapse">
+  <li><a href="#por-qué-necesitamos-más-que-tests-funcionales" id="toc-por-qué-necesitamos-más-que-tests-funcionales" class="nav-link" data-scroll-target="#por-qué-necesitamos-más-que-tests-funcionales">¿Por qué necesitamos más que tests funcionales?</a></li>
+  <li><a href="#sast-análisis-estático-de-seguridad" id="toc-sast-análisis-estático-de-seguridad" class="nav-link" data-scroll-target="#sast-análisis-estático-de-seguridad">SAST: Análisis estático de seguridad</a></li>
+  <li><a href="#dast-análisis-dinámico-de-seguridad" id="toc-dast-análisis-dinámico-de-seguridad" class="nav-link" data-scroll-target="#dast-análisis-dinámico-de-seguridad">DAST: Análisis dinámico de seguridad</a></li>
+  </ul></li>
+  <li><a href="#seguridad-integrada-en-el-testing" id="toc-seguridad-integrada-en-el-testing" class="nav-link" data-scroll-target="#seguridad-integrada-en-el-testing">📟 Seguridad integrada en el testing</a>
+  <ul class="collapse">
+  <li><a href="#por-qué-no-basta-con-que-los-tests-pasen" id="toc-por-qué-no-basta-con-que-los-tests-pasen" class="nav-link" data-scroll-target="#por-qué-no-basta-con-que-los-tests-pasen">¿Por qué no basta con que los tests pasen?</a></li>
+  <li><a href="#de-una-alerta-a-una-decisión" id="toc-de-una-alerta-a-una-decisión" class="nav-link" data-scroll-target="#de-una-alerta-a-una-decisión">De una alerta a una decisión</a></li>
+  <li><a href="#cómo-priorizamos-los-hallazgos" id="toc-cómo-priorizamos-los-hallazgos" class="nav-link" data-scroll-target="#cómo-priorizamos-los-hallazgos">¿Cómo priorizamos los hallazgos?</a></li>
+  <li><a href="#qué-significa-integrar-seguridad-en-el-testing" id="toc-qué-significa-integrar-seguridad-en-el-testing" class="nav-link" data-scroll-target="#qué-significa-integrar-seguridad-en-el-testing">¿Qué significa integrar seguridad en el testing?</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -836,9 +861,148 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>    page<span class="op">.</span><span class="fu">getByTestId</span>(<span class="st">"hero-list"</span>)</span>
 <span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>  )<span class="op">.</span><span class="fu">toBeVisible</span>()<span class="op">;</span></span>
 <span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-
-
 </section>
+</section>
+</section>
+<section id="sast-y-dast" class="level1">
+<h1>🐟 SAST y DAST</h1>
+<section id="por-qué-necesitamos-más-que-tests-funcionales" class="level2">
+<h2 class="anchored" data-anchor-id="por-qué-necesitamos-más-que-tests-funcionales">¿Por qué necesitamos más que tests funcionales?</h2>
+<p>Los tests que hemos trabajado con Vitest permiten comprobar si una función devuelve el resultado esperado. Playwright permite verificar flujos del usuario en el navegador</p>
+<p>Sin embargo, una aplicación puede superar esas pruebas y mantener problemas de seguridad.</p>
+<p>Por ejemplo:</p>
+<ul>
+<li>Una función calcula correctamente un resultado, pero construye una consulta SQL concatenando datos del usuario.</li>
+<li>Una página funciona correctamente, pero no incluye determinadas cabeceras de seguridad.</li>
+<li>Una API devuelve los datos esperados, pero permite consultar información sin autorización.</li>
+<li>Un formulario valida los datos en el navegador, pero el servidor no vuelve a validarlos.</li>
+</ul>
+<p>Por tanto, necesitamos distintas técnicas de verificación que aporten evidencias completementarias.</p>
+</section>
+<section id="sast-análisis-estático-de-seguridad" class="level2">
+<h2 class="anchored" data-anchor-id="sast-análisis-estático-de-seguridad">SAST: Análisis estático de seguridad</h2>
+<p>El <em>Static Application Security Testing</em> analiza el código fuente u otros artefactos sin necesidad de ejecutar la aplicación.</p>
+<p>Busca patrones que pueden indicar problemas de seguridad: funciones peligrosas, tratamiento inadecuado de datos, secretos expuestos o construcciones que merecen una revisión.</p>
+<p><strong>&lt;/&gt; Código fuente -&gt; Analizador SAST -&gt; Hallazgos</strong></p>
+<p>Una herramienta que utilizaremos es <strong>Semgrep</strong>. Permite analizar código mediante reglas y utilizar conjuntos de reglas para detectar patrones de seguridad.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">buscarUsuario</span>(nombre) {</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> consulta <span class="op">=</span> <span class="st">"SELECT * FROM usuarios WHERE nombre = '"</span> <span class="op">+</span> nombre <span class="op">+</span> <span class="st">"'"</span><span class="op">;</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="fu">ejecutarConsulta</span>(consulta)<span class="op">;</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>La concatenación de una entrada externa en una consulta SQL puede permitir una inyección SQL, dependiendo de cómo funcione <code>ejecutarConsulta</code> y de si existen otras protecciones.</p>
+<p>Por ejemplo:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">buscarUsuario</span>(nombre) {</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> consulta <span class="op">=</span> <span class="st">"SELECT * FROM usuarios WHERE nombre = '"</span> <span class="op">+</span> nombre <span class="op">+</span> <span class="st">"'"</span><span class="op">;</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="fu">ejecutarConsulta</span>(consulta)<span class="op">;</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="fu">buscarUsuario</span>(<span class="st">"' OR '1'='1' --"</span>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>La consulta resultante sería algo como:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> usuarios <span class="kw">WHERE</span> nombre <span class="op">=</span> <span class="st">''</span> <span class="kw">OR</span> <span class="st">'1'</span><span class="op">=</span><span class="st">'1'</span> <span class="co">--'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<blockquote class="blockquote">
+<p>Esto comprueba si el nombre está vacío o añade una condición que siempre es verdadera y <code>--</code> inicia un comentario SQL que hace que el resto de la línea se ignore.</p>
+</blockquote>
+<p>Un análisis SAST puede señalar esa construcción. No obstante, hay que comprobar el contexto: <strong>encontrar un patrón sospechoso no demuestra siempre que exista una vulnerabilidad explotable</strong>.</p>
+<p><strong>Ventajas</strong></p>
+<ul>
+<li>Puede detectar problemas antes de ejecutar o desplegar la aplicación.</li>
+<li>Permite analizar cambios durante el desarrollo.</li>
+<li>Facilita la integración en revisiones de código y pipelines.</li>
+</ul>
+<p><strong>Limitaciones</strong></p>
+<ul>
+<li>Puede producir falsos positivos</li>
+<li>Puede no comprender toda la lógica de negocio o el contexto de ejecución</li>
+<li>Puede pasar por alto vulnerabilidades que no coincidan con las reglas disponibles</li>
+</ul>
+</section>
+<section id="dast-análisis-dinámico-de-seguridad" class="level2">
+<h2 class="anchored" data-anchor-id="dast-análisis-dinámico-de-seguridad">DAST: Análisis dinámico de seguridad</h2>
+<p>El <em>Dynamic Application Security Testing</em> examina una aplicación mientras está ejecutándose. La herramienta interactúa con ella mediante peticiones HTTP y analiza las respuestas y los comportamientos observados.</p>
+<p>Utilizaremos <strong>OWASP ZAP</strong>. Puede rastrear una aplicación, analizar pasivamente las comunicaciones y ejecutar análisis activos configurados para buscar vulnerabilidades.</p>
+<p>Por ejemplo, puede detectar:</p>
+<ul>
+<li>Cabeceras de seguridad ausentes o mal configuradas.</li>
+<li>Cookies que no tienen determinados atributos de seguridad.</li>
+<li>Algunas formas de inyección o XSS.</li>
+<li>Otros comportamientos potencialmente inseguros observables desde el exterior.</li>
+</ul>
+<p><strong>Ventajas</strong></p>
+<ul>
+<li>Examina el comportamiento real de la aplicación desplegada.</li>
+<li>Puede identificar problemas de configuración y respuestas HTTP.</li>
+<li>No necesita acceso al código fuente.</li>
+</ul>
+<p><strong>Limitaciones</strong></p>
+<ul>
+<li>Puede no descubrir rutas que no haya explorado</li>
+<li>Puede no acceder a funciones que requieren autenticación</li>
+<li>No detecta necesariamente todos los fallos de autorización o lógica de negocio</li>
+<li>Un escaneo activo puede enviar peticiones que modifiquen datos o afecten al servicio</li>
+</ul>
+<blockquote class="blockquote">
+<p>Empezaremos con un análisis pasivo o <em>Baseline Scan</em>. No ejecutaremos pruebas activas contra aplicaciones públicas o sistemas sin autorización.</p>
+</blockquote>
+</section>
+</section>
+<section id="seguridad-integrada-en-el-testing" class="level1">
+<h1>📟 Seguridad integrada en el testing</h1>
+<section id="por-qué-no-basta-con-que-los-tests-pasen" class="level2">
+<h2 class="anchored" data-anchor-id="por-qué-no-basta-con-que-los-tests-pasen">¿Por qué no basta con que los tests pasen?</h2>
+<p>Imagina que una aplicción obtiene este resultado:</p>
+<ul>
+<li>Todos los test de Vitest pasan.</li>
+<li>Los flujos principales de Playwright funcionan.</li>
+<li>Semprep señala una posible inyección.</li>
+<li>ZAP detecta una cabecera de seguridad ausente.</li>
+</ul>
+<p>¿Está preparada para producción?</p>
+<p>No podemos responder mirando únicamente el número de tests superados. Los test funcionales verifican comportamientos esperados; SAST y DAST aportan otras evidencias sobre posibles problemas de seguridad.</p>
+<blockquote class="blockquote">
+<p>La decisión debe considerar el contexto, las consecuencias de cada defecto, la confianza en la evidencia y los controles existentes.</p>
+</blockquote>
+</section>
+<section id="de-una-alerta-a-una-decisión" class="level2">
+<h2 class="anchored" data-anchor-id="de-una-alerta-a-una-decisión">De una alerta a una decisión</h2>
+<p>Para gestionar un hallazgo, seguiremos este proceso:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./images/4.png" class="img-fluid figure-img"></p>
+<figcaption>Pasos</figcaption>
+</figure>
+</div>
+</section>
+<section id="cómo-priorizamos-los-hallazgos" class="level2">
+<h2 class="anchored" data-anchor-id="cómo-priorizamos-los-hallazgos">¿Cómo priorizamos los hallazgos?</h2>
+<p>No debemos confundir el nivel de alerta de una herramienta con el riesgo real para el negocio.</p>
+<p>Para priorizar, podemos utilizar estos criterios:</p>
+<ul>
+<li><strong>Impacto</strong>: consecuencias sobre la confidencialidad, integridad o disponibilidad.</li>
+<li><strong>Probabilidad</strong>: facilidad de explotación y condiciones necesarias.</li>
+<li><strong>Exposición</strong>: accesibilidad del componente y datos o funciones que protege.</li>
+<li><strong>Evidencia</strong>: grado de confirmación de hallazgo.</li>
+<li><strong>Controles existentes</strong>: medidas que puedan reducir el riesgo, sin asumir que lo eliminan.</li>
+</ul>
+<p>Una política didáctica de ejemplo podría ser:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./images/5.png" class="img-fluid figure-img"></p>
+<figcaption>Política didáctica de ejemplo</figcaption>
+</figure>
+</div>
+</section>
+<section id="qué-significa-integrar-seguridad-en-el-testing" class="level2">
+<h2 class="anchored" data-anchor-id="qué-significa-integrar-seguridad-en-el-testing">¿Qué significa integrar seguridad en el testing?</h2>
+<p>Significa que las comprobaciones de seguridad forman parte del proceso habitual de desarrollo, y no se ejecutan únicamente al final.</p>
+<p>Podemos organizar las verificaciones en diferentes momentos:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./images/6.png" class="img-fluid figure-img"></p>
+<figcaption>Momentos de verificación</figcaption>
+</figure>
+</div>
+
+
 </section>
 </section>
 

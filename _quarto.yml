@@ -38,6 +38,10 @@ website:
                 text: "UD2 · Lab 3 · ¿Podemos confiar en esta API?"
               - href: laboratorios/ud2/lab4.qmd
                 text: "UD2 · Lab 4 · E2E con PlayWright"
+              - href: laboratorios/ud2/lab5.qmd
+                text: "UD2 · Lab 5 · Análisis estático de seguridad con Semgrep"
+              - href: laboratorios/ud2/lab6.qmd
+                text: "UD2 · Lab 6 · Análisis dinámico de seguridad con OWASP ZAP"
               
     
       - section: "🚀 Desafíos"

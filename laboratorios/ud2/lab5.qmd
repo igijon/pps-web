@@ -1,0 +1,250 @@
+---
+title: "UD2 · Lab 5 · Análisis estático de seguridad con Semgrep"
+---
+
+# 🧪 Laboratorio 5. Análisis estático de seguridad con Semgrep
+
+En este laboratorio trabajarás con **SAST (Static Application Security Testing)**, una técnica que permite analizar el código fuente para identificar patrones que podrían indicar problemas de seguridad, sin necesidad de ejecutar la aplicación.
+
+Al finalizar la práctica, deberás ser capaz de:
+
+- Instalar y ejecutar Semgrep en tu equipo.
+- Analizar una aplicación JavaScript mediante reglas de seguridad.
+- Interpretar los resultados de un análisis estático.
+- Investigar si una alerta representa una vulnerabilidad real, un falso positivo o un problema que necesita más información.
+- Proponer correcciones y pruebas que permitan comprobar que los problemas se han resuelto.
+
+## 2. Contexto
+
+TaskFlow es una pequeña aplicación JavaScript para gestionar tareas. Permite mostrar tareas iniciales y añadir nuevas mediante un formulario.
+
+La aplicación funciona en el navegador y no necesita una base de datos. Sin embargo, su código incluye distintos patrones que merecen ser investigados desde el punto de vista de la seguridad.
+
+Tu trabajo consiste en analizar el proyecto con Semgrep, interpretar los resultados y elaborar un informe técnico con tus conclusiones.
+
+**Importante:** una alerta de una herramienta de análisis estático no demuestra por sí sola que exista una vulnerabilidad explotable. Deberás estudiar el código y justificar tus conclusiones.
+
+## 3. Preparación del entorno
+
+### 3.1. Descargar la aplicación
+
+Descarga el proyecto [TaskFlow](https://github.com/igijon/javascript_semgrep_taskflow) proporcionado para el laboratorio y descomprímelo en una carpeta de tu equipo.
+
+Abre esa carpeta con Visual Studio Code.
+
+La estructura del proyecto es la siguiente:
+
+```text
+taskflow-semgrep-lab/
+├── index.html
+├── app.js
+├── tareas.js
+├── data-access.js
+├── config.js
+├── semgrep.yml
+├── package.json
+└── README.md
+```
+
+No necesitas instalar dependencias de npm ni configurar una base de datos para realizar el análisis estático.
+
+### 3.2. Instalar Semgrep en macOS
+
+En macOS puedes instalar Semgrep mediante Homebrew.
+
+Abre Terminal y ejecuta:
+
+```bash
+brew install semgrep
+```
+
+Comprueba que la instalación ha terminado correctamente:
+
+```bash
+semgrep --version
+```
+
+Si no tienes Homebrew instalado, puedes consultar las instrucciones en [brew.sh](https://brew.sh/es/).
+
+### 3.3. Instalar Semgrep en Windows
+
+En Windows puedes utilizar Python y `pip`.
+
+Abre PowerShell o el terminal de Visual Studio Code y comprueba que Python está disponible:
+
+```powershell
+py --version
+```
+
+Si el comando no funciona, instala Python desde [python.org](https://www.python.org/downloads/windows/) y vuelve a abrir el terminal.
+
+Instala Semgrep:
+
+```powershell
+py -m pip install semgrep
+```
+
+Comprueba la instalación:
+
+```powershell
+semgrep --version
+```
+
+Si Windows no reconoce el comando `semgrep`, abre un terminal nuevo. Si el problema continúa, comprueba que la carpeta de ejecutables de Python está incluida en la variable de entorno `PATH`.
+
+> Nota: los métodos de instalación disponibles pueden cambiar entre versiones de Semgrep. Si la instalación mediante `pip` falla, consulta la [documentación oficial de Semgrep](https://semgrep.dev/docs/).
+
+### 3.4. Comprobar que estás en la carpeta correcta
+
+Abre un terminal desde la carpeta del proyecto.
+
+En macOS puedes ejecutar:
+
+```bash
+ls
+```
+
+En Windows PowerShell:
+
+```powershell
+Get-ChildItem
+```
+
+Comprueba que aparece el archivo `semgrep.yml`. Lo necesitarás para ejecutar el análisis con las reglas incluidas en el laboratorio.
+
+## 4. Primera ejecución de Semgrep
+
+Desde la raíz del proyecto, ejecuta:
+
+```bash
+semgrep scan --config semgrep.yml .
+```
+
+Este comando funciona tanto en macOS como en Windows, siempre que Semgrep esté instalado y disponible en el terminal.
+
+Sus elementos significan lo siguiente:
+
+| Elemento | Significado |
+|---|---|
+| `semgrep` | Ejecuta la herramienta. |
+| `scan` | Inicia un análisis del código. |
+| `--config semgrep.yml` | Indica el archivo de reglas que se utilizará. |
+| `.` | Analiza el directorio actual y los archivos compatibles que encuentre. |
+
+Observa los resultados. Semgrep puede mostrar el archivo afectado, la ubicación del código, la regla que ha generado la alerta y una explicación del problema potencial.
+
+No te limites a copiar la salida del terminal: debes comprender qué significa cada hallazgo.
+
+## 5. Investigación de los hallazgos
+
+Analiza el código del proyecto y examina las alertas generadas por Semgrep.
+
+Para cada hallazgo, responde a las siguientes preguntas:
+
+1. ¿En qué archivo y línea se encuentra?
+2. ¿Qué patrón ha detectado la herramienta?
+3. ¿Qué riesgo de seguridad intenta señalar?
+4. ¿Qué datos intervienen y de dónde proceden?
+5. ¿Existe suficiente evidencia para confirmar una vulnerabilidad?
+6. ¿Qué información adicional necesitarías para determinar el riesgo real?
+7. ¿Cómo corregirías el problema?
+8. ¿Qué prueba realizarías para comprobar que la corrección funciona?
+
+No todos los hallazgos tienen que tener la misma clasificación. En tu informe podrás distinguir entre:
+
+- **Vulnerabilidad confirmada:** existe evidencia suficiente para justificar que el problema es real en el contexto analizado.
+- **Posible falso positivo:** la herramienta ha señalado un patrón que, tras investigar, no representa el problema descrito.
+- **Pendiente de investigación:** faltan datos para confirmar o descartar el riesgo.
+- **Mejora preventiva:** el patrón merece una mejora de seguridad, aunque no se haya demostrado una vulnerabilidad explotable.
+
+Debes justificar la clasificación elegida.
+
+## 6. Actividades
+
+### Actividad 1. Comprender las reglas
+
+Abre `semgrep.yml` y examina las reglas utilizadas en el laboratorio.
+
+Identifica qué busca cada regla y qué tipo de riesgo pretende detectar.
+
+Completa esta tabla:
+
+| Identificador de la regla | Patrón que busca | Riesgo potencial | ¿Qué habría que comprobar? |
+|---|---|---|---|
+| `taskflow-js-dangerous-eval` | | | |
+| `taskflow-js-innerhtml` | | | |
+| `taskflow-sql-string-concat` | | | |
+| `taskflow-hardcoded-demo-key` | | | |
+
+### Actividad 2. Analizar el código
+
+Examina los archivos JavaScript y relaciona las alertas con el código que las ha generado.
+
+No des por hecho que una regla detectará todos los problemas posibles ni que todas las alertas tendrán la misma importancia.
+
+Registra los resultados utilizando esta plantilla:
+
+| Archivo y línea | Hallazgo | Evidencia | Clasificación | Corrección propuesta |
+|---|---|---|---|---|
+| | | | | |
+| | | | | |
+| | | | | |
+
+Si el análisis no genera el número de hallazgos que esperabas, comprueba la configuración utilizada y explica las limitaciones que has encontrado.
+
+### Actividad 3. Investigar una posible inyección SQL
+
+Examina la función `findUserQuery` del archivo `data-access.js`.
+
+Analiza cómo se construye la consulta SQL y responde:
+
+- ¿Qué ocurre si el parámetro `name` contiene caracteres que tienen significado en SQL?
+- ¿Por qué es importante distinguir entre datos e instrucciones?
+- ¿Qué diferencia existe entre concatenar una entrada en la consulta y utilizar parámetros?
+- ¿Se ejecuta realmente una consulta SQL en esta aplicación?
+- ¿Qué información necesitarías para confirmar que el problema sería explotable en una aplicación real?
+
+Propón una versión corregida de la función utilizando consultas parametrizadas. No es necesario conectarse a una base de datos, pero debes explicar qué responsabilidad tendría el controlador o la función que ejecuta la consulta.
+
+### Actividad 4. Analizar las limitaciones del SAST
+
+Responde razonadamente:
+
+1. ¿Puede Semgrep demostrar por sí solo que una aplicación es segura?
+2. ¿Qué problemas de seguridad podrían depender de la configuración del servidor o del comportamiento durante la ejecución?
+3. ¿Qué diferencia existe entre detectar un patrón sospechoso y demostrar una vulnerabilidad?
+4. ¿Qué otras pruebas complementarían este análisis?
+
+### Actividad 5. Comparar reglas locales y análisis automático
+
+Opcionalmente, ejecuta:
+
+```bash
+semgrep scan --config auto .
+```
+
+Compara los resultados con los obtenidos mediante `semgrep.yml`.
+
+Indica si aparecen hallazgos adicionales, si cambia la descripción de las alertas o si existen diferencias en la cobertura.
+
+Ten en cuenta que la configuración automática puede depender de la versión instalada, de las reglas disponibles y de la conectividad. Si no puedes ejecutarla, documenta la limitación y continúa con las reglas locales.
+
+## 7. Entrega
+
+Entrega un informe breve en Markdown o PDF que incluya:
+
+1. **Entorno:** sistema operativo y versión de Semgrep.
+2. **Ejecución:** comando utilizado y resultado general.
+3. **Registro de hallazgos:** archivo, evidencia, riesgo y clasificación.
+4. **Correcciones propuestas:** cambios recomendados y pruebas de verificación.
+5. **Limitaciones:** aspectos que el análisis no permite confirmar.
+6. **Conclusión:** valoración de la utilidad de SAST y de la necesidad de complementar el análisis con otras técnicas.
+
+No es necesario reproducir toda la salida del terminal. Selecciona las evidencias relevantes y explica tus conclusiones.
+
+
+## 8. Reflexión final
+
+Responde en unas pocas líneas:
+
+**Si Semgrep no detectara ninguna alerta en TaskFlow, ¿podrías afirmar que la aplicación está preparada para producción? ¿Qué otras comprobaciones realizarías antes de autorizar su despliegue?**
