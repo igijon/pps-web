@@ -30,7 +30,7 @@ Además, tendrás que ver por qué se producen, qué consecuencias pueden tener 
 
 ## Preparación del entorno
 
-1. Descarga y descomprime el proyecto
+1. Descarga y descomprime el [proyecto](https://github.com/igijon/javascript_express_eventia_testing)
 2. Abre la carpeta del proyecto en VSCode
 3. Comprueba que tienes instalado Node.js y npm
 4. Instala las dependencias del proyecto
