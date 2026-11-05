@@ -1,36 +1,218 @@
 ---
-title: "Desafío 1 · LifeOS - Tu vida digital"
+title: "Desafío 1 · Eventia: poniendo a prueba una aplicación"
 ---
 
-# 🚀 Desafío 1 · LifeOS - Tu vida digital
 
-El alumnado debe desarrollar una aplicación web llamada provisionalmente **LifeOS,** pero realmente cada alumno elegirá su nombre. 
+## CEE implicados
 
-Será una especie de **dashboard personal** para organizar planes, actividades, pequeños gastos, hábitos y objetivos.
+RA1 y RA2 (80% de todos los CCEE)
 
-# 🧩 Reto
 
->💡
->Deberás diseñar y desarrollar una aplicación web que ayude a una persona a organizar su vida diaria desde un único lugar.
->
+# 🚀 Desafío 1 · Eventia: poniendo a prueba una aplicación
 
-La aplicación debería permitir, como mínimo:
+**Eventia** es una aplicación web ficticia para la gestión de eventos y reservas.
 
-- 📅 organizar planes y eventos
-- ✅ gestionar tareas
-- 💰 controlar pequeños gastos
-- 📝 registrar información personal
-- 📊 visualizar un resumen de su situación
-- 💾 conservar los datos aunque cierre el navegador
+Permite consultar los eventos disponibles, iniciar sesión, realizar reservas y gestionar eventos desde una zona de administración.
 
-Queremos realizar una **SPA sencilla**, desarrollada inicialmente con **JavaScript + Vanilla + Vite,** donde diferentes funcionalidades comparten datos y estado.
+La aplicación está desarrollada utilizando tecnologías habituales del desarrollo web.
 
-Ejemplos que te pueden dar ideas:
+- **Frontend:** HTML, CSS, JavaScript
+- **Herramienta de desarrollo frontend**: Vite
+- **Backend**: Node.js y Express
+- **Comunicación**: API REST mediante peticiones HTTP e intercambio de datos JSON.
+- **Almacenamiento**: datos simulados en memoria, sin utilizar una BDD.
 
-![Ejemplo](images/d1_1.png)
+Aunque la aplicación permite realizar operaciones principales, contiene diferentes problemas de calidad y seguridad que debes investigar.
 
-![Ejemplo](images/d1_2.png)
+Tu misión será poner a prueba Eventia, diseñar y ejecutar diferentes tipos de pruebas, analizar su código y su comportamiento, identificar problemas y proponer soluciones.
 
-![Ejemplo](images/d1_3.png)
+Además, tendrás que ver por qué se producen, qué consecuencias pueden tener y cómo comprobar que las correcciones funcionan.
 
-![Ejemplo](images/d1_4.png)
+## Preparación del entorno
+
+1. Descarga y descomprime el proyecto
+2. Abre la carpeta del proyecto en VSCode
+3. Comprueba que tienes instalado Node.js y npm
+4. Instala las dependencias del proyecto
+5. Arranca la aplicación y comprueba que puedes acceder a Eventia desde el navegador.
+
+>**Importante**: los datos de Eventia son simulados y se almacenan en memoria. Al reiniciar el servidor, los cambios realizados pueden perderse. La aplicación debe ejecutarse únicamente en el entorno local de prácticas.
+
+## Fase 1. Conocer la aplicación
+
+Antes de comenzar las pruebas, investiga la estructura de la aplicación y responde:
+
+1. ¿Qué componentes forman la aplicación?
+2. ¿Qué responsabilidades tiene el frontend?
+3. ¿Cómo se comunican ambos componentes?
+4. ¿Qué información intercambian?
+5. ¿Dónde se almacenan los datos?
+6. ¿Qué ocurre cuando se reinicia el servidor?
+
+Identifica también las principales **funcionalidades** de la aplicación, cómo se estructuran los fuentes y de qué se encarga cada uno.
+
+## Fase 2. Pruebas unitarias con Vitest
+
+Realiza pruebas que comprueben:
+
+- El comportamiento esperado de las funciones
+- La respuesta ante datos válidos
+- La respuesta ante datos incorrectos
+- Los valores límite
+- Los casos en los que la función recibe información incompleta o inesperada
+- **Todo aquello que estimes oportuno indicando por qué**
+
+## Fase 3. Pruebas de API 
+
+Comprueba el comportamiento del backend realizando peticiones HTTP directamente a la API.
+
+Investiga los endpoints disponibles y diseña pruebas para comprobar su funcionamiento.
+
+Debes comprobar:
+
+**Funcionamiento normal**
+
+- Obtener el listado de eventos
+- Iniciar sesión con credenciales correctas
+- Consultar el perfil de un usuario autenticado
+- Crear una reserva válida
+
+**Situaciones incorrectas**
+
+- Intentar iniciar sesión con credenciales incorrectas
+- Consultar información protegida sin autenticarse
+- Enviar datos incompletos al crear una reserva
+- Enviar valores no válidos en los campos numéricos
+- Intentar realizar operaciones para las que el usuario no tiene permisos
+
+Presta especial atención a los códigos de estado HTTP y al contenido de las respuestas JSON.
+
+>Algunas pruebas de seguridad pueden fallar inicialmente porque la aplicación contiene vulnerabilidades intencionadas. Debes identificar el problema, corregirlo y conseguir que la prueba pase.
+
+
+## Fase 4. Pruebas E2E con Playwright
+
+Diseña y ejecuta un par de pruebas que reproduzcan algunos flujos de uso de Eventia.
+
+## Fase 5. Análisis estático con Semgrep
+
+Hasta ahora hemos comprobado el comportamiento de la aplicación mediante pruebas. Vamos a analizar su código fuente con Semgrep.
+
+Debes especial atención a patrones relacionados con:
+
+- Uso de innerHTML con información que procede de fuentes externas.
+- Uso de eval() o ejecución dinámica de código.
+- Almacenamiento de información sensible en el lado cliente.
+- Credenciales o secretos incluidos directamente en el código.
+- Construcción de consultas mediante concatenación de cadenas.
+
+>No todos estos patrones tienen por qué aparecer en la lógica principal de Eventia. Si se proporcionan ejemplos adicionales de código vulnerable, debes analizarlos también.
+
+Para cada hallazgo:
+
+1. Identifica el archivo y la línea de código
+2. Explica qué hace el código
+3. Describe por qué puede ser inseguro
+4. Indica qué consecuencias podría tener
+5. Propón una alternativa más segura
+6. Comprueba si la herramienta sigue detectando el problema después de corregirlo.
+
+>**Importante**: el resultado de Semgrep no demuestra automáticamente que exista una vulnerabilidad explotable. Debes estudiar el contexto y justificar tus conclusiones.
+
+## Fase 6. Análisis dinámico con OWASP ZAP
+
+Con la aplicación arrancada:
+
+1. Configura el navegador para utilizar ZAP como proxy.
+2. Navega por las diferentes funcionalidades de Eventia.
+3. Observa las peticiones y respuestas HTTP.
+4. Examina los métodos, cabeceras, parámetros y cuerpos de las peticiones.
+5. Identifica qué información se transmite.
+6. Comprueba las cabeceras de seguridad de las respuestas.
+
+Utiliza el análisis pasivo y, cuando proceda, el análisis activo sobre la aplicación local.
+
+Investiga especialmente:
+
+- Información transmitida entre cliente y servidor.
+- Protección de las operaciones que requieren autenticación.
+- Diferencias entre autenticación y autorización.
+- Posibilidad de modificar peticiones para acceder a operaciones no permitidas.
+- Validación de los datos enviados.
+- Configuración de CORS.
+- Cabeceras de seguridad HTTP.
+- Gestión y almacenamiento de tokens.
+
+No te limites a aceptar los resultados automáticos de ZAP. Examina las peticiones y respuestas y explica qué significan los hallazgos.
+
+>**Precaución**: realiza las pruebas exclusivamente sobre la aplicación local proporcionada. No utilices técnicas de ataque contra sistemas externos.
+
+
+
+## Fase 7. Corrección y verificación.
+
+Una vez identificados los problemas, selecciona los que te indico a continuación y corrígelos.
+
+Debes priorizar especialmente los relacionados con:
+
+- Validación de datos.
+- Autenticación y autorización.
+- Acceso a información de otros usuarios.
+- Inserción de contenido no confiable en el DOM.
+- Protección de información sensible.
+- Configuración del servidor y cabeceras HTTP.
+
+Para cada corrección:
+
+- Explica el problema original.
+- Describe el cambio realizado.
+- Justifica por qué la solución es más segura.
+- Ejecuta de nuevo las pruebas correspondientes.
+
+Comprueba si el problema ha quedado resuelto.
+
+No basta con eliminar el aviso de una herramienta: debes demostrar que el comportamiento inseguro ha desaparecido.
+
+## Entregables
+
+Vamos a dar seguimiento a nuestro proyecto con Git por lo tanto entregarás tu **link del repositorio en Github** con el proyecto siguiendo una estructura similar a:
+
+```txt
+eventia-desafío/
+│
+├── client/
+│   ├── src/
+│   ├── tests/
+│   │   └── unit/
+│   └── package.json
+│
+├── server/
+│   ├── src/
+│   ├── tests/
+│   │   ├── unit/
+│   │   └── api/
+│   └── package.json
+│
+├── e2e/
+│   └── eventia.spec.js
+│
+├── doc/
+│   ├── 01-arquitectura.md
+│   ├── 02-pruebas-unitarias.md
+│   ├── 03-pruebas-api.md
+│   ├── 04-pruebas-e2e.md
+│   ├── 05-analisis-semg​​rep.md
+│   ├── 06-analisis-zap.md
+│   ├── 07-correcciones.md
+│   └── 08-reflexion-final.md
+│
+├── playwright.config.js
+├── package.json
+└── README.md
+```
+
+## Nota muy importante
+
+**Para este desafío no se puede utilizar IA, si algo no se puede resolver es preferible dejarlo sin resolver.**
+
+>**Este laboratorio tendrá defensa personal ante el profesor para su evaluación**

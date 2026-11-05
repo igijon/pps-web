@@ -1,6 +1,9 @@
 ---
 title: "UD1 · Lab 3 · ¿Podemos confiar en lo que nos envía el navegador?"
 ---
+## CEE implicados
+
+RA1.c (20% del CE)
 
 # 🎯 Desafío
 

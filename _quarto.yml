@@ -46,8 +46,8 @@ website:
     
       - section: "🚀 Desafíos"
         contents:
-          # - href: desafios/desafio-01/index.qmd
-          #   text: "D1 · LifeOS"
+          - href: desafios/desafio-01/index.qmd
+            text: "D1 · Eventia"
 
 
       - href: proyecto-final/index.qmd

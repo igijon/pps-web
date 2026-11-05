@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Desafío 1 · LifeOS - Tu vida digital – Proyecto Intermodular</title>
+<title>Desafío 1 · Eventia: poniendo a prueba una aplicación – Puesta en Producción Segura</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -25,6 +25,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -87,7 +122,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../desafios/desafio-01/index.html">🚀 Desafíos</a></li><li class="breadcrumb-item"><a href="../../desafios/desafio-01/index.html">D1 · LifeOS</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../desafios/desafio-01/index.html">🚀 Desafíos</a></li><li class="breadcrumb-item"><a href="../../desafios/desafio-01/index.html">D1 · Eventia</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -102,7 +137,7 @@ ul.task-list li input[type="checkbox"] {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="../../">Proyecto Intermodular</a> 
+      <a href="../../">Puesta en Producción Segura</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -130,7 +165,13 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../unidades/ud1/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">1-Gestión de proyectos y metodologías ágiles</span></a>
+ <span class="menu-text">1-Del código a producción. ¿Qué significa que una aplicación sea segura?</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../unidades/ud2/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2-Testing. Encontrar problemas antes de produccion</span></a>
   </div>
 </li>
       </ul>
@@ -144,33 +185,97 @@ ul.task-list li input[type="checkbox"] {
           </a> 
       </div>
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+ <span class="menu-text">UD1</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../laboratorios/ud1/lab1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">UD1 · Lab 1 · Del reto al briefing y la viabilidad</span></a>
+ <span class="menu-text">UD1 · Lab 1 · ¿Dónde se ejecuta?</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../laboratorios/ud1/lab2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">UD1 · Lab 2 · Del problema al backlog</span></a>
+ <span class="menu-text">UD1 · Lab 2 · ¿Qué estamos ejecutando realmente?</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../laboratorios/ud1/lab3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">UD1 · Lab 3 · ¿Podemos confiar en lo que nos envía el navegador?</span></a>
   </div>
 </li>
       </ul>
   </li>
-        <li class="sidebar-item sidebar-item-section">
+          <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
- <span class="menu-text">🚀 Desafíos</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+ <span class="menu-text">UD2</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../laboratorios/ud2/lab1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">UD2 · Lab 1 · Detectives del testing: encontrar defectos en una aplicación</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../laboratorios/ud2/lab2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">UD2 · Lab 2 · ¿Podemos confiar en este código?</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../laboratorios/ud2/lab3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">UD2 · Lab 3 · ¿Podemos confiar en esta API?</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../laboratorios/ud2/lab4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">UD2 · Lab 4 · E2E con PlayWright</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../laboratorios/ud2/lab5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">UD2 · Lab 5 · Análisis estático de seguridad con Semgrep</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../laboratorios/ud2/lab6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">UD2 · Lab 6 · Análisis dinámico de seguridad con OWASP ZAP</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">🚀 Desafíos</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../desafios/desafio-01/index.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">D1 · LifeOS</span></a>
+ <span class="menu-text">D1 · Eventia</span></a>
   </div>
 </li>
       </ul>
@@ -178,7 +283,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../proyecto-final/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">🏆 Proyecto Intermodular Final</span></a>
+ <span class="menu-text">🏆 Proyecto Final</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -193,6 +298,12 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">📦 Recursos</span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sobremi/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">😎 Sobre mí</span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -203,17 +314,29 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#desafío-1-lifeos---tu-vida-digital" id="toc-desafío-1-lifeos---tu-vida-digital" class="nav-link active" data-scroll-target="#desafío-1-lifeos---tu-vida-digital">🚀 Desafío 1 · LifeOS - Tu vida digital</a></li>
-  <li><a href="#reto" id="toc-reto" class="nav-link" data-scroll-target="#reto">🧩&nbsp;Reto</a></li>
+  <li><a href="#cee-implicados" id="toc-cee-implicados" class="nav-link active" data-scroll-target="#cee-implicados">CEE implicados</a></li>
+  <li><a href="#desafío-1-eventia-poniendo-a-prueba-una-aplicación" id="toc-desafío-1-eventia-poniendo-a-prueba-una-aplicación" class="nav-link" data-scroll-target="#desafío-1-eventia-poniendo-a-prueba-una-aplicación">🚀 Desafío 1 · Eventia: poniendo a prueba una aplicación</a>
+  <ul class="collapse">
+  <li><a href="#preparación-del-entorno" id="toc-preparación-del-entorno" class="nav-link" data-scroll-target="#preparación-del-entorno">Preparación del entorno</a></li>
+  <li><a href="#fase-1.-conocer-la-aplicación" id="toc-fase-1.-conocer-la-aplicación" class="nav-link" data-scroll-target="#fase-1.-conocer-la-aplicación">Fase 1. Conocer la aplicación</a></li>
+  <li><a href="#fase-2.-pruebas-unitarias-con-vitest" id="toc-fase-2.-pruebas-unitarias-con-vitest" class="nav-link" data-scroll-target="#fase-2.-pruebas-unitarias-con-vitest">Fase 2. Pruebas unitarias con Vitest</a></li>
+  <li><a href="#fase-3.-pruebas-de-api" id="toc-fase-3.-pruebas-de-api" class="nav-link" data-scroll-target="#fase-3.-pruebas-de-api">Fase 3. Pruebas de API</a></li>
+  <li><a href="#fase-4.-pruebas-e2e-con-playwright" id="toc-fase-4.-pruebas-e2e-con-playwright" class="nav-link" data-scroll-target="#fase-4.-pruebas-e2e-con-playwright">Fase 4. Pruebas E2E con Playwright</a></li>
+  <li><a href="#fase-5.-análisis-estático-con-semgrep" id="toc-fase-5.-análisis-estático-con-semgrep" class="nav-link" data-scroll-target="#fase-5.-análisis-estático-con-semgrep">Fase 5. Análisis estático con Semgrep</a></li>
+  <li><a href="#fase-6.-análisis-dinámico-con-owasp-zap" id="toc-fase-6.-análisis-dinámico-con-owasp-zap" class="nav-link" data-scroll-target="#fase-6.-análisis-dinámico-con-owasp-zap">Fase 6. Análisis dinámico con OWASP ZAP</a></li>
+  <li><a href="#fase-7.-corrección-y-verificación." id="toc-fase-7.-corrección-y-verificación." class="nav-link" data-scroll-target="#fase-7.-corrección-y-verificación.">Fase 7. Corrección y verificación.</a></li>
+  <li><a href="#entregables" id="toc-entregables" class="nav-link" data-scroll-target="#entregables">Entregables</a></li>
+  <li><a href="#nota-muy-importante" id="toc-nota-muy-importante" class="nav-link" data-scroll-target="#nota-muy-importante">Nota muy importante</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../desafios/desafio-01/index.html">🚀 Desafíos</a></li><li class="breadcrumb-item"><a href="../../desafios/desafio-01/index.html">D1 · LifeOS</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../desafios/desafio-01/index.html">🚀 Desafíos</a></li><li class="breadcrumb-item"><a href="../../desafios/desafio-01/index.html">D1 · Eventia</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Desafío 1 · LifeOS - Tu vida digital</h1>
+<h1 class="title">Desafío 1 · Eventia: poniendo a prueba una aplicación</h1>
 </div>
 
 
@@ -230,53 +353,213 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="desafío-1-lifeos---tu-vida-digital" class="level1">
-<h1>🚀 Desafío 1 · LifeOS - Tu vida digital</h1>
-<p>El alumnado debe desarrollar una aplicación web llamada provisionalmente <strong>LifeOS,</strong> pero realmente cada alumno elegirá su nombre.</p>
-<p>Será una especie de <strong>dashboard personal</strong> para organizar planes, actividades, pequeños gastos, hábitos y objetivos.</p>
+<section id="cee-implicados" class="level2">
+<h2 class="anchored" data-anchor-id="cee-implicados">CEE implicados</h2>
+<p>RA1 y RA2 (80% de todos los CCEE)</p>
 </section>
-<section id="reto" class="level1">
-<h1>🧩&nbsp;Reto</h1>
-<blockquote class="blockquote">
-<p>💡 Deberás diseñar y desarrollar una aplicación web que ayude a una persona a organizar su vida diaria desde un único lugar.</p>
-</blockquote>
-<p>La aplicación debería permitir, como mínimo:</p>
+<section id="desafío-1-eventia-poniendo-a-prueba-una-aplicación" class="level1">
+<h1>🚀 Desafío 1 · Eventia: poniendo a prueba una aplicación</h1>
+<p><strong>Eventia</strong> es una aplicación web ficticia para la gestión de eventos y reservas.</p>
+<p>Permite consultar los eventos disponibles, iniciar sesión, realizar reservas y gestionar eventos desde una zona de administración.</p>
+<p>La aplicación está desarrollada utilizando tecnologías habituales del desarrollo web.</p>
 <ul>
-<li>📅 organizar planes y eventos</li>
-<li>✅ gestionar tareas</li>
-<li>💰 controlar pequeños gastos</li>
-<li>📝 registrar información personal</li>
-<li>📊 visualizar un resumen de su situación</li>
-<li>💾 conservar los datos aunque cierre el navegador</li>
+<li><strong>Frontend:</strong> HTML, CSS, JavaScript</li>
+<li><strong>Herramienta de desarrollo frontend</strong>: Vite</li>
+<li><strong>Backend</strong>: Node.js y Express</li>
+<li><strong>Comunicación</strong>: API REST mediante peticiones HTTP e intercambio de datos JSON.</li>
+<li><strong>Almacenamiento</strong>: datos simulados en memoria, sin utilizar una BDD.</li>
 </ul>
-<p>Queremos realizar una <strong>SPA sencilla</strong>, desarrollada inicialmente con <strong>JavaScript + Vanilla + Vite,</strong> donde diferentes funcionalidades comparten datos y estado.</p>
-<p>Ejemplos que te pueden dar ideas:</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/d1_1.png" class="img-fluid figure-img"></p>
-<figcaption>Ejemplo</figcaption>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/d1_2.png" class="img-fluid figure-img"></p>
-<figcaption>Ejemplo</figcaption>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/d1_3.png" class="img-fluid figure-img"></p>
-<figcaption>Ejemplo</figcaption>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/d1_4.png" class="img-fluid figure-img"></p>
-<figcaption>Ejemplo</figcaption>
-</figure>
-</div>
+<p>Aunque la aplicación permite realizar operaciones principales, contiene diferentes problemas de calidad y seguridad que debes investigar.</p>
+<p>Tu misión será poner a prueba Eventia, diseñar y ejecutar diferentes tipos de pruebas, analizar su código y su comportamiento, identificar problemas y proponer soluciones.</p>
+<p>Además, tendrás que ver por qué se producen, qué consecuencias pueden tener y cómo comprobar que las correcciones funcionan.</p>
+<section id="preparación-del-entorno" class="level2">
+<h2 class="anchored" data-anchor-id="preparación-del-entorno">Preparación del entorno</h2>
+<ol type="1">
+<li>Descarga y descomprime el proyecto</li>
+<li>Abre la carpeta del proyecto en VSCode</li>
+<li>Comprueba que tienes instalado Node.js y npm</li>
+<li>Instala las dependencias del proyecto</li>
+<li>Arranca la aplicación y comprueba que puedes acceder a Eventia desde el navegador.</li>
+</ol>
+<blockquote class="blockquote">
+<p><strong>Importante</strong>: los datos de Eventia son simulados y se almacenan en memoria. Al reiniciar el servidor, los cambios realizados pueden perderse. La aplicación debe ejecutarse únicamente en el entorno local de prácticas.</p>
+</blockquote>
+</section>
+<section id="fase-1.-conocer-la-aplicación" class="level2">
+<h2 class="anchored" data-anchor-id="fase-1.-conocer-la-aplicación">Fase 1. Conocer la aplicación</h2>
+<p>Antes de comenzar las pruebas, investiga la estructura de la aplicación y responde:</p>
+<ol type="1">
+<li>¿Qué componentes forman la aplicación?</li>
+<li>¿Qué responsabilidades tiene el frontend?</li>
+<li>¿Cómo se comunican ambos componentes?</li>
+<li>¿Qué información intercambian?</li>
+<li>¿Dónde se almacenan los datos?</li>
+<li>¿Qué ocurre cuando se reinicia el servidor?</li>
+</ol>
+<p>Identifica también las principales <strong>funcionalidades</strong> de la aplicación, cómo se estructuran los fuentes y de qué se encarga cada uno.</p>
+</section>
+<section id="fase-2.-pruebas-unitarias-con-vitest" class="level2">
+<h2 class="anchored" data-anchor-id="fase-2.-pruebas-unitarias-con-vitest">Fase 2. Pruebas unitarias con Vitest</h2>
+<p>Realiza pruebas que comprueben:</p>
+<ul>
+<li>El comportamiento esperado de las funciones</li>
+<li>La respuesta ante datos válidos</li>
+<li>La respuesta ante datos incorrectos</li>
+<li>Los valores límite</li>
+<li>Los casos en los que la función recibe información incompleta o inesperada</li>
+<li><strong>Todo aquello que estimes oportuno indicando por qué</strong></li>
+</ul>
+</section>
+<section id="fase-3.-pruebas-de-api" class="level2">
+<h2 class="anchored" data-anchor-id="fase-3.-pruebas-de-api">Fase 3. Pruebas de API</h2>
+<p>Comprueba el comportamiento del backend realizando peticiones HTTP directamente a la API.</p>
+<p>Investiga los endpoints disponibles y diseña pruebas para comprobar su funcionamiento.</p>
+<p>Debes comprobar:</p>
+<p><strong>Funcionamiento normal</strong></p>
+<ul>
+<li>Obtener el listado de eventos</li>
+<li>Iniciar sesión con credenciales correctas</li>
+<li>Consultar el perfil de un usuario autenticado</li>
+<li>Crear una reserva válida</li>
+</ul>
+<p><strong>Situaciones incorrectas</strong></p>
+<ul>
+<li>Intentar iniciar sesión con credenciales incorrectas</li>
+<li>Consultar información protegida sin autenticarse</li>
+<li>Enviar datos incompletos al crear una reserva</li>
+<li>Enviar valores no válidos en los campos numéricos</li>
+<li>Intentar realizar operaciones para las que el usuario no tiene permisos</li>
+</ul>
+<p>Presta especial atención a los códigos de estado HTTP y al contenido de las respuestas JSON.</p>
+<blockquote class="blockquote">
+<p>Algunas pruebas de seguridad pueden fallar inicialmente porque la aplicación contiene vulnerabilidades intencionadas. Debes identificar el problema, corregirlo y conseguir que la prueba pase.</p>
+</blockquote>
+</section>
+<section id="fase-4.-pruebas-e2e-con-playwright" class="level2">
+<h2 class="anchored" data-anchor-id="fase-4.-pruebas-e2e-con-playwright">Fase 4. Pruebas E2E con Playwright</h2>
+<p>Diseña y ejecuta un par de pruebas que reproduzcan algunos flujos de uso de Eventia.</p>
+</section>
+<section id="fase-5.-análisis-estático-con-semgrep" class="level2">
+<h2 class="anchored" data-anchor-id="fase-5.-análisis-estático-con-semgrep">Fase 5. Análisis estático con Semgrep</h2>
+<p>Hasta ahora hemos comprobado el comportamiento de la aplicación mediante pruebas. Vamos a analizar su código fuente con Semgrep.</p>
+<p>Debes especial atención a patrones relacionados con:</p>
+<ul>
+<li>Uso de innerHTML con información que procede de fuentes externas.</li>
+<li>Uso de eval() o ejecución dinámica de código.</li>
+<li>Almacenamiento de información sensible en el lado cliente.</li>
+<li>Credenciales o secretos incluidos directamente en el código.</li>
+<li>Construcción de consultas mediante concatenación de cadenas.</li>
+</ul>
+<blockquote class="blockquote">
+<p>No todos estos patrones tienen por qué aparecer en la lógica principal de Eventia. Si se proporcionan ejemplos adicionales de código vulnerable, debes analizarlos también.</p>
+</blockquote>
+<p>Para cada hallazgo:</p>
+<ol type="1">
+<li>Identifica el archivo y la línea de código</li>
+<li>Explica qué hace el código</li>
+<li>Describe por qué puede ser inseguro</li>
+<li>Indica qué consecuencias podría tener</li>
+<li>Propón una alternativa más segura</li>
+<li>Comprueba si la herramienta sigue detectando el problema después de corregirlo.</li>
+</ol>
+<blockquote class="blockquote">
+<p><strong>Importante</strong>: el resultado de Semgrep no demuestra automáticamente que exista una vulnerabilidad explotable. Debes estudiar el contexto y justificar tus conclusiones.</p>
+</blockquote>
+</section>
+<section id="fase-6.-análisis-dinámico-con-owasp-zap" class="level2">
+<h2 class="anchored" data-anchor-id="fase-6.-análisis-dinámico-con-owasp-zap">Fase 6. Análisis dinámico con OWASP ZAP</h2>
+<p>Con la aplicación arrancada:</p>
+<ol type="1">
+<li>Configura el navegador para utilizar ZAP como proxy.</li>
+<li>Navega por las diferentes funcionalidades de Eventia.</li>
+<li>Observa las peticiones y respuestas HTTP.</li>
+<li>Examina los métodos, cabeceras, parámetros y cuerpos de las peticiones.</li>
+<li>Identifica qué información se transmite.</li>
+<li>Comprueba las cabeceras de seguridad de las respuestas.</li>
+</ol>
+<p>Utiliza el análisis pasivo y, cuando proceda, el análisis activo sobre la aplicación local.</p>
+<p>Investiga especialmente:</p>
+<ul>
+<li>Información transmitida entre cliente y servidor.</li>
+<li>Protección de las operaciones que requieren autenticación.</li>
+<li>Diferencias entre autenticación y autorización.</li>
+<li>Posibilidad de modificar peticiones para acceder a operaciones no permitidas.</li>
+<li>Validación de los datos enviados.</li>
+<li>Configuración de CORS.</li>
+<li>Cabeceras de seguridad HTTP.</li>
+<li>Gestión y almacenamiento de tokens.</li>
+</ul>
+<p>No te limites a aceptar los resultados automáticos de ZAP. Examina las peticiones y respuestas y explica qué significan los hallazgos.</p>
+<blockquote class="blockquote">
+<p><strong>Precaución</strong>: realiza las pruebas exclusivamente sobre la aplicación local proporcionada. No utilices técnicas de ataque contra sistemas externos.</p>
+</blockquote>
+</section>
+<section id="fase-7.-corrección-y-verificación." class="level2">
+<h2 class="anchored" data-anchor-id="fase-7.-corrección-y-verificación.">Fase 7. Corrección y verificación.</h2>
+<p>Una vez identificados los problemas, selecciona los que te indico a continuación y corrígelos.</p>
+<p>Debes priorizar especialmente los relacionados con:</p>
+<ul>
+<li>Validación de datos.</li>
+<li>Autenticación y autorización.</li>
+<li>Acceso a información de otros usuarios.</li>
+<li>Inserción de contenido no confiable en el DOM.</li>
+<li>Protección de información sensible.</li>
+<li>Configuración del servidor y cabeceras HTTP.</li>
+</ul>
+<p>Para cada corrección:</p>
+<ul>
+<li>Explica el problema original.</li>
+<li>Describe el cambio realizado.</li>
+<li>Justifica por qué la solución es más segura.</li>
+<li>Ejecuta de nuevo las pruebas correspondientes.</li>
+</ul>
+<p>Comprueba si el problema ha quedado resuelto.</p>
+<p>No basta con eliminar el aviso de una herramienta: debes demostrar que el comportamiento inseguro ha desaparecido.</p>
+</section>
+<section id="entregables" class="level2">
+<h2 class="anchored" data-anchor-id="entregables">Entregables</h2>
+<p>Vamos a dar seguimiento a nuestro proyecto con Git por lo tanto entregarás tu <strong>link del repositorio en Github</strong> con el proyecto siguiendo una estructura similar a:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>eventia-desafío/</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>│</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>├── client/</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>│   ├── src/</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>│   ├── tests/</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>│   │   └── unit/</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>│   └── package.json</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>│</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>├── server/</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>│   ├── src/</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>│   ├── tests/</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>│   │   ├── unit/</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>│   │   └── api/</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>│   └── package.json</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>│</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>├── e2e/</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>│   └── eventia.spec.js</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>│</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>├── doc/</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>│   ├── 01-arquitectura.md</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>│   ├── 02-pruebas-unitarias.md</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>│   ├── 03-pruebas-api.md</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>│   ├── 04-pruebas-e2e.md</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>│   ├── 05-analisis-semg​​rep.md</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>│   ├── 06-analisis-zap.md</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>│   ├── 07-correcciones.md</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>│   └── 08-reflexion-final.md</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>│</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>├── playwright.config.js</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>├── package.json</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>└── README.md</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="nota-muy-importante" class="level2">
+<h2 class="anchored" data-anchor-id="nota-muy-importante">Nota muy importante</h2>
+<p><strong>Para este desafío no se puede utilizar IA, si algo no se puede resolver es preferible dejarlo sin resolver.</strong></p>
+<blockquote class="blockquote">
+<p><strong>Este laboratorio tendrá defensa personal ante el profesor para su evaluación</strong></p>
+</blockquote>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

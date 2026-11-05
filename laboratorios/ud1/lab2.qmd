@@ -1,6 +1,9 @@
 ---
 title: "UD1 · Lab 2 · ¿Qué estamos ejecutando realmente?"
 ---
+## CEE implicados
+
+RA1.b (20% del CE)
 
 # 🧪 ¿Qué estamos ejecutando realmente?
 

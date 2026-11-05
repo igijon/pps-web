@@ -100,12 +100,12 @@
   {
     "objectID": "desafios/desafio-01/index.html",
     "href": "desafios/desafio-01/index.html",
-    "title": "Desafío 1 · LifeOS - Tu vida digital",
+    "title": "Desafío 1 · Eventia: poniendo a prueba una aplicación",
     "section": "",
-    "text": "🚀 Desafío 1 · LifeOS - Tu vida digital\nEl alumnado debe desarrollar una aplicación web llamada provisionalmente LifeOS, pero realmente cada alumno elegirá su nombre.\nSerá una especie de dashboard personal para organizar planes, actividades, pequeños gastos, hábitos y objetivos.\n\n\n🧩 Reto\n\n💡 Deberás diseñar y desarrollar una aplicación web que ayude a una persona a organizar su vida diaria desde un único lugar.\n\nLa aplicación debería permitir, como mínimo:\n\n📅 organizar planes y eventos\n✅ gestionar tareas\n💰 controlar pequeños gastos\n📝 registrar información personal\n📊 visualizar un resumen de su situación\n💾 conservar los datos aunque cierre el navegador\n\nQueremos realizar una SPA sencilla, desarrollada inicialmente con JavaScript + Vanilla + Vite, donde diferentes funcionalidades comparten datos y estado.\nEjemplos que te pueden dar ideas:\n\n\n\nEjemplo\n\n\n\n\n\nEjemplo\n\n\n\n\n\nEjemplo\n\n\n\n\n\nEjemplo",
+    "text": "RA1 y RA2 (80% de todos los CCEE)",
     "crumbs": [
       "🚀 Desafíos",
-      "D1 · LifeOS"
+      "D1 · Eventia"
     ]
   },
   {
@@ -324,9 +324,10 @@
     "href": "laboratorios/ud1/lab1.html",
     "title": "UD1 · Lab 1 · ¿Dónde se ejecuta? ¿Cómo se comunica una aplicación?",
     "section": "",
-    "text": "Imagina que tenemos distintas piezas de software utilizando distintas tecnologías:\n\nReact\nJavaScript en navegador.\nNode.js\nPython\nAplicación Android\nBase de datos\n\nDebes responder, para cada una:\n\n¿Dónde se ejecuta?\n¿Qué necesita para ejecutarse?\n\n\nEsta actividad es conceptual",
+    "text": "RA1.a (20% del CE)",
     "crumbs": [
       "🧪 Laboratorios",
+      "UD1",
       "UD1 · Lab 1 · ¿Dónde se ejecuta?"
     ]
   },
@@ -497,9 +498,10 @@
     "href": "laboratorios/ud1/lab2.html",
     "title": "UD1 · Lab 2 · ¿Qué estamos ejecutando realmente?",
     "section": "",
-    "text": "Vamos a probar una aplicación sencilla.\nDescarga la parte front:\nHeroes React Front\nHeroes Node Back\nAbrimos los dos proyectos en VSCode y analizamos su estructura.\nAnalizamos el ficher package.json:\n\nTenemos que ver los scripts de ejecución\nTenemos que ver las dependencias que tienen\n\n\n\nnpm install\nnpm run start:dev\n\n\n\nnpm install\nnpm run dev\nDebes ver algo como esto en el navegador:\n\n\n\nResultado App Heroes\n\n\n\n\n\n\n¿Qué dependencias observas y de qué tipo en cada componente de la aplicación?\nObserva el tráfico de red que se produce, request y response correspondientes cuando interactúas con la aplicación y haz un esquema de lo que has obtenido:\n\nRequest indicando tipo y respuesta\nRespuesta JSON obtenida",
+    "text": "RA1.b (20% del CE)",
     "crumbs": [
       "🧪 Laboratorios",
+      "UD1",
       "UD1 · Lab 2 · ¿Qué estamos ejecutando realmente?"
     ]
   },
@@ -870,6 +872,7 @@
     "text": "Herramientas\n\nNavegador.\nDevTools.\nUna aplicación web sencilla que tú elijas.",
     "crumbs": [
       "🧪 Laboratorios",
+      "UD1",
       "UD1 · Lab 1 · ¿Dónde se ejecuta?"
     ]
   },
@@ -881,6 +884,7 @@
     "text": "¿Qué debemos hacer?\n\nAbrir la aplicación.\nAbrir DevTools.\nIr a Network.\nIdentificar peticiones.",
     "crumbs": [
       "🧪 Laboratorios",
+      "UD1",
       "UD1 · Lab 1 · ¿Dónde se ejecuta?"
     ]
   },
@@ -903,6 +907,7 @@
     "text": "Observamos:\n\nURL.\nMétodo.\nRequest.\nResponse.\nJSON.\nHeaders.\n\nPor ejemplo:\nGET /api/products\nRespuesta:\n[\n  {\n    \"id\": 1,\n    \"name\": \"Producto\"\n  }\n]\n\nTenemos que ver que una aplicación está formada por componentes que se comunican",
     "crumbs": [
       "🧪 Laboratorios",
+      "UD1",
       "UD1 · Lab 1 · ¿Dónde se ejecuta?"
     ]
   },
@@ -914,6 +919,7 @@
     "text": "Responde\n\n¿Qué información estamos enviando?\n¿Qué información estamos recibiendo?\n¿Qué ocurre si alguien la modifica?",
     "crumbs": [
       "🧪 Laboratorios",
+      "UD1",
       "UD1 · Lab 1 · ¿Dónde se ejecuta?"
     ]
   },
@@ -965,10 +971,11 @@
     "objectID": "laboratorios/ud1/lab2.html#montamos-nuestro-proyecto-back",
     "href": "laboratorios/ud1/lab2.html#montamos-nuestro-proyecto-back",
     "title": "UD1 · Lab 2 · ¿Qué estamos ejecutando realmente?",
-    "section": "",
-    "text": "npm install\nnpm run start:dev",
+    "section": "Montamos nuestro proyecto back",
+    "text": "Montamos nuestro proyecto back\nnpm install\nnpm run start:dev",
     "crumbs": [
       "🧪 Laboratorios",
+      "UD1",
       "UD1 · Lab 2 · ¿Qué estamos ejecutando realmente?"
     ]
   },
@@ -976,10 +983,11 @@
     "objectID": "laboratorios/ud1/lab2.html#montamos-nuestro-proyecto-front",
     "href": "laboratorios/ud1/lab2.html#montamos-nuestro-proyecto-front",
     "title": "UD1 · Lab 2 · ¿Qué estamos ejecutando realmente?",
-    "section": "",
-    "text": "npm install\nnpm run dev\nDebes ver algo como esto en el navegador:\n\n\n\nResultado App Heroes",
+    "section": "Montamos nuestro proyecto front",
+    "text": "Montamos nuestro proyecto front\nnpm install\nnpm run dev\nDebes ver algo como esto en el navegador:\n\n\n\nResultado App Heroes",
     "crumbs": [
       "🧪 Laboratorios",
+      "UD1",
       "UD1 · Lab 2 · ¿Qué estamos ejecutando realmente?"
     ]
   },
@@ -987,10 +995,11 @@
     "objectID": "laboratorios/ud1/lab2.html#cuestionario",
     "href": "laboratorios/ud1/lab2.html#cuestionario",
     "title": "UD1 · Lab 2 · ¿Qué estamos ejecutando realmente?",
-    "section": "",
-    "text": "¿Qué dependencias observas y de qué tipo en cada componente de la aplicación?\nObserva el tráfico de red que se produce, request y response correspondientes cuando interactúas con la aplicación y haz un esquema de lo que has obtenido:\n\nRequest indicando tipo y respuesta\nRespuesta JSON obtenida",
+    "section": "Cuestionario",
+    "text": "Cuestionario\n\n¿Qué dependencias observas y de qué tipo en cada componente de la aplicación?\nObserva el tráfico de red que se produce, request y response correspondientes cuando interactúas con la aplicación y haz un esquema de lo que has obtenido:\n\nRequest indicando tipo y respuesta\nRespuesta JSON obtenida",
     "crumbs": [
       "🧪 Laboratorios",
+      "UD1",
       "UD1 · Lab 2 · ¿Qué estamos ejecutando realmente?"
     ]
   },
@@ -1152,9 +1161,10 @@
     "href": "laboratorios/ud1/lab3.html",
     "title": "UD1 · Lab 3 · ¿Podemos confiar en lo que nos envía el navegador?",
     "section": "",
-    "text": "Hasta ahora hemos observado cómo una aplicación web se comunica mediante peticiones HTTP.\n\n¿Podemos confiar en que el navegador siempre enviará al servidor exactamente los datos que esperamos?\n\nEn este laboratorio vamos a investigar qué ocurre cuando un usuario modifica una petición HTTP antes de que llegue al servidor.\n\nNo se trata de atacar una aplicación externa, sino de analizar una aplicación de laboratorio sobre la que tenemos permiso para realizar pruebas\n\nHas podido observar que, cuando realizas una acción desde la interfaz, el navegador genera una petición HTTP:\nUsuario \n↓ \nInterfaz React \n↓ \nPetición HTTP \n↓ \nAPI REST \n↓ \nBackend\nEn este laboratorio vas a comprobar qué ocurre si modificas algunas de las peticiones que genera la aplicación Heroes.",
+    "text": "RA1.c (20% del CE)",
     "crumbs": [
       "🧪 Laboratorios",
+      "UD1",
       "UD1 · Lab 3 · ¿Podemos confiar en lo que nos envía el navegador?"
     ]
   },
@@ -1187,6 +1197,7 @@
     "text": "Tu misión\nConstruye una petición:\nPOST http://localhost:3000/api/heroes Content-Type: application/json\ncon un héroe inventado por ti.\nPor ejemplo:\n{ \n  \"name\": \"Nova\", \n\"slug\": \"nova\", \n\"alias\": \"Nova\", \n\"powers\": [ \"Control de energía\", \"Vuelo\" ], \n\"description\": \"Heroína capaz de controlar grandes cantidades de energía.\", \n\"strength\": 80, \n\"intelligence\": 90, \n\"speed\": 85, \n\"durability\": 75, \n\"team\": \"Guardians\", \n\"image\": \"https://example.com/nova.jpg\", \n\"firstAppearance\": \"2026\", \n\"status\": \"active\", \n\"category\": \"Hero\", \n\"universe\": \"Marvel\" }\nCrea datos propios.\nContesta:\n\n¿Qué código HTTP devuelve el servidor?\n¿Qué información devuelve?\n¿Se ha creado realmente el héroe?\n¿Qué identificador le ha asignado el backend?\n¿La aplicación React intervino en algún momento?",
     "crumbs": [
       "🧪 Laboratorios",
+      "UD1",
       "UD1 · Lab 3 · ¿Podemos confiar en lo que nos envía el navegador?"
     ]
   },
@@ -2201,6 +2212,174 @@
       "🧪 Laboratorios",
       "UD2",
       "UD2 · Lab 6 · Análisis dinámico de seguridad con OWASP ZAP"
+    ]
+  },
+  {
+    "objectID": "desafios/desafio-01/index.html#preparación-del-entorno",
+    "href": "desafios/desafio-01/index.html#preparación-del-entorno",
+    "title": "Desafío 1 · Eventia: poniendo a prueba una aplicación",
+    "section": "Preparación del entorno",
+    "text": "Preparación del entorno\n\nDescarga y descomprime el proyecto\nAbre la carpeta del proyecto en VSCode\nComprueba que tienes instalado Node.js y npm\nInstala las dependencias del proyecto\nArranca la aplicación y comprueba que puedes acceder a Eventia desde el navegador.\n\n\nImportante: los datos de Eventia son simulados y se almacenan en memoria. Al reiniciar el servidor, los cambios realizados pueden perderse. La aplicación debe ejecutarse únicamente en el entorno local de prácticas.",
+    "crumbs": [
+      "🚀 Desafíos",
+      "D1 · Eventia"
+    ]
+  },
+  {
+    "objectID": "desafios/desafio-01/index.html#fase-1.-conocer-la-aplicación",
+    "href": "desafios/desafio-01/index.html#fase-1.-conocer-la-aplicación",
+    "title": "Desafío 1 · Eventia: poniendo a prueba una aplicación",
+    "section": "Fase 1. Conocer la aplicación",
+    "text": "Fase 1. Conocer la aplicación\nAntes de comenzar las pruebas, investiga la estructura de la aplicación y responde:\n\n¿Qué componentes forman la aplicación?\n¿Qué responsabilidades tiene el frontend?\n¿Cómo se comunican ambos componentes?\n¿Qué información intercambian?\n¿Dónde se almacenan los datos?\n¿Qué ocurre cuando se reinicia el servidor?\n\nIdentifica también las principales funcionalidades de la aplicación, cómo se estructuran los fuentes y de qué se encarga cada uno.",
+    "crumbs": [
+      "🚀 Desafíos",
+      "D1 · Eventia"
+    ]
+  },
+  {
+    "objectID": "desafios/desafio-01/index.html#fase-2.-pruebas-unitarias-con-vitest",
+    "href": "desafios/desafio-01/index.html#fase-2.-pruebas-unitarias-con-vitest",
+    "title": "Desafío 1 · Eventia: poniendo a prueba una aplicación",
+    "section": "Fase 2. Pruebas unitarias con Vitest",
+    "text": "Fase 2. Pruebas unitarias con Vitest\nRealiza pruebas que comprueben:\n\nEl comportamiento esperado de las funciones\nLa respuesta ante datos válidos\nLa respuesta ante datos incorrectos\nLos valores límite\nLos casos en los que la función recibe información incompleta o inesperada\nTodo aquello que estimes oportuno indicando por qué",
+    "crumbs": [
+      "🚀 Desafíos",
+      "D1 · Eventia"
+    ]
+  },
+  {
+    "objectID": "desafios/desafio-01/index.html#fase-3.-pruebas-de-api",
+    "href": "desafios/desafio-01/index.html#fase-3.-pruebas-de-api",
+    "title": "Desafío 1 · Eventia: poniendo a prueba una aplicación",
+    "section": "Fase 3. Pruebas de API",
+    "text": "Fase 3. Pruebas de API\nComprueba el comportamiento del backend realizando peticiones HTTP directamente a la API.\nInvestiga los endpoints disponibles y diseña pruebas para comprobar su funcionamiento.\nDebes comprobar:\nFuncionamiento normal\n\nObtener el listado de eventos\nIniciar sesión con credenciales correctas\nConsultar el perfil de un usuario autenticado\nCrear una reserva válida\n\nSituaciones incorrectas\n\nIntentar iniciar sesión con credenciales incorrectas\nConsultar información protegida sin autenticarse\nEnviar datos incompletos al crear una reserva\nEnviar valores no válidos en los campos numéricos\nIntentar realizar operaciones para las que el usuario no tiene permisos\n\nPresta especial atención a los códigos de estado HTTP y al contenido de las respuestas JSON.\n\nAlgunas pruebas de seguridad pueden fallar inicialmente porque la aplicación contiene vulnerabilidades intencionadas. Debes identificar el problema, corregirlo y conseguir que la prueba pase.",
+    "crumbs": [
+      "🚀 Desafíos",
+      "D1 · Eventia"
+    ]
+  },
+  {
+    "objectID": "desafios/desafio-01/index.html#fase-4.-pruebas-e2e-con-playwright",
+    "href": "desafios/desafio-01/index.html#fase-4.-pruebas-e2e-con-playwright",
+    "title": "Desafío 1 · Eventia: poniendo a prueba una aplicación",
+    "section": "Fase 4. Pruebas E2E con Playwright",
+    "text": "Fase 4. Pruebas E2E con Playwright\nDiseña y ejecuta un par de pruebas que reproduzcan algunos flujos de uso de Eventia.",
+    "crumbs": [
+      "🚀 Desafíos",
+      "D1 · Eventia"
+    ]
+  },
+  {
+    "objectID": "desafios/desafio-01/index.html#fase-5.-análisis-estático-con-semgrep",
+    "href": "desafios/desafio-01/index.html#fase-5.-análisis-estático-con-semgrep",
+    "title": "Desafío 1 · Eventia: poniendo a prueba una aplicación",
+    "section": "Fase 5. Análisis estático con Semgrep",
+    "text": "Fase 5. Análisis estático con Semgrep\nHasta ahora hemos comprobado el comportamiento de la aplicación mediante pruebas. Vamos a analizar su código fuente con Semgrep.\nDebes especial atención a patrones relacionados con:\n\nUso de innerHTML con información que procede de fuentes externas.\nUso de eval() o ejecución dinámica de código.\nAlmacenamiento de información sensible en el lado cliente.\nCredenciales o secretos incluidos directamente en el código.\nConstrucción de consultas mediante concatenación de cadenas.\n\n\nNo todos estos patrones tienen por qué aparecer en la lógica principal de Eventia. Si se proporcionan ejemplos adicionales de código vulnerable, debes analizarlos también.\n\nPara cada hallazgo:\n\nIdentifica el archivo y la línea de código\nExplica qué hace el código\nDescribe por qué puede ser inseguro\nIndica qué consecuencias podría tener\nPropón una alternativa más segura\nComprueba si la herramienta sigue detectando el problema después de corregirlo.\n\n\nImportante: el resultado de Semgrep no demuestra automáticamente que exista una vulnerabilidad explotable. Debes estudiar el contexto y justificar tus conclusiones.",
+    "crumbs": [
+      "🚀 Desafíos",
+      "D1 · Eventia"
+    ]
+  },
+  {
+    "objectID": "desafios/desafio-01/index.html#fase-6.-análisis-dinámico-con-owasp-zap",
+    "href": "desafios/desafio-01/index.html#fase-6.-análisis-dinámico-con-owasp-zap",
+    "title": "Desafío 1 · Eventia: poniendo a prueba una aplicación",
+    "section": "Fase 6. Análisis dinámico con OWASP ZAP",
+    "text": "Fase 6. Análisis dinámico con OWASP ZAP\nCon la aplicación arrancada:\n\nConfigura el navegador para utilizar ZAP como proxy.\nNavega por las diferentes funcionalidades de Eventia.\nObserva las peticiones y respuestas HTTP.\nExamina los métodos, cabeceras, parámetros y cuerpos de las peticiones.\nIdentifica qué información se transmite.\nComprueba las cabeceras de seguridad de las respuestas.\n\nUtiliza el análisis pasivo y, cuando proceda, el análisis activo sobre la aplicación local.\nInvestiga especialmente:\n\nInformación transmitida entre cliente y servidor.\nProtección de las operaciones que requieren autenticación.\nDiferencias entre autenticación y autorización.\nPosibilidad de modificar peticiones para acceder a operaciones no permitidas.\nValidación de los datos enviados.\nConfiguración de CORS.\nCabeceras de seguridad HTTP.\nGestión y almacenamiento de tokens.\n\nNo te limites a aceptar los resultados automáticos de ZAP. Examina las peticiones y respuestas y explica qué significan los hallazgos.\n\nPrecaución: realiza las pruebas exclusivamente sobre la aplicación local proporcionada. No utilices técnicas de ataque contra sistemas externos.",
+    "crumbs": [
+      "🚀 Desafíos",
+      "D1 · Eventia"
+    ]
+  },
+  {
+    "objectID": "desafios/desafio-01/index.html#entregables",
+    "href": "desafios/desafio-01/index.html#entregables",
+    "title": "Desafío 1 · Eventia: poniendo a prueba una aplicación",
+    "section": "Entregables",
+    "text": "Entregables\nVamos a dar seguimiento a nuestro proyecto con Git por lo tanto entregarás tu link del repositorio en Github con el proyecto siguiendo una estructura similar a:\neventia-desafío/\n│\n├── client/\n│   ├── src/\n│   ├── tests/\n│   │   └── unit/\n│   └── package.json\n│\n├── server/\n│   ├── src/\n│   ├── tests/\n│   │   ├── unit/\n│   │   └── api/\n│   └── package.json\n│\n├── e2e/\n│   └── eventia.spec.js\n│\n├── doc/\n│   ├── 01-arquitectura.md\n│   ├── 02-pruebas-unitarias.md\n│   ├── 03-pruebas-api.md\n│   ├── 04-pruebas-e2e.md\n│   ├── 05-analisis-semg​​rep.md\n│   ├── 06-analisis-zap.md\n│   ├── 07-correcciones.md\n│   └── 08-reflexion-final.md\n│\n├── playwright.config.js\n├── package.json\n└── README.md",
+    "crumbs": [
+      "🚀 Desafíos",
+      "D1 · Eventia"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud1/lab1.html#cee-implicados",
+    "href": "laboratorios/ud1/lab1.html#cee-implicados",
+    "title": "UD1 · Lab 1 · ¿Dónde se ejecuta? ¿Cómo se comunica una aplicación?",
+    "section": "",
+    "text": "RA1.a (20% del CE)",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD1",
+      "UD1 · Lab 1 · ¿Dónde se ejecuta?"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud1/lab2.html#cee-implicados",
+    "href": "laboratorios/ud1/lab2.html#cee-implicados",
+    "title": "UD1 · Lab 2 · ¿Qué estamos ejecutando realmente?",
+    "section": "",
+    "text": "RA1.b (20% del CE)",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD1",
+      "UD1 · Lab 2 · ¿Qué estamos ejecutando realmente?"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud1/lab3.html#cee-implicados",
+    "href": "laboratorios/ud1/lab3.html#cee-implicados",
+    "title": "UD1 · Lab 3 · ¿Podemos confiar en lo que nos envía el navegador?",
+    "section": "",
+    "text": "RA1.c (20% del CE)",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD1",
+      "UD1 · Lab 3 · ¿Podemos confiar en lo que nos envía el navegador?"
+    ]
+  },
+  {
+    "objectID": "desafios/desafio-01/index.html#fase-7.",
+    "href": "desafios/desafio-01/index.html#fase-7.",
+    "title": "Desafío 1 · Eventia: poniendo a prueba una aplicación",
+    "section": "",
+    "text": "Una vez identificados los problemas, selecciona los que te indico a continuación y corrígelos.\nDebes priorizar especialmente los relacionados con:\n\nValidación de datos.\nAutenticación y autorización.\nAcceso a información de otros usuarios.\nInserción de contenido no confiable en el DOM.\nProtección de información sensible.\nConfiguración del servidor y cabeceras HTTP.\n\nPara cada corrección:\n\nExplica el problema original.\nDescribe el cambio realizado.\nJustifica por qué la solución es más segura.\nEjecuta de nuevo las pruebas correspondientes.\n\nComprueba si el problema ha quedado resuelto.\nNo basta con eliminar el aviso de una herramienta: debes demostrar que el comportamiento inseguro ha desaparecido.",
+    "crumbs": [
+      "🚀 Desafíos",
+      "D1 · Eventia"
+    ]
+  },
+  {
+    "objectID": "desafios/desafio-01/index.html#fase-7.-corrección-y-verificación.",
+    "href": "desafios/desafio-01/index.html#fase-7.-corrección-y-verificación.",
+    "title": "Desafío 1 · Eventia: poniendo a prueba una aplicación",
+    "section": "Fase 7. Corrección y verificación.",
+    "text": "Fase 7. Corrección y verificación.\nUna vez identificados los problemas, selecciona los que te indico a continuación y corrígelos.\nDebes priorizar especialmente los relacionados con:\n\nValidación de datos.\nAutenticación y autorización.\nAcceso a información de otros usuarios.\nInserción de contenido no confiable en el DOM.\nProtección de información sensible.\nConfiguración del servidor y cabeceras HTTP.\n\nPara cada corrección:\n\nExplica el problema original.\nDescribe el cambio realizado.\nJustifica por qué la solución es más segura.\nEjecuta de nuevo las pruebas correspondientes.\n\nComprueba si el problema ha quedado resuelto.\nNo basta con eliminar el aviso de una herramienta: debes demostrar que el comportamiento inseguro ha desaparecido.",
+    "crumbs": [
+      "🚀 Desafíos",
+      "D1 · Eventia"
+    ]
+  },
+  {
+    "objectID": "desafios/desafio-01/index.html#cee-implicados",
+    "href": "desafios/desafio-01/index.html#cee-implicados",
+    "title": "Desafío 1 · Eventia: poniendo a prueba una aplicación",
+    "section": "",
+    "text": "RA1 y RA2 (80% de todos los CCEE)",
+    "crumbs": [
+      "🚀 Desafíos",
+      "D1 · Eventia"
+    ]
+  },
+  {
+    "objectID": "desafios/desafio-01/index.html#nota-muy-importante",
+    "href": "desafios/desafio-01/index.html#nota-muy-importante",
+    "title": "Desafío 1 · Eventia: poniendo a prueba una aplicación",
+    "section": "Nota muy importante",
+    "text": "Nota muy importante\nPara este desafío no se puede utilizar IA, si algo no se puede resolver es preferible dejarlo sin resolver.\n\nEste laboratorio tendrá defensa personal ante el profesor para su evaluación",
+    "crumbs": [
+      "🚀 Desafíos",
+      "D1 · Eventia"
     ]
   }
 ]

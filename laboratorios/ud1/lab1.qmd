@@ -2,6 +2,10 @@
 title: "UD1 · Lab 1 · ¿Dónde se ejecuta? ¿Cómo se comunica una aplicación?"
 ---
 
+## CEE implicados
+
+RA1.a (20% del CE)
+
 # 🧪 ¿Dónde se ejecuta?
 
 Imagina que tenemos distintas piezas de software utilizando distintas tecnologías:
