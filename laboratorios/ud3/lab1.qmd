@@ -1,0 +1,96 @@
+---
+title: "UD3 · Lab 1 · Inventario de activos"
+---
+**
+(Trabajo por parejas)**
+
+# 🔬 Laboratorio: La aplicación TiendaLocal
+ 
+## Descripción general
+ 
+**TiendaLocal** es una tienda online de una pequeña empresa de productos artesanales de la comarca. Vende a clientes de toda España. Tiene unos 5.000 clientes registrados y gestiona unos 200 pedidos al mes. La empresa tiene 4 personas: la propietaria, dos empleados de logística y atención al cliente, y un desarrollador freelance que mantiene el sistema.
+ 
+## 4.2 Componentes
+ 
+| Componente | Descripción |
+|---|---|
+| **Web pública** | Catálogo, registro de usuarios, carrito y compra |
+| **API REST** | Backend que da servicio a la web y a la app móvil |
+| **Base de datos** | Almacena clientes, pedidos, productos y contraseñas (con hash) |
+| **App móvil** | Permite a los clientes consultar sus pedidos y recibir notificaciones |
+| **Panel de administración** | Usado por la propietaria y los empleados para gestionar pedidos y productos |
+| **Pasarela de pago** | Servicio externo de terceros. TiendaLocal **no almacena** los datos de tarjeta, solo un identificador de transacción |
+| **Servicio de correo** | Servicio externo para enviar confirmaciones de pedido |
+| **Chatbot de atención al cliente** | Asistente basado en un LLM que responde dudas y puede consultar el estado de un pedido |
+| **Repositorio de código** | Alojado en GitHub, con el código de la web, la API y la app |
+| **Servidor** | Un servidor virtual en la nube con la API y la base de datos en contenedores Docker |
+| **Copias de seguridad** | Backup diario de la base de datos, en un servicio de almacenamiento externo |
+ 
+## Datos que maneja
+ 
+- Clientes: nombre, email, dirección, teléfono, contraseña (hash).
+- Pedidos: productos, importes, direcciones de envío, estado.
+- Catálogo: productos, precios, stock.
+- Identificador de transacción de la pasarela de pago (no datos de tarjeta).
+- Historial de conversaciones del chatbot.
+- Logs de acceso y errores.
+  
+---
+ 
+## Plantilla de inventario 
+ 
+Cada pareja completa una tabla como esta (mínimo 12 filas):
+ 
+| ID | Activo | Categoría | Ubicación | Propietario | Valor (A/M/B) | Justificación |
+|---|---|---|---|---|---|---|
+| A01 | | | | | | |
+| A02 | | | | | | |
+| A03 | | | | | | |
+| … | | | | | | |
+ 
+**Reglas:**
+ 
+- Al menos **12 activos**.
+- Al menos **5 categorías** distintas.
+- La justificación debe explicar **qué pasaría para el negocio** si se pierde, se filtra o se altera.
+  
+---
+ 
+:::{.content-visible when-profile="docente"}
+# Solucionario orientativo (solo docente)
+ 
+Este inventario **no es el único posible**. Úsalo como referencia, no como plantilla de corrección.
+ 
+| ID | Activo | Categoría | Ubicación | Propietario | Valor | Justificación |
+|---|---|---|---|---|---|---|
+| A01 | Datos personales de clientes | Información | Base de datos | Propietaria | **Alto** | Obligación legal (RGPD), sanciones y pérdida de confianza si se filtran |
+| A02 | Pedidos e histórico de ventas | Información | Base de datos | Propietaria | **Alto** | Es la actividad del negocio; su pérdida impide gestionar envíos y facturación |
+| A03 | Hashes de contraseñas | Credenciales | Base de datos | Desarrollador | **Alto** | Si se filtran, facilitan ataques de fuerza bruta y reutilización en otros servicios |
+| A04 | Catálogo de productos y precios | Información | Base de datos | Propietaria | Medio | Su alteración causaría pérdidas (precios erróneos) pero es recuperable desde backup |
+| A05 | Logs de acceso y errores | Información | Servidor | Desarrollador | Medio | Imprescindibles para investigar incidentes; pueden contener datos personales |
+| A06 | Conversaciones del chatbot | Información | Servicio LLM / BD | Propietaria | Medio | Pueden contener datos personales y consultas sensibles de clientes |
+| A07 | Código fuente (web, API, app) | Software | GitHub | Desarrollador | Medio-Alto | Propiedad intelectual y vía para descubrir vulnerabilidades |
+| A08 | Binario de la app móvil | Software | Tiendas de apps | Desarrollador | Medio | Puede ser analizado o falsificado (app clonada con malware) |
+| A09 | Dependencias de terceros | Software | Repositorio | Desarrollador | Medio | Una librería comprometida afecta a toda la aplicación |
+| A10 | Disponibilidad de la web y la API | Servicios | Servidor | Propietaria | **Alto** | Sin servicio no hay ventas; el negocio es 100 % online |
+| A11 | Pasarela de pago (integración) | Servicios | Tercero | Propietaria | **Alto** | Su alteración o fallo afecta directamente al ingreso y a la confianza |
+| A12 | Servicio de correo transaccional | Servicios | Tercero | Desarrollador | Bajo-Medio | Su caída es molesta, pero no para el negocio |
+| A13 | Servidor y contenedores | Infraestructura | Cloud | Desarrollador | **Alto** | Es donde reside todo el sistema; su compromiso da acceso a todo lo demás |
+| A14 | Copias de seguridad | Información / Infra. | Almacenamiento externo | Desarrollador | **Alto** | Última defensa ante pérdida o ransomware; si están comprometidas, no hay recuperación |
+| A15 | Claves API (pasarela, correo, LLM) | Secretos | Variables de entorno / repo | Desarrollador | **Alto** | Dan acceso a servicios de pago y con coste económico directo |
+| A16 | Credenciales de administración del panel | Credenciales | Personas / BD | Propietaria | **Alto** | Acceso privilegiado a toda la gestión del negocio |
+| A17 | Certificado TLS y claves privadas | Secretos | Servidor | Desarrollador | Alto | Su robo permite suplantación del sitio |
+| A18 | Prompt de sistema y herramientas del chatbot | Software / IA | Configuración LLM | Desarrollador | Medio | Su exposición o manipulación puede permitir que el chatbot actúe de forma no prevista |
+| A19 | Conocimiento del desarrollador freelance | Personas | Una sola persona | Propietaria | Medio-Alto | Dependencia de una única persona (factor "bus"): si no está, el sistema es difícil de mantener |
+| A20 | Reputación y confianza de clientes | Intangibles | — | Propietaria | **Alto** | Con 5.000 clientes y negocio 100 % online, la confianza es el principal valor |
+| A21 | Cumplimiento legal (RGPD) | Intangibles | — | Propietaria | **Alto** | Una infracción conlleva sanciones económicas y daño reputacional |
+ 
+**Puntos que conviene destacar al comentarlo con la clase:**
+ 
+1. Los **hashes de contraseñas** y los **secretos** son activos que muchos grupos olvidan.
+2. La **disponibilidad** es un activo en sí mismo en un negocio 100 % online.
+3. Los **datos de tarjeta no aparecen** porque la pasarela los gestiona: es una decisión de diseño que **reduce el inventario de activos propios**. Es un buen ejemplo de "menos activos que proteger = menos riesgo".
+4. Los activos **intangibles** (reputación, legalidad) justifican la inversión en seguridad ante la dirección.
+5. La **dependencia de una persona** es un riesgo organizativo real, aunque no sea técnico.
+
+:::

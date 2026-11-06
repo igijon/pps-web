@@ -2447,5 +2447,65 @@
       "📚 Unidades",
       "3-¿Qué tenemos que proteger?"
     ]
+  },
+  {
+    "objectID": "laboratorios/ud3/lab1.html",
+    "href": "laboratorios/ud3/lab1.html",
+    "title": "UD3 · Lab 1 · Inventario de activos",
+    "section": "",
+    "text": "(Trabajo por parejas)",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD3",
+      "UD3 · Lab 1 · Inventario de activos"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud3/lab1.html#descripción-general",
+    "href": "laboratorios/ud3/lab1.html#descripción-general",
+    "title": "UD3 · Lab 1 · Inventario de activos",
+    "section": "Descripción general",
+    "text": "Descripción general\nTiendaLocal es una tienda online de una pequeña empresa de productos artesanales de la comarca. Vende a clientes de toda España. Tiene unos 5.000 clientes registrados y gestiona unos 200 pedidos al mes. La empresa tiene 4 personas: la propietaria, dos empleados de logística y atención al cliente, y un desarrollador freelance que mantiene el sistema.",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD3",
+      "UD3 · Lab 1 · Inventario de activos"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud3/lab1.html#componentes",
+    "href": "laboratorios/ud3/lab1.html#componentes",
+    "title": "UD3 · Lab 1 · Inventario de activos",
+    "section": "4.2 Componentes",
+    "text": "4.2 Componentes\n\n\n\n\n\n\n\nComponente\nDescripción\n\n\n\n\nWeb pública\nCatálogo, registro de usuarios, carrito y compra\n\n\nAPI REST\nBackend que da servicio a la web y a la app móvil\n\n\nBase de datos\nAlmacena clientes, pedidos, productos y contraseñas (con hash)\n\n\nApp móvil\nPermite a los clientes consultar sus pedidos y recibir notificaciones\n\n\nPanel de administración\nUsado por la propietaria y los empleados para gestionar pedidos y productos\n\n\nPasarela de pago\nServicio externo de terceros. TiendaLocal no almacena los datos de tarjeta, solo un identificador de transacción\n\n\nServicio de correo\nServicio externo para enviar confirmaciones de pedido\n\n\nChatbot de atención al cliente\nAsistente basado en un LLM que responde dudas y puede consultar el estado de un pedido\n\n\nRepositorio de código\nAlojado en GitHub, con el código de la web, la API y la app\n\n\nServidor\nUn servidor virtual en la nube con la API y la base de datos en contenedores Docker\n\n\nCopias de seguridad\nBackup diario de la base de datos, en un servicio de almacenamiento externo",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD3",
+      "UD3 · Lab 1 · Inventario de activos"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud3/lab1.html#datos-que-maneja",
+    "href": "laboratorios/ud3/lab1.html#datos-que-maneja",
+    "title": "UD3 · Lab 1 · Inventario de activos",
+    "section": "Datos que maneja",
+    "text": "Datos que maneja\n\nClientes: nombre, email, dirección, teléfono, contraseña (hash).\nPedidos: productos, importes, direcciones de envío, estado.\nCatálogo: productos, precios, stock.\nIdentificador de transacción de la pasarela de pago (no datos de tarjeta).\nHistorial de conversaciones del chatbot.\nLogs de acceso y errores.",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD3",
+      "UD3 · Lab 1 · Inventario de activos"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud3/lab1.html#plantilla-de-inventario",
+    "href": "laboratorios/ud3/lab1.html#plantilla-de-inventario",
+    "title": "UD3 · Lab 1 · Inventario de activos",
+    "section": "Plantilla de inventario",
+    "text": "Plantilla de inventario\nCada pareja completa una tabla como esta (mínimo 12 filas):\n\n\n\n\n\n\n\n\n\n\n\n\nID\nActivo\nCategoría\nUbicación\nPropietario\nValor (A/M/B)\nJustificación\n\n\n\n\nA01\n\n\n\n\n\n\n\n\nA02\n\n\n\n\n\n\n\n\nA03\n\n\n\n\n\n\n\n\n…\n\n\n\n\n\n\n\n\n\nReglas:\n\nAl menos 12 activos.\nAl menos 5 categorías distintas.\nLa justificación debe explicar qué pasaría para el negocio si se pierde, se filtra o se altera.",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD3",
+      "UD3 · Lab 1 · Inventario de activos"
+    ]
   }
 ]

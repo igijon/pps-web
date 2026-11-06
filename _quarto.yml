@@ -44,6 +44,10 @@ website:
                 text: "UD2 · Lab 5 · Análisis estático de seguridad con Semgrep"
               - href: laboratorios/ud2/lab6.qmd
                 text: "UD2 · Lab 6 · Análisis dinámico de seguridad con OWASP ZAP"
+          - section: "UD3"
+            contents:
+              - href: laboratorios/ud3/lab1.qmd
+                text: "UD3 · Lab 1 · Inventario de activos"
               
     
       - section: "🚀 Desafíos"
