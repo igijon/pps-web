@@ -2381,5 +2381,71 @@
       "🚀 Desafíos",
       "D1 · Eventia"
     ]
+  },
+  {
+    "objectID": "unidades/ud3/index.html",
+    "href": "unidades/ud3/index.html",
+    "title": "UD3. ¿Qué tenemos que proteger?",
+    "section": "",
+    "text": "“Hasta ahora hemos visto cómo funciona una aplicación y cómo se prueba. A partir de hoy damos un paso atrás: antes de pensar en cómo atacar o defender, tenemos que responder a una pregunta de negocio. ¿Qué es lo que realmente importa proteger? Esta unidad sigue una lógica: primero qué protegemos, luego de qué, después cuánto riesgo hay, y al final lo convertimos en requisitos para la unidad siguiente.”\nRespuestas que probablemente aparecerán:",
+    "crumbs": [
+      "📚 Unidades",
+      "3-¿Qué tenemos que proteger?"
+    ]
+  },
+  {
+    "objectID": "unidades/ud3/index.html#tipos-de-activos-en-una-aplicación",
+    "href": "unidades/ud3/index.html#tipos-de-activos-en-una-aplicación",
+    "title": "UD3. ¿Qué tenemos que proteger?",
+    "section": "Tipos de activos en una aplicación",
+    "text": "Tipos de activos en una aplicación\nPara una aplicación web/móvil, propongo esta clasificación sencilla (basada en la lógica de metodologías como MAGERIT, pero adaptada a un contexto de desarrollo):\n\n\n\n\n\n\nNoteNota\n\n\n\nMAGERIT es la metodología de análisis de riesgos del Ministerio de Hacienda, usada en el Esquema Nacional de Seguridad. Su catálogo de activos es más extenso. En clase no hace falta, pero puedes mencionarlo como referencia en el contexto español.\n\n\n\n\n\n\n\n\n\n\nCategoría\nQué incluye\nEjemplos en una app\n\n\n\n\nInformación / datos\nTodo dato que la organización genera, almacena o trata\nDatos de clientes, pedidos, catálogo, logs, datos de pago\n\n\nSoftware y código\nAplicaciones propias y de terceros\nCódigo fuente, repositorio, librerías, binarios de la app móvil\n\n\nServicios\nLo que la aplicación ofrece o consume\nLa web disponible, la API, el correo transaccional, la pasarela de pago\n\n\nInfraestructura\nDonde se ejecuta todo\nServidores, contenedores, base de datos, red, DNS\n\n\nCredenciales y secretos\nLo que da acceso a otros activos\nContraseñas, claves API, tokens, certificados TLS, claves de firma\n\n\nPersonas y procesos\nQuién opera y cómo\nAdministradores, desarrolladores, proceso de despliegue\n\n\nIntangibles\nLo que no se toca pero vale\nReputación, confianza de los clientes, cumplimiento legal (RGPD)",
+    "crumbs": [
+      "📚 Unidades",
+      "3-¿Qué tenemos que proteger?"
+    ]
+  },
+  {
+    "objectID": "unidades/ud3/index.html#activos-específicos-de-aplicaciones-modernas",
+    "href": "unidades/ud3/index.html#activos-específicos-de-aplicaciones-modernas",
+    "title": "UD3. ¿Qué tenemos que proteger?",
+    "section": "Activos específicos de aplicaciones modernas",
+    "text": "Activos específicos de aplicaciones modernas\n\nSecretos en el código y en los pipelines: claves API, tokens de GitHub Actions.\nDependencias de terceros: una librería comprometida es un activo comprometido.\nAplicaciones con LLM: además de los anteriores, aparecen activos nuevos: el prompt de sistema, los datos a los que el modelo tiene acceso (por ejemplo, base de conocimiento o historial de pedidos) y las herramientas o acciones que el modelo puede ejecutar.",
+    "crumbs": [
+      "📚 Unidades",
+      "3-¿Qué tenemos que proteger?"
+    ]
+  },
+  {
+    "objectID": "unidades/ud3/index.html#valor-propietario-y-ubicación",
+    "href": "unidades/ud3/index.html#valor-propietario-y-ubicación",
+    "title": "UD3. ¿Qué tenemos que proteger?",
+    "section": "Valor, propietario y ubicación",
+    "text": "Valor, propietario y ubicación\nUn inventario de activos útil no es una lista de nombres. Para cada activo hay que saber:\n\n\n\n\n\n\n\nAtributo\nPregunta que responde\n\n\n\n\nPropietario\n¿Quién es responsable de este activo y decide sobre él?\n\n\nUbicación\n¿Dónde reside? (servidor, contenedor, repositorio, tercero)\n\n\nValor\n¿Cuánto importa para el negocio? (alto / medio / bajo)\n\n\nJustificación\n¿Por qué ese valor? ¿Qué pasaría si se pierde, se filtra o se altera?\n\n\n\n\nCómo valorar:\n\nAlto: su pérdida o compromiso pararía el negocio, tendría consecuencias legales graves o dañaría seriamente la reputación.\nMedio: causaría molestias importantes o costes, pero el negocio seguiría funcionando.\nBajo: el impacto sería menor y fácilmente recuperable.",
+    "crumbs": [
+      "📚 Unidades",
+      "3-¿Qué tenemos que proteger?"
+    ]
+  },
+  {
+    "objectID": "unidades/ud3/index.html#activo-amenaza-vulnerabilidad-riesgo-adelanto",
+    "href": "unidades/ud3/index.html#activo-amenaza-vulnerabilidad-riesgo-adelanto",
+    "title": "UD3. ¿Qué tenemos que proteger?",
+    "section": "Activo ≠ amenaza ≠ vulnerabilidad ≠ riesgo (adelanto)",
+    "text": "Activo ≠ amenaza ≠ vulnerabilidad ≠ riesgo (adelanto)\nVamos a ver un ejemplo:\n\n\n\n\n\n\n\nConcepto\nEjemplo\n\n\n\n\nActivo\nLa base de datos de clientes\n\n\nAmenaza\nUn atacante que quiere robar datos\n\n\nVulnerabilidad\nUna consulta SQL construida concatenando texto\n\n\nRiesgo\nLa probabilidad de que el atacante la explote, multiplicada por el daño\n\n\n\n\n\n\n\n\n\nNoteNota\n\n\n\nTodo empieza con el activo: sin activo, no hay nada que proteger y no hay riesgo.",
+    "crumbs": [
+      "📚 Unidades",
+      "3-¿Qué tenemos que proteger?"
+    ]
+  },
+  {
+    "objectID": "unidades/ud3/index.html#casos-reales",
+    "href": "unidades/ud3/index.html#casos-reales",
+    "title": "UD3. ¿Qué tenemos que proteger?",
+    "section": "Casos reales",
+    "text": "Casos reales\n“¿Qué activo estaba en juego? ¿Quién era su propietario? ¿Qué pasó con su valor?”\n\nEquifax (2017): se comprometieron datos personales de más de 100 millones de personas, explotando una vulnerabilidad conocida de un componente web sin parchear.\n\nActivos: datos personales (información) y confianza (intangible).\n\nColonial Pipeline (2021): un ataque de ransomware paralizó durante días un oleoducto en EE. UU.\n\nActivo clave: disponibilidad del servicio, no tanto los datos.\n\n\n\n\n\n\nNoteNota\n\n\n\nEl ransomware es un tipo de malware (software malicioso) que secuestra los datos o el dispositivo de una víctima y exige el pago de un rescate económico para devolver el acceso",
+    "crumbs": [
+      "📚 Unidades",
+      "3-¿Qué tenemos que proteger?"
+    ]
   }
 ]

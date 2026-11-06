@@ -1,0 +1,125 @@
+---
+title: "UD3. ¿Qué tenemos que proteger?"
+---
+
+
+> "Hasta ahora hemos visto cómo funciona una aplicación y cómo se prueba. A partir de hoy damos un paso atrás: antes de pensar en cómo atacar o defender, tenemos que responder a una pregunta de negocio. ¿Qué es lo que realmente importa proteger? Esta unidad sigue una lógica: primero **qué** protegemos, luego **de qué**, después **cuánto riesgo** hay, y al final lo convertimos en requisitos para la unidad siguiente."
+
+
+>**"Imagina que montas una tienda online. Un día todo sale mal. ¿Qué es lo peor que podría pasar? ¿Qué te dolería más perder? ¿Qué tienen en común todas estas cosas?"**
+
+::: {.content-visible when-profile="docente"}
+
+Respuestas que probablemente aparecerán:
+
+| Respuesta | A qué categoría de activo apunta |
+|---|---|
+| "Que me roben los datos de los clientes" | Información (datos personales) |
+| "Que se caiga la web y no pueda vender" | Servicio / disponibilidad |
+| "Que me roben el dinero" | Información financiera / pasarela de pago |
+| "Que me hackeen y me borren todo" | Información + copias de seguridad |
+| "Que se enteren los clientes y pierda su confianza" | Reputación (activo intangible) |
+| "Que alguien copie mi código" | Software / propiedad intelectual |
+
+::: {.callout-note}
+## Atención
+Probablemente alguien mencione **amenazas** ("que me hackeen") en lugar de activos ("mis datos"). Es un buen momento para decir: *"Eso que dices es lo que **puede pasar**. Fíjate en lo que **se pierde**: eso es lo que vamos a llamar activo."* Aún no desarrolles amenaza vs. activo; lo harás en el minuto 25.
+:::
+
+:::
+
+# 🐮 ¿Qué es un activo?
+
+> **Activo**: cualquier elemento que tiene valor para la organización y que, por tanto, debe protegerse.
+ 
+Puntos clave a subrayar:
+ 
+- El valor es **para el negocio**, no para el atacante (aunque suelen coincidir).
+- Un activo **no tiene por qué ser técnico**: puede ser la reputación, un proceso o una persona con conocimiento crítico.
+- Un activo puede ser **valioso por sí mismo** (los datos) o por **lo que permite** (las credenciales de administrador no valen nada por sí solas, pero abren la puerta a todo lo demás).
+
+
+## Tipos de activos en una aplicación
+
+
+Para una aplicación web/móvil, propongo esta clasificación sencilla (basada en la lógica de metodologías como MAGERIT, pero adaptada a un contexto de desarrollo):
+
+::: {.callout-note}
+## Nota
+MAGERIT es la metodología de análisis de riesgos del Ministerio de Hacienda, usada en el Esquema Nacional de Seguridad. Su catálogo de activos es más extenso. En clase no hace falta, pero puedes mencionarlo como referencia en el contexto español.
+:::
+
+ 
+| Categoría | Qué incluye | Ejemplos en una app |
+|---|---|---|
+| **Información / datos** | Todo dato que la organización genera, almacena o trata | Datos de clientes, pedidos, catálogo, logs, datos de pago |
+| **Software y código** | Aplicaciones propias y de terceros | Código fuente, repositorio, librerías, binarios de la app móvil |
+| **Servicios** | Lo que la aplicación ofrece o consume | La web disponible, la API, el correo transaccional, la pasarela de pago |
+| **Infraestructura** | Donde se ejecuta todo | Servidores, contenedores, base de datos, red, DNS |
+| **Credenciales y secretos** | Lo que da acceso a otros activos | Contraseñas, claves API, tokens, certificados TLS, claves de firma |
+| **Personas y procesos** | Quién opera y cómo | Administradores, desarrolladores, proceso de despliegue |
+| **Intangibles** | Lo que no se toca pero vale | Reputación, confianza de los clientes, cumplimiento legal (RGPD) |
+
+## Activos específicos de aplicaciones modernas
+ 
+ 
+- **Secretos en el código y en los pipelines:** claves API, tokens de GitHub Actions. 
+- **Dependencias de terceros:** una librería comprometida es un activo comprometido. 
+- **Aplicaciones con LLM:** además de los anteriores, aparecen activos nuevos: el **prompt de sistema**, los **datos a los que el modelo tiene acceso** (por ejemplo, base de conocimiento o historial de pedidos) y las **herramientas o acciones que el modelo puede ejecutar**. 
+
+## Valor, propietario y ubicación
+ 
+Un inventario de activos útil no es una lista de nombres. Para cada activo hay que saber:
+ 
+| Atributo | Pregunta que responde |
+|---|---|
+| **Propietario** | ¿Quién es responsable de este activo y decide sobre él? |
+| **Ubicación** | ¿Dónde reside? (servidor, contenedor, repositorio, tercero) |
+| **Valor** | ¿Cuánto importa para el negocio? (alto / medio / bajo) |
+| **Justificación** | ¿Por qué ese valor? ¿Qué pasaría si se pierde, se filtra o se altera? |
+ 
+ <br>
+
+**Cómo valorar:**
+ 
+- **Alto:** su pérdida o compromiso pararía el negocio, tendría consecuencias legales graves o dañaría seriamente la reputación.
+- **Medio:** causaría molestias importantes o costes, pero el negocio seguiría funcionando.
+- **Bajo:** el impacto sería menor y fácilmente recuperable.
+
+## Activo ≠ amenaza ≠ vulnerabilidad ≠ riesgo (adelanto)
+ 
+Vamos a ver un ejemplo:
+
+| Concepto | Ejemplo |
+|---|---|
+| **Activo** | La base de datos de clientes |
+| **Amenaza** | Un atacante que quiere robar datos |
+| **Vulnerabilidad** | Una consulta SQL construida concatenando texto |
+| **Riesgo** | La probabilidad de que el atacante la explote, multiplicada por el daño |
+ 
+:::{.callout-note}
+## Nota
+**Todo empieza con el activo**: sin activo, no hay nada que proteger y no hay riesgo.
+:::
+
+## Casos reales
+
+*"¿Qué activo estaba en juego? ¿Quién era su propietario? ¿Qué pasó con su valor?"*
+ 
+- **Equifax (2017):** se comprometieron datos personales de más de 100 millones de personas, explotando una vulnerabilidad conocida de un componente web sin parchear. 
+  
+::: {.content-visible when-profile="docente"}
+Activos: datos personales (información) y confianza (intangible).
+:::
+
+- **Colonial Pipeline (2021):** un ataque de ransomware paralizó durante días un oleoducto en EE. UU. 
+
+::: {.content-visible when-profile="docente"}
+Activo clave: **disponibilidad del servicio**, no tanto los datos.
+:::
+
+:::{.callout-note}
+## Nota
+El ransomware es un tipo de malware (software malicioso) que secuestra los datos o el dispositivo de una víctima y exige el pago de un rescate económico para devolver el acceso
+:::
+

@@ -17,6 +17,8 @@ website:
             href: unidades/ud1/index.qmd
           - text: "2-Testing. Encontrar problemas antes de produccion"
             href: unidades/ud2/index.qmd
+          - text: "3-¿Qué tenemos que proteger?"
+            href: unidades/ud3/index.qmd
 
       - section: "🧪 Laboratorios"
         contents: 
