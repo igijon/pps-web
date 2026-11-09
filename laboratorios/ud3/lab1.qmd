@@ -10,7 +10,7 @@ title: "UD3 · Lab 1 · Inventario de activos"
  
 **TiendaLocal** es una tienda online de una pequeña empresa de productos artesanales de la comarca. Vende a clientes de toda España. Tiene unos 5.000 clientes registrados y gestiona unos 200 pedidos al mes. La empresa tiene 4 personas: la propietaria, dos empleados de logística y atención al cliente, y un desarrollador freelance que mantiene el sistema.
  
-## 4.2 Componentes
+## Componentes
  
 | Componente | Descripción |
 |---|---|
