@@ -57,6 +57,7 @@ Cada pareja completa una tabla como esta (mínimo 12 filas):
 ---
  
 :::{.content-visible when-profile="docente"}
+:::{.callout-important}
 # Solucionario orientativo (solo docente)
  
 Este inventario **no es el único posible**. Úsalo como referencia, no como plantilla de corrección.
@@ -93,4 +94,5 @@ Este inventario **no es el único posible**. Úsalo como referencia, no como pla
 4. Los activos **intangibles** (reputación, legalidad) justifican la inversión en seguridad ante la dirección.
 5. La **dependencia de una persona** es un riesgo organizativo real, aunque no sea técnico.
 
+:::
 :::

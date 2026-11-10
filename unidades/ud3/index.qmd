@@ -9,7 +9,7 @@ title: "UD3. ¿Qué tenemos que proteger?"
 >**"Imagina que montas una tienda online. Un día todo sale mal. ¿Qué es lo peor que podría pasar? ¿Qué te dolería más perder? ¿Qué tienen en común todas estas cosas?"**
 
 ::: {.content-visible when-profile="docente"}
-
+::: {.callout-important}
 Respuestas que probablemente aparecerán:
 
 | Respuesta | A qué categoría de activo apunta |
@@ -25,7 +25,7 @@ Respuestas que probablemente aparecerán:
 ## Atención
 Probablemente alguien mencione **amenazas** ("que me hackeen") en lugar de activos ("mis datos"). Es un buen momento para decir: *"Eso que dices es lo que **puede pasar**. Fíjate en lo que **se pierde**: eso es lo que vamos a llamar activo."* Aún no desarrolles amenaza vs. activo; lo harás en el minuto 25.
 :::
-
+:::
 :::
 
 # 🐮 ¿Qué es un activo?
@@ -46,7 +46,7 @@ Para una aplicación web/móvil, propongo esta clasificación sencilla (basada e
 
 ::: {.callout-note}
 ## Nota
-MAGERIT es la metodología de análisis de riesgos del Ministerio de Hacienda, usada en el Esquema Nacional de Seguridad. Su catálogo de activos es más extenso. En clase no hace falta, pero puedes mencionarlo como referencia en el contexto español.
+MAGERIT es la metodología de análisis de riesgos del Ministerio de Hacienda, usada en el Esquema Nacional de Seguridad. Su catálogo de activos es más extenso. 
 :::
 
  
@@ -109,13 +109,17 @@ Vamos a ver un ejemplo:
 - **Equifax (2017):** se comprometieron datos personales de más de 100 millones de personas, explotando una vulnerabilidad conocida de un componente web sin parchear. 
   
 ::: {.content-visible when-profile="docente"}
+::: {.callout-important}
 Activos: datos personales (información) y confianza (intangible).
+:::
 :::
 
 - **Colonial Pipeline (2021):** un ataque de ransomware paralizó durante días un oleoducto en EE. UU. 
 
 ::: {.content-visible when-profile="docente"}
+::: {.callout-important}
 Activo clave: **disponibilidad del servicio**, no tanto los datos.
+:::
 :::
 
 :::{.callout-note}

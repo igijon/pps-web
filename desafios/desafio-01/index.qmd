@@ -62,6 +62,12 @@ Realiza pruebas que comprueben:
 - Los casos en los que la función recibe información incompleta o inesperada
 - **Todo aquello que estimes oportuno indicando por qué**
 
+::::{.callout-note}
+## Importante
+Ten en cuenta que para realizar pruebas unitarias, puede que tengas que refactorizar código de la aplicación para que las funciones sean exportables y puedan ser importadas en los ficheros de test.
+**Pista**: saca el código referente a las reservas de las rutas en una función aparte y expórtala para poder testearla.
+::::
+
 ## Fase 3. Pruebas de API 
 
 Comprueba el comportamiento del backend realizando peticiones HTTP directamente a la API.
