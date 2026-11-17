@@ -71,7 +71,7 @@ Cada pareja completa una tabla como esta (mínimo 12 filas):
 
 ### Plantilla
  
-| ID | Activo | C | I | D | Valor global | Justificación (qué pasaría) | ¿Cambia respecto a sesión 1? |
+| ID | Activo | C | I | D | Valor global | Justificación (qué pasaría) | ¿Cambia respecto a la tabla anterior? |
 |---|---|---|---|---|---|---|---|
 | A01 | | | | | | | |
 | … | | | | | | | |
