@@ -55,6 +55,32 @@ Cada pareja completa una tabla como esta (mínimo 12 filas):
 - La justificación debe explicar **qué pasaría para el negocio** si se pierde, se filtra o se altera.
   
 ---
+
+## Valoración CIA del inventario
+
+1. Valorad **al menos 10 activos**.
+2. Son **obligatorios** estos cinco:
+   - Datos personales de clientes
+   - Catálogo de productos y precios
+   - Copias de seguridad
+   - Claves API
+   - Disponibilidad de la web y la API
+3. Elegid otros cinco libremente (recomendado: incluid un secreto, un componente de terceros y algo relacionado con el chatbot).
+4. En cada fila, la **justificación** debe responder: *"¿qué consecuencia concreta tendría perder esa propiedad?"*
+5. Calculad el **valor global** (el máximo de C, I, D). Si cambia respecto a lo que pusisteis en la tabla anterior, **marcadlo** y explicad por qué.
+
+### Plantilla
+ 
+| ID | Activo | C | I | D | Valor global | Justificación (qué pasaría) | ¿Cambia respecto a sesión 1? |
+|---|---|---|---|---|---|---|---|
+| A01 | | | | | | | |
+| … | | | | | | | |
+ 
+**Reglas de oro:**
+ 
+- No pongáis "Alto" en todo. Si todo es crítico, nada lo es.
+- Una propiedad puede ser **Baja** y eso no significa que el activo no importe.
+- Justificar con el negocio, no con la técnica.
  
 :::{.content-visible when-profile="docente"}
 :::{.callout-important}

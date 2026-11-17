@@ -127,3 +127,118 @@ Activo clave: **disponibilidad del servicio**, no tanto los datos.
 El ransomware es un tipo de malware (software malicioso) que secuestra los datos o el dispositivo de una víctima y exige el pago de un rescate económico para devolver el acceso
 :::
 
+
+
+# 🌩 CIA y valor del activo
+
+>**¿De qué manera puede dañarse cada activo y cuánto importa cada una de esas maneras?**
+
+No todos los activos "valiosos" se pierden igual ni duelen igual. Para razonarlo con orden usamos un modelo clásico: la **tríada CIA**.
+ 
+## La tríada CIA
+ 
+| Propiedad | Pregunta clave | Se pierde cuando… |
+|---|---|---|
+| **C**onfidencialidad | ¿Solo accede quien debe? | Alguien no autorizado **ve** o **obtiene** la información |
+| **I**ntegridad | ¿Es correcto y no ha sido alterado? | Alguien (o algo) **modifica** o **corrompe** datos o sistemas sin autorización |
+| **A**vailability (**D**isponibilidad) | ¿Está accesible cuando se necesita? | El activo o servicio **no está disponible** cuando hace falta |
+ 
+::: {.callout-note}
+## Nota sobre las siglas
+En inglés es **CIA** (*Confidentiality, Integrity, Availability*). En las tablas de este material usaremos **C – I – D** (D de disponibilidad) para no confundir la "A" de *Availability* con la "A" de *Alto*.
+:::
+ 
+### Confidencialidad
+ 
+- **Idea:** la información solo la ve quien tiene derecho a verla.
+- **Ejemplos en TiendaLocal:** que no se filtren los datos de los clientes; que nadie sin permiso lea los pedidos de otro usuario; que las claves API no acaben en un repositorio público.
+- **Ojo:** confidencialidad no es lo mismo que *privacidad*. La privacidad es un derecho de las personas sobre sus datos (y está regulada por el RGPD); la confidencialidad es la propiedad técnica que ayuda a garantizarla.
+  
+### Integridad
+ 
+- **Idea:** la información y los sistemas son exactos, completos y no han sido modificados sin autorización.
+- **Ejemplos en TiendaLocal:** que nadie pueda cambiar el precio de un producto; que un pedido no se altere tras pagarlo; que el código desplegado sea el que se escribió y no uno manipulado; que los logs no se puedan borrar para ocultar un ataque.
+- **Ojo:** la integridad también se rompe **sin mala intención** (un error de migración que duplica pedidos).
+
+### Disponibilidad
+ 
+- **Idea:** los activos y servicios están accesibles y funcionan cuando se necesitan.
+- **Ejemplos en TiendaLocal:** que la web y la API estén operativas; que los backups se puedan restaurar; que el desarrollador freelance esté localizable si algo falla.
+- **Ojo:** un **ransomware** es, ante todo, un ataque a la disponibilidad (cifra los datos para que no se puedan usar), aunque a menudo también compromete la confidencialidad (si antes los roba).
+
+### Un mismo incidente puede afectar a varias propiedades
+ 
+Los incidentes reales rara vez rompen solo una propiedad. Por eso la tríada se aplica **a cada activo por separado**, y se piensa en las tres dimensiones.
+ 
+## Cada activo tiene su propio perfil CIA
+ 
+Dos activos del mismo valor global pueden tener perfiles muy distintos:
+ 
+| Activo | C | I | D | Por qué |
+|---|---|---|---|---|
+| Catálogo de productos (público) | B | M | M | Es información pública, pero si se altera (precios) o se cae, hay pérdidas |
+| Datos personales de clientes | A | M | M | Su filtración tiene consecuencias legales y reputacionales graves |
+| Disponibilidad de la web/API | B | M | A | No contiene secretos, pero sin ella no hay negocio |
+ 
+**Lección:** no hay un único "nivel de seguridad". Se protege cada activo **según la propiedad que más le importa**.
+ 
+## Cómo se valora: el impacto
+ 
+Para decidir si una propiedad es **Baja (B)**, **Media (M)** o **Alta (A)** para un activo, hay que preguntarse: **si se pierde esta propiedad, ¿qué consecuencias tiene para el negocio?**
+ 
+Las consecuencias se miden en varias dimensiones de impacto:
+ 
+| Dimensión | Pregunta |
+|---|---|
+| **Operativo** | ¿Se para el negocio? ¿Durante cuánto tiempo? |
+| **Económico** | ¿Cuánto dinero se pierde o cuesta recuperarse? |
+| **Legal** | ¿Hay incumplimiento normativo (RGPD...) o sanciones? |
+| **Reputacional** | ¿Se pierde la confianza de clientes y socios? |
+| **Personas** | ¿Se daña a las personas (por ejemplo, exposición de datos sensibles)? |
+ 
+### Escala de valoración
+ 
+| Nivel | Criterio orientativo |
+|---|---|
+| **Alto (A)** | Consecuencias **graves**: parada prolongada del negocio, sanciones relevantes, daño serio a la reputación o a las personas. Difícilmente recuperable. |
+| **Medio (M)** | Consecuencias **importantes pero asumibles**: molestias, costes, pérdida temporal de ventas. Recuperable con esfuerzo. |
+| **Bajo (B)** | Consecuencias **menores**: sin efecto relevante en el negocio. Fácilmente recuperable. |
+ 
+### Valor global del activo
+ 
+Para simplificar, el **valor global** de un activo es el **más alto** de sus tres dimensiones (C, I, D). Si una sola dimensión es crítica, el activo es crítico.
+ 
+::: {.callout-tip}
+## Ejemplo real de esta lógica
+El Esquema Nacional de Seguridad (ENS) trabaja con cinco dimensiones (confidencialidad, integridad, disponibilidad, autenticidad y trazabilidad) y categoriza un sistema según el nivel más alto de sus dimensiones. 
+:::
+ 
+## Más allá de la tríada 
+ 
+| Propiedad | Idea |
+|---|---|
+| **Autenticidad** | Saber que quien dice ser alguien realmente lo es (o que un dato proviene de quien dice) |
+| **Trazabilidad** | Poder demostrar **quién hizo qué y cuándo**, sin que se pueda negar |
+ 
+Las tendremos presentes más adelante.
+ 
+## Primer vistazo a los controles
+ 
+Cada propiedad se protege con medidas distintas. Los veremos con detalle más adelante; de momento, para que te hagas una idea:
+ 
+| Propiedad | Ejemplos de medidas |
+|---|---|
+| **Confidencialidad** | Cifrado, control de acceso, principio de mínimo privilegio, gestión de secretos |
+| **Integridad** | Validación de entradas, hashes y firmas, control de versiones, registros de auditoría |
+| **Disponibilidad** | Copias de seguridad, redundancia, monitorización, límites de uso (*rate limiting*) |
+ 
+## Caso de aplicaciones con LLM
+ 
+El chatbot de TiendaLocal también tiene perfil CIA:
+ 
+- **Confidencialidad:** que no revele información de otros clientes ni su propio *prompt* de sistema.
+- **Integridad:** que no pueda ser manipulado para que actúe de forma no prevista (por ejemplo, mediante instrucciones maliciosas en un mensaje).
+- **Disponibilidad:** que no se pueda agotar su uso o su coste.
+  
+---
+ 

@@ -2501,7 +2501,250 @@
     "href": "laboratorios/ud3/lab1.html#plantilla-de-inventario",
     "title": "UD3 · Lab 1 · Inventario de activos",
     "section": "Plantilla de inventario",
-    "text": "Plantilla de inventario\nCada pareja completa una tabla como esta (mínimo 12 filas):\n\n\n\n\n\n\n\n\n\n\n\n\nID\nActivo\nCategoría\nUbicación\nPropietario\nValor (A/M/B)\nJustificación\n\n\n\n\nA01\n\n\n\n\n\n\n\n\nA02\n\n\n\n\n\n\n\n\nA03\n\n\n\n\n\n\n\n\n…\n\n\n\n\n\n\n\n\n\nReglas:\n\nAl menos 12 activos.\nAl menos 5 categorías distintas.\nLa justificación debe explicar qué pasaría para el negocio si se pierde, se filtra o se altera.\n\n\n\n\n\n\n\n\nImportantSolucionario orientativo (solo docente)\n\n\n\nEste inventario no es el único posible. Úsalo como referencia, no como plantilla de corrección.\n\n\n\n\n\n\n\n\n\n\n\n\nID\nActivo\nCategoría\nUbicación\nPropietario\nValor\nJustificación\n\n\n\n\nA01\nDatos personales de clientes\nInformación\nBase de datos\nPropietaria\nAlto\nObligación legal (RGPD), sanciones y pérdida de confianza si se filtran\n\n\nA02\nPedidos e histórico de ventas\nInformación\nBase de datos\nPropietaria\nAlto\nEs la actividad del negocio; su pérdida impide gestionar envíos y facturación\n\n\nA03\nHashes de contraseñas\nCredenciales\nBase de datos\nDesarrollador\nAlto\nSi se filtran, facilitan ataques de fuerza bruta y reutilización en otros servicios\n\n\nA04\nCatálogo de productos y precios\nInformación\nBase de datos\nPropietaria\nMedio\nSu alteración causaría pérdidas (precios erróneos) pero es recuperable desde backup\n\n\nA05\nLogs de acceso y errores\nInformación\nServidor\nDesarrollador\nMedio\nImprescindibles para investigar incidentes; pueden contener datos personales\n\n\nA06\nConversaciones del chatbot\nInformación\nServicio LLM / BD\nPropietaria\nMedio\nPueden contener datos personales y consultas sensibles de clientes\n\n\nA07\nCódigo fuente (web, API, app)\nSoftware\nGitHub\nDesarrollador\nMedio-Alto\nPropiedad intelectual y vía para descubrir vulnerabilidades\n\n\nA08\nBinario de la app móvil\nSoftware\nTiendas de apps\nDesarrollador\nMedio\nPuede ser analizado o falsificado (app clonada con malware)\n\n\nA09\nDependencias de terceros\nSoftware\nRepositorio\nDesarrollador\nMedio\nUna librería comprometida afecta a toda la aplicación\n\n\nA10\nDisponibilidad de la web y la API\nServicios\nServidor\nPropietaria\nAlto\nSin servicio no hay ventas; el negocio es 100 % online\n\n\nA11\nPasarela de pago (integración)\nServicios\nTercero\nPropietaria\nAlto\nSu alteración o fallo afecta directamente al ingreso y a la confianza\n\n\nA12\nServicio de correo transaccional\nServicios\nTercero\nDesarrollador\nBajo-Medio\nSu caída es molesta, pero no para el negocio\n\n\nA13\nServidor y contenedores\nInfraestructura\nCloud\nDesarrollador\nAlto\nEs donde reside todo el sistema; su compromiso da acceso a todo lo demás\n\n\nA14\nCopias de seguridad\nInformación / Infra.\nAlmacenamiento externo\nDesarrollador\nAlto\nÚltima defensa ante pérdida o ransomware; si están comprometidas, no hay recuperación\n\n\nA15\nClaves API (pasarela, correo, LLM)\nSecretos\nVariables de entorno / repo\nDesarrollador\nAlto\nDan acceso a servicios de pago y con coste económico directo\n\n\nA16\nCredenciales de administración del panel\nCredenciales\nPersonas / BD\nPropietaria\nAlto\nAcceso privilegiado a toda la gestión del negocio\n\n\nA17\nCertificado TLS y claves privadas\nSecretos\nServidor\nDesarrollador\nAlto\nSu robo permite suplantación del sitio\n\n\nA18\nPrompt de sistema y herramientas del chatbot\nSoftware / IA\nConfiguración LLM\nDesarrollador\nMedio\nSu exposición o manipulación puede permitir que el chatbot actúe de forma no prevista\n\n\nA19\nConocimiento del desarrollador freelance\nPersonas\nUna sola persona\nPropietaria\nMedio-Alto\nDependencia de una única persona (factor “bus”): si no está, el sistema es difícil de mantener\n\n\nA20\nReputación y confianza de clientes\nIntangibles\n—\nPropietaria\nAlto\nCon 5.000 clientes y negocio 100 % online, la confianza es el principal valor\n\n\nA21\nCumplimiento legal (RGPD)\nIntangibles\n—\nPropietaria\nAlto\nUna infracción conlleva sanciones económicas y daño reputacional\n\n\n\nPuntos que conviene destacar al comentarlo con la clase:\n\nLos hashes de contraseñas y los secretos son activos que muchos grupos olvidan.\nLa disponibilidad es un activo en sí mismo en un negocio 100 % online.\nLos datos de tarjeta no aparecen porque la pasarela los gestiona: es una decisión de diseño que reduce el inventario de activos propios. Es un buen ejemplo de “menos activos que proteger = menos riesgo”.\nLos activos intangibles (reputación, legalidad) justifican la inversión en seguridad ante la dirección.\nLa dependencia de una persona es un riesgo organizativo real, aunque no sea técnico.",
+    "text": "Plantilla de inventario\nCada pareja completa una tabla como esta (mínimo 12 filas):\n\n\n\n\n\n\n\n\n\n\n\n\nID\nActivo\nCategoría\nUbicación\nPropietario\nValor (A/M/B)\nJustificación\n\n\n\n\nA01\n\n\n\n\n\n\n\n\nA02\n\n\n\n\n\n\n\n\nA03\n\n\n\n\n\n\n\n\n…\n\n\n\n\n\n\n\n\n\nReglas:\n\nAl menos 12 activos.\nAl menos 5 categorías distintas.\nLa justificación debe explicar qué pasaría para el negocio si se pierde, se filtra o se altera.",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD3",
+      "UD3 · Lab 1 · Inventario de activos"
+    ]
+  },
+  {
+    "objectID": "unidades/ud3/index.html#a.2-la-tríada-cia",
+    "href": "unidades/ud3/index.html#a.2-la-tríada-cia",
+    "title": "UD3. ¿Qué tenemos que proteger?",
+    "section": "A.2 La tríada CIA",
+    "text": "A.2 La tríada CIA\n\n\n\n\n\n\n\n\nPropiedad\nPregunta clave\nSe pierde cuando…\n\n\n\n\nConfidencialidad\n¿Solo accede quien debe?\nAlguien no autorizado ve o obtiene la información\n\n\nIntegridad\n¿Es correcto y no ha sido alterado?\nAlguien (o algo) modifica o corrompe datos o sistemas sin autorización\n\n\nAvailability (Disponibilidad)\n¿Está accesible cuando se necesita?\nEl activo o servicio no está disponible cuando hace falta\n\n\n\n\n\n\n\n\n\nNoteNota sobre las siglas\n\n\n\nEn inglés es CIA (Confidentiality, Integrity, Availability). En las tablas de este material usaremos C – I – D (D de disponibilidad) para no confundir la “A” de Availability con la “A” de Alto.\n\n\n\nConfidencialidad\n\nIdea: la información solo la ve quien tiene derecho a verla.\nEjemplos en TiendaLocal: que no se filtren los datos de los clientes; que nadie sin permiso lea los pedidos de otro usuario; que las claves API no acaben en un repositorio público.\nOjo: confidencialidad no es lo mismo que privacidad. La privacidad es un derecho de las personas sobre sus datos (y está regulada por el RGPD); la confidencialidad es la propiedad técnica que ayuda a garantizarla. ### Integridad\nIdea: la información y los sistemas son exactos, completos y no han sido modificados sin autorización.\nEjemplos en TiendaLocal: que nadie pueda cambiar el precio de un producto; que un pedido no se altere tras pagarlo; que el código desplegado sea el que se escribió y no uno manipulado; que los logs no se puedan borrar para ocultar un ataque.\nOjo: la integridad también se rompe sin mala intención (un error de migración que duplica pedidos). ### Disponibilidad\nIdea: los activos y servicios están accesibles y funcionan cuando se necesitan.\nEjemplos en TiendaLocal: que la web y la API estén operativas; que los backups se puedan restaurar; que el desarrollador freelance esté localizable si algo falla.\nOjo: un ransomware es, ante todo, un ataque a la disponibilidad (cifra los datos para que no se puedan usar), aunque a menudo también compromete la confidencialidad (si antes los roba). ### Un mismo incidente puede afectar a varias propiedades\n\nLos incidentes reales rara vez rompen solo una propiedad. Por eso la tríada se aplica a cada activo por separado, y se piensa en las tres dimensiones.",
+    "crumbs": [
+      "📚 Unidades",
+      "3-¿Qué tenemos que proteger?"
+    ]
+  },
+  {
+    "objectID": "unidades/ud3/index.html#a.3-cada-activo-tiene-su-propio-perfil-cia",
+    "href": "unidades/ud3/index.html#a.3-cada-activo-tiene-su-propio-perfil-cia",
+    "title": "UD3. ¿Qué tenemos que proteger?",
+    "section": "A.3 Cada activo tiene su propio perfil CIA",
+    "text": "A.3 Cada activo tiene su propio perfil CIA\nDos activos del mismo valor global pueden tener perfiles muy distintos:\n\n\n\n\n\n\n\n\n\n\nActivo\nC\nI\nD\nPor qué\n\n\n\n\nCatálogo de productos (público)\nB\nM\nM\nEs información pública, pero si se altera (precios) o se cae, hay pérdidas\n\n\nDatos personales de clientes\nA\nM\nM\nSu filtración tiene consecuencias legales y reputacionales graves\n\n\nDisponibilidad de la web/API\nB\nM\nA\nNo contiene secretos, pero sin ella no hay negocio\n\n\n\nLección: no hay un único “nivel de seguridad”. Se protege cada activo según la propiedad que más le importa.",
+    "crumbs": [
+      "📚 Unidades",
+      "3-¿Qué tenemos que proteger?"
+    ]
+  },
+  {
+    "objectID": "unidades/ud3/index.html#a.4-cómo-se-valora-el-impacto",
+    "href": "unidades/ud3/index.html#a.4-cómo-se-valora-el-impacto",
+    "title": "UD3. ¿Qué tenemos que proteger?",
+    "section": "A.4 Cómo se valora: el impacto",
+    "text": "A.4 Cómo se valora: el impacto\nPara decidir si una propiedad es Baja (B), Media (M) o Alta (A) para un activo, hay que preguntarse: si se pierde esta propiedad, ¿qué consecuencias tiene para el negocio?\nLas consecuencias se miden en varias dimensiones de impacto:\n\n\n\n\n\n\n\nDimensión\nPregunta\n\n\n\n\nOperativo\n¿Se para el negocio? ¿Durante cuánto tiempo?\n\n\nEconómico\n¿Cuánto dinero se pierde o cuesta recuperarse?\n\n\nLegal\n¿Hay incumplimiento normativo (RGPD…) o sanciones?\n\n\nReputacional\n¿Se pierde la confianza de clientes y socios?\n\n\nPersonas\n¿Se daña a las personas (por ejemplo, exposición de datos sensibles)?\n\n\n\n\nEscala de valoración\n\n\n\n\n\n\n\nNivel\nCriterio orientativo\n\n\n\n\nAlto (A)\nConsecuencias graves: parada prolongada del negocio, sanciones relevantes, daño serio a la reputación o a las personas. Difícilmente recuperable.\n\n\nMedio (M)\nConsecuencias importantes pero asumibles: molestias, costes, pérdida temporal de ventas. Recuperable con esfuerzo.\n\n\nBajo (B)\nConsecuencias menores: sin efecto relevante en el negocio. Fácilmente recuperable.\n\n\n\n\n\nValor global del activo\nPara simplificar, el valor global de un activo es el más alto de sus tres dimensiones (C, I, D). Si una sola dimensión es crítica, el activo es crítico.\n\n\n\n\n\n\nTipEjemplo real de esta lógica\n\n\n\nEl Esquema Nacional de Seguridad (ENS) trabaja con cinco dimensiones (confidencialidad, integridad, disponibilidad, autenticidad y trazabilidad) y categoriza un sistema según el nivel más alto de sus dimensiones. Si lo citas en clase, consulta el texto vigente.",
+    "crumbs": [
+      "📚 Unidades",
+      "3-¿Qué tenemos que proteger?"
+    ]
+  },
+  {
+    "objectID": "unidades/ud3/index.html#a.5-más-allá-de-la-tríada-mención-breve",
+    "href": "unidades/ud3/index.html#a.5-más-allá-de-la-tríada-mención-breve",
+    "title": "UD3. ¿Qué tenemos que proteger?",
+    "section": "A.5 Más allá de la tríada (mención breve)",
+    "text": "A.5 Más allá de la tríada (mención breve)\n\n\n\n\n\n\n\nPropiedad\nIdea\n\n\n\n\nAutenticidad\nSaber que quien dice ser alguien realmente lo es (o que un dato proviene de quien dice)\n\n\nTrazabilidad / no repudio\nPoder demostrar quién hizo qué y cuándo, sin que se pueda negar\n\n\n\nLas tendremos presentes más adelante (en STRIDE aparecen directamente).",
+    "crumbs": [
+      "📚 Unidades",
+      "3-¿Qué tenemos que proteger?"
+    ]
+  },
+  {
+    "objectID": "unidades/ud3/index.html#a.6-primer-vistazo-a-los-controles",
+    "href": "unidades/ud3/index.html#a.6-primer-vistazo-a-los-controles",
+    "title": "UD3. ¿Qué tenemos que proteger?",
+    "section": "A.6 Primer vistazo a los controles",
+    "text": "A.6 Primer vistazo a los controles\nCada propiedad se protege con medidas distintas. Los veremos con detalle más adelante; de momento, para que te hagas una idea:\n\n\n\n\n\n\n\nPropiedad\nEjemplos de medidas\n\n\n\n\nConfidencialidad\nCifrado, control de acceso, principio de mínimo privilegio, gestión de secretos\n\n\nIntegridad\nValidación de entradas, hashes y firmas, control de versiones, registros de auditoría\n\n\nDisponibilidad\nCopias de seguridad, redundancia, monitorización, límites de uso (rate limiting)",
+    "crumbs": [
+      "📚 Unidades",
+      "3-¿Qué tenemos que proteger?"
+    ]
+  },
+  {
+    "objectID": "unidades/ud3/index.html#a.7-caso-de-aplicaciones-con-llm",
+    "href": "unidades/ud3/index.html#a.7-caso-de-aplicaciones-con-llm",
+    "title": "UD3. ¿Qué tenemos que proteger?",
+    "section": "A.7 Caso de aplicaciones con LLM",
+    "text": "A.7 Caso de aplicaciones con LLM\nEl chatbot de TiendaLocal también tiene perfil CIA:\n\nConfidencialidad: que no revele información de otros clientes ni su propio prompt de sistema.\nIntegridad: que no pueda ser manipulado para que actúe de forma no prevista (por ejemplo, mediante instrucciones maliciosas en un mensaje).\nDisponibilidad: que no se pueda agotar su uso o su coste.",
+    "crumbs": [
+      "📚 Unidades",
+      "3-¿Qué tenemos que proteger?"
+    ]
+  },
+  {
+    "objectID": "unidades/ud3/index.html#a.8-actividad-valoración-cia-del-inventario",
+    "href": "unidades/ud3/index.html#a.8-actividad-valoración-cia-del-inventario",
+    "title": "UD3. ¿Qué tenemos que proteger?",
+    "section": "A.8 Actividad: valoración CIA del inventario",
+    "text": "A.8 Actividad: valoración CIA del inventario\nQué hacéis: tomáis vuestro inventario de la sesión 1 y le añadís la valoración C – I – D de cada activo, con una justificación.\nCondiciones:\n\nValorad al menos 10 activos.\nSon obligatorios estos cinco:\n\nDatos personales de clientes\nCatálogo de productos y precios\nCopias de seguridad\nClaves API\nDisponibilidad de la web y la API\n\nElegid otros cinco libremente (recomendado: incluid un secreto, un componente de terceros y algo relacionado con el chatbot).\nEn cada fila, la justificación debe responder: “¿qué consecuencia concreta tendría perder esa propiedad?”\nCalculad el valor global (el máximo de C, I, D). Si cambia respecto a lo que pusisteis en la sesión 1, marcadlo y explicad por qué. lo es.\n\n\nUna propiedad puede ser Baja y eso no significa que el activo no importe.\nJustificar con el negocio, no con la técnica.### Plantilla\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nID\nActivo\nC\nI\nD\nValor global\nJustificación (qué pasaría)\n¿Cambia respecto a sesión 1?\n\n\n\n\nA01\n\n\n\n\n\n\n\n\n\n…\n\n\n\n\n\n\n\n\n\n\nReglas de oro:\n\nNo pongáis “Alto” en todo. Si todo es crítico, nada",
+    "crumbs": [
+      "📚 Unidades",
+      "3-¿Qué tenemos que proteger?"
+    ]
+  },
+  {
+    "objectID": "unidades/ud3/index.html#b.0-ficha-de-la-sesión",
+    "href": "unidades/ud3/index.html#b.0-ficha-de-la-sesión",
+    "title": "UD3. ¿Qué tenemos que proteger?",
+    "section": "B.0 Ficha de la sesión",
+    "text": "B.0 Ficha de la sesión\n\n\n\n\n\n\n\nUnidad\nUD3 · ¿Qué tenemos que proteger?\n\n\nSesión\n2 de 7 (60 min)\n\n\nTema\nLa tríada CIA y la valoración del impacto\n\n\nFormato\nDinámica participativa + exposición + trabajo en grupos\n\n\nProducto\nInventario de la sesión 1 ampliado con valoración C-I-D y valor global\n\n\nSe reutiliza en\nSesión 3 (impacto en el riesgo), sesión 5 (STRIDE ↔︎ CIA), UD4 (requisitos)\n\n\n\n\nObjetivos de aprendizaje\nAl terminar la sesión, el alumnado será capaz de:\n\nDefinir confidencialidad, integridad y disponibilidad y reconocer cuál se vulnera en un escenario dado.\nEntender que un mismo incidente puede afectar a varias propiedades.\nAsignar a cada activo un perfil CIA razonado (B/M/A).\nJustificar la valoración a partir del impacto en el negocio (operativo, económico, legal, reputacional).\nCalcular el valor global de un activo y revisar valoraciones anteriores. ### Conocimientos previos\n\nEl inventario de la sesión 1. Conviene que hayan terminado, o casi, la tarea de casa.\n\n\nMateriales\n\nLa Parte A proyectada o impresa.\n3 tarjetas por alumno (o por grupo), con C, I y D (papel sirve), para la dinámica de escenarios.\nPlantilla de la actividad (A.8).\nSolucionario (B.5) solo para ti hasta el final.",
+    "crumbs": [
+      "📚 Unidades",
+      "3-¿Qué tenemos que proteger?"
+    ]
+  },
+  {
+    "objectID": "unidades/ud3/index.html#b.1-cronograma",
+    "href": "unidades/ud3/index.html#b.1-cronograma",
+    "title": "UD3. ¿Qué tenemos que proteger?",
+    "section": "B.1 Cronograma",
+    "text": "B.1 Cronograma\n\n\n\n\n\n\n\n\n\nMinutos\nBloque\nQué se hace\nModalidad\n\n\n\n\n0-5\nRepaso y gancho\nRecordar la sesión 1 y plantear “¿se pierden igual todos los activos?”\nDocente\n\n\n5-15\nActivación\nDinámica de tarjetas: “¿qué propiedad se ha roto?”\nParticipativa\n\n\n15-30\nTeoría\nCIA, perfil por activo, impacto, valor global\nDocente + preguntas\n\n\n30-52\nActividad\nValoración CIA del inventario en grupos\nGrupos\n\n\n52-58\nPuesta en común\nComparación, debate y cambios respecto a la sesión 1\nPlenaria\n\n\n58-60\nCierre\nResumen y avance de la sesión 3\nDocente",
+    "crumbs": [
+      "📚 Unidades",
+      "3-¿Qué tenemos que proteger?"
+    ]
+  },
+  {
+    "objectID": "unidades/ud3/index.html#b.2-desarrollo-detallado",
+    "href": "unidades/ud3/index.html#b.2-desarrollo-detallado",
+    "title": "UD3. ¿Qué tenemos que proteger?",
+    "section": "B.2 Desarrollo detallado",
+    "text": "B.2 Desarrollo detallado\n\nB.2.1 Repaso y gancho (0-5 min)\nRepaso rápido (2 min), preguntas orales:\n\n“¿Qué es un activo? Dame uno que no sea técnico.”\n“¿Cuál es la diferencia entre un activo y una amenaza?” Gancho (3 min). Escribe en la pizarra dos activos de TiendaLocal, ambos valorados como “Altos” en la sesión 1:\n\n\nDatos personales de clientes\nDisponibilidad de la web y la API Pregunta: “Los dos son altos. Pero, ¿se pierden de la misma forma? ¿Y duelen igual?”\n\nDeja que debatan 1 minuto. La idea que buscas: uno se “pierde” si lo ve alguien que no debe; el otro, si deja de funcionar. Son tipos de pérdida distintos. Eso es lo que hoy vamos a ordenar.\n\n\nB.2.2 Activación: dinámica de tarjetas (5-15 min)\nObjetivo: que descubran CIA a partir de ejemplos antes de la definición formal.\nMecánica:\n\nCada alumno (o grupo) tiene tres tarjetas: C, I, D.\nLees un escenario. A la de tres, todos levantan la tarjeta de la propiedad que más se ve afectada.\nPreguntas a quien discrepe por qué lo ve distinto. Dedica ~1,5 minutos por escenario. Escenarios y respuestas:\n\n\n\n\n\n\n\n\n\n\n#\nEscenario\nRespuesta principal\nNotas para el debate\n\n\n\n\n1\nUna empleada envía por error el listado de clientes a un destinatario equivocado\nC\nSin mala intención: la confidencialidad también se rompe por error\n\n\n2\nUn atacante cambia el precio de un producto de 50 € a 0,50 €\nI\nLos datos están “ahí”, pero ya no son fiables\n\n\n3\nUn ransomware cifra el servidor y la web está caída tres días\nD\nEs la respuesta principal. Pregunta: “¿y si antes copiaron los datos?” → también C\n\n\n4\nUn empleado curioso consulta los pedidos de un conocido sin necesidad\nC\nTiene acceso técnico, pero no debería verlos: autorización ≠ acceso\n\n\n5\nUn fallo en una migración duplica pedidos en la base de datos\nI\nSin atacante: un error también rompe la integridad\n\n\n6\nEn plena campaña, la API se satura y la web no carga\nD\nPuede ser un ataque (DoS) o un simple exceso de tráfico\n\n\n\nEscenario extra para el debate (si hay tiempo): “Un atacante manipula los logs para borrar su rastro.” → I (se altera el registro) y además se pierde trazabilidad. Sirve para introducir las propiedades adicionales.\nCierre de la dinámica (30 segundos): “Habéis descubierto vosotros las tres propiedades. Ahora les ponemos nombre.”\n\n\nB.2.3 Teoría (15-30 min)\nSigue la Parte A. Guion por tramos:\n\n\n\n\n\n\n\n\nMin\nTramo\nQué hacer\n\n\n\n\n15-19\nA.2 Tríada CIA\nDefine cada propiedad y liga con las tarjetas de la dinámica. Insiste en: confidencialidad ≠ privacidad; integridad incluye errores sin mala fe; ransomware = disponibilidad (y a veces confidencialidad).\n\n\n19-22\nA.3 Perfil por activo\nProyecta la tabla de tres activos y pregunta: “¿Por qué el catálogo tiene C baja?” Deja que lo deduzcan.\n\n\n22-27\nA.4 Impacto y escala\nExplica las cinco dimensiones y la escala. Pon un ejemplo trabajado en pizarra (ver abajo).\n\n\n27-29\nA.4 Valor global\nRegla del máximo y por qué es una simplificación.\n\n\n29-30\nA.5-A.7\nMenciona autenticidad, trazabilidad, controles y LLM sin detenerte.\n\n\n\nEjemplo trabajado para la pizarra (copias de seguridad):\n\nC: contienen todos los datos de clientes. Si se filtran, el impacto es el mismo que filtrar la base de datos → Alta. I: si se alteran o están corruptas, restauraremos datos erróneos sin saberlo → Alta. D: si no existen o no se pueden restaurar tras un incidente, no hay recuperación → Alta. Valor global: Alto.\n\nEs un ejemplo útil porque los tres son altos y porque ilustra que las copias son un activo tan valioso como la propia base de datos.\n\n\n\n\n\n\nWarningTrampa frecuente\n\n\n\nAl explicar la escala, alguien dirá “todo es alto”. Recuérdales la regla de oro: si todo es crítico, no hay prioridades, y sin prioridades no se puede decidir cómo gastar el presupuesto de seguridad.\n\n\nSobre la nota de las siglas: en la bibliografía en español verás “D” o “A” para disponibilidad, y a veces “DIC”. No hace falta que se aprendan todas; basta con que entiendan el concepto.\n\n\nB.2.4 Actividad (30-52 min)\nOrganización: los mismos grupos de la sesión 1.\nConsigna (léela en voz alta):\n\n“Seguís siendo el equipo de seguridad de TiendaLocal. La dirección os pide ahora saber qué activos son los más críticos y por qué. Tomad vuestro inventario y valorad cada activo en C, I y D. Tenéis que valorar al menos 10, incluyendo los cinco obligatorios. Y cuidado: si al pensarlo mejor cambia la importancia de algún activo, anotadlo.”\n\nReparto de tiempo:\n\n\n\n\n\n\n\nMinutos\nQué hacen\n\n\n\n\n30-33\nExplicas la plantilla y comprueban que tienen el inventario de la sesión 1\n\n\n33-48\nValoración en grupo\n\n\n48-52\nRevisión de valor global y marcado de cambios\n\n\n\nQué hacer tú mientras tanto:\nPasa por los grupos y haz preguntas, no des respuestas:\n\n“Si perdéis esa propiedad, ¿qué pasa exactamente, y cuánto os costaría?” (fuerza la justificación)\n“¿Por qué la confidencialidad del catálogo es alta? ¿No es información pública?” (para quien sobrevalora)\n“¿Qué pasaría si alguien cambiara esto sin que os enteraseis?” (para llevarles a la integridad, que suelen olvidar)\n“Si todos los valores son A, ¿cuál protegeríais primero?” (para obligar a priorizar) Pistas si se bloquean:\n\n\nEmpezad por los cinco obligatorios: el solucionario del catálogo, las copias y la disponibilidad ya los tenéis a medias en la tabla A.3.\nPara cada activo, responded tres veces: “¿qué pasa si lo ve quien no debe? ¿Y si alguien lo cambia? ¿Y si no está?”\nNo miréis la técnica: pensad en el negocio. Reto extra para grupos rápidos: identificar un activo en el que las tres dimensiones sean bajas y explicar por qué sigue estando en el inventario.\n\n\n\nB.2.5 Puesta en común (52-58 min)\nDinámica:\n\nCada grupo presenta un activo y su perfil CIA (1 minuto por grupo). Pídeles que elijan el que les haya generado más discusión.\nCompara con el solucionario (B.5) y señala diferencias interesantes.\nPregunta: “¿Qué activos han cambiado de valor respecto a la sesión 1?” Anota los cambios en la pizarra. Lo importante es la reflexión: “¿por qué vuestra visión cambió al mirar la integridad?”\nDebate rápido sobre los intangibles (reputación y RGPD): ¿se valoran con CIA? Ver nota abajo. Mensajes clave:\n\n\nValorar con CIA revela cosas que el primer vistazo no mostraba (por ejemplo, la integridad del código fuente o de las dependencias).\nNo hay una única respuesta correcta: lo importante es que la justificación sea coherente con el negocio.\nLos activos intangibles (reputación, cumplimiento legal) no suelen valorarse con CIA: son más bien consecuencias del impacto. Es una idea que enlaza con la sesión 3. ### B.2.6 Cierre y avance (58-60 min)\n\nResumen en 3 frases:\n\nLa tríada CIA describe las tres maneras clásicas de dañar un activo.\nCada activo tiene su propio perfil CIA, y se valora por el impacto en el negocio.\nEl valor global es el máximo de las tres dimensiones. Avance de la sesión 3:\n\n\n“Ya sabemos qué protegemos y cómo puede dañarse. Nos falta saber quién y cómo puede hacerlo: amenazas, vulnerabilidades y vectores. Y entonces sí hablaremos de riesgo.”\n\nTarea opcional: completar los activos que no hayan llegado a valorar. Para la próxima sesión, pensar un ejemplo cotidiano de amenaza, vulnerabilidad y daño (no tiene por qué ser informático: una casa con una ventana abierta, por ejemplo).",
+    "crumbs": [
+      "📚 Unidades",
+      "3-¿Qué tenemos que proteger?"
+    ]
+  },
+  {
+    "objectID": "unidades/ud3/index.html#b.3-dificultades-previsibles",
+    "href": "unidades/ud3/index.html#b.3-dificultades-previsibles",
+    "title": "UD3. ¿Qué tenemos que proteger?",
+    "section": "B.3 Dificultades previsibles",
+    "text": "B.3 Dificultades previsibles\n\n\n\n\n\n\n\nSituación\nQué hacer\n\n\n\n\nConfunden confidencialidad con privacidad\nAclara que la privacidad es el derecho, y la confidencialidad la propiedad técnica\n\n\nOlvidan la integridad\nPregunta: “¿Y si alguien lo cambia sin que os enteréis?”\n\n\nSolo ven disponibilidad como “DoS”\nPon ejemplos de fallos propios: backup que no restaura, certificado caducado, persona clave ausente\n\n\nTodo es “Alto”\nPide que ordenen los activos del más al menos crítico\n\n\nPonen “Bajo” a algo por considerarlo público\nRecuérdales: público no significa que se pueda alterar (integridad)\n\n\nUn grupo es muy lento\nQue se centren en los cinco obligatorios; los demás pueden quedar de tarea\n\n\nUn grupo termina antes\nReto extra (B.2.4) o que anticipen amenazas para sus 3 activos más críticos\n\n\nVas mal de tiempo\nReduce la dinámica de tarjetas a 4 escenarios y las secciones A.5-A.7 a una mención",
+    "crumbs": [
+      "📚 Unidades",
+      "3-¿Qué tenemos que proteger?"
+    ]
+  },
+  {
+    "objectID": "unidades/ud3/index.html#b.4-evaluación",
+    "href": "unidades/ud3/index.html#b.4-evaluación",
+    "title": "UD3. ¿Qué tenemos que proteger?",
+    "section": "B.4 Evaluación",
+    "text": "B.4 Evaluación\nNo requiere calificación formal. Si quieres evidencias, el inventario valorado forma parte del entregable final de la unidad. Rúbrica sencilla:\n\n\n\n\n\n\n\n\n\nCriterio\nInsuficiente\nSuficiente\nExcelente\n\n\n\n\nAplicación de CIA\nConfunde propiedades\nLas aplica correctamente en su mayoría\nLas aplica con matices (varias propiedades, errores sin mala fe)\n\n\nJustificación\nAusente o técnica\nGenérica pero correcta\nConcreta, con consecuencias para el negocio\n\n\nDiferenciación\nTodo igual (todo A)\nCierta variedad\nPerfiles distintos y coherentes por activo\n\n\nRevisión\nNo detecta cambios\nDetecta algún cambio\nExplica por qué cambia la valoración",
+    "crumbs": [
+      "📚 Unidades",
+      "3-¿Qué tenemos que proteger?"
+    ]
+  },
+  {
+    "objectID": "unidades/ud3/index.html#b.5-solucionario-orientativo",
+    "href": "unidades/ud3/index.html#b.5-solucionario-orientativo",
+    "title": "UD3. ¿Qué tenemos que proteger?",
+    "section": "B.5 Solucionario orientativo",
+    "text": "B.5 Solucionario orientativo\nEscala: Bajo, Medio, Alto. D = disponibilidad. El valor global es el máximo de C, I y D. Una flecha ↑ indica que el valor global sube respecto a la sesión 1.\n\n\n\n\n\n\n\n\n\n\n\n\nID\nActivo\nC\nI\nD\nGlobal\nJustificación resumida\n\n\n\n\nA01\nDatos personales de clientes\nA\nM\nM\nA\nFiltración: sanciones RGPD y pérdida de confianza. La alteración o pérdida temporal son recuperables\n\n\nA02\nPedidos e histórico\nM\nA\nA\nA\nAlterar pedidos ya pagados o perderlos paraliza envíos y facturación\n\n\nA03\nHashes de contraseñas\nA\nA\nM\nA\nSi se filtran o se sustituyen, permiten ataques o toma de cuentas\n\n\nA04\nCatálogo y precios\nB\nM\nM\nM\nEs público. Alterar precios daña, pero se recupera desde backup\n\n\nA05\nLogs de acceso y errores\nM\nA\nB\nA ↑\nSu integridad es clave para investigar incidentes. Si se manipulan, no hay trazabilidad\n\n\nA06\nConversaciones del chatbot\nM\nB\nB\nM\nPueden contener datos personales (sube a Alta si se guarda sin minimizar)\n\n\nA07\nCódigo fuente\nM\nA\nM\nA ↑\nUna modificación maliciosa (puerta trasera) compromete todo el sistema\n\n\nA08\nBinario de la app móvil\nB\nM\nB\nM\nEs público, pero una versión alterada o clonada puede engañar a usuarios\n\n\nA09\nDependencias de terceros\nB\nA\nM\nA ↑\nUna dependencia comprometida afecta a todo el sistema sin que nadie lo vea\n\n\nA10\nDisponibilidad de web y API\nB\nM\nA\nA\nNegocio 100 % online: sin servicio no hay ingresos\n\n\nA11\nPasarela de pago (integración)\nM\nA\nA\nA\nAlterar importes o caída de la pasarela afecta directamente a cobros\n\n\nA12\nServicio de correo transaccional\nM\nM\nB\nM\nSu caída es molesta; los correos contienen datos de pedidos\n\n\nA13\nServidor y contenedores\nA\nA\nA\nA\nSu compromiso da acceso a todo lo demás\n\n\nA14\nCopias de seguridad\nA\nA\nA\nA\nContienen todos los datos; son la última defensa ante un incidente\n\n\nA15\nClaves API\nA\nA\nM\nA\nSu robo da acceso a servicios de pago y con coste económico\n\n\nA16\nCredenciales de administración\nA\nA\nM\nA\nAcceso privilegiado a toda la gestión\n\n\nA17\nCertificado TLS y claves privadas\nA\nA\nM\nA\nSu robo permite suplantar el sitio\n\n\nA18\nPrompt de sistema y herramientas del chatbot\nM\nM\nB\nM\nRevelarlo o manipularlo facilita abusos del chatbot. Subiría si el chatbot pudiera ejecutar acciones sensibles\n\n\nA19\nConocimiento del desarrollador\nM\nB\nA\nA\nSi no está disponible, el sistema es difícil de mantener o recuperar\n\n\nA20\nReputación y confianza\n—\n—\n—\n—\nIntangible: es más una consecuencia del impacto que un activo con perfil CIA\n\n\nA21\nCumplimiento legal (RGPD)\n—\n—\n—\n—\nIdem: aparece como dimensión de impacto en los demás activos\n\n\n\n\nPuntos que conviene destacar\n\nTres activos suben respecto a la sesión 1 (logs, código fuente y dependencias), todos por integridad. Es el ejemplo ideal para decir: “la integridad es la propiedad que más se olvida.”\nLos activos con perfil A-A-A (servidor, copias de seguridad) son puntos únicos de fallo: si se comprometen, caen muchas cosas a la vez.\nEl catálogo es público y aun así es medio: confidencialidad baja no significa “sin importancia”.\nReputación y RGPD no tienen perfil CIA propio: aparecen como justificación del impacto en el resto. Es la conexión natural con la sesión 3.\nValorar disponibilidad de personas (A19) sorprende a muchos alumnos y abre un buen debate.",
+    "crumbs": [
+      "📚 Unidades",
+      "3-¿Qué tenemos que proteger?"
+    ]
+  },
+  {
+    "objectID": "unidades/ud3/index.html#b.6-notas-para-tu-primer-año",
+    "href": "unidades/ud3/index.html#b.6-notas-para-tu-primer-año",
+    "title": "UD3. ¿Qué tenemos que proteger?",
+    "section": "B.6 Notas para tu primer año",
+    "text": "B.6 Notas para tu primer año\n\nEl solucionario es una referencia, no una plantilla de corrección. Un grupo puede defender una valoración distinta con buenos argumentos: déjale hacerlo.\nPrepara tú los 3 activos que más suelen generar discusión: catálogo, logs y código fuente. Si ya tienes tu respuesta argumentada, el debate será más ágil.\nSi la dinámica de tarjetas se va de tiempo, es buena señal: significa que están participando. Recorta la teoría complementaria (A.5-A.7) y retómala en las sesiones siguientes.\nAnticipa la objeción de “¿para qué sirve esto?”. Respuesta preparada: “Porque no se puede proteger todo con el mismo esfuerzo. Esto nos dice dónde poner el esfuerzo primero.”",
+    "crumbs": [
+      "📚 Unidades",
+      "3-¿Qué tenemos que proteger?"
+    ]
+  },
+  {
+    "objectID": "unidades/ud3/index.html#la-tríada-cia",
+    "href": "unidades/ud3/index.html#la-tríada-cia",
+    "title": "UD3. ¿Qué tenemos que proteger?",
+    "section": "La tríada CIA",
+    "text": "La tríada CIA\n\n\n\n\n\n\n\n\nPropiedad\nPregunta clave\nSe pierde cuando…\n\n\n\n\nConfidencialidad\n¿Solo accede quien debe?\nAlguien no autorizado ve o obtiene la información\n\n\nIntegridad\n¿Es correcto y no ha sido alterado?\nAlguien (o algo) modifica o corrompe datos o sistemas sin autorización\n\n\nAvailability (Disponibilidad)\n¿Está accesible cuando se necesita?\nEl activo o servicio no está disponible cuando hace falta\n\n\n\n\n\n\n\n\n\nNoteNota sobre las siglas\n\n\n\nEn inglés es CIA (Confidentiality, Integrity, Availability). En las tablas de este material usaremos C – I – D (D de disponibilidad) para no confundir la “A” de Availability con la “A” de Alto.\n\n\n\nConfidencialidad\n\nIdea: la información solo la ve quien tiene derecho a verla.\nEjemplos en TiendaLocal: que no se filtren los datos de los clientes; que nadie sin permiso lea los pedidos de otro usuario; que las claves API no acaben en un repositorio público.\nOjo: confidencialidad no es lo mismo que privacidad. La privacidad es un derecho de las personas sobre sus datos (y está regulada por el RGPD); la confidencialidad es la propiedad técnica que ayuda a garantizarla.\n\n\n\nIntegridad\n\nIdea: la información y los sistemas son exactos, completos y no han sido modificados sin autorización.\nEjemplos en TiendaLocal: que nadie pueda cambiar el precio de un producto; que un pedido no se altere tras pagarlo; que el código desplegado sea el que se escribió y no uno manipulado; que los logs no se puedan borrar para ocultar un ataque.\nOjo: la integridad también se rompe sin mala intención (un error de migración que duplica pedidos).\n\n\n\nDisponibilidad\n\nIdea: los activos y servicios están accesibles y funcionan cuando se necesitan.\nEjemplos en TiendaLocal: que la web y la API estén operativas; que los backups se puedan restaurar; que el desarrollador freelance esté localizable si algo falla.\nOjo: un ransomware es, ante todo, un ataque a la disponibilidad (cifra los datos para que no se puedan usar), aunque a menudo también compromete la confidencialidad (si antes los roba).\n\n\n\nUn mismo incidente puede afectar a varias propiedades\nLos incidentes reales rara vez rompen solo una propiedad. Por eso la tríada se aplica a cada activo por separado, y se piensa en las tres dimensiones.",
+    "crumbs": [
+      "📚 Unidades",
+      "3-¿Qué tenemos que proteger?"
+    ]
+  },
+  {
+    "objectID": "unidades/ud3/index.html#cada-activo-tiene-su-propio-perfil-cia",
+    "href": "unidades/ud3/index.html#cada-activo-tiene-su-propio-perfil-cia",
+    "title": "UD3. ¿Qué tenemos que proteger?",
+    "section": "Cada activo tiene su propio perfil CIA",
+    "text": "Cada activo tiene su propio perfil CIA\nDos activos del mismo valor global pueden tener perfiles muy distintos:\n\n\n\n\n\n\n\n\n\n\nActivo\nC\nI\nD\nPor qué\n\n\n\n\nCatálogo de productos (público)\nB\nM\nM\nEs información pública, pero si se altera (precios) o se cae, hay pérdidas\n\n\nDatos personales de clientes\nA\nM\nM\nSu filtración tiene consecuencias legales y reputacionales graves\n\n\nDisponibilidad de la web/API\nB\nM\nA\nNo contiene secretos, pero sin ella no hay negocio\n\n\n\nLección: no hay un único “nivel de seguridad”. Se protege cada activo según la propiedad que más le importa.",
+    "crumbs": [
+      "📚 Unidades",
+      "3-¿Qué tenemos que proteger?"
+    ]
+  },
+  {
+    "objectID": "unidades/ud3/index.html#cómo-se-valora-el-impacto",
+    "href": "unidades/ud3/index.html#cómo-se-valora-el-impacto",
+    "title": "UD3. ¿Qué tenemos que proteger?",
+    "section": "Cómo se valora: el impacto",
+    "text": "Cómo se valora: el impacto\nPara decidir si una propiedad es Baja (B), Media (M) o Alta (A) para un activo, hay que preguntarse: si se pierde esta propiedad, ¿qué consecuencias tiene para el negocio?\nLas consecuencias se miden en varias dimensiones de impacto:\n\n\n\n\n\n\n\nDimensión\nPregunta\n\n\n\n\nOperativo\n¿Se para el negocio? ¿Durante cuánto tiempo?\n\n\nEconómico\n¿Cuánto dinero se pierde o cuesta recuperarse?\n\n\nLegal\n¿Hay incumplimiento normativo (RGPD…) o sanciones?\n\n\nReputacional\n¿Se pierde la confianza de clientes y socios?\n\n\nPersonas\n¿Se daña a las personas (por ejemplo, exposición de datos sensibles)?\n\n\n\n\nEscala de valoración\n\n\n\n\n\n\n\nNivel\nCriterio orientativo\n\n\n\n\nAlto (A)\nConsecuencias graves: parada prolongada del negocio, sanciones relevantes, daño serio a la reputación o a las personas. Difícilmente recuperable.\n\n\nMedio (M)\nConsecuencias importantes pero asumibles: molestias, costes, pérdida temporal de ventas. Recuperable con esfuerzo.\n\n\nBajo (B)\nConsecuencias menores: sin efecto relevante en el negocio. Fácilmente recuperable.\n\n\n\n\n\nValor global del activo\nPara simplificar, el valor global de un activo es el más alto de sus tres dimensiones (C, I, D). Si una sola dimensión es crítica, el activo es crítico.\n\n\n\n\n\n\nTipEjemplo real de esta lógica\n\n\n\nEl Esquema Nacional de Seguridad (ENS) trabaja con cinco dimensiones (confidencialidad, integridad, disponibilidad, autenticidad y trazabilidad) y categoriza un sistema según el nivel más alto de sus dimensiones.",
+    "crumbs": [
+      "📚 Unidades",
+      "3-¿Qué tenemos que proteger?"
+    ]
+  },
+  {
+    "objectID": "unidades/ud3/index.html#más-allá-de-la-tríada-mención-breve",
+    "href": "unidades/ud3/index.html#más-allá-de-la-tríada-mención-breve",
+    "title": "UD3. ¿Qué tenemos que proteger?",
+    "section": "Más allá de la tríada (mención breve)",
+    "text": "Más allá de la tríada (mención breve)\n\n\n\n\n\n\n\nPropiedad\nIdea\n\n\n\n\nAutenticidad\nSaber que quien dice ser alguien realmente lo es (o que un dato proviene de quien dice)\n\n\nTrazabilidad / no repudio\nPoder demostrar quién hizo qué y cuándo, sin que se pueda negar\n\n\n\nLas tendremos presentes más adelante (en STRIDE aparecen directamente).",
+    "crumbs": [
+      "📚 Unidades",
+      "3-¿Qué tenemos que proteger?"
+    ]
+  },
+  {
+    "objectID": "unidades/ud3/index.html#más-allá-de-la-tríada",
+    "href": "unidades/ud3/index.html#más-allá-de-la-tríada",
+    "title": "UD3. ¿Qué tenemos que proteger?",
+    "section": "Más allá de la tríada",
+    "text": "Más allá de la tríada\n\n\n\n\n\n\n\nPropiedad\nIdea\n\n\n\n\nAutenticidad\nSaber que quien dice ser alguien realmente lo es (o que un dato proviene de quien dice)\n\n\nTrazabilidad\nPoder demostrar quién hizo qué y cuándo, sin que se pueda negar\n\n\n\nLas tendremos presentes más adelante.",
+    "crumbs": [
+      "📚 Unidades",
+      "3-¿Qué tenemos que proteger?"
+    ]
+  },
+  {
+    "objectID": "unidades/ud3/index.html#primer-vistazo-a-los-controles",
+    "href": "unidades/ud3/index.html#primer-vistazo-a-los-controles",
+    "title": "UD3. ¿Qué tenemos que proteger?",
+    "section": "Primer vistazo a los controles",
+    "text": "Primer vistazo a los controles\nCada propiedad se protege con medidas distintas. Los veremos con detalle más adelante; de momento, para que te hagas una idea:\n\n\n\n\n\n\n\nPropiedad\nEjemplos de medidas\n\n\n\n\nConfidencialidad\nCifrado, control de acceso, principio de mínimo privilegio, gestión de secretos\n\n\nIntegridad\nValidación de entradas, hashes y firmas, control de versiones, registros de auditoría\n\n\nDisponibilidad\nCopias de seguridad, redundancia, monitorización, límites de uso (rate limiting)",
+    "crumbs": [
+      "📚 Unidades",
+      "3-¿Qué tenemos que proteger?"
+    ]
+  },
+  {
+    "objectID": "unidades/ud3/index.html#caso-de-aplicaciones-con-llm",
+    "href": "unidades/ud3/index.html#caso-de-aplicaciones-con-llm",
+    "title": "UD3. ¿Qué tenemos que proteger?",
+    "section": "Caso de aplicaciones con LLM",
+    "text": "Caso de aplicaciones con LLM\nEl chatbot de TiendaLocal también tiene perfil CIA:\n\nConfidencialidad: que no revele información de otros clientes ni su propio prompt de sistema.\nIntegridad: que no pueda ser manipulado para que actúe de forma no prevista (por ejemplo, mediante instrucciones maliciosas en un mensaje).\nDisponibilidad: que no se pueda agotar su uso o su coste.",
+    "crumbs": [
+      "📚 Unidades",
+      "3-¿Qué tenemos que proteger?"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud3/lab1.html#valoración-cia-del-inventario",
+    "href": "laboratorios/ud3/lab1.html#valoración-cia-del-inventario",
+    "title": "UD3 · Lab 1 · Inventario de activos",
+    "section": "Valoración CIA del inventario",
+    "text": "Valoración CIA del inventario\n\nValorad al menos 10 activos.\nSon obligatorios estos cinco:\n\nDatos personales de clientes\nCatálogo de productos y precios\nCopias de seguridad\nClaves API\nDisponibilidad de la web y la API\n\nElegid otros cinco libremente (recomendado: incluid un secreto, un componente de terceros y algo relacionado con el chatbot).\nEn cada fila, la justificación debe responder: “¿qué consecuencia concreta tendría perder esa propiedad?”\nCalculad el valor global (el máximo de C, I, D). Si cambia respecto a lo que pusisteis en la tabla anterior, marcadlo y explicad por qué.\n\n\nPlantilla\n\n\n\n\n\n\n\n\n\n\n\n\n\nID\nActivo\nC\nI\nD\nValor global\nJustificación (qué pasaría)\n¿Cambia respecto a sesión 1?\n\n\n\n\nA01\n\n\n\n\n\n\n\n\n\n…\n\n\n\n\n\n\n\n\n\n\nReglas de oro:\n\nNo pongáis “Alto” en todo. Si todo es crítico, nada lo es.\nUna propiedad puede ser Baja y eso no significa que el activo no importe.\nJustificar con el negocio, no con la técnica.\n\n\n\n\n\n\n\nImportantSolucionario orientativo (solo docente)\n\n\n\nEste inventario no es el único posible. Úsalo como referencia, no como plantilla de corrección.\n\n\n\n\n\n\n\n\n\n\n\n\nID\nActivo\nCategoría\nUbicación\nPropietario\nValor\nJustificación\n\n\n\n\nA01\nDatos personales de clientes\nInformación\nBase de datos\nPropietaria\nAlto\nObligación legal (RGPD), sanciones y pérdida de confianza si se filtran\n\n\nA02\nPedidos e histórico de ventas\nInformación\nBase de datos\nPropietaria\nAlto\nEs la actividad del negocio; su pérdida impide gestionar envíos y facturación\n\n\nA03\nHashes de contraseñas\nCredenciales\nBase de datos\nDesarrollador\nAlto\nSi se filtran, facilitan ataques de fuerza bruta y reutilización en otros servicios\n\n\nA04\nCatálogo de productos y precios\nInformación\nBase de datos\nPropietaria\nMedio\nSu alteración causaría pérdidas (precios erróneos) pero es recuperable desde backup\n\n\nA05\nLogs de acceso y errores\nInformación\nServidor\nDesarrollador\nMedio\nImprescindibles para investigar incidentes; pueden contener datos personales\n\n\nA06\nConversaciones del chatbot\nInformación\nServicio LLM / BD\nPropietaria\nMedio\nPueden contener datos personales y consultas sensibles de clientes\n\n\nA07\nCódigo fuente (web, API, app)\nSoftware\nGitHub\nDesarrollador\nMedio-Alto\nPropiedad intelectual y vía para descubrir vulnerabilidades\n\n\nA08\nBinario de la app móvil\nSoftware\nTiendas de apps\nDesarrollador\nMedio\nPuede ser analizado o falsificado (app clonada con malware)\n\n\nA09\nDependencias de terceros\nSoftware\nRepositorio\nDesarrollador\nMedio\nUna librería comprometida afecta a toda la aplicación\n\n\nA10\nDisponibilidad de la web y la API\nServicios\nServidor\nPropietaria\nAlto\nSin servicio no hay ventas; el negocio es 100 % online\n\n\nA11\nPasarela de pago (integración)\nServicios\nTercero\nPropietaria\nAlto\nSu alteración o fallo afecta directamente al ingreso y a la confianza\n\n\nA12\nServicio de correo transaccional\nServicios\nTercero\nDesarrollador\nBajo-Medio\nSu caída es molesta, pero no para el negocio\n\n\nA13\nServidor y contenedores\nInfraestructura\nCloud\nDesarrollador\nAlto\nEs donde reside todo el sistema; su compromiso da acceso a todo lo demás\n\n\nA14\nCopias de seguridad\nInformación / Infra.\nAlmacenamiento externo\nDesarrollador\nAlto\nÚltima defensa ante pérdida o ransomware; si están comprometidas, no hay recuperación\n\n\nA15\nClaves API (pasarela, correo, LLM)\nSecretos\nVariables de entorno / repo\nDesarrollador\nAlto\nDan acceso a servicios de pago y con coste económico directo\n\n\nA16\nCredenciales de administración del panel\nCredenciales\nPersonas / BD\nPropietaria\nAlto\nAcceso privilegiado a toda la gestión del negocio\n\n\nA17\nCertificado TLS y claves privadas\nSecretos\nServidor\nDesarrollador\nAlto\nSu robo permite suplantación del sitio\n\n\nA18\nPrompt de sistema y herramientas del chatbot\nSoftware / IA\nConfiguración LLM\nDesarrollador\nMedio\nSu exposición o manipulación puede permitir que el chatbot actúe de forma no prevista\n\n\nA19\nConocimiento del desarrollador freelance\nPersonas\nUna sola persona\nPropietaria\nMedio-Alto\nDependencia de una única persona (factor “bus”): si no está, el sistema es difícil de mantener\n\n\nA20\nReputación y confianza de clientes\nIntangibles\n—\nPropietaria\nAlto\nCon 5.000 clientes y negocio 100 % online, la confianza es el principal valor\n\n\nA21\nCumplimiento legal (RGPD)\nIntangibles\n—\nPropietaria\nAlto\nUna infracción conlleva sanciones económicas y daño reputacional\n\n\n\nPuntos que conviene destacar al comentarlo con la clase:\n\nLos hashes de contraseñas y los secretos son activos que muchos grupos olvidan.\nLa disponibilidad es un activo en sí mismo en un negocio 100 % online.\nLos datos de tarjeta no aparecen porque la pasarela los gestiona: es una decisión de diseño que reduce el inventario de activos propios. Es un buen ejemplo de “menos activos que proteger = menos riesgo”.\nLos activos intangibles (reputación, legalidad) justifican la inversión en seguridad ante la dirección.\nLa dependencia de una persona es un riesgo organizativo real, aunque no sea técnico.",
     "crumbs": [
       "🧪 Laboratorios",
       "UD3",

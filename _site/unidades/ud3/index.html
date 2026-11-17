@@ -310,6 +310,25 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#activo-amenaza-vulnerabilidad-riesgo-adelanto" id="toc-activo-amenaza-vulnerabilidad-riesgo-adelanto" class="nav-link" data-scroll-target="#activo-amenaza-vulnerabilidad-riesgo-adelanto">Activo ≠ amenaza ≠ vulnerabilidad ≠ riesgo (adelanto)</a></li>
   <li><a href="#casos-reales" id="toc-casos-reales" class="nav-link" data-scroll-target="#casos-reales">Casos reales</a></li>
   </ul></li>
+  <li><a href="#cia-y-valor-del-activo" id="toc-cia-y-valor-del-activo" class="nav-link" data-scroll-target="#cia-y-valor-del-activo">🌩 CIA y valor del activo</a>
+  <ul class="collapse">
+  <li><a href="#la-tríada-cia" id="toc-la-tríada-cia" class="nav-link" data-scroll-target="#la-tríada-cia">La tríada CIA</a>
+  <ul class="collapse">
+  <li><a href="#confidencialidad" id="toc-confidencialidad" class="nav-link" data-scroll-target="#confidencialidad">Confidencialidad</a></li>
+  <li><a href="#integridad" id="toc-integridad" class="nav-link" data-scroll-target="#integridad">Integridad</a></li>
+  <li><a href="#disponibilidad" id="toc-disponibilidad" class="nav-link" data-scroll-target="#disponibilidad">Disponibilidad</a></li>
+  <li><a href="#un-mismo-incidente-puede-afectar-a-varias-propiedades" id="toc-un-mismo-incidente-puede-afectar-a-varias-propiedades" class="nav-link" data-scroll-target="#un-mismo-incidente-puede-afectar-a-varias-propiedades">Un mismo incidente puede afectar a varias propiedades</a></li>
+  </ul></li>
+  <li><a href="#cada-activo-tiene-su-propio-perfil-cia" id="toc-cada-activo-tiene-su-propio-perfil-cia" class="nav-link" data-scroll-target="#cada-activo-tiene-su-propio-perfil-cia">Cada activo tiene su propio perfil CIA</a></li>
+  <li><a href="#cómo-se-valora-el-impacto" id="toc-cómo-se-valora-el-impacto" class="nav-link" data-scroll-target="#cómo-se-valora-el-impacto">Cómo se valora: el impacto</a>
+  <ul class="collapse">
+  <li><a href="#escala-de-valoración" id="toc-escala-de-valoración" class="nav-link" data-scroll-target="#escala-de-valoración">Escala de valoración</a></li>
+  <li><a href="#valor-global-del-activo" id="toc-valor-global-del-activo" class="nav-link" data-scroll-target="#valor-global-del-activo">Valor global del activo</a></li>
+  </ul></li>
+  <li><a href="#más-allá-de-la-tríada" id="toc-más-allá-de-la-tríada" class="nav-link" data-scroll-target="#más-allá-de-la-tríada">Más allá de la tríada</a></li>
+  <li><a href="#primer-vistazo-a-los-controles" id="toc-primer-vistazo-a-los-controles" class="nav-link" data-scroll-target="#primer-vistazo-a-los-controles">Primer vistazo a los controles</a></li>
+  <li><a href="#caso-de-aplicaciones-con-llm" id="toc-caso-de-aplicaciones-con-llm" class="nav-link" data-scroll-target="#caso-de-aplicaciones-con-llm">Caso de aplicaciones con LLM</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -628,6 +647,285 @@ Important
 <p>El ransomware es un tipo de malware (software malicioso) que secuestra los datos o el dispositivo de una víctima y exige el pago de un rescate económico para devolver el acceso</p>
 </div>
 </div>
+</section>
+</section>
+<section id="cia-y-valor-del-activo" class="level1">
+<h1>🌩 CIA y valor del activo</h1>
+<blockquote class="blockquote">
+<p><strong>¿De qué manera puede dañarse cada activo y cuánto importa cada una de esas maneras?</strong></p>
+</blockquote>
+<p>No todos los activos “valiosos” se pierden igual ni duelen igual. Para razonarlo con orden usamos un modelo clásico: la <strong>tríada CIA</strong>.</p>
+<section id="la-tríada-cia" class="level2">
+<h2 class="anchored" data-anchor-id="la-tríada-cia">La tríada CIA</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Propiedad</th>
+<th>Pregunta clave</th>
+<th>Se pierde cuando…</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>C</strong>onfidencialidad</td>
+<td>¿Solo accede quien debe?</td>
+<td>Alguien no autorizado <strong>ve</strong> o <strong>obtiene</strong> la información</td>
+</tr>
+<tr class="even">
+<td><strong>I</strong>ntegridad</td>
+<td>¿Es correcto y no ha sido alterado?</td>
+<td>Alguien (o algo) <strong>modifica</strong> o <strong>corrompe</strong> datos o sistemas sin autorización</td>
+</tr>
+<tr class="odd">
+<td><strong>A</strong>vailability (<strong>D</strong>isponibilidad)</td>
+<td>¿Está accesible cuando se necesita?</td>
+<td>El activo o servicio <strong>no está disponible</strong> cuando hace falta</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Nota sobre las siglas
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>En inglés es <strong>CIA</strong> (<em>Confidentiality, Integrity, Availability</em>). En las tablas de este material usaremos <strong>C – I – D</strong> (D de disponibilidad) para no confundir la “A” de <em>Availability</em> con la “A” de <em>Alto</em>.</p>
+</div>
+</div>
+<section id="confidencialidad" class="level3">
+<h3 class="anchored" data-anchor-id="confidencialidad">Confidencialidad</h3>
+<ul>
+<li><strong>Idea:</strong> la información solo la ve quien tiene derecho a verla.</li>
+<li><strong>Ejemplos en TiendaLocal:</strong> que no se filtren los datos de los clientes; que nadie sin permiso lea los pedidos de otro usuario; que las claves API no acaben en un repositorio público.</li>
+<li><strong>Ojo:</strong> confidencialidad no es lo mismo que <em>privacidad</em>. La privacidad es un derecho de las personas sobre sus datos (y está regulada por el RGPD); la confidencialidad es la propiedad técnica que ayuda a garantizarla.</li>
+</ul>
+</section>
+<section id="integridad" class="level3">
+<h3 class="anchored" data-anchor-id="integridad">Integridad</h3>
+<ul>
+<li><strong>Idea:</strong> la información y los sistemas son exactos, completos y no han sido modificados sin autorización.</li>
+<li><strong>Ejemplos en TiendaLocal:</strong> que nadie pueda cambiar el precio de un producto; que un pedido no se altere tras pagarlo; que el código desplegado sea el que se escribió y no uno manipulado; que los logs no se puedan borrar para ocultar un ataque.</li>
+<li><strong>Ojo:</strong> la integridad también se rompe <strong>sin mala intención</strong> (un error de migración que duplica pedidos).</li>
+</ul>
+</section>
+<section id="disponibilidad" class="level3">
+<h3 class="anchored" data-anchor-id="disponibilidad">Disponibilidad</h3>
+<ul>
+<li><strong>Idea:</strong> los activos y servicios están accesibles y funcionan cuando se necesitan.</li>
+<li><strong>Ejemplos en TiendaLocal:</strong> que la web y la API estén operativas; que los backups se puedan restaurar; que el desarrollador freelance esté localizable si algo falla.</li>
+<li><strong>Ojo:</strong> un <strong>ransomware</strong> es, ante todo, un ataque a la disponibilidad (cifra los datos para que no se puedan usar), aunque a menudo también compromete la confidencialidad (si antes los roba).</li>
+</ul>
+</section>
+<section id="un-mismo-incidente-puede-afectar-a-varias-propiedades" class="level3">
+<h3 class="anchored" data-anchor-id="un-mismo-incidente-puede-afectar-a-varias-propiedades">Un mismo incidente puede afectar a varias propiedades</h3>
+<p>Los incidentes reales rara vez rompen solo una propiedad. Por eso la tríada se aplica <strong>a cada activo por separado</strong>, y se piensa en las tres dimensiones.</p>
+</section>
+</section>
+<section id="cada-activo-tiene-su-propio-perfil-cia" class="level2">
+<h2 class="anchored" data-anchor-id="cada-activo-tiene-su-propio-perfil-cia">Cada activo tiene su propio perfil CIA</h2>
+<p>Dos activos del mismo valor global pueden tener perfiles muy distintos:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Activo</th>
+<th>C</th>
+<th>I</th>
+<th>D</th>
+<th>Por qué</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Catálogo de productos (público)</td>
+<td>B</td>
+<td>M</td>
+<td>M</td>
+<td>Es información pública, pero si se altera (precios) o se cae, hay pérdidas</td>
+</tr>
+<tr class="even">
+<td>Datos personales de clientes</td>
+<td>A</td>
+<td>M</td>
+<td>M</td>
+<td>Su filtración tiene consecuencias legales y reputacionales graves</td>
+</tr>
+<tr class="odd">
+<td>Disponibilidad de la web/API</td>
+<td>B</td>
+<td>M</td>
+<td>A</td>
+<td>No contiene secretos, pero sin ella no hay negocio</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Lección:</strong> no hay un único “nivel de seguridad”. Se protege cada activo <strong>según la propiedad que más le importa</strong>.</p>
+</section>
+<section id="cómo-se-valora-el-impacto" class="level2">
+<h2 class="anchored" data-anchor-id="cómo-se-valora-el-impacto">Cómo se valora: el impacto</h2>
+<p>Para decidir si una propiedad es <strong>Baja (B)</strong>, <strong>Media (M)</strong> o <strong>Alta (A)</strong> para un activo, hay que preguntarse: <strong>si se pierde esta propiedad, ¿qué consecuencias tiene para el negocio?</strong></p>
+<p>Las consecuencias se miden en varias dimensiones de impacto:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Dimensión</th>
+<th>Pregunta</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Operativo</strong></td>
+<td>¿Se para el negocio? ¿Durante cuánto tiempo?</td>
+</tr>
+<tr class="even">
+<td><strong>Económico</strong></td>
+<td>¿Cuánto dinero se pierde o cuesta recuperarse?</td>
+</tr>
+<tr class="odd">
+<td><strong>Legal</strong></td>
+<td>¿Hay incumplimiento normativo (RGPD…) o sanciones?</td>
+</tr>
+<tr class="even">
+<td><strong>Reputacional</strong></td>
+<td>¿Se pierde la confianza de clientes y socios?</td>
+</tr>
+<tr class="odd">
+<td><strong>Personas</strong></td>
+<td>¿Se daña a las personas (por ejemplo, exposición de datos sensibles)?</td>
+</tr>
+</tbody>
+</table>
+<section id="escala-de-valoración" class="level3">
+<h3 class="anchored" data-anchor-id="escala-de-valoración">Escala de valoración</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Nivel</th>
+<th>Criterio orientativo</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Alto (A)</strong></td>
+<td>Consecuencias <strong>graves</strong>: parada prolongada del negocio, sanciones relevantes, daño serio a la reputación o a las personas. Difícilmente recuperable.</td>
+</tr>
+<tr class="even">
+<td><strong>Medio (M)</strong></td>
+<td>Consecuencias <strong>importantes pero asumibles</strong>: molestias, costes, pérdida temporal de ventas. Recuperable con esfuerzo.</td>
+</tr>
+<tr class="odd">
+<td><strong>Bajo (B)</strong></td>
+<td>Consecuencias <strong>menores</strong>: sin efecto relevante en el negocio. Fácilmente recuperable.</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="valor-global-del-activo" class="level3">
+<h3 class="anchored" data-anchor-id="valor-global-del-activo">Valor global del activo</h3>
+<p>Para simplificar, el <strong>valor global</strong> de un activo es el <strong>más alto</strong> de sus tres dimensiones (C, I, D). Si una sola dimensión es crítica, el activo es crítico.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Ejemplo real de esta lógica
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>El Esquema Nacional de Seguridad (ENS) trabaja con cinco dimensiones (confidencialidad, integridad, disponibilidad, autenticidad y trazabilidad) y categoriza un sistema según el nivel más alto de sus dimensiones.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="más-allá-de-la-tríada" class="level2">
+<h2 class="anchored" data-anchor-id="más-allá-de-la-tríada">Más allá de la tríada</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Propiedad</th>
+<th>Idea</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Autenticidad</strong></td>
+<td>Saber que quien dice ser alguien realmente lo es (o que un dato proviene de quien dice)</td>
+</tr>
+<tr class="even">
+<td><strong>Trazabilidad</strong></td>
+<td>Poder demostrar <strong>quién hizo qué y cuándo</strong>, sin que se pueda negar</td>
+</tr>
+</tbody>
+</table>
+<p>Las tendremos presentes más adelante.</p>
+</section>
+<section id="primer-vistazo-a-los-controles" class="level2">
+<h2 class="anchored" data-anchor-id="primer-vistazo-a-los-controles">Primer vistazo a los controles</h2>
+<p>Cada propiedad se protege con medidas distintas. Los veremos con detalle más adelante; de momento, para que te hagas una idea:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Propiedad</th>
+<th>Ejemplos de medidas</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Confidencialidad</strong></td>
+<td>Cifrado, control de acceso, principio de mínimo privilegio, gestión de secretos</td>
+</tr>
+<tr class="even">
+<td><strong>Integridad</strong></td>
+<td>Validación de entradas, hashes y firmas, control de versiones, registros de auditoría</td>
+</tr>
+<tr class="odd">
+<td><strong>Disponibilidad</strong></td>
+<td>Copias de seguridad, redundancia, monitorización, límites de uso (<em>rate limiting</em>)</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="caso-de-aplicaciones-con-llm" class="level2">
+<h2 class="anchored" data-anchor-id="caso-de-aplicaciones-con-llm">Caso de aplicaciones con LLM</h2>
+<p>El chatbot de TiendaLocal también tiene perfil CIA:</p>
+<ul>
+<li><strong>Confidencialidad:</strong> que no revele información de otros clientes ni su propio <em>prompt</em> de sistema.</li>
+<li><strong>Integridad:</strong> que no pueda ser manipulado para que actúe de forma no prevista (por ejemplo, mediante instrucciones maliciosas en un mensaje).</li>
+<li><strong>Disponibilidad:</strong> que no se pueda agotar su uso o su coste.</li>
+</ul>
+<hr>
 
 
 </section>
