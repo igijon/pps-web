@@ -242,3 +242,141 @@ El chatbot de TiendaLocal también tiene perfil CIA:
   
 ---
  
+# 🐭 Amenazas, vulnerabilidades, vectores y riesgo
+
+Ya sabemos **qué** protegemos y **de qué maneras puede dañarse** cada uno. Hoy respondemos a dos preguntas nuevas:
+
+- **¿Quién o qué puede dañarlo, y cómo?** → amenazas, vulnerabilidades y vectores.
+- **¿Cuánto debería preocuparnos?** → probabilidad, impacto y riesgo.
+
+Estas palabras se usan a menudo como si fueran sinónimas y **no lo son**. Una gran parte de los errores en análisis de riesgos empieza por mezclarlas. Hoy aprendemos a distinguirlas.
+
+## Vocabulario
+
+| Término | Definición | Ejemplo en TiendaLocal |
+|---|---|---|
+| **Activo** | Lo que tiene valor y hay que proteger | La base de datos de clientes |
+| **Amenaza** | Causa potencial de un incidente que puede dañar un activo | Un atacante que quiere robar datos |
+| **Actor de amenaza** | Quién (o qué) está detrás de la amenaza | Un grupo cibercriminal, un empleado descontento… |
+| **Vulnerabilidad** | Debilidad de un activo o de sus protecciones que una amenaza puede aprovechar | Una consulta SQL construida concatenando texto |
+| **Vector de ataque** | El camino o medio por el que la amenaza alcanza la vulnerabilidad | El campo de búsqueda de la web |
+| **Exploit** | Técnica o código que aprovecha una vulnerabilidad concreta | Una entrada diseñada para manipular la consulta SQL |
+| **Incidente** | La amenaza que se materializa y daña un activo | Se filtran los datos de los clientes |
+| **Impacto** | Consecuencia del incidente para el negocio | Sanción RGPD, pérdida de confianza |
+| **Probabilidad** | Cuán posible es que el incidente ocurra | Alta: la web está expuesta a internet y la vulnerabilidad es fácil de explotar |
+| **Riesgo** | Combinación de probabilidad e impacto | Alto |
+| **Control** | Medida que reduce la probabilidad o el impacto | Consultas parametrizadas, WAF (Web Application Firewall), copias de seguridad |
+
+## La cadena del ataque
+
+Los términos se encadenan así:
+
+```
+ ACTOR DE AMENAZA ──usa un──▶ VECTOR ──para explotar una──▶ VULNERABILIDAD
+                                                                   │
+                                                                   ▼
+          IMPACTO ◀──consecuencia── INCIDENTE ◀──daña── ACTIVO (C / I / D)
+```
+
+Una forma práctica de recordarlo: **¿quién? → ¿por dónde? → ¿qué debilidad? → ¿qué se daña? → ¿qué consecuencias?**
+
+::: {.callout-note}
+## Sin una pieza, no hay riesgo (o es muy bajo)
+- **Sin activo:** no hay nada que perder.
+- **Sin amenaza:** nadie ni nada tiene interés o capacidad de dañarlo.
+- **Sin vulnerabilidad:** no hay debilidad que aprovechar.
+
+El riesgo aparece cuando coinciden las tres cosas.
+:::
+
+## Tipos de amenazas y actores
+
+Una amenaza **no siempre es un atacante** con mala intención.
+
+| Origen | Ejemplos |
+|---|---|
+| **Humana intencionada** | Cibercriminales, hacktivistas, competidores, empleados descontentos (*insiders*), actores estatales |
+| **Humana no intencionada** | Errores de configuración, borrados accidentales, envío de datos al destinatario equivocado |
+| **Técnica** | Fallos de hardware o software, caídas de servicios de terceros |
+| **Entorno** | Incendio, inundación, corte de suministro eléctrico |
+
+Para valorar la probabilidad, de cada actor interesa su **motivación** (¿qué gana?) y su **capacidad** (¿puede hacerlo?). Un ataque automatizado que prueba contraseñas contra miles de webs no necesita tener motivos concretos contra TiendaLocal: le basta con que esté expuesta.
+
+## Tipos de vulnerabilidades
+
+| Tipo | Qué es | Ejemplo |
+|---|---|---|
+| **De código** | Errores en el software | Inyección SQL, falta de validación de entradas |
+| **De diseño** | La arquitectura no incluye una protección necesaria | Un endpoint sin comprobar a quién pertenece el pedido |
+| **De configuración** | Ajustes inseguros | Credenciales por defecto, puertos abiertos sin necesidad |
+| **De componentes** | Software de terceros con fallos conocidos | Una librería sin actualizar |
+| **De procesos y personas** | Faltan procedimientos o formación | Sin autenticación en dos pasos, sin formación contra el *phishing* |
+
+::: {.callout-tip}
+## Tres siglas que conviene conocer
+- **CVE:** identificador público de una vulnerabilidad **concreta** (por ejemplo, un fallo en una versión de una librería).
+- **CWE:** catálogo de **tipos de debilidad** (por ejemplo, "inyección SQL").
+- **CVSS:** sistema para **puntuar la gravedad técnica** de una vulnerabilidad.
+
+Ojo: una puntuación CVSS alta **no equivale a riesgo alto para tu negocio**. Depende de tu activo, de si el componente está expuesto y de los controles que tengas.
+:::
+
+## Vectores de ataque frecuentes
+
+| Vector | Descripción |
+|---|---|
+| **Formularios y campos de entrada** | Búsquedas, login, registro, comentarios |
+| **API expuesta** | Endpoints accesibles desde internet |
+| **Credenciales robadas o reutilizadas** | Contraseñas filtradas en otros servicios |
+| **Ingeniería social** | *Phishing*, suplantación de proveedores |
+| **Cadena de suministro** | Dependencias o herramientas de terceros comprometidas |
+| **Repositorios y pipelines** | Secretos subidos por error, acceso a CI/CD |
+| **Acceso físico o interno** | Equipo robado, empleado con acceso excesivo |
+| **Interfaz de lenguaje natural** | Mensajes maliciosos a un chatbot (*prompt injection*) |
+
+El conjunto de todos los vectores posibles de una aplicación forma su **superficie de ataque**. La estudiaremos en la próxima sesión.
+
+## De impacto y probabilidad a riesgo
+
+### Impacto
+
+Impacto: es el **valor de la propiedad CIA** que se vería afectada. Si el incidente rompe la confidencialidad de un activo con C = Alta, el impacto es **Alto**.
+
+### Probabilidad
+
+Se estima con preguntas como:
+
+| Factor | Pregunta |
+|---|---|
+| **Actor** | ¿Hay quien tenga motivación y capacidad? |
+| **Exposición** | ¿Está accesible desde internet o solo desde dentro? |
+| **Facilidad** | ¿Es fácil de explotar? ¿Existe un exploit público? |
+| **Controles** | ¿Qué protecciones existen ya? |
+| **Historial** | ¿Es un ataque frecuente? |
+
+### Matriz de riesgo 3×3
+
+Asignamos **B = 1, M = 2, A = 3** y multiplicamos:
+
+| Probabilidad \ Impacto | **B** | **M** | **A** |
+|---|---|---|---|
+| **A** | 3 (Medio) | 6 (Alto) | 9 (Alto) |
+| **M** | 2 (Bajo) | 4 (Medio) | 6 (Alto) |
+| **B** | 1 (Bajo) | 2 (Bajo) | 3 (Medio) |
+
+**Niveles:** 1-2 → **Bajo**; 3-4 → **Medio**; 6-9 → **Alto**.
+
+::: {.callout-warning}
+## Una matriz es una simplificación
+Con solo tres niveles habrá muchos riesgos "empatados". Después aprenderemos a priorizar con más criterio. Por ahora, la matriz nos sirve para **ordenar ideas**, no para dar sentencias definitivas.
+:::
+
+## Qué se hace con un riesgo (adelanto)
+
+Una vez valorado, un riesgo puede **mitigarse** (reducirlo con controles), **aceptarse**, **transferirse** (por ejemplo, con un seguro) o **evitarse** (eliminar la causa). 
+
+---
+
+:::{.callout-tip}
+Preparados para el [Laboratorio 2](https://igijon.github.io/pps-web/laboratorios/ud3/lab2.html)
+:::

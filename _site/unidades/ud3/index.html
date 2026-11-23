@@ -247,6 +247,12 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">UD3 · Lab 1 · Inventario de activos</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../laboratorios/ud3/lab2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">UD3 · Lab 2 · Desmontar escenarios</span></a>
+  </div>
+</li>
       </ul>
   </li>
       </ul>
@@ -328,6 +334,21 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#más-allá-de-la-tríada" id="toc-más-allá-de-la-tríada" class="nav-link" data-scroll-target="#más-allá-de-la-tríada">Más allá de la tríada</a></li>
   <li><a href="#primer-vistazo-a-los-controles" id="toc-primer-vistazo-a-los-controles" class="nav-link" data-scroll-target="#primer-vistazo-a-los-controles">Primer vistazo a los controles</a></li>
   <li><a href="#caso-de-aplicaciones-con-llm" id="toc-caso-de-aplicaciones-con-llm" class="nav-link" data-scroll-target="#caso-de-aplicaciones-con-llm">Caso de aplicaciones con LLM</a></li>
+  </ul></li>
+  <li><a href="#amenazas-vulnerabilidades-vectores-y-riesgo" id="toc-amenazas-vulnerabilidades-vectores-y-riesgo" class="nav-link" data-scroll-target="#amenazas-vulnerabilidades-vectores-y-riesgo">🐭 Amenazas, vulnerabilidades, vectores y riesgo</a>
+  <ul class="collapse">
+  <li><a href="#vocabulario" id="toc-vocabulario" class="nav-link" data-scroll-target="#vocabulario">Vocabulario</a></li>
+  <li><a href="#la-cadena-del-ataque" id="toc-la-cadena-del-ataque" class="nav-link" data-scroll-target="#la-cadena-del-ataque">La cadena del ataque</a></li>
+  <li><a href="#tipos-de-amenazas-y-actores" id="toc-tipos-de-amenazas-y-actores" class="nav-link" data-scroll-target="#tipos-de-amenazas-y-actores">Tipos de amenazas y actores</a></li>
+  <li><a href="#tipos-de-vulnerabilidades" id="toc-tipos-de-vulnerabilidades" class="nav-link" data-scroll-target="#tipos-de-vulnerabilidades">Tipos de vulnerabilidades</a></li>
+  <li><a href="#vectores-de-ataque-frecuentes" id="toc-vectores-de-ataque-frecuentes" class="nav-link" data-scroll-target="#vectores-de-ataque-frecuentes">Vectores de ataque frecuentes</a></li>
+  <li><a href="#de-impacto-y-probabilidad-a-riesgo" id="toc-de-impacto-y-probabilidad-a-riesgo" class="nav-link" data-scroll-target="#de-impacto-y-probabilidad-a-riesgo">De impacto y probabilidad a riesgo</a>
+  <ul class="collapse">
+  <li><a href="#impacto" id="toc-impacto" class="nav-link" data-scroll-target="#impacto">Impacto</a></li>
+  <li><a href="#probabilidad" id="toc-probabilidad" class="nav-link" data-scroll-target="#probabilidad">Probabilidad</a></li>
+  <li><a href="#matriz-de-riesgo-33" id="toc-matriz-de-riesgo-33" class="nav-link" data-scroll-target="#matriz-de-riesgo-33">Matriz de riesgo 3×3</a></li>
+  </ul></li>
+  <li><a href="#qué-se-hace-con-un-riesgo-adelanto" id="toc-qué-se-hace-con-un-riesgo-adelanto" class="nav-link" data-scroll-target="#qué-se-hace-con-un-riesgo-adelanto">Qué se hace con un riesgo (adelanto)</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -926,6 +947,370 @@ Important
 <li><strong>Disponibilidad:</strong> que no se pueda agotar su uso o su coste.</li>
 </ul>
 <hr>
+</section>
+</section>
+<section id="amenazas-vulnerabilidades-vectores-y-riesgo" class="level1">
+<h1>🐭 Amenazas, vulnerabilidades, vectores y riesgo</h1>
+<p>Ya sabemos <strong>qué</strong> protegemos y <strong>de qué maneras puede dañarse</strong> cada uno. Hoy respondemos a dos preguntas nuevas:</p>
+<ul>
+<li><strong>¿Quién o qué puede dañarlo, y cómo?</strong> → amenazas, vulnerabilidades y vectores.</li>
+<li><strong>¿Cuánto debería preocuparnos?</strong> → probabilidad, impacto y riesgo.</li>
+</ul>
+<p>Estas palabras se usan a menudo como si fueran sinónimas y <strong>no lo son</strong>. Una gran parte de los errores en análisis de riesgos empieza por mezclarlas. Hoy aprendemos a distinguirlas.</p>
+<section id="vocabulario" class="level2">
+<h2 class="anchored" data-anchor-id="vocabulario">Vocabulario</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Término</th>
+<th>Definición</th>
+<th>Ejemplo en TiendaLocal</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Activo</strong></td>
+<td>Lo que tiene valor y hay que proteger</td>
+<td>La base de datos de clientes</td>
+</tr>
+<tr class="even">
+<td><strong>Amenaza</strong></td>
+<td>Causa potencial de un incidente que puede dañar un activo</td>
+<td>Un atacante que quiere robar datos</td>
+</tr>
+<tr class="odd">
+<td><strong>Actor de amenaza</strong></td>
+<td>Quién (o qué) está detrás de la amenaza</td>
+<td>Un grupo cibercriminal, un empleado descontento…</td>
+</tr>
+<tr class="even">
+<td><strong>Vulnerabilidad</strong></td>
+<td>Debilidad de un activo o de sus protecciones que una amenaza puede aprovechar</td>
+<td>Una consulta SQL construida concatenando texto</td>
+</tr>
+<tr class="odd">
+<td><strong>Vector de ataque</strong></td>
+<td>El camino o medio por el que la amenaza alcanza la vulnerabilidad</td>
+<td>El campo de búsqueda de la web</td>
+</tr>
+<tr class="even">
+<td><strong>Exploit</strong></td>
+<td>Técnica o código que aprovecha una vulnerabilidad concreta</td>
+<td>Una entrada diseñada para manipular la consulta SQL</td>
+</tr>
+<tr class="odd">
+<td><strong>Incidente</strong></td>
+<td>La amenaza que se materializa y daña un activo</td>
+<td>Se filtran los datos de los clientes</td>
+</tr>
+<tr class="even">
+<td><strong>Impacto</strong></td>
+<td>Consecuencia del incidente para el negocio</td>
+<td>Sanción RGPD, pérdida de confianza</td>
+</tr>
+<tr class="odd">
+<td><strong>Probabilidad</strong></td>
+<td>Cuán posible es que el incidente ocurra</td>
+<td>Alta: la web está expuesta a internet y la vulnerabilidad es fácil de explotar</td>
+</tr>
+<tr class="even">
+<td><strong>Riesgo</strong></td>
+<td>Combinación de probabilidad e impacto</td>
+<td>Alto</td>
+</tr>
+<tr class="odd">
+<td><strong>Control</strong></td>
+<td>Medida que reduce la probabilidad o el impacto</td>
+<td>Consultas parametrizadas, WAF (Web Application Firewall), copias de seguridad</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="la-cadena-del-ataque" class="level2">
+<h2 class="anchored" data-anchor-id="la-cadena-del-ataque">La cadena del ataque</h2>
+<p>Los términos se encadenan así:</p>
+<pre><code> ACTOR DE AMENAZA ──usa un──▶ VECTOR ──para explotar una──▶ VULNERABILIDAD
+                                                                   │
+                                                                   ▼
+          IMPACTO ◀──consecuencia── INCIDENTE ◀──daña── ACTIVO (C / I / D)</code></pre>
+<p>Una forma práctica de recordarlo: <strong>¿quién? → ¿por dónde? → ¿qué debilidad? → ¿qué se daña? → ¿qué consecuencias?</strong></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Sin una pieza, no hay riesgo (o es muy bajo)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>Sin activo:</strong> no hay nada que perder.</li>
+<li><strong>Sin amenaza:</strong> nadie ni nada tiene interés o capacidad de dañarlo.</li>
+<li><strong>Sin vulnerabilidad:</strong> no hay debilidad que aprovechar.</li>
+</ul>
+<p>El riesgo aparece cuando coinciden las tres cosas.</p>
+</div>
+</div>
+</section>
+<section id="tipos-de-amenazas-y-actores" class="level2">
+<h2 class="anchored" data-anchor-id="tipos-de-amenazas-y-actores">Tipos de amenazas y actores</h2>
+<p>Una amenaza <strong>no siempre es un atacante</strong> con mala intención.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Origen</th>
+<th>Ejemplos</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Humana intencionada</strong></td>
+<td>Cibercriminales, hacktivistas, competidores, empleados descontentos (<em>insiders</em>), actores estatales</td>
+</tr>
+<tr class="even">
+<td><strong>Humana no intencionada</strong></td>
+<td>Errores de configuración, borrados accidentales, envío de datos al destinatario equivocado</td>
+</tr>
+<tr class="odd">
+<td><strong>Técnica</strong></td>
+<td>Fallos de hardware o software, caídas de servicios de terceros</td>
+</tr>
+<tr class="even">
+<td><strong>Entorno</strong></td>
+<td>Incendio, inundación, corte de suministro eléctrico</td>
+</tr>
+</tbody>
+</table>
+<p>Para valorar la probabilidad, de cada actor interesa su <strong>motivación</strong> (¿qué gana?) y su <strong>capacidad</strong> (¿puede hacerlo?). Un ataque automatizado que prueba contraseñas contra miles de webs no necesita tener motivos concretos contra TiendaLocal: le basta con que esté expuesta.</p>
+</section>
+<section id="tipos-de-vulnerabilidades" class="level2">
+<h2 class="anchored" data-anchor-id="tipos-de-vulnerabilidades">Tipos de vulnerabilidades</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Tipo</th>
+<th>Qué es</th>
+<th>Ejemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>De código</strong></td>
+<td>Errores en el software</td>
+<td>Inyección SQL, falta de validación de entradas</td>
+</tr>
+<tr class="even">
+<td><strong>De diseño</strong></td>
+<td>La arquitectura no incluye una protección necesaria</td>
+<td>Un endpoint sin comprobar a quién pertenece el pedido</td>
+</tr>
+<tr class="odd">
+<td><strong>De configuración</strong></td>
+<td>Ajustes inseguros</td>
+<td>Credenciales por defecto, puertos abiertos sin necesidad</td>
+</tr>
+<tr class="even">
+<td><strong>De componentes</strong></td>
+<td>Software de terceros con fallos conocidos</td>
+<td>Una librería sin actualizar</td>
+</tr>
+<tr class="odd">
+<td><strong>De procesos y personas</strong></td>
+<td>Faltan procedimientos o formación</td>
+<td>Sin autenticación en dos pasos, sin formación contra el <em>phishing</em></td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Tres siglas que conviene conocer
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>CVE:</strong> identificador público de una vulnerabilidad <strong>concreta</strong> (por ejemplo, un fallo en una versión de una librería).</li>
+<li><strong>CWE:</strong> catálogo de <strong>tipos de debilidad</strong> (por ejemplo, “inyección SQL”).</li>
+<li><strong>CVSS:</strong> sistema para <strong>puntuar la gravedad técnica</strong> de una vulnerabilidad.</li>
+</ul>
+<p>Ojo: una puntuación CVSS alta <strong>no equivale a riesgo alto para tu negocio</strong>. Depende de tu activo, de si el componente está expuesto y de los controles que tengas.</p>
+</div>
+</div>
+</section>
+<section id="vectores-de-ataque-frecuentes" class="level2">
+<h2 class="anchored" data-anchor-id="vectores-de-ataque-frecuentes">Vectores de ataque frecuentes</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Vector</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Formularios y campos de entrada</strong></td>
+<td>Búsquedas, login, registro, comentarios</td>
+</tr>
+<tr class="even">
+<td><strong>API expuesta</strong></td>
+<td>Endpoints accesibles desde internet</td>
+</tr>
+<tr class="odd">
+<td><strong>Credenciales robadas o reutilizadas</strong></td>
+<td>Contraseñas filtradas en otros servicios</td>
+</tr>
+<tr class="even">
+<td><strong>Ingeniería social</strong></td>
+<td><em>Phishing</em>, suplantación de proveedores</td>
+</tr>
+<tr class="odd">
+<td><strong>Cadena de suministro</strong></td>
+<td>Dependencias o herramientas de terceros comprometidas</td>
+</tr>
+<tr class="even">
+<td><strong>Repositorios y pipelines</strong></td>
+<td>Secretos subidos por error, acceso a CI/CD</td>
+</tr>
+<tr class="odd">
+<td><strong>Acceso físico o interno</strong></td>
+<td>Equipo robado, empleado con acceso excesivo</td>
+</tr>
+<tr class="even">
+<td><strong>Interfaz de lenguaje natural</strong></td>
+<td>Mensajes maliciosos a un chatbot (<em>prompt injection</em>)</td>
+</tr>
+</tbody>
+</table>
+<p>El conjunto de todos los vectores posibles de una aplicación forma su <strong>superficie de ataque</strong>. La estudiaremos en la próxima sesión.</p>
+</section>
+<section id="de-impacto-y-probabilidad-a-riesgo" class="level2">
+<h2 class="anchored" data-anchor-id="de-impacto-y-probabilidad-a-riesgo">De impacto y probabilidad a riesgo</h2>
+<section id="impacto" class="level3">
+<h3 class="anchored" data-anchor-id="impacto">Impacto</h3>
+<p>Impacto: es el <strong>valor de la propiedad CIA</strong> que se vería afectada. Si el incidente rompe la confidencialidad de un activo con C = Alta, el impacto es <strong>Alto</strong>.</p>
+</section>
+<section id="probabilidad" class="level3">
+<h3 class="anchored" data-anchor-id="probabilidad">Probabilidad</h3>
+<p>Se estima con preguntas como:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Factor</th>
+<th>Pregunta</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Actor</strong></td>
+<td>¿Hay quien tenga motivación y capacidad?</td>
+</tr>
+<tr class="even">
+<td><strong>Exposición</strong></td>
+<td>¿Está accesible desde internet o solo desde dentro?</td>
+</tr>
+<tr class="odd">
+<td><strong>Facilidad</strong></td>
+<td>¿Es fácil de explotar? ¿Existe un exploit público?</td>
+</tr>
+<tr class="even">
+<td><strong>Controles</strong></td>
+<td>¿Qué protecciones existen ya?</td>
+</tr>
+<tr class="odd">
+<td><strong>Historial</strong></td>
+<td>¿Es un ataque frecuente?</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="matriz-de-riesgo-33" class="level3">
+<h3 class="anchored" data-anchor-id="matriz-de-riesgo-33">Matriz de riesgo 3×3</h3>
+<p>Asignamos <strong>B = 1, M = 2, A = 3</strong> y multiplicamos:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Probabilidad &nbsp;Impacto</th>
+<th><strong>B</strong></th>
+<th><strong>M</strong></th>
+<th><strong>A</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>A</strong></td>
+<td>3 (Medio)</td>
+<td>6 (Alto)</td>
+<td>9 (Alto)</td>
+</tr>
+<tr class="even">
+<td><strong>M</strong></td>
+<td>2 (Bajo)</td>
+<td>4 (Medio)</td>
+<td>6 (Alto)</td>
+</tr>
+<tr class="odd">
+<td><strong>B</strong></td>
+<td>1 (Bajo)</td>
+<td>2 (Bajo)</td>
+<td>3 (Medio)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Niveles:</strong> 1-2 → <strong>Bajo</strong>; 3-4 → <strong>Medio</strong>; 6-9 → <strong>Alto</strong>.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Una matriz es una simplificación
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Con solo tres niveles habrá muchos riesgos “empatados”. Después aprenderemos a priorizar con más criterio. Por ahora, la matriz nos sirve para <strong>ordenar ideas</strong>, no para dar sentencias definitivas.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="qué-se-hace-con-un-riesgo-adelanto" class="level2">
+<h2 class="anchored" data-anchor-id="qué-se-hace-con-un-riesgo-adelanto">Qué se hace con un riesgo (adelanto)</h2>
+<p>Una vez valorado, un riesgo puede <strong>mitigarse</strong> (reducirlo con controles), <strong>aceptarse</strong>, <strong>transferirse</strong> (por ejemplo, con un seguro) o <strong>evitarse</strong> (eliminar la causa).</p>
+<hr>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Preparados para el <a href="https://igijon.github.io/pps-web/laboratorios/ud3/lab2.html">Laboratorio 2</a></p>
+</div>
+</div>
 
 
 </section>

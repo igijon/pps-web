@@ -48,6 +48,8 @@ website:
             contents:
               - href: laboratorios/ud3/lab1.qmd
                 text: "UD3 · Lab 1 · Inventario de activos"
+              - href: laboratorios/ud3/lab2.qmd
+                text: "UD3 · Lab 2 · Desmontar escenarios"
               
     
       - section: "🚀 Desafíos"
